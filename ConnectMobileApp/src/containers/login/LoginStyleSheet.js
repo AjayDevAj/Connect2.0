@@ -101,7 +101,5 @@ export default StyleSheet.create({
         paddingLeft: 20,
         fontSize: 12,
     }
-
-
 })
 

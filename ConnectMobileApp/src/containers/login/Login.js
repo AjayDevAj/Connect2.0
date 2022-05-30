@@ -142,7 +142,6 @@ const Login = () => {
                                     GET OTP
                                 </Text>
                             </TouchableOpacity>
-
                         </View>
                     </View>
 
