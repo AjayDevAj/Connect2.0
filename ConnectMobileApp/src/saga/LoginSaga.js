@@ -8,7 +8,6 @@ import { getError, getResponse } from '../actions/LoginAction'
 
 function* handleLoginDataResponse(action) {
     try {
-
         const data = yield call(getLogIn,action.mobileNumber)
         console.log('LogIn Response', data)
         yield put(getResponse(data))
