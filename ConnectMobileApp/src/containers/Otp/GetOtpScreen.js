@@ -22,10 +22,12 @@ import Bubble from '../../component/Bubble';
 
 const GetOtpScreen = () => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
+    // <KeyboardAvoidingView
+    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    //   style={{flex: 1}}>
       <SafeAreaView style={{flex: 1}}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : ''} animated={true}
+                style={{ flex: 1 }} >
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={styles.UpperView}>
             <Bubble />
@@ -37,7 +39,7 @@ const GetOtpScreen = () => {
                 justifyContent: 'flex-end',
                 alignItems: 'flex-start',
               }}>
-              <GetOtpBg width={'200'} height={'200'} />
+              <GetOtpBg width={'180'} height={'150'} />
             </View>
           </View>
 
@@ -80,8 +82,9 @@ const GetOtpScreen = () => {
             </View>
           </View>
         </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
-    </KeyboardAvoidingView>
+   
   );
 };
 
