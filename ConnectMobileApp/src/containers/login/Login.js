@@ -22,24 +22,28 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const loginResponce = useSelector(store => store.loginDataResponse)
+    const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
 
+    const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
+    const [inputVal, setInputVal] = useState('');
 
+    const [disbaleval, setVisbal] = useState(true);
+
+    
+
+  //MARK:- Using hook function.
     useEffect(() => {
         console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
         if (JSON.stringify(loginResponce.message) != null) {
             Alert.alert('ConnectApp', JSON.stringify(loginResponce.message))
+            console.log("loginResponce message :::::::: ",  loginResponce.message )
+         
         }
     }, [loginResponce]);
 
-    const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
-    const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
 
-    const [inputVal, setInputVal] = useState('');
-
-
-
-    //Check for the Phone Number TextInput
+    //MARK:- Check for the Phone Number TextInput.
     const checkTextInput = async () => {
         if (!textInputPhoneNum.trim()) {
             alert('Please Enter Mobile Number');
@@ -50,12 +54,11 @@ const Login = () => {
         } else {
             //calling API login
             dispatch(loadLoginData(textInputPhoneNum))
-
         }
     };
 
 
-
+    //MARK:-  Only number input ( phone validation )
     const onChangeTextChar = (enterString) => {
         console.log(`onChangeText: ${enterString}`);
         if (enterString.trim().length > 0) {
@@ -69,6 +72,7 @@ const Login = () => {
         }
     };
 
+      //MARK:- Render UIView.
     return (
         <SafeAreaView
             style={{ flex: 1 }}>
@@ -101,14 +105,14 @@ const Login = () => {
                             <Text
                                 style={styles.MobileText}> Mobile Number </Text>
                             <Text
-                                style={styles.NormalText}> A 4 digit OTP will be sent to verify your number 
+                                style={styles.NormalText}> A 4 digit OTP will be sent to verify your number
                             </Text>
 
-                            <View style={styles.TextInputView}
-                            >
+                            <View style={styles.TextInputView}>
                                 <Text style={{
                                     fontSize: 15,
                                     marginLeft: 5,
+                                    color: 'black',
 
                                 }}> +91 </Text>
 
@@ -120,14 +124,17 @@ const Login = () => {
                                     dataDetector="phoneNumber"
                                     value={inputVal}
                                     onChangeText={
+                                        
                                         (value) => {
                                             console.log('TextInput value : ', value)
                                             onChangeTextChar(value)
                                             setTextInputPhoneNum(value)
                                             if (value.trim().length === 10) {
                                                 setActiveBtn('rgba(rgba(14, 0, 113, 1))')
+                                                setVisbal(false)
                                             } else {
                                                 setActiveBtn('rgba(112, 112, 112, 0.22)')
+                                                setVisbal(true)
                                             }
                                         }
                                     }
@@ -135,7 +142,7 @@ const Login = () => {
                                 </TextInput>
                             </View>
 
-                            <TouchableOpacity
+                            <TouchableOpacity disabled={disbaleval}
                                 style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={() => checkTextInput()}>
 
                                 <Text style={styles.OtpText}>
