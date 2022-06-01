@@ -17,8 +17,13 @@ import { loadLoginData } from '../../actions/LoginAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 
+import { Actions } from 'react-native-router-flux'
+import navigationString from '../../constent/navigationString';
 
-const Login = () => {
+// old all 
+const Login = ({navigation}) => {
+
+    console.log("props hear", navigation)
 
     const dispatch = useDispatch();
     const loginResponce = useSelector(store => store.loginDataResponse)
@@ -29,8 +34,6 @@ const Login = () => {
 
     const [disbaleval, setVisbal] = useState(true);
 
-    
-
   //MARK:- Using hook function.
     useEffect(() => {
         console.log("loginResponce : ", JSON.stringify(loginResponce.message));
@@ -38,13 +41,15 @@ const Login = () => {
         if (JSON.stringify(loginResponce.message) != null) {
             Alert.alert('ConnectApp', JSON.stringify(loginResponce.message))
             console.log("loginResponce message :::::::: ",  loginResponce.message )
-         
+            Actions.otp()
+
         }
     }, [loginResponce]);
 
 
     //MARK:- Check for the Phone Number TextInput.
     const checkTextInput = async () => {
+
         if (!textInputPhoneNum.trim()) {
             alert('Please Enter Mobile Number');
         }
@@ -144,6 +149,7 @@ const Login = () => {
 
                             <TouchableOpacity disabled={disbaleval}
                                 style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={() => checkTextInput()}>
+                                {/* style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={()=> navigation.navigate(navigationString.OTP)}> */}
 
                                 <Text style={styles.OtpText}>
                                     GET OTP
@@ -151,7 +157,6 @@ const Login = () => {
                             </TouchableOpacity>
                         </View>
                     </View>
-
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>

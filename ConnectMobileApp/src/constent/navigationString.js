@@ -1,6 +1,6 @@
 
 export default {
-    HOME: "Home",
-    PROFILE: "Profile",
-    EXPLORE: "Explore",
+    LOGIN: "Login",
+    OTP: "Otp",
+  
 }

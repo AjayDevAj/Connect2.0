@@ -5,7 +5,6 @@ import { getLogIn } from '../api/APICalling'
 import { getError, getResponse } from '../actions/LoginAction'
 
 //Worker Saga...
-
 function* handleLoginDataResponse(action) {
     try {
         const data = yield call(getLogIn,action.mobileNumber)
@@ -18,7 +17,6 @@ function* handleLoginDataResponse(action) {
 }
 
 //Watcher Saga...
-
 export default function* LoginDataWatcherSaga() {
     console.log('LogIn Saga Watcher')
     yield takeEvery(CONSTANT.LOGIN_DATA, handleLoginDataResponse)
