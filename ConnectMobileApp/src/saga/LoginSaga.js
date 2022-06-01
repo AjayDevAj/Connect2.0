@@ -1,6 +1,6 @@
 
 import { take, put, call, takeLatest, takeEvery } from 'redux-saga/effects'
-import { CONSTANT } from '../containers/Constant'
+import { CONSTANT } from '../utility/Constant'
 import { getLogin } from '../api/MobileNumberAuthentication'
 import { getError, getResponse } from '../actions/LoginAction'
 
