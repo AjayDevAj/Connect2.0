@@ -1,5 +1,5 @@
 
-import { CONSTANT } from "../containers/Constant";
+import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";
 
 const loginDataReducer = (state = '', action) => {

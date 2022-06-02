@@ -73,6 +73,7 @@ export default function Otp({
               //{width: width / (codeCount + 2), height: height / 14},
               {width:'14.5%',height:'9%',padding:'8%'},
              //{maxHeight:100,maxWidth:100}
+             
               
               
             ]}

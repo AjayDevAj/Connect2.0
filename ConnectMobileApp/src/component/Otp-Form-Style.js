@@ -3,6 +3,7 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'flex-start',
+     
     },
     input: {
        //flex: 1,
@@ -10,6 +11,8 @@ const styles = {
       fontSize: 32,
       textAlign: 'center',
       backgroundColor: '#fff',
+      //color:'red'
+      
       
       
       

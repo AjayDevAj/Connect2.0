@@ -14,6 +14,15 @@
 		5816B16F6B0DED030224A994 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE7E55C649A8CFA4D1E9F0E /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */; };
 		7CA2E285C8A002A6FED252A7 /* libPods-ConnectMobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE5BDE6A1F45F7F96E219E1 /* libPods-ConnectMobileApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B2C36BB989D84ECA81E814B8 /* Alte DIN 1451 Mittelschrift gepraegt Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85D931C2EB684D39B3751CF2 /* Alte DIN 1451 Mittelschrift gepraegt Regular.ttf */; };
+		727648FF60C140549F4989E9 /* alte-din-1451-mittelschrift-gepraegt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC47214B7A4F4CB2A4C0F28B /* alte-din-1451-mittelschrift-gepraegt.ttf */; };
+		D5CB973B03F94F93A0F1DA8B /* Altedin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41793FD67B0E47ACADB273AA /* Altedin.ttf */; };
+		D8F832C933A9451CAA39C9B7 /* din1451alt G.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 046FB8814EDB4DDDAA6CBD31 /* din1451alt G.ttf */; };
+		2FAF6EB694D14CE7853E1436 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60FEE1934B34434DBBE31C9D /* Poppins-Bold.ttf */; };
+		EC2FEF8DC898497E8E848206 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 109375A7CAA44452A3DE3629 /* Poppins-Medium.ttf */; };
+		E4C32396039446DC8ED63401 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B152BB1504145F0909E1905 /* Poppins-Regular.ttf */; };
+		EC6C4EBAF883450393713F52 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60B46CC2A8CC492D8EFADEFF /* Poppins-SemiBold.ttf */; };
+		DEDD56F1AC134AC9B9C52B54 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91A079BEC3644E4FBF52424D /* Poppins-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +53,15 @@
 		D5B782DB4624D9D046EAF6E6 /* Pods-ConnectMobileApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp.release.xcconfig"; sourceTree = "<group>"; };
 		E8C0C61E48C96EDAEF98FD50 /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		85D931C2EB684D39B3751CF2 /* Alte DIN 1451 Mittelschrift gepraegt Regular.ttf */ = {isa = PBXFileReference; name = "Alte DIN 1451 Mittelschrift gepraegt Regular.ttf"; path = "../assets/fonts/Alte DIN 1451 Mittelschrift gepraegt Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC47214B7A4F4CB2A4C0F28B /* alte-din-1451-mittelschrift-gepraegt.ttf */ = {isa = PBXFileReference; name = "alte-din-1451-mittelschrift-gepraegt.ttf"; path = "../assets/fonts/alte-din-1451-mittelschrift-gepraegt.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		41793FD67B0E47ACADB273AA /* Altedin.ttf */ = {isa = PBXFileReference; name = "Altedin.ttf"; path = "../assets/fonts/Altedin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		046FB8814EDB4DDDAA6CBD31 /* din1451alt G.ttf */ = {isa = PBXFileReference; name = "din1451alt G.ttf"; path = "../assets/fonts/din1451alt G.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60FEE1934B34434DBBE31C9D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		109375A7CAA44452A3DE3629 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B152BB1504145F0909E1905 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60B46CC2A8CC492D8EFADEFF /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		91A079BEC3644E4FBF52424D /* Poppins-Thin.ttf */ = {isa = PBXFileReference; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +152,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				1F7FE8DD631210E080F18A04 /* Pods */,
+				51357000C05E4465A0305C68 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +167,23 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		51357000C05E4465A0305C68 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				85D931C2EB684D39B3751CF2 /* Alte DIN 1451 Mittelschrift gepraegt Regular.ttf */,
+				CC47214B7A4F4CB2A4C0F28B /* alte-din-1451-mittelschrift-gepraegt.ttf */,
+				41793FD67B0E47ACADB273AA /* Altedin.ttf */,
+				046FB8814EDB4DDDAA6CBD31 /* din1451alt G.ttf */,
+				60FEE1934B34434DBBE31C9D /* Poppins-Bold.ttf */,
+				109375A7CAA44452A3DE3629 /* Poppins-Medium.ttf */,
+				8B152BB1504145F0909E1905 /* Poppins-Regular.ttf */,
+				60B46CC2A8CC492D8EFADEFF /* Poppins-SemiBold.ttf */,
+				91A079BEC3644E4FBF52424D /* Poppins-Thin.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +281,15 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				B2C36BB989D84ECA81E814B8 /* Alte DIN 1451 Mittelschrift gepraegt Regular.ttf in Resources */,
+				727648FF60C140549F4989E9 /* alte-din-1451-mittelschrift-gepraegt.ttf in Resources */,
+				D5CB973B03F94F93A0F1DA8B /* Altedin.ttf in Resources */,
+				D8F832C933A9451CAA39C9B7 /* din1451alt G.ttf in Resources */,
+				2FAF6EB694D14CE7853E1436 /* Poppins-Bold.ttf in Resources */,
+				EC2FEF8DC898497E8E848206 /* Poppins-Medium.ttf in Resources */,
+				E4C32396039446DC8ED63401 /* Poppins-Regular.ttf in Resources */,
+				EC6C4EBAF883450393713F52 /* Poppins-SemiBold.ttf in Resources */,
+				DEDD56F1AC134AC9B9C52B54 /* Poppins-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

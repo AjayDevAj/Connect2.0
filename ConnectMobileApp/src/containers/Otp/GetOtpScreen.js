@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 
 import {
   SafeAreaView,
@@ -21,6 +21,25 @@ import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
 
 const GetOtpScreen = () => {
+
+  const [activeBtn, setActiveBtn] = useState(false);
+  console.log(activeBtn)
+
+  const ActivebtnHandler=()=>{
+    if(activeBtn==false)
+    {
+      //console.log(activeBtn)
+    }
+    else{
+      //console.log(activeBtn)
+    }
+    
+  }
+
+  useEffect(() => {
+    ActivebtnHandler()
+    //console.log('use',activeBtn)
+  })
   return (
     // <KeyboardAvoidingView
     //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -60,12 +79,20 @@ const GetOtpScreen = () => {
                 <EditPencilIcon />
               </TouchableOpacity>
             </View>
-
+           
             <View style={styles.roundedTextInputView}>
               <OTP
                 codeCount={4}
-                otpStyles={{backgroundColor: '#EFF0F2', borderRadius: 10}}
-                onTyping={''}
+                otpStyles={{backgroundColor: '#EFF0F2', borderRadius: 10,}}
+                onFinish={ (value) => {
+                  console.log('TextInput value : ', value)
+                 // {setActiveBtn('true')}
+                 console.log(activeBtn)
+                 setActiveBtn(true)
+                 
+                  
+              }}
+                
               />
             </View>
 
@@ -75,6 +102,7 @@ const GetOtpScreen = () => {
 
             <View style={{flex: 1}}>
               <TouchableOpacity
+              disabled={activeBtn}
                 onPress={() => Alert.alert('Number Varification API Call')}
                 style={styles.VerifyButton}>
                 <Text style={styles.VerifyButtonText}>VERIFY</Text>

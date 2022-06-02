@@ -1,5 +1,5 @@
 
-import { CONSTANT } from "../containers/Constant";
+import { CONSTANT } from "../utility/Constant";
 
 const loadLoginData = (mobileNumber) => ({
     type: CONSTANT.LOGIN_DATA,mobileNumber

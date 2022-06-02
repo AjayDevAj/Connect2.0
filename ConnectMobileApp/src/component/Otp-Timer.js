@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Dimensions, Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 
 const OtpTimerHandler = () => {
-  const [counter, setCounter] = useState(30);
+  const [counter, setCounter] = useState(5);
   console.log(counter);
   useEffect(() => {
     const timer =
@@ -13,9 +13,14 @@ const OtpTimerHandler = () => {
   return (
     <View>
       {counter > 0 ? <Text style={{color: 'rgba(95, 99, 104, 1)'}}>
-          Time Left : {counter} sec
+          Time Left : {counter} sec 
           </Text> :
-          <Text style={{color: 'rgba(95, 99, 104, 1)'}}>
+
+
+          
+          <Text style={{color: 'rgba(95, 99, 104, 1)',}}>
+            <Text style={{color:'red',}}>Wrong OTP</Text>
+            
             Didn’t Received?{' '}
             <TouchableOpacity
               onPress={() => Alert.alert('Navigate to Mobile Screen')}>
