@@ -8,10 +8,10 @@ const getStoreLocations = async () => {
 
     const response = await fetch(API_URL_DEV + '/user/auth/get-locations', {
         method: 'get',
-        headers:{
-            Authorization:
-              'Bearer ' + (await AsyncStorage.getItem('@access_token')),
-          },
+        // headers:{
+        //     Authorization:
+        //     //   'Bearer ' + (await AsyncStorage.getItem('@access_token')),
+        //   },
     })
       const data = response.json()
 
