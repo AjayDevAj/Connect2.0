@@ -1,0 +1,37 @@
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/EvilIcons';
+
+const SkipButton = ({ navigation }) => {
+    const goToLoginPage = () => {
+        navigation.navigate('Login');
+    }
+    return (
+      <View>
+          <TouchableOpacity onPress={goToLoginPage} >
+            <Text style={ styles.text }>Skip</Text>
+            <Icon name="chevron-right" size={22} style={ styles.icon } />
+            </TouchableOpacity>
+      </View>
+    );
+}
+  
+const styles = StyleSheet.create({
+    text: {
+        color: '#000',
+        textAlign: 'left',
+        left: -145,
+        top: -80,
+        opacity: 0.9,
+        letterSpacing: 0.14,
+        fontFamily: 'Poppins-Regular',
+        fontSize: 14
+    },
+    icon: {
+        color: '#000',
+        top: -102,
+        left: -118,
+    }
+});
+  
+export default SkipButton;
