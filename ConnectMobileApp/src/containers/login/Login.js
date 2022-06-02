@@ -16,9 +16,12 @@ import { connect } from 'react-redux';
 import { loadLoginData } from '../../actions/LoginAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
+import navigationString from '../../constent/navigationString';
+import Routes from '../../navigation/Routes';
 
 
-const Login = () => {
+
+const Login = ({navigation}) => {
 
     const dispatch = useDispatch();
     const loginResponce = useSelector(store => store.loginDataResponse)
@@ -64,6 +67,7 @@ const Login = () => {
         } else {
             //calling API login
             dispatch(loadLoginData(textInputPhoneNum))
+             
 
         }
     };
@@ -157,7 +161,7 @@ const Login = () => {
                             </Text> : null}
 
                             <TouchableOpacity disabled={disbaleval}
-                                style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={() => checkTextInput()}>
+                                style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={()=>navigation.navigate(navigationString.GetOtpScreen)}>
 
                                 <Text style={styles.OtpText}>
                                     GET OTP
