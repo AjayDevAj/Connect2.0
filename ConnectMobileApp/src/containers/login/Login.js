@@ -28,40 +28,50 @@ const Login = () => {
     const [inputVal, setInputVal] = useState('');
 
     const [disbaleval, setVisbal] = useState(true);
+    const [responseerror,setError] = useState('false');
 
-    
 
-  //MARK:- Using hook function.
     useEffect(() => {
         console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
         if (JSON.stringify(loginResponce.message) != null) {
-            Alert.alert('ConnectApp', JSON.stringify(loginResponce.message))
-            console.log("loginResponce message :::::::: ",  loginResponce.message )
-         
+            console.log("Login Msg type Error :=>>>", JSON.stringify(loginResponce))
+            // console.log("Login Msg type Msg :=>>>", loginResponce.message)
+
+            if ((loginResponce.error) == true ) {
+                setError('true');
+                console.log("useEffect loginResponce true ::::",loginResponce)
+
+
+            }else{
+                setError('false');
+                console.log("useEffect loginResponce false ::::",loginResponce)
+
+            }
         }
     }, [loginResponce]);
 
 
-    //MARK:- Check for the Phone Number TextInput.
+    //Check for the Phone Number TextInput
     const checkTextInput = async () => {
         if (!textInputPhoneNum.trim()) {
             alert('Please Enter Mobile Number');
         }
         else if (textInputPhoneNum.trim().length != 10) {
-            alert('Please enter a valid mobile number');
+            alert('Please enter 10 digit valid mobile number');
+
 
         } else {
             //calling API login
             dispatch(loadLoginData(textInputPhoneNum))
+
         }
     };
 
-
-    //MARK:-  Only number input ( phone validation )
     const onChangeTextChar = (enterString) => {
         console.log(`onChangeText: ${enterString}`);
         if (enterString.trim().length > 0) {
+            // setError('false')
             if (/^-?\d+$/.test(enterString)) {
                 setInputVal(enterString);
             } else {
@@ -72,7 +82,6 @@ const Login = () => {
         }
     };
 
-      //MARK:- Render UIView.
     return (
         <SafeAreaView
             style={{ flex: 1 }}>
@@ -107,12 +116,12 @@ const Login = () => {
                             <Text
                                 style={styles.NormalText}> A 4 digit OTP will be sent to verify your number
                             </Text>
-
-                            <View style={styles.TextInputView}>
+                              {console.log("UIView: 118: ",responseerror)}
+                            <View style={responseerror  == 'true' ? styles.TextInputViewError : styles.TextInputView}
+                            >
                                 <Text style={{
                                     fontSize: 15,
                                     marginLeft: 5,
-                                    color: 'black',
 
                                 }}> +91 </Text>
 
@@ -124,9 +133,8 @@ const Login = () => {
                                     dataDetector="phoneNumber"
                                     value={inputVal}
                                     onChangeText={
-                                        
                                         (value) => {
-                                            console.log('TextInput value : ', value)
+                                            //console.log('TextInput value : ', value)
                                             onChangeTextChar(value)
                                             setTextInputPhoneNum(value)
                                             if (value.trim().length === 10) {
@@ -141,6 +149,12 @@ const Login = () => {
                                     style={styles.TextInput}>
                                 </TextInput>
                             </View>
+
+                            {console.log("UIView 150:",responseerror)}
+
+                            {responseerror  == 'true' ? <Text style={styles.errorMsg}>
+                                Mobile no. doesn't exist
+                            </Text> : null}
 
                             <TouchableOpacity disabled={disbaleval}
                                 style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={() => checkTextInput()}>
