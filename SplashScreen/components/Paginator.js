@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated, useWindowDimensions } from 'react-native';
 
-import paginatorStyles from '../assets/styles/NextButtonStyleSheet';
+import paginatorStyles from '../assets/styles/PaginatorStyleSheet';
 
 const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
