@@ -2,13 +2,13 @@ import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
 import DeviceInfo from 'react-native-device-info';
 
 /** * Get device mac id */
-let mac = await DeviceInfo.getMacAddress().then((mac) => {return mac});
+const mac = await DeviceInfo.getMacAddress().then((mac) => {return mac});
 
 /** * Get device ip */
-let ip = await DeviceInfo.getIpAddress().then((ip) => {return ip});
+const ip = await DeviceInfo.getIpAddress().then((ip) => {return ip});
 
 /** * Get device UniqueId */
-let uniqueId = await DeviceInfo.getUniqueId();
+const uniqueId = await DeviceInfo.getUniqueId();
 
 /**
  *  Verify OTP
