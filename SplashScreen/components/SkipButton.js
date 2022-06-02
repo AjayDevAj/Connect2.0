@@ -1,37 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import skipButtonStyles from '../assets/styles/SkipButtonStyleSheet';
 
 const SkipButton = ({ navigation }) => {
     const goToLoginPage = () => {
-        navigation.navigate('Login');
+        AsyncStorage.setItem('@viewedOnboarding', 'true');
+
+        alert("You will be redirected to enter ”mobile number” screen");
+
+        // navigation.navigate('Login');
     }
     return (
-      <View>
-          <TouchableOpacity onPress={goToLoginPage} >
-            <Text style={ styles.text }>Skip</Text>
-            <Icon name="chevron-right" size={22} style={ styles.icon } />
-            </TouchableOpacity>
-      </View>
+        <TouchableOpacity onPress={goToLoginPage} >
+            <Text style={ skipButtonStyles.text }>Skip</Text>
+            <Icon name="chevron-right" size={22} style={ skipButtonStyles.icon } />
+        </TouchableOpacity>
     );
 }
-  
-const styles = StyleSheet.create({
-    text: {
-        color: '#000',
-        textAlign: 'left',
-        left: -145,
-        top: -80,
-        opacity: 0.9,
-        letterSpacing: 0.14,
-        fontFamily: 'Poppins-Regular',
-        fontSize: 14
-    },
-    icon: {
-        color: '#000',
-        top: -102,
-        left: -118,
-    }
-});
   
 export default SkipButton;

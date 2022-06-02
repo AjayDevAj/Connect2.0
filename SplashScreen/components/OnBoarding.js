@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, FlatList, Animated } from 'react-native';
+import { View, FlatList, Animated } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import slides from './slides';
@@ -7,6 +7,8 @@ import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
+
+import onBoardingStyles from '../assets/styles/OnBoardingStyleSheet';
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,7 +39,7 @@ const OnBoarding = ({ navigation }) => {
     };
 
     return (
-      <View style={ styles.Container }>
+      <View style={ onBoardingStyles.container }>
         <View>
             <FlatList 
                 data={slides} 
@@ -57,23 +59,12 @@ const OnBoarding = ({ navigation }) => {
             />
         </View>
         <Paginator data={slides} scrollX={scrollX} />
-        <View style = {{ flexDirection: 'row' }}>
+        <View style = { onBoardingStyles.skipNextRow }>
             <SkipButton navigation={navigation} />
             <NextButton scrollTo={scrollTo} />
         </View>
       </View>
     );
 };
-  
-const styles = StyleSheet.create({
-    Container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F7FCFF'
-    },
-    textStyle: {
-        color: '#000'
-    }
-});
-  
+
 export default OnBoarding;
