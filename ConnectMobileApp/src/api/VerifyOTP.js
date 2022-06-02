@@ -37,4 +37,4 @@ const verifyOTP = async (mobileNumber,otp) => {
       }
       return data;
 }
-export {getStoreLocations}
+export {verifyOTP}
