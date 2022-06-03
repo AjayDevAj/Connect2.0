@@ -11,7 +11,8 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-
+import {useDispatch, useSelector} from 'react-redux';
+import { loadStoreLocationData } from '../../actions/StoreLocationAction';
 import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';
 
 import OTP from '../../component/Otp-Form';
@@ -21,6 +22,8 @@ import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
 
 const GetOtpScreen = () => {
+
+ 
 
   const [activeBtn, setActiveBtn] = useState(false);
   console.log(activeBtn)

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,6 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadStoreLocationData} from '../../actions/StoreLocationAction';
+
 import {FlatList} from 'react-native-gesture-handler';
 //import UpperviewBG from './assets/images/Group2491.svg';
 import UpperviewBG from '../../assets/images/Group2491';
@@ -21,6 +24,17 @@ const DATA = [
 ];
 
 export default Storelocation = () => {
+
+  const dispatch = useDispatch();
+  const LocationResonce = useSelector(store => store.StoreLocationDataResponse);
+  
+
+  // useEffect(() => {
+   
+  //   dispatch(loadStoreLocationData);
+  // }, [LocationResonce]);
+
+
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
 
@@ -129,9 +143,7 @@ export default Storelocation = () => {
 
           {...panelProps}
           isActive={isPanelActive}>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            
-          </View>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}></View>
 
           {/* <FlatList
             data={[{ title: 'Title Text', key: 'item1' },{ title: 'Title Text', key: 'item2' }]}
