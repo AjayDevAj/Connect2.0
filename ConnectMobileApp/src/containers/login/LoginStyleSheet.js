@@ -46,7 +46,8 @@ export default StyleSheet.create({
    },
    errorMsg:{
        color: 'red',
-       paddingLeft: 20
+       marginLeft: 20,
+       marginTop:5
    },
    TextInput: {
        width:320,
@@ -56,8 +57,8 @@ export default StyleSheet.create({
    BottomView: {
        width: '100%',
        justifyContent: 'flex-start',
-       borderTopLeftRadius: 25,
-       borderTopRightRadius: 25,
+       borderTopLeftRadius: 16,
+       borderTopRightRadius: 16,
        backgroundColor:'rgba(255, 255, 255, 1)',
        shadowRadius: 5,
        shadowOpacity:0.8,
