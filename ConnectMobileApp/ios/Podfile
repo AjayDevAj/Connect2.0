@@ -12,6 +12,8 @@ target 'ConnectMobileApp' do
     :hermes_enabled => false
   )
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'ConnectMobileAppTests' do
     inherit! :complete
     # Pods for testing

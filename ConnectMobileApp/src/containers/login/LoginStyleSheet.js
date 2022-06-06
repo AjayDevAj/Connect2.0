@@ -111,7 +111,7 @@ export default StyleSheet.create({
        paddingLeft: 20,
        fontSize: 12,
        fontFamily:fontFamily.Poppins,
-       color:"rgba(0, 0, 0, 1, 0.7)"
+       color:"rgba(0, 0, 0, 1,.7)"
    }
 })
 
