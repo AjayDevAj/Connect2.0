@@ -2,6 +2,7 @@
 import {
   StyleSheet,
 } from 'react-native';
+import fontFamily from '../../utility/Font-Declarations'
 
 export default StyleSheet.create({
 
@@ -13,66 +14,64 @@ export default StyleSheet.create({
   },
 
   BottomView: {
-    // backgroundColor:'green',
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    bottom: 0,
-    elevation: 10,
-    shadowColor: 'rgba(47, 110, 243, 0.16)',
-    //shadowColor:'red',
-    shadowOffset: { width: 0, height: -5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 5,
     width: '100%',
-  },
+    justifyContent: 'flex-start',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    backgroundColor:'rgba(255, 255, 255, 1)',
+    shadowRadius: 5,
+    shadowOpacity:0.8,
+     shadowOffset: {
+        width: 0,
+        height: -5,
+    },
+    elevation: 10,
+    paddingVertical: 20,
+    shadowColor:'rgba(47, 110, 243, 0.16)',
+    paddingBottom:40,
+    paddingLeft:16
+},
 
   roundedTextInputView: {
-    //flex: 1,
-    //margin: 30,
-    //marginLeft: -5,
-    // marginBottom: 15,
-    // marginTop: 25,
     flexDirection: 'row',
-    // backgroundColor: 'red',
     width: '100%',
-    height: '15%',
-    // marginTop: 10
-
+    backgroundColor:'red'
   },
   EnterOtpText: {
-    color: 'rgba(0, 0, 0, 1)',
-    alignItems: 'stretch',
-    fontWeight: 'bold',
+    marginTop: 6,
     fontSize: 24,
-    margin: 10,
-    marginLeft: 20,
-    marginTop: 10,
-    // backgroundColor: 'green'
+    fontWeight: 'bold',
+    fontFamily: fontFamily.Alte_DIN,
+
+  },
+  EnterOtpStaticText: {
+    fontSize: 12,
+    fontFamily: fontFamily.Poppins,
+    color: 'rgba(95, 99, 104, 1)',
+    alignItems:'baseline'
+
+  },
+  EnterOtpStaticTextMobile: {
+    fontSize: 12,
+    fontFamily: fontFamily.PoppinsSemiBoald,
+    color: 'rgba(95, 99, 104, 1)',
+    alignItems:'baseline'
 
   },
   WehaveSent4DigOtp_TextView: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    //paddingBottom:5,
-
-    //marginTop: 10,
-    marginLeft: 20,
-    // padding: 10,
-    // backgroundColor: 'orange',
-    width: '100%'
+    width: '100%',
+    marginTop:15,
+    fontFamily:fontFamily.Poppins
+    // marginLeft:5
 
   },
   OtpTimerView: {
-    // flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    //padding:30,
-    // margin: 10,
-    marginLeft: 20,
-    // backgroundColor: 'green',
     width: '100%',
     marginTop: 20
 
@@ -83,14 +82,13 @@ export default StyleSheet.create({
     color: 'white',
   },
   VerifyButton: {
-    width: '90%',
     borderRadius: 15,
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
-    marginLeft: 20,
     backgroundColor: 'rgba(14, 0, 113, 1)',
+    marginRight:16
   },
 })
 

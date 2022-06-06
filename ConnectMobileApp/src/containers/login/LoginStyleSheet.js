@@ -4,16 +4,17 @@ import fontFamily from '../../utility/Font-Declarations'
 
 export default StyleSheet.create({
    OtpBtn: {
-       width: "90%",
        borderRadius: 15,
-       height: 45,
+       height: 40,
        alignItems: "center",
        justifyContent: "center",
        marginTop: 20,
-       //backgroundColor: activeBtn,
        justifyContent: 'center',
        alignItems: 'center',
-       marginLeft: 20
+       backgroundColor:'red',
+       marginRight:16
+       
+
    },
    OtpText: {
        fontSize: 18,
@@ -21,38 +22,38 @@ export default StyleSheet.create({
        color: 'white'
    },
    TextInputView: {
-       width: "90%",
+    //    width: "90%",
        flexDirection: 'row',
        justifyContent: 'center',
-       height: 45,
-       marginLeft: 20,
-       marginTop: 10,
+       height: 40,
+       marginTop: 24,
        borderWidth: 0.5,
        borderColor: 'lightgrey',
        borderRadius: 10,
        alignItems:'center',
+       marginRight: 16,
+
    },
    TextInputViewError: {
        borderColor: 'red',
        width: "90%",
        flexDirection: 'row',
        justifyContent: 'center',
-       height: 45,
-       marginLeft: 20,
-       marginTop: 10,
+       height: 40,
+       marginTop: 24,
        borderWidth: 0.5,
        borderRadius: 10,
        alignItems:'center',
    },
    errorMsg:{
        color: 'red',
-       marginLeft: 20,
        marginTop:5
    },
    TextInput: {
-       width:320,
+       width:"90%",
        fontSize: 15,
-       color:'#000000'
+       color:'#000000',
+       height:'100%'
    },
    BottomView: {
        width: '100%',
@@ -69,6 +70,8 @@ export default StyleSheet.create({
        elevation: 10,
        paddingVertical: 20,
        shadowColor:'rgba(47, 110, 243, 0.16)',
+       paddingBottom:40,
+       paddingLeft:16
    },
    UpperView: {
        width: '100%',
@@ -92,16 +95,12 @@ export default StyleSheet.create({
        bottom: 2,
    },
    EnterText: {
-       marginTop: 5,
-       paddingLeft: 20,
        fontSize: 18,
        fontFamily: fontFamily.Alte_DIN,
        color:'#5F6368'
-
    },
    MobileText: {
-       marginTop: 5,
-       paddingLeft: 20,
+       marginTop: 6,
        fontSize: 24,
        fontWeight: 'bold',
        color: '#000000',
@@ -109,11 +108,10 @@ export default StyleSheet.create({
 
    },
    NormalText: {
-       marginTop: 15,
-       paddingLeft: 20,
+       marginTop: 20,
        fontSize: 12,
        fontFamily:fontFamily.Poppins,
-       color:"rgba(0, 0, 0, 1,.7)"
+       color:"#000000"
    }
 })
 

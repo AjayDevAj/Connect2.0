@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Dimensions, Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
+import fontFamily from '../utility/Font-Declarations'
 
 const OtpTimerHandler = () => {
   const [counter, setCounter] = useState(30);
@@ -12,10 +13,10 @@ const OtpTimerHandler = () => {
 
   return (
     <View>
-      {counter > 0 ? <Text style={{color: 'rgba(95, 99, 104, 1)'}}>
+      {counter > 0 ? <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,fontFamily:fontFamily.Poppins}}>
           Time Left : {counter} sec
           </Text> :
-          <Text style={{color: 'rgba(95, 99, 104, 1)'}}>
+          <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,fontFamily:fontFamily.Poppins}}>
             Didn’t Received?{' '}
             <TouchableOpacity
               onPress={() => Alert.alert('Navigate to Mobile Screen')}>
@@ -29,6 +30,10 @@ const styles = StyleSheet.create({
     ResentButtonText: {
       color: 'rgba(0, 112, 252, 1)',
       textDecorationLine: 'underline',
-      marginRight: 5,
+      fontFamily:fontFamily.Poppins,
+      fontSize:12,
+      marginTop:10,
+      marginLeft:3
+      
     }});
 export default OtpTimerHandler;

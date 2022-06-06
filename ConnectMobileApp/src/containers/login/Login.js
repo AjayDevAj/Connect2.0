@@ -18,6 +18,7 @@ import {loadLoginData} from '../../actions/LoginAction';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
+import { set } from 'react-native-reanimated';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -28,23 +29,24 @@ const Login = ({navigation}) => {
   const [inputVal, setInputVal] = useState('');
 
   const [disbaleval, setVisbal] = useState(true);
-  const [responseerror, setError] = useState('false');
+  const [responseerror, setError] = useState({
+      errorStatus:false,
+      errorMsg:''
+  });
   const [onFocus, setFocus] = useState(false);
 
   useEffect(() => {
-    // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
+    console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
     if (JSON.stringify(loginResponce.message) != null) {
-      // console.log("Login Msg type Error :=>>>", JSON.stringify(loginResponce))
-
-      if (loginResponce.error == true) {
-        setError('true');
-        //console.log("useEffect loginResponce true ::::", loginResponce)
-      } else {
-        setError('false');
-        // console.log("useEffect loginResponce false ::::", loginResponce)
-      }
-
+     
+        setError(
+            {
+                errorMsg:loginResponce.message,
+                errorStatus:loginResponce.error
+            }
+        )
+      
       // navigate to next screen.
       if (loginResponce.error == false) {
         navigation.navigate(navigationString.GetOtpScreen, {
@@ -68,8 +70,12 @@ const Login = ({navigation}) => {
   };
 
   const onChangeTextChar = enterString => {
-    console.log(`onChangeText: ${enterString}`);
-
+    setError(
+        {
+            errorMsg:'',
+            errorStatus:false
+        }
+    )
     if (enterString.trim().length > 0) {
       // setError('false')
       if (/^-?\d+$/.test(enterString)) {
@@ -85,7 +91,7 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <View style={{flex:1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         animated={true}
@@ -105,16 +111,20 @@ const Login = ({navigation}) => {
             </View>
 
             <View style={styles.BottomView}>
-              <Text style={styles.EnterText}> Enter Your </Text>
-              <Text style={styles.MobileText}> Mobile Number </Text>
-              <Text style={styles.NormalText}>
+               
+              <Text style={styles.EnterText}>Enter Your</Text>
+               
+              <Text style={styles.MobileText}>Mobile Number</Text>
+          
+              <Text style={styles.NormalText}>   
                 {' '}
                 A 4 digit OTP will be sent to verify your number
               </Text>
-
-              <View
+           
+     
+                 <View
                 style={
-                  responseerror == 'true'
+                  responseerror.errorStatus == true
                     ? styles.TextInputViewError
                     : styles.TextInputView
                 }>
@@ -146,8 +156,8 @@ const Login = ({navigation}) => {
                   style={styles.TextInput}></TextInput>
               </View>
 
-              {responseerror == 'true' ? (
-                <Text style={styles.errorMsg}>Mobile no. doesn't exist</Text>
+              {responseerror.errorStatus == true ? (
+                <Text style={styles.errorMsg}>{responseerror.errorMsg}</Text>
               ) : null}
 
               <TouchableOpacity
@@ -156,11 +166,13 @@ const Login = ({navigation}) => {
                 onPress={() => checkTextInput()}>
                 <Text style={styles.OtpText}>GET OTP</Text>
               </TouchableOpacity>
+              
             </View>
-          </View>
+            
+          </View> 
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default Login;
