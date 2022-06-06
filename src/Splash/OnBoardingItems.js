@@ -5,6 +5,8 @@ import { Text, View, Image, useWindowDimensions } from 'react-native';
 import Ellipse1 from './Ellipses/Ellipse1';
 import Ellipse2 from './Ellipses/Ellipse2';
 import Ellipse3 from './Ellipses/Ellipse3';
+
+// Stylesheet
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 // Complete data (background circles (Ellipse), image, title, description) 

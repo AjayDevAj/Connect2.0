@@ -3,7 +3,6 @@ import { View, Animated, useWindowDimensions } from 'react-native';
 
 import paginatorStyles from './styles/PaginatorStyleSheet';
 
-
 // Pagination will highlight the current onboarding slide
 const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();

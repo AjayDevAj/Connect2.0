@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, FlatList, Animated } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import slides from './slides';
 import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';

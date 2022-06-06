@@ -12,7 +12,6 @@ import { Provider } from 'react-redux';
 import configureStore  from './src/store/Store';
 import Routes from './src/navigation/Routes';
 
-
 const App = () => {
   // Set state & check if the app is launched for first time
   const [isFirstLaunch, setIsFirstLaunch] = useState(true);
