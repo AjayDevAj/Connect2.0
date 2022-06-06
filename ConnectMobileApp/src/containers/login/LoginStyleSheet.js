@@ -23,7 +23,7 @@ export default StyleSheet.create({
        color: 'white'
    },
    TextInputView: {
-       width: 370,
+       width: "90%",
        flexDirection: 'row',
        justifyContent: 'center',
        height: 45,
@@ -36,7 +36,7 @@ export default StyleSheet.create({
    },
    TextInputViewError: {
        borderColor: 'red',
-       width: 370,
+       width: "90%",
        flexDirection: 'row',
        justifyContent: 'center',
        height: 45,
@@ -49,9 +49,7 @@ export default StyleSheet.create({
    errorMsg:{
        color: 'red',
        paddingLeft: 20
-
    },
-
    TextInput: {
        width:320,
        fontSize: 15,
@@ -62,15 +60,18 @@ export default StyleSheet.create({
        justifyContent: 'flex-start',
        borderTopLeftRadius: 25,
        borderTopRightRadius: 25,
-       backgroundColor: 'white',
+       backgroundColor:'rgba(255, 255, 255, 1)',
        shadowRadius: 5,
+       shadowOpacity:0.8,
         shadowOffset: {
            width: 0,
-           height: -2,
+           height: -5,
        },
-       elevation: 30,
+       elevation: 10,
        paddingVertical: 20,
+       shadowColor:'rgba(47, 110, 243, 0.16)',
    },
+
    UpperView: {
        width: '100%',
        //height:'55%',
@@ -84,13 +85,13 @@ export default StyleSheet.create({
        top: -50,
        right: -50,
        position: "absolute",
-       alignSelf: 'flex-end'
+       alignSelf: 'flex-end',
    },
    ImageView: {
-       marginTop: 150,
-       height: 170,
-       width: 170,
-       bottom: 2
+       marginTop: 130,
+       height: 190,
+       width: 190,
+       bottom: 2,
    },
    EnterText: {
        marginTop: 5,

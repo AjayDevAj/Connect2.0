@@ -1,59 +1,48 @@
 
 import React, { useEffect, useState } from 'react';
 import {
-    View, Alert,
-    Text, StyleSheet,
-    TextInput, Image,
-    TouchableOpacity,
-    SafeAreaView,
+    View, Alert, Text, StyleSheet, TextInput, Image, TouchableOpacity, SafeAreaView,
     KeyboardAvoidingView, ScrollView, Platform
 } from 'react-native';
 
 import { image } from '../images/Image';
-import { Component } from 'react';
-import { Node } from 'react';
-import { connect } from 'react-redux';
 import { loadLoginData } from '../../actions/LoginAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../constent/navigationString';
-import Routes from '../../navigation/Routes';
 
-
-
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const loginResponce = useSelector(store => store.loginDataResponse)
-    const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
 
+    const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
     const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
     const [inputVal, setInputVal] = useState('');
 
     const [disbaleval, setVisbal] = useState(true);
-    const [responseerror,setError] = useState('false');
-
+    const [responseerror, setError] = useState('false');
 
     useEffect(() => {
-        console.log("loginResponce : ", JSON.stringify(loginResponce.message));
+        // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
         if (JSON.stringify(loginResponce.message) != null) {
-            console.log("Login Msg type Error :=>>>", JSON.stringify(loginResponce))
-            // console.log("Login Msg type Msg :=>>>", loginResponce.message)
+            // console.log("Login Msg type Error :=>>>", JSON.stringify(loginResponce))
 
-            if ((loginResponce.error) == true ) {
+            if ((loginResponce.error) == true) {
                 setError('true');
-                console.log("useEffect loginResponce true ::::",loginResponce)
-
-
-            }else{
+                //console.log("useEffect loginResponce true ::::", loginResponce)
+            } else {
                 setError('false');
-                console.log("useEffect loginResponce false ::::",loginResponce)
+                // console.log("useEffect loginResponce false ::::", loginResponce)
+            }
 
+            // navigate to next screen.
+            if ((loginResponce.error) == false) {
+                navigation.navigate(navigationString.GetOtpScreen, { mobile_Number: textInputPhoneNum })
             }
         }
     }, [loginResponce]);
-
 
     //Check for the Phone Number TextInput
     const checkTextInput = async () => {
@@ -63,12 +52,9 @@ const Login = ({navigation}) => {
         else if (textInputPhoneNum.trim().length != 10) {
             alert('Please enter 10 digit valid mobile number');
 
-
         } else {
             //calling API login
             dispatch(loadLoginData(textInputPhoneNum))
-             
-
         }
     };
 
@@ -95,8 +81,8 @@ const Login = ({navigation}) => {
 
                 <View>
                     <View
-                        style={styles.CircilePostion}
-                    ></View>
+                        style={styles.CircilePostion}>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={{ flex: 1 }}>
@@ -113,21 +99,12 @@ const Login = ({navigation}) => {
 
                         <View
                             style={styles.BottomView}>
-                            <Text
-                                style={styles.EnterText}> Enter Your </Text>
-                            <Text
-                                style={styles.MobileText}> Mobile Number </Text>
-                            <Text
-                                style={styles.NormalText}> A 4 digit OTP will be sent to verify your number
-                            </Text>
-                              {console.log("UIView: 118: ",responseerror)}
-                            <View style={responseerror  == 'true' ? styles.TextInputViewError : styles.TextInputView}
-                            >
-                                <Text style={{
-                                    fontSize: 15,
-                                    marginLeft: 5,
+                            <Text style={styles.EnterText}> Enter Your </Text>
+                            <Text style={styles.MobileText}> Mobile Number </Text>
+                            <Text style={styles.NormalText}> A 4 digit OTP will be sent to verify your number</Text>
 
-                                }}> +91 </Text>
+                            <View style={responseerror == 'true' ? styles.TextInputViewError : styles.TextInputView}>
+                                <Text style={{ fontSize: 15, marginLeft: 5, }}> +91 </Text>
 
                                 <TextInput
                                     placeholder="Enter 10 Digit Mobile No."
@@ -154,27 +131,22 @@ const Login = ({navigation}) => {
                                 </TextInput>
                             </View>
 
-                            {console.log("UIView 150:",responseerror)}
-
-                            {responseerror  == 'true' ? <Text style={styles.errorMsg}>
+                            {responseerror == 'true' ? <Text style={styles.errorMsg}>
                                 Mobile no. doesn't exist
                             </Text> : null}
 
                             <TouchableOpacity disabled={disbaleval}
-                                style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={()=>navigation.navigate(navigationString.GetOtpScreen)}>
-
+                                style={[styles.OtpBtn, { backgroundColor: activeBtn }]} onPress={() => checkTextInput()}>
                                 <Text style={styles.OtpText}>
                                     GET OTP
                                 </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
-
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
-
 export default Login;
 

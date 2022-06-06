@@ -15,8 +15,10 @@ const getResponse = payload => ({
     payload
 })
 
+
+
 export {
     loadLoginData,
     getError,
-    getResponse
+    getResponse,
 }

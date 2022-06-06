@@ -3,13 +3,16 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'flex-start',
+      marginHorizontal: -15
+
     },
     input: {
        //flex: 1,
-      marginHorizontal: 8,
-      fontSize: 32,
-      textAlign: 'center',
+      marginHorizontal: 10,
+      fontSize: 30,
+      //textAlign: 'center',
       backgroundColor: '#fff',
+      alignItems: 'center'
       
       
       
