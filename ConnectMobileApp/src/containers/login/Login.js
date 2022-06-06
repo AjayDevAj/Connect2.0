@@ -22,6 +22,8 @@ const Login = ({ navigation }) => {
 
     const [disbaleval, setVisbal] = useState(true);
     const [responseerror, setError] = useState('false');
+    const [onFocus, setFocus] = useState(false);
+
 
     useEffect(() => {
         // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
@@ -60,15 +62,20 @@ const Login = ({ navigation }) => {
 
     const onChangeTextChar = (enterString) => {
         console.log(`onChangeText: ${enterString}`);
+
         if (enterString.trim().length > 0) {
             // setError('false')
             if (/^-?\d+$/.test(enterString)) {
                 setInputVal(enterString);
+                setFocus(true)
+
             } else {
                 Alert.alert("Please enter a valid phone number.")
             }
         } else {
             setInputVal(enterString.trim());
+            setFocus(false)
+
         }
     };
 
@@ -105,7 +112,9 @@ const Login = ({ navigation }) => {
                             <Text style={styles.NormalText}> A 4 digit OTP will be sent to verify your number</Text>
 
                             <View style={responseerror == 'true' ? styles.TextInputViewError : styles.TextInputView}>
-                                <Text style={{ fontSize: 15, marginLeft: 5, }}> +91 </Text>
+                                {onFocus &&
+                                <Text style={{ fontSize: 15, marginLeft: 14, }}> +91 </Text>
+    }
 
                                 <TextInput
                                     placeholder="Enter 10 Digit Mobile No."
@@ -114,6 +123,9 @@ const Login = ({ navigation }) => {
                                     maxLength={10}
                                     dataDetector="phoneNumber"
                                     value={inputVal}
+                                    // onFocus={() => { console.log('onSubmitEditing') }}
+
+
                                     onChangeText={
                                         (value) => {
                                             //console.log('TextInput value : ', value)
@@ -121,10 +133,10 @@ const Login = ({ navigation }) => {
                                             setTextInputPhoneNum(value)
                                             if (value.trim().length === 10) {
                                                 setActiveBtn('rgba(rgba(14, 0, 113, 1))')
-                                                setVisbal(false)
                                             } else {
                                                 setActiveBtn('rgba(112, 112, 112, 0.22)')
                                                 setVisbal(true)
+
                                             }
                                         }
                                     }

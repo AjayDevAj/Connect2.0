@@ -51,6 +51,7 @@ export default StyleSheet.create({
    TextInput: {
        width:320,
        fontSize: 15,
+       color:'#000000'
    },
    BottomView: {
        width: '100%',
