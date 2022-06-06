@@ -8,7 +8,7 @@ import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 const Stack = createNativeStackNavigator();
 
 /**
- * Routes matain the navigation stacks
+ * TabBar maintain the tab controllers
  */
  const Routes = () => {
   return (

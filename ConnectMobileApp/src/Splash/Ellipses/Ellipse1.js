@@ -14,7 +14,8 @@ const Ellipse1 = () => {
 const styles = StyleSheet.create({
     Container: {
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        overflow:'hidden'
     },
     textStyle: {
         color: '#000'

@@ -10,7 +10,7 @@ import onBoardingStyles from './styles/OnBoardingStyleSheet';
 const OnBoardingItems = ({ item }) => {
     const { width } = useWindowDimensions();
     return (
-      <View style={ {width} }>
+      <View style={ {width,overflow:'hidden'} }>
         {item.id == 1 ? <Ellipse1 /> : item.id == 2 ? <Ellipse2 /> : <Ellipse3 /> }
         <Image source={item.image} style={ onBoardingStyles.image } />
         <View >
