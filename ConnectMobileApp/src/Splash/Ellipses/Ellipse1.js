@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     Container: {
         flexDirection:'row',
         justifyContent:'space-between',
-        overflow:'hidden'
+        // overflow:'hidden',
     },
     textStyle: {
         color: '#000'
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         borderRadius:65/2,
         top: 180,
         left: 30,
+        zIndex:1
     }
 });
 

@@ -44,6 +44,7 @@ const OnBoarding = ({ navigation }) => {
       <View style={ onBoardingStyles.container }>
         <View>
             <FlatList 
+            
                 data={slides} 
                 renderItem={({item}) => <OnBoardingItems item={item} />} 
                 horizontal

@@ -18,21 +18,23 @@ const onBoardingStyles = StyleSheet.create({
         fontSize: 22,
         // fontFamily: 'alte-din-1451-mittelschrift.gepraegt',
         top: 30,
-        color: '#0E0071',
+        color: 'rgba(14, 0, 113, 1)',
         textAlign: 'center',
         letterSpacing: 0.22,
-        opacity: 0.8
+        opacity: 0.8,
+        fontFamily:fontFamily.Alte_DIN
     },
     description: {
         fontSize: 12,
         fontFamily: fontFamily.Poppins,
-        color: '#000000',
+        color: 'rgba(0, 0, 0, 0.6)',
         textAlign: 'center',
         letterSpacing: 0.12,
         opacity: 0.5,
         top: 40,
         left: 60,
-        width: 260
+        width: 260,
+        
     },
 });
 
