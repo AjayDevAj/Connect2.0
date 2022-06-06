@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import navigationString from '../constent/navigationString';
 import Login from '../containers/login/Login';
-import GetOtpScreen from '../containers/otp/GetOtpScreen';
+import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 
 const Stack = createNativeStackNavigator();
 

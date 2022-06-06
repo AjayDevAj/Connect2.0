@@ -27,7 +27,6 @@ export default StyleSheet.create({
        flexDirection: 'row',
        justifyContent: 'center',
        height: 45,
-       marginLeft: 20,
        marginTop: 10,
        borderWidth: 0.5,
        borderColor: 'lightgrey',
@@ -62,7 +61,6 @@ export default StyleSheet.create({
        justifyContent: 'flex-start',
        borderTopLeftRadius: 25,
        borderTopRightRadius: 25,
-       backgroundColor: 'white',
        shadowRadius: 5,
         shadowOffset: {
            width: 0,
@@ -70,6 +68,8 @@ export default StyleSheet.create({
        },
        elevation: 30,
        paddingVertical: 20,
+       marginLeft:20,
+       marginRight:20
    },
    UpperView: {
        width: '100%',
@@ -94,19 +94,16 @@ export default StyleSheet.create({
    },
    EnterText: {
        marginTop: 5,
-       paddingLeft: 20,
        fontSize: 18
    },
    MobileText: {
        marginTop: 5,
-       paddingLeft: 20,
        fontSize: 24,
        fontWeight: 'bold',
        color: 'black'
    },
    NormalText: {
        marginTop: 15,
-       paddingLeft: 20,
        fontSize: 12,
    }
 })

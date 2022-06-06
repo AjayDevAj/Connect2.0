@@ -62,13 +62,9 @@ const Login = ({navigation}) => {
         }
         else if (textInputPhoneNum.trim().length != 10) {
             alert('Please enter 10 digit valid mobile number');
-
-
         } else {
             //calling API login
             dispatch(loadLoginData(textInputPhoneNum))
-             
-
         }
     };
 
@@ -100,7 +96,7 @@ const Login = ({navigation}) => {
                 </View>
 
                 <ScrollView contentContainerStyle={{ flex: 1 }}>
-                    <View style={{ position: 'absolute', bottom: 0, width: "100%" }}>
+                    <View style={{ position: 'absolute', bottom: 0, width: "100%"}}>
 
                         <View
                             style={styles.UpperView}>
@@ -126,6 +122,7 @@ const Login = ({navigation}) => {
                                 <Text style={{
                                     fontSize: 15,
                                     marginLeft: 5,
+
 
                                 }}> +91 </Text>
 
