@@ -1,24 +1,23 @@
 
 import { CONSTANT } from "../utility/Constant";
 
-const loadLoginData = (mobileNumber) => ({
-    type: CONSTANT.LOGIN_DATA,mobileNumber
+const loadOtpData = (mobileNumber, otp) => ({
+    type: CONSTANT.OTP_DATA,mobileNumber,otp
 })
 
 const getError = payload => ({
-    type: CONSTANT.DATA_ERROR,
+    type: CONSTANT.OTP_DATA_ERROR,
     payload
 })
 
 const getResponse = payload => ({
-    type: CONSTANT.DATA_SUCCESS,
+    type: CONSTANT.OTP_DATA_SUCCESS,
     payload
 })
 
 
-
 export {
-    loadLoginData,
+    loadOtpData,
     getError,
     getResponse,
 }

@@ -8,7 +8,7 @@ import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
 
-import onBoardingStyles from '../assets/styles/OnBoardingStyleSheet';
+import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 // import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import skipButtonStyles from '../assets/styles/SkipButtonStyleSheet';
+import skipButtonStyles from './styles/SkipButtonStyleSheet';
 
 const SkipButton = ({ navigation }) => {
     const goToLoginPage = () => {

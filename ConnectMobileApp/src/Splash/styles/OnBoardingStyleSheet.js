@@ -15,7 +15,7 @@ const onBoardingStyles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
-        fontFamily: 'alte-din-1451-mittelschrift.gepraegt',
+        // fontFamily: 'alte-din-1451-mittelschrift.gepraegt',
         top: 30,
         color: '#0E0071',
         textAlign: 'center',

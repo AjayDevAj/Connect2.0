@@ -5,7 +5,7 @@ import Ellipse1 from './Ellipses/Ellipse1';
 import Ellipse2 from './Ellipses/Ellipse2';
 import Ellipse3 from './Ellipses/Ellipse3';
 
-import onBoardingStyles from '../assets/styles/OnBoardingStyleSheet';
+import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 const OnBoardingItems = ({ item }) => {
     const { width } = useWindowDimensions();

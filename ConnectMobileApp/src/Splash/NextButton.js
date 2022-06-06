@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
-import nextButtonStyles from '../assets/styles/NextButtonStyleSheet';
+import nextButtonStyles from './styles/NextButtonStyleSheet';
 
 const NextButton = ({ scrollTo }) => {
     return (

@@ -71,7 +71,7 @@ export default function Otp({
               styles.input,
               otpStyles,
               //{width: width / (codeCount + 2), height: height / 14},
-              {width:'14.5%',height:'9%',padding:'8%'},
+              {width:'15%',height:'10%',padding:'8%'},
              //{maxHeight:100,maxWidth:100}
               
               
