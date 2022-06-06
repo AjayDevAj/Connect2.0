@@ -11,7 +11,7 @@ const paginatorStyles = StyleSheet.create({
         backgroundColor: '#657180',
         marginHorizontal: 3,
         opacity: 0.02,
-        top:-240
+        top:-240,
     },
 });
 

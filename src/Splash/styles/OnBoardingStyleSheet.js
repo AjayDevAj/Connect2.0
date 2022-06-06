@@ -32,7 +32,7 @@ const onBoardingStyles = StyleSheet.create({
         opacity: 0.6,
         top: 68,
         left: 50,
-        width: 273,
+        width: 273
         
     },
 });

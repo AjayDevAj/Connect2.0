@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         color: '#000'
     },
     image3623: {
-        opacity: 0.15,
+        opacity: 0.12,
         width:197,
         height:197,
         backgroundColor:'#0E0071',
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
         left:-38,
     },
     image3624: {
-        opacity: 0.2,
-        top: 0,
-        left: 110,
-        width:119,
-        height:119,
+        opacity: 0.12,
+        top: -5,
+        left: 115,
+        width: 109,
+        height: 109,
         backgroundColor:'#0070FC',
-        borderRadius:119/2,
+        borderRadius: 109/2,
     },
     image3625: {
         opacity: 0.1,

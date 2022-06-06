@@ -14,7 +14,7 @@ const skipButtonStyles = StyleSheet.create({
     icon: {
         color: '#000',
         top: -102,
-        left: -118,
+        left: -118
     },
 });
 

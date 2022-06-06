@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import skipButtonStyles from './styles/SkipButtonStyleSheet';
 
+
 // Once clicked, it will skip to Login screen & Onboarding viewed will be set to true
 const SkipButton = ({ navigation }) => {
     const goToLoginPage = () => {

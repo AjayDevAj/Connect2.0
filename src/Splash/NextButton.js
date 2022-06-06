@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import nextButtonStyles from './styles/NextButtonStyleSheet';
 
+
 // It will move to next slide of onboarding
 const NextButton = ({ scrollTo }) => {
   return (

@@ -11,7 +11,7 @@ const nextButtonStyles = StyleSheet.create({
     top: -90,
     left: 120,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 });
 

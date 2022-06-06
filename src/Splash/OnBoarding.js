@@ -7,7 +7,6 @@ import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
-
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 // Complete onboarding data includes - 
