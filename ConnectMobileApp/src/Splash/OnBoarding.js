@@ -7,7 +7,7 @@ import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
-import navigationString from '../constent/navigationString';
+import navigationString from '../utility/NavigationString';
 
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 

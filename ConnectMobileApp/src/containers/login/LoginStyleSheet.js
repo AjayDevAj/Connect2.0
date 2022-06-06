@@ -1,6 +1,7 @@
-import {
-    StyleSheet,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
+import { color } from 'react-native-reanimated';
+import fontFamily from '../../utility/Font-Declarations'
+
 export default StyleSheet.create({
    OtpBtn: {
        width: "90%",
@@ -91,19 +92,26 @@ export default StyleSheet.create({
    EnterText: {
        marginTop: 5,
        paddingLeft: 20,
-       fontSize: 18
+       fontSize: 18,
+       fontFamily: fontFamily.Alte_DIN,
+       color:'#5F6368'
+
    },
    MobileText: {
        marginTop: 5,
        paddingLeft: 20,
        fontSize: 24,
        fontWeight: 'bold',
-       color: 'black'
+       color: '#000000',
+       fontFamily: fontFamily.Alte_DIN,
+
    },
    NormalText: {
        marginTop: 15,
        paddingLeft: 20,
        fontSize: 12,
+       fontFamily:fontFamily.Poppins,
+       color:"rgba(0, 0, 0, 1, 0.7)"
    }
 })
 

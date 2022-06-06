@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import fontFamily from '../../utility/Font-Declarations'
 
 const skipButtonStyles = StyleSheet.create({
     text: {
@@ -8,7 +9,7 @@ const skipButtonStyles = StyleSheet.create({
         top: -80,
         opacity: 0.9,
         letterSpacing: 0.14,
-        fontFamily: 'Poppins-Regular',
+        fontFamily: fontFamily.Poppins,
         fontSize: 14
     },
     icon: {

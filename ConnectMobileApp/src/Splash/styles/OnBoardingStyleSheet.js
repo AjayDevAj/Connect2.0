@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import fontFamily from '../../utility/Font-Declarations'
 
 const onBoardingStyles = StyleSheet.create({
     container: {
@@ -24,7 +25,7 @@ const onBoardingStyles = StyleSheet.create({
     },
     description: {
         fontSize: 12,
-        fontFamily: 'Poppins-Regular',
+        fontFamily: fontFamily.Poppins,
         color: '#000000',
         textAlign: 'center',
         letterSpacing: 0.12,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import navigationString from '../constent/navigationString';
+import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';

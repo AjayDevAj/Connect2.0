@@ -9,7 +9,7 @@ import { image } from '../images/Image';
 import { loadLoginData } from '../../actions/LoginAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
-import navigationString from '../../constent/navigationString';
+import navigationString from '../../utility/NavigationString';
 
 const Login = ({ navigation }) => {
 
