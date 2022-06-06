@@ -1,0 +1,51 @@
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+const Ellipse3 = () => {
+    return (
+        <View style={ styles.Container }>
+            <View style={ styles.image3623 }></View>
+            <View style={ styles.image3624 }></View>
+            <View style={ styles.image3625 }></View>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    Container: {
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    textStyle: {
+        color: '#000'
+    },
+    image3623: {
+        opacity: 0.15,
+        width:197,
+        height:197,
+        backgroundColor:'#0E0071',
+        borderRadius:197/2,
+        top:-45,
+        left:-133,
+    },
+    image3624: {
+        opacity: 0.1,
+        top: -30,
+        left: 75,
+        width: 149,
+        height: 149,
+        backgroundColor:'#00C158',
+        borderRadius: 149/2,
+    },
+    image3625: {
+        opacity: 0.1,
+        width:65,
+        height:65,
+        backgroundColor:'#FFAA00',
+        borderRadius:65/2,
+        top: 250,
+        left: 10,
+    }
+});
+
+export default Ellipse3;
