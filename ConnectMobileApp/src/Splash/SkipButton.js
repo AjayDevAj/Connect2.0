@@ -3,12 +3,14 @@ import { Text, TouchableOpacity } from 'react-native';
 // import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import skipButtonStyles from './styles/SkipButtonStyleSheet';
+import navigationString from '../constent/navigationString'
 
 const SkipButton = ({ navigation }) => {
     const goToLoginPage = () => {
         AsyncStorage.setItem('@viewedOnboarding', 'true');
 
-        alert("You will be redirected to enter ”mobile number” screen");
+        // alert("You will be redirected to enter ”mobile number” screen");
+        navigation.navigate(navigationString.LOGIN)
 
         // navigation.navigate('Login');
     }

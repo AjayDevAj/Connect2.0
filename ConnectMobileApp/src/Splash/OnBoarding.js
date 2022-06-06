@@ -7,6 +7,7 @@ import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
+import navigationString from '../constent/navigationString';
 
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
@@ -29,9 +30,10 @@ const OnBoarding = ({ navigation }) => {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         } else {
             try {
-                AsyncStorage.setItem('@viewedOnboarding', 'true');
+                // AsyncStorage.setItem('@viewedOnboarding', 'true');
+                // alert("You will be redirected to enter ”mobile number” screen");
+                navigation.navigate(navigationString.LOGIN)
 
-                alert("You will be redirected to enter ”mobile number” screen");
             } catch (err) {
                 console.log('Error @setItem: ', err);
             }
