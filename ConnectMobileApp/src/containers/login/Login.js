@@ -22,13 +22,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
 
 const Login = () => {
+
   const dispatch = useDispatch();
   const loginResponce = useSelector(store => store.loginDataResponse);
-  const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
 
+  const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
   const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
   const [inputVal, setInputVal] = useState('');
-
   const [disbaleval, setVisbal] = useState(true);
 
   //MARK:- Using hook function.

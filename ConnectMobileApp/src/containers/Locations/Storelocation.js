@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadStoreLocationData} from '../../actions/StoreLocationAction';
@@ -16,24 +17,16 @@ import styles from './StorleLocationStylesheet';
 
 import {SwipeablePanel} from 'rn-swipeable-panel';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-];
-
 export default Storelocation = () => {
-
   const dispatch = useDispatch();
   const LocationResonce = useSelector(store => store.StoreLocationDataResponse);
-  
+  console.log('My data responce', LocationResonce);
 
-  // useEffect(() => {
-   
-  //   dispatch(loadStoreLocationData);
-  // }, [LocationResonce]);
-
+  useEffect(() => {
+    //loadStoreLocationData()
+    //console.log()
+    dispatch(loadStoreLocationData());
+  }, [LocationResonce]);
 
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
@@ -122,7 +115,7 @@ export default Storelocation = () => {
           flex: 1.3,
           //justifyContent: 'center',
           //alignItems: 'flex-end',
-          // backgroundColor: 'red',
+          backgroundColor: 'red',
         }}>
         <SwipeablePanel
           barStyle={{backgroundColor: '#2F6EF329'}}
@@ -132,6 +125,8 @@ export default Storelocation = () => {
             shadowOffset: {width: 0, height: 2},
             shadowOpacity: 0.9,
             shadowRadius: 2,
+            padding: 20,
+
             //width:50,
             //justifyContent:'flex-end'
             //alignItems:'center',
@@ -143,21 +138,27 @@ export default Storelocation = () => {
 
           {...panelProps}
           isActive={isPanelActive}>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}></View>
+          <ScrollView>
+            <Text>{LocationResonce}</Text>
+            <TouchableOpacity>
+              <Text>CONTINUE</Text>
+            </TouchableOpacity>
+            <Text>hi</Text>
 
-          {/* <FlatList
-            data={[{ title: 'Title Text', key: 'item1' },{ title: 'Title Text', key: 'item2' }]}
-            renderItem={({item}) => (
-              <View style={{alignItems:'center',padding:10,backgroundColor:''}}>
-                <Text>{item.key}</Text>
-              </View>
-            )}
-            keyExtractor={item => item.id}
-          /> */}
-          <TouchableOpacity style={styles.VerifyButton}>
-            <Text style={styles.VerifyButtonText}>CONTINUE</Text>
-          </TouchableOpacity>
+            <TouchableOpacity>
+              <Text>CONTINUE</Text>
+            </TouchableOpacity>
+          </ScrollView>
         </SwipeablePanel>
+      </View>
+      <View
+        style={{
+          height: 40,
+          bottom: 20,
+        }}>
+        <TouchableOpacity style={styles.ContinueButton}>
+          <Text style={styles.ContinueButtonText}>CONTINUE</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

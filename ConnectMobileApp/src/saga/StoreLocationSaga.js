@@ -2,7 +2,7 @@
 import { take, put, call, takeLatest, takeEvery } from 'redux-saga/effects'
 import { CONSTANT } from '../utility/Constant'
 import { getError, getResponse } from '../actions/StoreLocationAction'
-import {getStoreLocations} from '../api/GetStoreLocations'
+import {GetStoreLocations} from '../api/GetStoreLocations'
 
 
 //Worker Saga...
@@ -13,11 +13,12 @@ import {getStoreLocations} from '../api/GetStoreLocations'
  */
 function* HandleStoreDataResponse(action) {
     try {
-        const data = yield call(getStoreLocations)
-        console.log('StoreLocation responce', data)
+        const data = yield call(GetStoreLocations)
+        console.log('StoreLocation responce')
         yield put(getResponse(data))
     }
      catch(errors) {
+         console.log('Error here', errors)
          yield put(getError(errors.toString()))
      }
 }
@@ -27,5 +28,6 @@ function* HandleStoreDataResponse(action) {
 export default function* StoreDataWatcherSaga() {
     console.log('Store Saga Watcher')
     yield takeEvery(CONSTANT.STORE_LOCATION_DATA, HandleStoreDataResponse)
+    
 
 }

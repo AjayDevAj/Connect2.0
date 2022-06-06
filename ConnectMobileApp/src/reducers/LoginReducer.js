@@ -1,6 +1,7 @@
 
 import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";
+import StoreLocationDataReducer from "./StoreLocationReducer";
 
 const loginDataReducer = (state = '', action) => {
 
@@ -17,6 +18,8 @@ const loginDataReducer = (state = '', action) => {
 
 const rootReducers = combineReducers({
     loginDataResponse: loginDataReducer,
+    StoreLocationDataResponse:StoreLocationDataReducer
+    
 })
 
 export default rootReducers;

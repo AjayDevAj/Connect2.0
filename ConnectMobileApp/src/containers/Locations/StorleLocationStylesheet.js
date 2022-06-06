@@ -5,12 +5,12 @@ import {
 
 export default StyleSheet.create({
 
-    VerifyButtonText: {
+    ContinueButtonText: {
         fontSize: 18,
         fontWeight: 'bold',
         color: 'white',
       },
-      VerifyButton: {
+      ContinueButton: {
         width: '90%',
         borderRadius: 15,
         height: 45,
@@ -21,7 +21,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 20,
-        top:200
+        paddingBottom:5
+       
+        
       },
 
 })
