@@ -1,10 +1,10 @@
 
 import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File';
-//import { DeviceInfo } from 'react-native-device-info';
+import { DeviceInfo } from 'react-native-device-info';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
 
 /** * Get device mac id */
-//const mac = await DeviceInfo.getMacAddress().then((mac) => {return mac});
-//console.log("Print mac ==== ", mac)
+
 
 /** * Get device ip */
 //const ip = await DeviceInfo.getIpAddress().then((ip) => {return ip});
@@ -24,7 +24,11 @@ import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File';
  */
 
 const verifyOTP = async (mobileNumber, otp) => {
+    console.log("Print mac ==== pre")
 
+    // const mac = await DeviceInfo.getMacAddress().then((mac) => {return mac});
+// console.log("Print mac ==== ", mac)
+// return
     const param = JSON.stringify({
         phonenumber: 9467396412,
         otp: 1469,

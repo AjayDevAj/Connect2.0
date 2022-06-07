@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Dimensions, Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 import fontFamily from '../utility/Font-Declarations'
 
-const OtpTimerHandler = ({Resend}) => {
+const OtpTimerHandler = ({Resend,StopTimer}) => {
   const [counter, setCounter] = useState(30);
   useEffect(() => {
     const timer =
@@ -15,7 +15,10 @@ const OtpTimerHandler = ({Resend}) => {
       {counter > 0 ? <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,fontFamily:fontFamily.Poppins}}>
           Time Left : {counter} sec
           </Text> :
-          <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,fontFamily:fontFamily.Poppins}}>
+          <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,
+                        fontFamily:fontFamily.Poppins,
+                        // marginBottom:10
+          }}>
             Didn’t Received?{' '}
             <TouchableOpacity
               onPress={Resend}>

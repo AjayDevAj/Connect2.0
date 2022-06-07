@@ -7,8 +7,6 @@ import navigationString from '../../utility/NavigationString';
 
 const Location = ({navigation}) => {
   const route = useRoute();
-  //   const mobileNumber = route.params.mobile_Number;
-
   return (
     <View style={{flex: 1}}>
       <Bubble />

@@ -80,9 +80,10 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily:fontFamily.Alte_DIN
   },
   VerifyButton: {
-    borderRadius: 15,
+    borderRadius: 8,
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',

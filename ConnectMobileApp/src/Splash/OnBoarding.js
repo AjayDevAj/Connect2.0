@@ -1,39 +1,28 @@
 import React, { useState, useRef } from 'react';
 import { View, FlatList, Animated } from 'react-native';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import slides from './slides';
 import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
 import navigationString from '../utility/NavigationString';
-
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const scrollX = useRef(new Animated.Value(0)).current;
-
     const slidesRef = useRef(null);
-
     const viewableItems = [];
     const viewableItemsChanged = useRef(({ viewableItems }) => {
         setCurrentIndex(viewableItems[0].index)
     }).current;
-
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-
     const scrollTo = async () => {
         if (currentIndex < slides.length - 1) {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         } else {
             try {
-                // AsyncStorage.setItem('@viewedOnboarding', 'true');
-                // alert("You will be redirected to enter ”mobile number” screen");
                 navigation.navigate(navigationString.LOGIN)
-
             } catch (err) {
                 console.log('Error @setItem: ', err);
             }
@@ -44,7 +33,6 @@ const OnBoarding = ({ navigation }) => {
       <View style={ onBoardingStyles.container }>
         <View>
             <FlatList 
-            
                 data={slides} 
                 renderItem={({item}) => <OnBoardingItems item={item} />} 
                 horizontal

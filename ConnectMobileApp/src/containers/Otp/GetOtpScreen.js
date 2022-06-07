@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform} from 'react-native';
+import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform,} from 'react-native';
 import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
@@ -19,29 +19,30 @@ const GetOtpScreen = ({navigation}) => {
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
   const [otp, setOtpNum] = useState('');
+  const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
+  const [disbaleval, setVisbal] = useState(true);
+  const [timerEnable, setTimerEnable] = useState(false);
+
 
   useEffect(() => {
-    console.log('VerfyResponce otpResponce: ', JSON.stringify(otpResponce));
-    navigation.navigate(NavigationString.Location);
+    // console.log('otpResponce',otpResponce)
+    if (otpResponce.code != null) {
+      navigation.navigate(NavigationString.Location);
+    }
   }, [otpResponce]);
 
   useEffect(() => {
-
-    console.log('VerfyResponce resendOtpResponce: ', JSON.stringify(resendOtpResponce));
+    // setTimerEnable(true)
   }, [resendOtpResponce]);
 
-/**
- * OTP Api calling
- *  */ 
- const VerifyOTPApi = () => {
-    console.log('click me verify');
-    console.log('Mobile Num :====>', mobileNumber);
-
-    dispatch(loadOtpData(mobileNumber, otp));
+  /**
+   * OTP Api calling
+   *  */
+  const VerifyOTPApi = () => {
+      dispatch(loadOtpData(mobileNumber, otp));
   };
 
   const reSendOTP = () => {
-    console.log('reSendOTP Mobile Num :====>', mobileNumber);
     dispatch(loadOtpData_Resend(mobileNumber));
   };
 
@@ -66,7 +67,6 @@ const GetOtpScreen = ({navigation}) => {
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.EnterOtpText}>Enter OTP</Text>
               </View>
-
               <View style={styles.WehaveSent4DigOtp_TextView}>
                 <Text style={styles.EnterOtpStaticText}>
                   Enter OTP you receive via call on{' '}
@@ -83,23 +83,31 @@ const GetOtpScreen = ({navigation}) => {
                   </TouchableOpacity>
                 </Text>
               </View>
-
+              {/* OTP input */}
               <OTPTextInput
                 ref={e => console.log(';sdd')}
                 containerStyle={{borderColor: 'red'}}
+                handleTextChange={text => {
+                  if (text.trim().length === 4) {
+                    setOtpNum(text)
+                    setActiveBtn('rgba(rgba(14, 0, 113, 1))');
+                    setVisbal(false);
+                  } else {
+                    setActiveBtn('rgba(112, 112, 112, 0.22)');
+                    setVisbal(true);
+                  }
+                }}
               />
-
               <View style={styles.OtpTimerView}>
-                <OtpTimerHandler Resend={ (test) => reSendOTP()}/>
+                <OtpTimerHandler Resend={test => reSendOTP()} />
               </View>
 
               <TouchableOpacity
-                // onPress={() => Alert.alert('Number Varification API Call')}
+                disabled={disbaleval}
                 onPress={() => VerifyOTPApi()}
-                style={styles.VerifyButton}>
+                style={[styles.VerifyButton, {backgroundColor: activeBtn}]}>
                 <Text style={styles.VerifyButtonText}>VERIFY</Text>
               </TouchableOpacity>
-              {/* </View> */}
             </View>
           </View>
         </ScrollView>

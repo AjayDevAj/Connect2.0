@@ -28,6 +28,7 @@
     "react-native-svg": "^12.3.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-swipe-up-panel": "^1.2.22",
+    "react-native-vector-icons": "^9.1.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "redux-saga": "^1.1.3",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-// import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import skipButtonStyles from './styles/SkipButtonStyleSheet';
 import navigationString from '../utility/NavigationString'
@@ -16,8 +16,9 @@ const SkipButton = ({ navigation }) => {
     }
     return (
         <TouchableOpacity onPress={goToLoginPage} >
-            <Text style={ skipButtonStyles.text }>Skip</Text>
-            {/* <Icon name="chevron-right" size={22} style={ skipButtonStyles.icon } /> */}
+            <Text style={ skipButtonStyles.text }>Skip </Text>
+            <Icon name="chevron-right" size={22} style={ skipButtonStyles.icon } />
+           
         </TouchableOpacity>
     );
 }

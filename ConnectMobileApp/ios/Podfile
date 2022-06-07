@@ -14,6 +14,8 @@ target 'ConnectMobileApp' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'ConnectMobileAppTests' do
     inherit! :complete
     # Pods for testing

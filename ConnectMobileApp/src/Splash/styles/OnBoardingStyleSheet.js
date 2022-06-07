@@ -16,9 +16,8 @@ const onBoardingStyles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
-        // fontFamily: 'alte-din-1451-mittelschrift.gepraegt',
         top: 30,
-        color: 'rgba(14, 0, 113, 1)',
+        color: '#0E0071',
         textAlign: 'center',
         letterSpacing: 0.22,
         opacity: 0.8,
@@ -27,12 +26,12 @@ const onBoardingStyles = StyleSheet.create({
     description: {
         fontSize: 12,
         fontFamily: fontFamily.Poppins,
-        color: 'rgba(0, 0, 0, 0.6)',
+        color: '#000000',
         textAlign: 'center',
         letterSpacing: 0.12,
         opacity: 0.5,
         top: 40,
-        left: 60,
+        // left: 60,
         width: 260,
         
     },

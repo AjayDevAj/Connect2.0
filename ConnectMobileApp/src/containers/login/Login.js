@@ -12,13 +12,11 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-
 import {image} from '../images/Image';
 import {loadLoginData} from '../../actions/LoginAction';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
-import { set } from 'react-native-reanimated';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -39,14 +37,12 @@ const Login = ({navigation}) => {
     console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
     if (JSON.stringify(loginResponce.message) != null) {
-     
         setError(
             {
                 errorMsg:loginResponce.message,
                 errorStatus:loginResponce.error
             }
         )
-      
       // navigate to next screen.
       if (loginResponce.error == false) {
         navigation.navigate(navigationString.GetOtpScreen, {
@@ -109,7 +105,6 @@ const Login = ({navigation}) => {
                 source={image.backgroundImage}
               />
             </View>
-
             <View style={styles.BottomView}>
                
               <Text style={styles.EnterText}>Enter Your</Text>
@@ -120,8 +115,6 @@ const Login = ({navigation}) => {
                 {' '}
                 A 4 digit OTP will be sent to verify your number
               </Text>
-           
-     
                  <View
                 style={
                   responseerror.errorStatus == true
@@ -131,7 +124,6 @@ const Login = ({navigation}) => {
                 {onFocus && (
                   <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>
                 )}
-
                 <TextInput
                   placeholder="Enter 10 Digit Mobile No."
                   placeholderTextColor="gray"
@@ -139,10 +131,9 @@ const Login = ({navigation}) => {
                   maxLength={10}
                   dataDetector="phoneNumber"
                   value={inputVal}
-                  // onFocus={() => { console.log('onSubmitEditing') }}
+                  onSubmitEditing={() => { console.log('onSubmitEditing') }}
 
                   onChangeText={value => {
-                    //console.log('TextInput value : ', value)
                     onChangeTextChar(value);
                     setTextInputPhoneNum(value);
                     if (value.trim().length === 10) {
@@ -155,20 +146,16 @@ const Login = ({navigation}) => {
                   }}
                   style={styles.TextInput}></TextInput>
               </View>
-
               {responseerror.errorStatus == true ? (
                 <Text style={styles.errorMsg}>{responseerror.errorMsg}</Text>
               ) : null}
-
               <TouchableOpacity
                 disabled={disbaleval}
                 style={[styles.OtpBtn, {backgroundColor: activeBtn}]}
                 onPress={() => checkTextInput()}>
                 <Text style={styles.OtpText}>GET OTP</Text>
               </TouchableOpacity>
-              
             </View>
-            
           </View> 
         </ScrollView>
       </KeyboardAvoidingView>

@@ -4,7 +4,7 @@ import fontFamily from '../../utility/Font-Declarations'
 
 export default StyleSheet.create({
    OtpBtn: {
-       borderRadius: 15,
+       borderRadius: 8,
        height: 40,
        alignItems: "center",
        justifyContent: "center",
@@ -36,7 +36,7 @@ export default StyleSheet.create({
    },
    TextInputViewError: {
        borderColor: 'red',
-       width: "90%",
+    //    width: "90%",
        flexDirection: 'row',
        justifyContent: 'center',
        height: 40,
@@ -44,6 +44,9 @@ export default StyleSheet.create({
        borderWidth: 0.5,
        borderRadius: 10,
        alignItems:'center',
+       marginRight: 16,
+
+       
    },
    errorMsg:{
        color: 'red',
