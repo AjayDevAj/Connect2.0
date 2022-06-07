@@ -10,6 +10,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
 import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
+import NavigationString from '../../utility/NavigationString';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -21,10 +22,11 @@ const GetOtpScreen = ({navigation}) => {
 
   useEffect(() => {
     console.log('VerfyResponce otpResponce: ', JSON.stringify(otpResponce));
+    navigation.navigate(NavigationString.Location);
   }, [otpResponce]);
 
   useEffect(() => {
-    
+
     console.log('VerfyResponce resendOtpResponce: ', JSON.stringify(resendOtpResponce));
   }, [resendOtpResponce]);
 
