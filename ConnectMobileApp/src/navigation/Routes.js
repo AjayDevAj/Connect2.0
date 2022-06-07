@@ -6,6 +6,8 @@ import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
 import Location from '../containers/Location/Location';
+import RouteTabBar from '../navigation/RouteTabBar';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +23,7 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} options={{headerShown: false}}/>
         <Stack.Screen name={navigationString.Location} component = {Location} options={{headerShown: false}}/>
+        <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>

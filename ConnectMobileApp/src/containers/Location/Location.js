@@ -1,25 +1,33 @@
 import React, {useState} from 'react';
-import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform} from 'react-native';
-import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';
-import EditPencilIcon from '../../component/EditPencilIcon';
-import OtpTimerHandler from '../../component/Otp-Timer';
-import styles from './LocationSheet';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Bubble from '../../component/Bubble';
-import OTPTextInput from 'react-native-otp-textinput';
 import {useRoute} from '@react-navigation/native';
+import RouteTabBar from '../../navigation/RouteTabBar';
+import navigationString from '../../utility/NavigationString';
 
 const Location = ({navigation}) => {
   const route = useRoute();
-//   const mobileNumber = route.params.mobile_Number;
+  //   const mobileNumber = route.params.mobile_Number;
 
   return (
     <View style={{flex: 1}}>
-    
-        <View>
-          <Bubble />
-        </View>
-
-        
+      <Bubble />
+      <TouchableOpacity
+        onPress={() => navigation.navigate(navigationString.RouteTabBar)}
+        style={{
+          backgroundColor: 'green',
+          height: 50,
+          flex: 1,
+          marginBottom: 30,
+        }}>
+        <View
+          style={{
+            backgroundColor: 'green',
+            height: 50,
+            flex: 1,
+            marginBottom: 30,
+          }}></View>
+      </TouchableOpacity>
     </View>
   );
 };
