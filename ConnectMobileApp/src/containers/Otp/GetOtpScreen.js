@@ -1,53 +1,50 @@
 import React, {useEffect, useState, useRef} from 'react';
-
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Alert,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
-import navigationString from '../../utility/NavigationString';
+import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform} from 'react-native';
 import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';
-import OTP from '../../component/Otp-Form';
 import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
 import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
 import OTPTextInput from 'react-native-otp-textinput';
-
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
+import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const otpResponce = useSelector(store => store.OtpResponceData);
-  console.log('otp Responce ===>', otpResponce);
-
+  const resendOtpResponce = useSelector(store => store.OtpResponceData);
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
-  console.log('MOBILE_Number :::=> ', mobileNumber);
-
   const [otp, setOtpNum] = useState('');
 
-  useEffect(() => {}, [otpResponce]);
+  useEffect(() => {
+    console.log('VerfyResponce otpResponce: ', JSON.stringify(otpResponce));
+  }, [otpResponce]);
 
-  //calling API login
-  const VerifyOTPApi = () => {
+  useEffect(() => {
+    
+    console.log('VerfyResponce resendOtpResponce: ', JSON.stringify(resendOtpResponce));
+  }, [resendOtpResponce]);
+
+/**
+ * OTP Api calling
+ *  */ 
+ const VerifyOTPApi = () => {
     console.log('click me verify');
     console.log('Mobile Num :====>', mobileNumber);
 
     dispatch(loadOtpData(mobileNumber, otp));
   };
 
+  const reSendOTP = () => {
+    console.log('reSendOTP Mobile Num :====>', mobileNumber);
+    dispatch(loadOtpData_Resend(mobileNumber));
+  };
+
   return (
     <View style={{flex: 1}}>
-     
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         animated={true}
@@ -77,7 +74,8 @@ const GetOtpScreen = ({navigation}) => {
                     styles.EnterOtpStaticTextMobile,
                     {color: 'rgba(0, 0, 0, 1)'},
                   ]}>
-                  9897969543{'  '}
+                  {mobileNumber}
+                  {'  '}
                   <TouchableOpacity onPress={navigation.goBack}>
                     <EditPencilIcon />
                   </TouchableOpacity>
@@ -90,7 +88,7 @@ const GetOtpScreen = ({navigation}) => {
               />
 
               <View style={styles.OtpTimerView}>
-                <OtpTimerHandler />
+                <OtpTimerHandler Resend={ (test) => reSendOTP()}/>
               </View>
 
               <TouchableOpacity

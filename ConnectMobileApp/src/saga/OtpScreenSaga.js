@@ -4,7 +4,8 @@ import { take, put, call, takeLatest, takeEvery } from 'redux-saga/effects'
 import { CONSTANT } from '../utility/Constant'
 import { getError, getResponse } from '../actions/OtpScreenAction'
 import { verifyOTP } from '../api/VerifyOTP'
-import Otp from '../component/Otp-Form'
+import { ResendOTP } from '../api/ResendOTP'
+
 
 //Worker Saga...
 /**

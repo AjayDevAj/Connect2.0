@@ -2,9 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {View, Dimensions, Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 import fontFamily from '../utility/Font-Declarations'
 
-const OtpTimerHandler = () => {
+const OtpTimerHandler = ({Resend}) => {
   const [counter, setCounter] = useState(30);
-  console.log(counter);
   useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -19,7 +18,7 @@ const OtpTimerHandler = () => {
           <Text style={{color: 'rgba(95, 99, 104, 1)',fontSize:12,fontFamily:fontFamily.Poppins}}>
             Didn’t Received?{' '}
             <TouchableOpacity
-              onPress={() => Alert.alert('Navigate to Mobile Screen')}>
+              onPress={Resend}>
               <Text style={styles.ResentButtonText}>Resend</Text>
             </TouchableOpacity>
           </Text>}

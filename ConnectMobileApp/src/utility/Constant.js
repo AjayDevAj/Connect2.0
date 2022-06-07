@@ -8,6 +8,10 @@ const CONSTANT = {
     OTP_DATA_ERROR: 'OTP_DATA_ERROR',
     OTP_DATA_SUCCESS: 'OTP_DATA_SUCCESS',
 
+    Resend_OTP_DATA: 'Resend_OTP_DATA',
+    Resend_OTP_DATA_ERROR: 'Resend_OTP_DATA_ERROR',
+    Resend_OTP_DATA_SUCCESS: 'Resend_OTP_DATA_SUCCESS',
+
 }
 
 export { CONSTANT }
