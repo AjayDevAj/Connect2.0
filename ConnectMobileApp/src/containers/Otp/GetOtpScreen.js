@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform,} from 'react-native';
-import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';
+import GetOtpBg from '../../../assets/svg/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
 import styles from './GetOtpScreenStylesheet';

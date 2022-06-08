@@ -7,8 +7,7 @@ import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
 import RouteTabBar from '../navigation/RouteTabBar';
-
-
+import { HeaderBackButton } from '@react-navigation/stack';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +23,6 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} options={{headerShown: false}}/>
         <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/>
         <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
-
       </Stack.Navigator>
     </NavigationContainer>
   )

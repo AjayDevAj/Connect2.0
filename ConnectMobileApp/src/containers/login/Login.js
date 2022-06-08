@@ -12,7 +12,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {image} from '../images/Image';
+import {image} from '../../../assets/images/Image';
 import {loadLoginData} from '../../actions/LoginAction';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';

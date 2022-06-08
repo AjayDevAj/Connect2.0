@@ -21,7 +21,7 @@ const onBoardingStyles = StyleSheet.create({
         textAlign: 'center',
         letterSpacing: 0.22,
         opacity: 0.8,
-        fontFamily:fontFamily.Alte_DIN
+        fontFamily:fontFamily.Alte_DIN,
     },
     description: {
         fontSize: 12,

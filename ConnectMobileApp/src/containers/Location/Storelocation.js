@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import UpperviewBG from '../../containers/images/OtpScreenAssets/Group2491.svg';
+import UpperviewBG from '../../../assets/svg/Group2491.svg';
 import styles from './StorleLocationStylesheet';
 import {SwipeablePanel} from 'rn-swipeable-panel';
 import fontFamily from '../../utility/Font-Declarations';
@@ -119,12 +119,12 @@ export default Storelocation = ({navigation}) => {
                 height: -5,
             },
             elevation: 10,
-            paddingVertical: 20,
+            // paddingVertical: 20,
             shadowColor:'rgba(47, 110, 243, 0.16)',
-            padding:20
-            // padding: 20,
-            // bottom: 30,
+            padding:20,
+            bottom: -70,
           }}
+          // smallPanelHeight={200}
           disableSwipeIcon={false}
           noBackgroundOpacity={true}
           //scrollViewProps={{backgroundColor:'red'}}

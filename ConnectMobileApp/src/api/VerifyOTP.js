@@ -40,7 +40,7 @@ const verifyOTP = async (mobileNumber, otp) => {
         loged_in: 1,
     })
 
-    console.log("Print api URL ===;", API_URL_DEV + '/user/auth/validateOTP')
+    console.log("Print api URL ===;", API_URL_STAGING + '/user/auth/validateOTP')
     console.log("Print param ===;", param)
 
     const bodyData = new FormData();

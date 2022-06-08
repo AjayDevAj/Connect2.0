@@ -6,7 +6,7 @@ import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
  */
 const getStoreLocations = async () => {
 
-    const response = await fetch(API_URL_DEV + '/user/auth/get-locations', {
+    const response = await fetch(API_URL_STAGING + '/user/auth/get-locations', {
         method: 'get',
         // headers:{
         //     Authorization:
