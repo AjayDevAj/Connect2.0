@@ -1,3 +1,36 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: GetOtpScreen.js
+** UsedFor: Get Otp Screen at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**    Get Otp Screen complete view component
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, {useEffect, useState, useRef} from 'react';
 import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform,} from 'react-native';
 import GetOtpBg from '../images/OtpScreenAssets/Group_2433.svg';

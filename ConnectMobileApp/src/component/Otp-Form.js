@@ -1,3 +1,26 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Otp-Form.js
+** UsedFor: Otp Form at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** Otp Form Component
+** ==========================================================
+*
+**
+*/
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useRef, useEffect} from 'react';
 import {View, TextInput, Dimensions} from 'react-native';
@@ -5,9 +28,7 @@ import {View, TextInput, Dimensions} from 'react-native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-
- import  styles  from '../component/Otp-Form-Style'
-
+import  styles  from '../component/Otp-Form-Style'
 
 const initCodes = [];
 export default function Otp({
@@ -73,8 +94,6 @@ export default function Otp({
               //{width: width / (codeCount + 2), height: height / 14},
               {width:'15%',height:'10%',padding:'8%'},
              //{maxHeight:100,maxWidth:100}
-              
-              
             ]}
             onChangeText={text => onChangeCode(text, index)}
             onKeyPress={event => onKeyPress(event, index)}

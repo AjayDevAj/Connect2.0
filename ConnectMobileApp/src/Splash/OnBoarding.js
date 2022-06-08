@@ -1,5 +1,46 @@
+/*
+**
+*
+** ===================================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: OnBoarding.js
+** UsedFor: OnBoarding data at splashscreen for connect 2.0 app
+** Author:
+**
+** ====================================================================
+*
+**
+**
+*
+** ==========================================================
+**                     OnBoarding Component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, { useState, useRef } from 'react';
 import { View, FlatList, Animated } from 'react-native';
+
+/*
+**
+*
+** Other import
+*
+** 
+*/
+
 import slides from './slides';
 import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
@@ -7,6 +48,19 @@ import NextButton from './NextButton';
 import SkipButton from './SkipButton';
 import navigationString from '../utility/NavigationString';
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
+
+
+/*
+**
+*
+** Complete onboarding data includes - 
+**                                      Flatlist (background circles (Ellipse), image, title, description)
+**                                      Paginator
+**                                      Skip button
+**                                      Next Button
+*
+** 
+*/
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,6 +76,7 @@ const OnBoarding = ({ navigation }) => {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         } else {
             try {
+                // navigate to login screen
                 navigation.navigate(navigationString.LOGIN)
             } catch (err) {
                 console.log('Error @setItem: ', err);

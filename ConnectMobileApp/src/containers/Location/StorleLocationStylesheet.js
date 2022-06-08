@@ -1,3 +1,35 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: StorleLocationStylesheet.js
+** UsedFor: Store Location Stylesheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**              Store Location Stylesheet
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import {
     StyleSheet,

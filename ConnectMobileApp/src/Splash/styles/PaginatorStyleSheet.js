@@ -1,3 +1,35 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: PaginatorStyleSheet.js
+** UsedFor: Paginator StyleSheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**                   Paginator Stylesheet
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import { StyleSheet } from 'react-native';
 
 const paginatorStyles = StyleSheet.create({
