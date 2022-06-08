@@ -1,3 +1,34 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: LoginReducer.js
+** UsedFor: Login Reducer at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** Login Reducer component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";

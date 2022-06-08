@@ -1,3 +1,35 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: OnBoardingStyleSheet.js
+** UsedFor: OnBoarding StyleSheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**                   OnBoarding Stylesheet
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import { StyleSheet } from 'react-native';
 import fontFamily from '../../utility/Font-Declarations'
 

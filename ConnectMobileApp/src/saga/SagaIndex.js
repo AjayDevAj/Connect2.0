@@ -1,3 +1,34 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: SagaIndex.js
+** UsedFor: Saga Index at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** Saga Index component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import { all } from 'redux-saga/effects';
 import LoginDataWatcherSaga from './LoginSaga';
@@ -10,7 +41,5 @@ export default function* rootSaga() {
         LoginDataWatcherSaga(),
         OtpDataWatcherSaga(),
         ResendOtpDataWatcherSaga()
-
     ]);
-    
 }

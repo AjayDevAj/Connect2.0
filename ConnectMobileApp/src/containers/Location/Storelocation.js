@@ -1,9 +1,42 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Storelocation.js
+** UsedFor: Get Otp Screen at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**    Store location complete view component
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import UpperviewBG from '../../../assets/svg/Group2491.svg';
 import styles from './StorleLocationStylesheet';
-import {SwipeablePanel} from 'rn-swipeable-panel';
+// import {SwipeablePanel} from 'rn-swipeable-panel';
 import fontFamily from '../../utility/Font-Declarations';
 import NavigationString from '../../utility/NavigationString';
 
@@ -147,15 +180,6 @@ export default Storelocation = ({navigation}) => {
             })
           }
           </ScrollView>
-
-
-
-
-
-
-
-
-
 
         </SwipeablePanel>
       </View>

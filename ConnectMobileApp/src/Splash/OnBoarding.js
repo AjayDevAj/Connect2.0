@@ -1,5 +1,46 @@
-import React, {useState, useRef} from 'react';
-import {View, FlatList, Animated} from 'react-native';
+/*
+**
+*
+** ===================================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: OnBoarding.js
+** UsedFor: OnBoarding data at splashscreen for connect 2.0 app
+** Author:
+**
+** ====================================================================
+*
+**
+**
+*
+** ==========================================================
+**                     OnBoarding Component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
+import React, { useState, useRef } from 'react';
+import { View, FlatList, Animated } from 'react-native';
+
+/*
+**
+*
+** Other import
+*
+** 
+*/
+
 import slides from './slides';
 import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
@@ -8,26 +49,39 @@ import SkipButton from './SkipButton';
 import navigationString from '../utility/NavigationString';
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
-const OnBoarding = ({navigation}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const slidesRef = useRef(null);
-  const viewableItems = [];
-  const viewableItemsChanged = useRef(({viewableItems}) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
-  const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
-  const scrollTo = async () => {
-    if (currentIndex < slides.length - 1) {
-      slidesRef.current.scrollToIndex({index: currentIndex + 1});
-    } else {
-      try {
-        navigation.navigate(navigationString.LOGIN);
-      } catch (err) {
-        console.log('Error @setItem: ', err);
-      }
-    }
-  };
+/*
+**
+*
+** Complete onboarding data includes - 
+**                                      Flatlist (background circles (Ellipse), image, title, description)
+**                                      Paginator
+**                                      Skip button
+**                                      Next Button
+*
+** 
+*/
+
+const OnBoarding = ({ navigation }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const scrollX = useRef(new Animated.Value(0)).current;
+    const slidesRef = useRef(null);
+    const viewableItems = [];
+    const viewableItemsChanged = useRef(({ viewableItems }) => {
+        setCurrentIndex(viewableItems[0].index)
+    }).current;
+    const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+    const scrollTo = async () => {
+        if (currentIndex < slides.length - 1) {
+            slidesRef.current.scrollToIndex({ index: currentIndex + 1});
+        } else {
+            try {
+                // navigate to login screen
+                navigation.navigate(navigationString.LOGIN)
+            } catch (err) {
+                console.log('Error @setItem: ', err);
+            }
+        }
+    };
 
   return (
     <View style={onBoardingStyles.container}>

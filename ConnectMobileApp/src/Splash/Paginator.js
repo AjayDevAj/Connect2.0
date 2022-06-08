@@ -1,7 +1,56 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Paginator.js
+** UsedFor: Paginator at splashscreen for connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**                     Paginator Component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React from 'react';
 import { View, Animated, useWindowDimensions } from 'react-native';
 
+/*
+**
+*
+** import paginator stylesheet
+*
+** 
+*/
+
 import paginatorStyles from './styles/PaginatorStyleSheet';
+
+
+/*
+**
+*
+** Pagination will highlight the current onboarding slide
+*
+** 
+*/
 
 const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
@@ -24,4 +73,4 @@ const Paginator = ({ data, scrollX }) => {
 };
   
   
-  export default Paginator;
+export default Paginator;
