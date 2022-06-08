@@ -10,13 +10,15 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   ScrollView,
-  Platform,
+  Platform, Pressable,
 } from 'react-native';
 import {image} from '../images/Image';
 import {loadLoginData} from '../../actions/LoginAction';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
+import BackgroundImg from '../images/login_bg.svg'
+
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -32,9 +34,10 @@ const Login = ({navigation}) => {
       errorMsg:''
   });
   const [onFocus, setFocus] = useState(false);
+  const [text, setText] = React.useState('+91');
 
   useEffect(() => {
-    console.log("loginResponce : ", JSON.stringify(loginResponce.message));
+   // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
     if (JSON.stringify(loginResponce.message) != null) {
         setError(
@@ -86,6 +89,13 @@ const Login = ({navigation}) => {
     }
   };
 
+  const showText = () => {
+   { <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>}
+    console.log("Click on Text Input")
+   //Alert.alert("Show")
+   textInputPhoneNum.setText == '+91'
+  }
+
   return (
     <View style={{flex:1}}>
       <KeyboardAvoidingView
@@ -99,18 +109,13 @@ const Login = ({navigation}) => {
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <View style={styles.UpperView}>
-              <Image
-                style={styles.ImageView}
-                resizeMode="contain"
-                source={image.backgroundImage}
-              />
+
+              <BackgroundImg width={'190'} height={'190'} />
             </View>
             <View style={styles.BottomView}>
                
               <Text style={styles.EnterText}>Enter Your</Text>
-               
               <Text style={styles.MobileText}>Mobile Number</Text>
-          
               <Text style={styles.NormalText}>   
                 {' '}
                 A 4 digit OTP will be sent to verify your number
@@ -121,19 +126,21 @@ const Login = ({navigation}) => {
                     ? styles.TextInputViewError
                     : styles.TextInputView
                 }>
-                {onFocus && (
+                {/* {onFocus && (
                   <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>
-                )}
+                )} */}
+
                 <TextInput
                   placeholder="Enter 10 Digit Mobile No."
+                  onTouchStart={()=> showText()}
                   placeholderTextColor="gray"
                   keyboardType={'phone-pad'}
                   maxLength={10}
                   dataDetector="phoneNumber"
                   value={inputVal}
                   onSubmitEditing={() => { console.log('onSubmitEditing') }}
-
                   onChangeText={value => {
+                    setText(text)
                     onChangeTextChar(value);
                     setTextInputPhoneNum(value);
                     if (value.trim().length === 10) {
@@ -144,7 +151,8 @@ const Login = ({navigation}) => {
                       setVisbal(true);
                     }
                   }}
-                  style={styles.TextInput}></TextInput>
+                  style={styles.TextInput}>
+                  </TextInput>
               </View>
               {responseerror.errorStatus == true ? (
                 <Text style={styles.errorMsg}>{responseerror.errorMsg}</Text>

@@ -1,6 +1,6 @@
 export const image =
 {
-   // backgroundImage:require('../images/group.png'),
-    backgroundImage:require('../images/group.png'),
+   // loginBackGround:require('../images/login_bg.svg'),
+    //loginBackImgPNG:('../images/loginBackImg.png')
 
 }
