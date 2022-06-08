@@ -1,3 +1,29 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: RouteTabBar.js
+** UsedFor: Navigation route tabs at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** Navigation route tabs component
+** ==========================================================
+*
+**
+*/
+
+
+
+
 // import React from 'react';
 // import {NavigationContainer, StackActions} from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -22,6 +48,18 @@
 // }
 
 // export default Routes;
+
+
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import * as React from 'react';
 import { Text, View } from 'react-native';

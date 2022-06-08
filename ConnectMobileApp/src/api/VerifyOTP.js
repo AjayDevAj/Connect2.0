@@ -1,3 +1,33 @@
+/*
+**
+*
+** ================================================================
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: VerifyOTP.js
+** UsedFor: Verify OTP at connect 2.0 app
+** Author:
+** ================================================================
+*
+**
+**
+*
+** ================================================================
+** Verify OTP api file to verify the OTP authentication while login
+** ================================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** import constant data (common data used in overall projects)
+*
+** 
+*/
 
 import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File';
 import { DeviceInfo } from 'react-native-device-info';
@@ -23,12 +53,12 @@ import { getUniqueId, getManufacturer } from 'react-native-device-info';
  * @param {*} otp 
  */
 
-const verifyOTP = async (mobileNumber, otp) => {
+ const verifyOTP = async (mobileNumber, otp) => {
     console.log("Print mac ==== pre")
 
     // const mac = await DeviceInfo.getMacAddress().then((mac) => {return mac});
-// console.log("Print mac ==== ", mac)
-// return
+    // console.log("Print mac ==== ", mac)
+    // return
     const param = JSON.stringify({
         phonenumber: 9467396412,
         otp: 1469,
@@ -40,7 +70,7 @@ const verifyOTP = async (mobileNumber, otp) => {
         loged_in: 1,
     })
 
-    console.log("Print api URL ===;", API_URL_DEV + '/user/auth/validateOTP')
+    console.log("Print api URL ===;", API_URL_STAGING + '/user/auth/validateOTP')
     console.log("Print param ===;", param)
 
     const bodyData = new FormData();
@@ -79,4 +109,15 @@ const verifyOTP = async (mobileNumber, otp) => {
     }
     return data;
 }
+
+/*
+**
+*
+** All the constants defined above will be exported 
+** so that it could be imported in verify otp file 
+** & can be used as a common constants imported from 
+** the constant file 
+*
+** 
+*/
 export { verifyOTP }

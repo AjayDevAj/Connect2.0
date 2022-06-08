@@ -1,3 +1,36 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: LoginStyleSheet.js
+** UsedFor: Login StyleSheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**              Login StyleSheet
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import {StyleSheet} from 'react-native';
 import { color } from 'react-native-reanimated';
 import fontFamily from '../../utility/Font-Declarations'

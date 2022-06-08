@@ -1,3 +1,36 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Location.js
+** UsedFor: Location Component at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**              Location Component
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Bubble from '../../component/Bubble';

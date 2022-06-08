@@ -1,5 +1,46 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Ellipse3.js
+** UsedFor: Ellipse3 at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**                     Ellipse3 Component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+
+
+/*
+**
+*
+** Circle view for splashscreen3, named Ellipse3
+*
+** 
+*/
 
 const Ellipse3 = () => {
     return (

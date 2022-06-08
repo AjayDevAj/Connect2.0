@@ -1,6 +1,48 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Otp-Timer.js
+** UsedFor: Otp Timer at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** Otp Timer Component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, {useState, useEffect} from 'react';
 import {View, Dimensions, Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 import fontFamily from '../utility/Font-Declarations'
+
+
+/*
+**
+*
+** It holds the no. of second an OTP is valid for
+** This component handles for approx 60 sec
+*
+** 
+*/
 
 const OtpTimerHandler = ({Resend,StopTimer}) => {
   const [counter, setCounter] = useState(30);
@@ -28,14 +70,26 @@ const OtpTimerHandler = ({Resend,StopTimer}) => {
     </View>
   );
 };
+
+
+
+/*
+**
+*
+** Resend otp time limit stylesheet
+*
+** 
+*/
+
 const styles = StyleSheet.create({
-    ResentButtonText: {
-      color: 'rgba(0, 112, 252, 1)',
-      textDecorationLine: 'underline',
-      fontFamily:fontFamily.Poppins,
-      fontSize:12,
-      marginTop:10,
-      marginLeft:3
-      
-    }});
+  ResentButtonText: {
+    color: 'rgba(0, 112, 252, 1)',
+    textDecorationLine: 'underline',
+    fontFamily:fontFamily.Poppins,
+    fontSize:12,
+    marginTop:10,
+    marginLeft:3
+  }
+});
+
 export default OtpTimerHandler;

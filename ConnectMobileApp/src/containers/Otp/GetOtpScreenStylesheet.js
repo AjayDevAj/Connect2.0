@@ -1,3 +1,35 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: GetOtpScreenStylesheet.js
+** UsedFor: Get Otp Screen Stylesheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**    Get Otp Screen Stylesheet
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import {
   StyleSheet,

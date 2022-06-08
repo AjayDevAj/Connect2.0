@@ -1,3 +1,34 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: OtpReducer.js
+** UsedFor: OTP Reducer at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+** OTP Reducer component
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
 
 import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";
@@ -23,5 +54,3 @@ const otpDataReducer = (state = '', action) => {
 
 }
 export default otpDataReducer;
-
-

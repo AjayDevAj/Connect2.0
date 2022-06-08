@@ -1,3 +1,35 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: OnBoardingStyleSheet.js
+** UsedFor: OnBoarding StyleSheet at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**                   OnBoarding Stylesheet
+** ==========================================================
+*
+**
+*/
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import { StyleSheet } from 'react-native';
 import fontFamily from '../../utility/Font-Declarations'
 
@@ -21,7 +53,7 @@ const onBoardingStyles = StyleSheet.create({
         textAlign: 'center',
         letterSpacing: 0.22,
         opacity: 0.8,
-        fontFamily:fontFamily.Alte_DIN
+        fontFamily:fontFamily.Alte_DIN,
     },
     description: {
         fontSize: 12,

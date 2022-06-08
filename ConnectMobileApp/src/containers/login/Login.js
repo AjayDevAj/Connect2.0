@@ -1,3 +1,36 @@
+/*
+**
+*
+** ========================================================
+**
+** AppName: Connect2.0
+** Version: X.0.0
+** FileName: Login.js
+** UsedFor: Login Component at connect 2.0 app
+** Author:
+**
+** ========================================================
+*
+**
+**
+*
+** ==========================================================
+**              Login Component
+** ==========================================================
+*
+**
+*/
+
+
+
+/*
+**
+*
+** Common react packages import
+*
+** 
+*/
+
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -12,7 +45,7 @@ import {
   ScrollView,
   Platform, Pressable,
 } from 'react-native';
-import {image} from '../images/Image';
+import {image} from '../../../assets/images/Image';
 import {loadLoginData} from '../../actions/LoginAction';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
