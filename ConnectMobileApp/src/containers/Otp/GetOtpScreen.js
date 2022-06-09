@@ -37,6 +37,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Dimensions
 } from 'react-native';
 import GetOtpBg from '../../../assets/svg/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
@@ -69,8 +70,11 @@ const GetOtpScreen = ({navigation}) => {
   const [disbaleval, setVisbal] = useState(true);
   const [timerEnable, setTimerEnable] = useState(false);
 
+//let fontsize = Dimensions.get('window').height
+
   useEffect(() => {
-    // console.log('otpResponce',otpResponce)
+
+  
     if (otpResponce.code != null) {
       navigation.navigate(NavigationString.Location);
     }
@@ -107,7 +111,7 @@ const GetOtpScreen = ({navigation}) => {
       otpResponce.data != undefined &&
       otpResponce.data.code != 200
     ) {
-      return <OtpErrorState />;
+      return (<OtpErrorState />);
     }
   };
 
@@ -152,11 +156,14 @@ const GetOtpScreen = ({navigation}) => {
               <OTPTextInput
                 ref={e => console.log(';sdd')}
                 containerStyle={{borderColor: 'red'}}
+                adjustFontSizeToFit={true}
+                numberOfLines={1}
                 textInputStyle={{
                   color: otptextcolor.textcolor,
                   backgroundColor: otptextcolor.backgroundColor,
                   fontFamily: fontFamily.Alte_DIN,
-                  fontSize:24
+                  fontSize:21
+                  
                 }}
                 tintColor={otptextcolor.tintColor}
                 offTintColor={otptextcolor.offTintColor}
