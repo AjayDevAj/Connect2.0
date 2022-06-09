@@ -42,8 +42,8 @@ import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
 import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
-
 
 /*
 **
@@ -97,7 +97,7 @@ const Stack = createNativeStackNavigator();
       <Stack.Navigator initialRouteName="OnBoarding">
         <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
-        <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} 
+         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
             options={{ 
               headerTintColor: '#000',
               headerStyle: {
@@ -126,6 +126,8 @@ const Stack = createNativeStackNavigator();
         />
         <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
       </Stack.Navigator>
+      <Incoming_Chat />
+
     </NavigationContainer>
   )
 }

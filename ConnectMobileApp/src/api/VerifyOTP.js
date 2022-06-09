@@ -60,8 +60,8 @@ import { getUniqueId, getManufacturer } from 'react-native-device-info';
     // console.log("Print mac ==== ", mac)
     // return
     const param = JSON.stringify({
-        phonenumber: 9467396412,
-        otp: 1469,
+        phonenumber: mobileNumber,
+        otp: otp,
         device_type: Platform.OS == 'ios' ? 'iOS' : 'android',
         device_token: "qw",
         uid: "po",
@@ -74,8 +74,8 @@ import { getUniqueId, getManufacturer } from 'react-native-device-info';
     console.log("Print param ===;", param)
 
     const bodyData = new FormData();
-    bodyData.append('phonenumber', "9467396412",)
-    bodyData.append('otp', "1469")
+    bodyData.append('phonenumber', mobileNumber,)
+    bodyData.append('otp', otp)
     bodyData.append('device_type', Platform.OS == 'ios' ? 'iOS' : 'android')
     bodyData.append('device_token', "qw")
     bodyData.append('uid', "po")
@@ -89,17 +89,6 @@ import { getUniqueId, getManufacturer } from 'react-native-device-info';
         method: 'post',
         body: bodyData
 
-        // method: 'get',
-        // body: {
-        //     phonenumber: mobileNumber,
-        //     otp: otp,
-        //     device_type: Platform.OS == 'ios' ? 'iOS' : 'android',
-        //     device_token: "fcmToken",
-        //     uid: uniqueId,
-        //     ip: ip,
-        //     mac: mac,
-        //     loged_in: 0,
-        // }
     })
     const data = response.json()
     console.log('otp data : ', data)
