@@ -34,12 +34,11 @@ import { Text, View } from 'react-native';
 
 import closedChatStyles from './styles/ClosedChatStylesheet';
 
+import ChatList from './ChatList';
 
 const ClosedChat = () => {
     return (
-        <View>
-            {/* <Text style={ closedChatStyles.closedChatText }>Closed</Text> */}
-        </View>
+        <ChatList type="closed" />
     );
 }
 

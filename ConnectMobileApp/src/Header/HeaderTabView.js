@@ -59,7 +59,7 @@ const HeaderTabView = ({ chatTabsTitleData, chatTabs }) => {
         <TabBar {...props} 
           activeColor={{ color: '#0070FC' }}
           inactiveColor={{ color: '#657180' }}
-          indicatorStyle={{ backgroundColor: '#0070FC' }}
+          indicatorStyle={ tabViewStyles.tabViewIndicator }
           renderLabel={({route, color}) => (
             <View>
               <Text style={ tabViewStyles.tabText }>{route.title}</Text>

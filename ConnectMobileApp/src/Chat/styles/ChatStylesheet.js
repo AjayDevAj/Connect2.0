@@ -43,6 +43,8 @@ const chatStyles = StyleSheet.create({
         width: '100%', 
         height: '70%',
         overflow: 'scroll',
+        position: 'absolute',
+        top: 50,
     },
     chatSmsButtonContainer: {
         width: 70,  
