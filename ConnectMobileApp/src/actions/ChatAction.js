@@ -31,7 +31,7 @@
 
 import { CONSTANT } from "../utility/Constant";
 
-
+import { combineReducers } from "redux"
 
 /*
 **
@@ -43,7 +43,9 @@ import { CONSTANT } from "../utility/Constant";
 */
 
 const loadChatData = (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => ({
-    type: CONSTANT.CHAT_DATA,is_important,location_id,unread,order_by,chat_status,pagination,other_chat,user_id
+   
+    type: CONSTANT.CHAT_DATA,is_important,location_id,unread,order_by,chat_status,pagination,other_chat,user_id,
+    
 })
 
 
