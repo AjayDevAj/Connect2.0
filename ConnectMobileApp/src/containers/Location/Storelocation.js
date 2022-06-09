@@ -26,6 +26,7 @@ export default Storelocation = ({navigation}) => {
       .catch(error => console.error(error));
   }, [LocationResonce]);
 
+  
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
