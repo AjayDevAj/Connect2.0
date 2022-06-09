@@ -35,12 +35,12 @@ import { Text, View } from 'react-native';
 import notificationStyles from './styles/NotificationStylesheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const HeaderNotification = () => {
+const HeaderNotification = ({ left, message, right }) => {
     return (
         <View style={ notificationStyles.notificationMainContainer }>
-            <Icon name="people" size={20} style={ notificationStyles.notificationPeopleIcon } />
-            <Text style={ notificationStyles.notificationText }>12 Open chats with team</Text>
-            <Icon name="chevron-right" size={18} style={ notificationStyles.notificationRightIcon } />
+            <Icon name={left} size={20} style={ notificationStyles.notificationLeftIcon } />
+            <Text style={ notificationStyles.notificationText }>{message}</Text>
+            <Icon name={right} size={18} style={ notificationStyles.notificationRightIcon } />
         </View>
     );
 }

@@ -48,7 +48,6 @@ const headerStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        position: 'absolute',
     },
     headerMenuIcon: {
         position: 'absolute',

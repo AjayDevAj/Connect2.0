@@ -36,13 +36,13 @@ import headerStyles from './styles/headerStyleSheet';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TopHeader = ({ name, menuHandler, searchHandler, filterHandler }) => {
+const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler }) => {
     return (
         <View style={ headerStyles.mainContainer }>
-            <Icon name="menu" size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
+            <Icon name={firstIcon} size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
             <Text style={ headerStyles.headerText }>{name}</Text>
-            <Icon name="search" size={28} style={ headerStyles.headerSearchIcon } onPress={searchHandler} />
-            <Icon name="filter-list" size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+            <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon } onPress={searchHandler} />
+            <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
         </View>
     );
 }
