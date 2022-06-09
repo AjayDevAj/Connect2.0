@@ -41,7 +41,7 @@ const chatStyles = StyleSheet.create({
     chatListMainContainer: {
         backgroundColor: '#FFFFFF', 
         width: '100%', 
-        height: '70%',
+        height: '100%',
         overflow: 'scroll',
         position: 'absolute',
         top: 50,

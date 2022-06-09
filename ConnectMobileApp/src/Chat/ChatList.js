@@ -33,7 +33,9 @@ import CardLocationTime from '../Card/CardLocationTime';
 
 import {useSelector, useDispatch} from 'react-redux';
 
-import loadChatData from '../actions/ChatAction';
+import {loadChatData} from '../actions/ChatAction';
+
+import { useIsFocused } from '@react-navigation/native';
 
 const OpenChatData = [
     {
@@ -99,28 +101,33 @@ const assignedChatData = [
 ];
 
 
-const ChatList = ({ type }) => {
-    const dispatch = useDispatch();
-    const chatResponseData = useSelector(store => store.ChatResponseData);
 
-    useEffect(() => {
-   
-        console.log('chatResponseData',chatResponseData)
-        // if (otpResponce.code != null) {
-        //   navigation.navigate(NavigationString.Location);
-        // }
+
     
-       
-      }, [chatResponseData]);
-
-      useEffect(() => {
-        dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
-      });
 
       
 
-    console.log("Chat Response Data - " + chatResponseData);
+    
 
+const ChatList = ({ type }) => {
+    const isFocused = useIsFocused();
+
+    const dispatch = useDispatch();
+    const chatResponseData = useSelector(store => store.ChatResponseData);
+
+    // console.log("Chat Response Data - " + chatResponseData);
+
+useEffect(() => {
+    if (chatResponseData.data != null) {
+        console.log('chatResponseData',chatResponseData.data)
+    }
+  }, [chatResponseData]);
+
+useEffect(() => {
+if (isFocused) {
+    dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
+}
+}, [isFocused]);
     return (
         <View style={ chatStyles.chatListMainContainer }>
             <FlatList 
