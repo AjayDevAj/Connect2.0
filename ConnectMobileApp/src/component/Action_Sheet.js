@@ -56,7 +56,7 @@ const Action_Sheet = () => {
   return (
       <ActionSheet id = "helloworld_sheet"
       gestureEnabled={true}
-      initialOffsetFromBottom={100}
+      
       onMomentumScrollEnd={() =>
         console.log('onMomentumScrollEnd')
       }
