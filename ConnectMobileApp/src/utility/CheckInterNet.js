@@ -3,6 +3,7 @@ import { View, Text, Alert } from 'react-native'
 import React from 'react'
 import InternetConnectionAlert from "react-native-internet-connection-alert";
 
+
 const CheckInterNet = () => {
     return (
             <View style={{ width: '100%', height: '12%' }}>

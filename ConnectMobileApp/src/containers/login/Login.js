@@ -51,6 +51,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
 import CheckInterNet from '../../utility/CheckInterNet';
+import Loader from '../../utility/Loader';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -59,6 +60,9 @@ const Login = ({navigation}) => {
   const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
   const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
   const [inputVal, setInputVal] = useState('');
+
+  const [loading, setLoading] = useState(false);
+
 
   const [disbaleval, setVisbal] = useState(true);
   const [responseerror, setError] = useState({
@@ -71,14 +75,18 @@ const Login = ({navigation}) => {
     console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
     if (JSON.stringify(loginResponce.message) != null) {
+      setLoading(false)
         setError(
             {
                 errorMsg:loginResponce.message,
-                errorStatus:loginResponce.error
+                errorStatus:loginResponce.error,
+                
             }
         )
       // navigate to next screen.
       if (loginResponce.error == false) {
+        setLoading(false);
+
         navigation.navigate(navigationString.GetOtpScreen, {
           mobile_Number: textInputPhoneNum,
         });
@@ -96,6 +104,7 @@ const Login = ({navigation}) => {
     } else {
       //calling API login
       <CheckInterNet/>
+      setLoading(true);
       dispatch(loadLoginData(textInputPhoneNum));
     }
   };
@@ -123,6 +132,8 @@ const Login = ({navigation}) => {
 
   return (
     <View style={{flex:1}}>
+      <Loader loading={loading} />
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         animated={true}
@@ -144,9 +155,7 @@ const Login = ({navigation}) => {
             <View style={styles.BottomView}>
                
               <Text style={styles.EnterText}>Enter Your</Text>
-               
               <Text style={styles.MobileText}>Mobile Number</Text>
-          
               <Text style={styles.NormalText}>   
                 {' '}
                 A 4 digit OTP will be sent to verify your number
@@ -158,9 +167,11 @@ const Login = ({navigation}) => {
                     : styles.TextInputView
                 }>
                 {onFocus && (
-                  <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>
+                  <Text style={{fontSize: 15, marginLeft: 14, alignItems:'center'}}> +91 </Text>
                 )}
                 <TextInput
+                  behavior={Platform.OS == "ios" ? "alignItems" : "center"}
+
                   placeholder="Enter 10 Digit Mobile No."
                   placeholderTextColor="gray"
                   keyboardType={'phone-pad'}
