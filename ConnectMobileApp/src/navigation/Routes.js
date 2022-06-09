@@ -32,7 +32,7 @@
 */
 
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
@@ -53,12 +53,23 @@ import fontFamily from '../utility/Font-Declarations';
 ** 
 */
 
-function StoreLocation() {
+const StoreLocation = () => {
   return (
-    <Text style={{ color: '#000', fontFamily: fontFamily.Alte_DIN }}>Store Location</Text>
+    <Text style={ locationStyle.locationText }>Store Location</Text>
   );
 }
 
+const locationStyle = StyleSheet.create({
+  locationText: {
+    color: '#000', 
+    fontFamily: fontFamily.Alte_DIN,
+    fontSize: 18,
+    textAlign: 'left',
+    opacity: 1,
+    letterSpacing: 0,
+  }
+  
+});
 
 /*
 **
@@ -68,7 +79,7 @@ function StoreLocation() {
 ** 
 */
 
-function OtpScreen() {
+const OtpScreen = () => {
   return (
     <Icon name="backward" size={24} color='#fff' />
   );
@@ -82,17 +93,34 @@ const Stack = createNativeStackNavigator();
  const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="OnBoarding">
+      <Stack.Navigator initialRouteName="RouteTabBar">
+      {/* <Stack.Navigator initialRouteName="OnBoarding"> */}
         <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} 
             options={{ 
-              headerTitle: (props) => <OtpScreen {...props} onPress={() => navigationString.goBack()} />
+              headerTintColor: '#000',
+              headerStyle: {
+                backgroundColor: '#F7FCFF',
+                height: 60,
+                shadowColor: '#F7FCFF', // this covers iOS
+                elevation: 0, // this covers Android
+              },
+              headerShadowVisible: false,
+              headerTitle: () => <OtpScreen onPress={() => navigationString.goBack()} />
             }}
         />
         {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
         <Stack.Screen name={navigationString.Location} component = {Storelocation} 
             options={{ 
+              headerTintColor: '#000',
+              headerStyle: {
+                padding: 10,
+                backgroundColor: '#F7FCFF',
+                shadowColor: 'transparent', // this covers iOS
+                elevation: 0, // this covers Android
+              },
+              headerShadowVisible: false,
               headerTitle: (props) => <StoreLocation {...props} />
             }}
         />
