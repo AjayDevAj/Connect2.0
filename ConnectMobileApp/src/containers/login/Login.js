@@ -63,7 +63,6 @@ const Login = ({navigation}) => {
 
   const [loading, setLoading] = useState(false);
 
-
   const [disbaleval, setVisbal] = useState(true);
   const [responseerror, setError] = useState({
       errorStatus:false,
@@ -79,14 +78,12 @@ const Login = ({navigation}) => {
         setError(
             {
                 errorMsg:loginResponce.message,
-                errorStatus:loginResponce.error,
-                
+                errorStatus:loginResponce.error, 
             }
         )
       // navigate to next screen.
       if (loginResponce.error == false) {
         setLoading(false);
-
         navigation.navigate(navigationString.GetOtpScreen, {
           mobile_Number: textInputPhoneNum,
         });
