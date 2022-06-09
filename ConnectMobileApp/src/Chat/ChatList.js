@@ -21,7 +21,7 @@
 **
 */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 
 import chatStyles from './styles/ChatStylesheet';
@@ -32,6 +32,8 @@ import CardNameMessage from '../Card/CardNameMessage';
 import CardLocationTime from '../Card/CardLocationTime';
 
 import {useSelector, useDispatch} from 'react-redux';
+
+import loadChatData from '../actions/ChatAction';
 
 const OpenChatData = [
     {
@@ -100,6 +102,22 @@ const assignedChatData = [
 const ChatList = ({ type }) => {
     const dispatch = useDispatch();
     const chatResponseData = useSelector(store => store.ChatResponseData);
+
+    useEffect(() => {
+   
+        console.log('chatResponseData',chatResponseData)
+        // if (otpResponce.code != null) {
+        //   navigation.navigate(NavigationString.Location);
+        // }
+    
+       
+      }, [chatResponseData]);
+
+      useEffect(() => {
+        dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
+      });
+
+      
 
     console.log("Chat Response Data - " + chatResponseData);
 
