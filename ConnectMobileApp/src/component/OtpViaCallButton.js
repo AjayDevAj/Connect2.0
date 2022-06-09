@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {View,TouchableOpacity , StyleSheet, Text} from 'react-native'
+import {View,TouchableOpacity , StyleSheet, Text , Alert} from 'react-native'
 
 function OtpViaCallButton() {
   return (
@@ -8,7 +8,7 @@ function OtpViaCallButton() {
     <View>
       <TouchableOpacity
         style={styles.OtpViaCALLButton}
-        onPress={()=>console.log('Via CALL')}
+        onPress={()=>Alert.alert('OTP Via Call')}
       >
         <Text style={styles.OtpViaCALLButtonText}>CALL </Text>
       </TouchableOpacity>  

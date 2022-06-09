@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,TouchableOpacity , StyleSheet , Text} from 'react-native'
+import {View,TouchableOpacity , StyleSheet , Text , Alert} from 'react-native'
 // import Icon from 'react-native-vector-icons/MaterialIcons ';
 
 function OtpViaSMSButton() {
@@ -8,7 +8,7 @@ function OtpViaSMSButton() {
     <View>
       <TouchableOpacity
         style={styles.OtpViaSMSButton}
-        onPress={()=>console.log('Via SMA')}
+        onPress={()=>Alert.alert('SMS otp')}
       >
           {/* <Icon name="sms" size={16} color="#900"/> */}
         <Text style={styles.OtpViaSMSButtonText}>Via SMS </Text>
