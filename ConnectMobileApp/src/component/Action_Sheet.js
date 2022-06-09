@@ -56,6 +56,7 @@ const Action_Sheet = () => {
   return (
       <ActionSheet id = "helloworld_sheet"
       gestureEnabled={true}
+      initialOffsetFromBottom={100}
       onMomentumScrollEnd={() =>
         console.log('onMomentumScrollEnd')
       }
@@ -67,7 +68,7 @@ const Action_Sheet = () => {
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        style={{maxHeight:'100%'}}
+        // style={{maxHeight:'100%'}}
       />
         </View>
       </ActionSheet>
