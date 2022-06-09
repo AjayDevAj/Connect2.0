@@ -1,38 +1,43 @@
 /*
-**
-*
-** ========================================================
-**
-** AppName: Connect2.0
-** Version: X.0.0
-** FileName: GetOtpScreen.js
-** UsedFor: Get Otp Screen at connect 2.0 app
-** Author:
-**
-** ========================================================
-*
-**
-**
-*
-** ==========================================================
-**    Get Otp Screen complete view component
-** ==========================================================
-*
-**
-*/
-
-
+ **
+ *
+ ** ========================================================
+ **
+ ** AppName: Connect2.0
+ ** Version: X.0.0
+ ** FileName: GetOtpScreen.js
+ ** UsedFor: Get Otp Screen at connect 2.0 app
+ ** Author:
+ **
+ ** ========================================================
+ *
+ **
+ **
+ *
+ ** ==========================================================
+ **    Get Otp Screen complete view component
+ ** ==========================================================
+ *
+ **
+ */
 
 /*
-**
-*
-** Common react packages import
-*
-** 
-*/
+ **
+ *
+ ** Common react packages import
+ *
+ **
+ */
 
 import React, {useEffect, useState, useRef} from 'react';
-import {Text,TouchableOpacity,View,ScrollView,KeyboardAvoidingView,Platform,} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import GetOtpBg from '../../../assets/svg/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
@@ -45,6 +50,7 @@ import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import OtpErrorState from '../../component/OtpErrorState';
+import fontFamily from '../../utility/Font-Declarations';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -54,19 +60,30 @@ const GetOtpScreen = ({navigation}) => {
   const mobileNumber = route.params.mobile_Number;
   const [otp, setOtpNum] = useState('');
   const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
+  const [otptextcolor, setOtptextColor] = useState({
+    textcolor: '#5F6368',
+    tintColor: 'rgba(239, 240, 242, 1)',
+    offTintColor: 'rgba(239, 240, 242, 1)',
+    backgroundColor: 'rgba(239, 240, 242, 1)',
+  });
   const [disbaleval, setVisbal] = useState(true);
   const [timerEnable, setTimerEnable] = useState(false);
 
-
-
   useEffect(() => {
-   
     // console.log('otpResponce',otpResponce)
     if (otpResponce.code != null) {
       navigation.navigate(NavigationString.Location);
     }
-
-   
+    if (otpResponce != '') {
+      if (otpResponce.data.code == 400) {
+        setOtptextColor({
+          textcolor: 'rgba(164, 34, 22, 1)',
+          tintColor: 'rgba(164, 34, 22, 1)',
+          offTintColor: 'rgba(164, 34, 22, 1)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        });
+      }
+    }
   }, [otpResponce]);
 
   useEffect(() => {
@@ -77,8 +94,7 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
-      dispatch(loadOtpData(mobileNumber, otp));
-      
+    dispatch(loadOtpData(mobileNumber, otp));
   };
 
   const reSendOTP = () => {
@@ -86,16 +102,14 @@ const GetOtpScreen = ({navigation}) => {
   };
 
   const OtpErrorHandler = () => {
-    
-    if (otpResponce !== undefined && otpResponce.data !== undefined && otpResponce.data.code !=200)
-    {
-    
-      return(
-        <OtpErrorState/>
-      );
-     
+    if (
+      otpResponce != undefined &&
+      otpResponce.data != undefined &&
+      otpResponce.data.code != 200
+    ) {
+      return <OtpErrorState />;
     }
-  }
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -138,9 +152,17 @@ const GetOtpScreen = ({navigation}) => {
               <OTPTextInput
                 ref={e => console.log(';sdd')}
                 containerStyle={{borderColor: 'red'}}
+                textInputStyle={{
+                  color: otptextcolor.textcolor,
+                  backgroundColor: otptextcolor.backgroundColor,
+                  fontFamily: fontFamily.Alte_DIN,
+                  fontSize:24
+                }}
+                tintColor={otptextcolor.tintColor}
+                offTintColor={otptextcolor.offTintColor}
                 handleTextChange={text => {
                   if (text.trim().length === 4) {
-                    setOtpNum(text)
+                    setOtpNum(text);
                     setActiveBtn('rgba(rgba(14, 0, 113, 1))');
                     setVisbal(false);
                   } else {
@@ -149,11 +171,9 @@ const GetOtpScreen = ({navigation}) => {
                   }
                 }}
               />
+              {OtpErrorHandler()}
               <View style={styles.OtpTimerView}>
                 <OtpTimerHandler Resend={test => reSendOTP()} />
-                {
-               OtpErrorHandler()
-                }
               </View>
 
               <TouchableOpacity
