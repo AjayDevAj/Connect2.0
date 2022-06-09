@@ -1,59 +1,20 @@
-/*
-**
-*
-** ========================================================
-**
-** AppName: Connect2.0
-** Version: X.0.0
-** FileName: Login.js
-** UsedFor: Login Component at connect 2.0 app
-** Author:
-**
-** ========================================================
-*
-**
-**
-*
-** ==========================================================
-**              Login Component
-** ==========================================================
-*
-**
-*/
 
-
-
-/*
-**
-*
-** Common react packages import
-*
-** 
-*/
-
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Alert,
-  Text,
-  StyleSheet,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform, Pressable,
+  View, Alert, Text, StyleSheet, TextInput, Image, TouchableOpacity, SafeAreaView,
+  KeyboardAvoidingView, ScrollView, Platform, Pressable, Button,
 } from 'react-native';
-import {image} from '../../../assets/images/Image';
-import {loadLoginData} from '../../actions/LoginAction';
-import {useDispatch, useSelector} from 'react-redux';
+import { loadLoginData } from '../../actions/LoginAction';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
 import BackgroundImg from '../images/login_bg.svg'
+import CheckInterNet from '../../utility/CheckInterNet';
 
 
-const Login = ({navigation}) => {
+/************** Login Component **************/
+const Login = ({ navigation }) => {
+
   const dispatch = useDispatch();
   const loginResponce = useSelector(store => store.loginDataResponse);
 
@@ -63,22 +24,24 @@ const Login = ({navigation}) => {
 
   const [disbaleval, setVisbal] = useState(true);
   const [responseerror, setError] = useState({
-      errorStatus:false,
-      errorMsg:''
+    errorStatus: false,
+    errorMsg: ''
   });
   const [onFocus, setFocus] = useState(false);
   const [text, setText] = React.useState('+91');
+  const [checkNum, setCheckNum] = React.useState('+91');
 
+  /************** UseEffect Hook **************/
   useEffect(() => {
-   // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
+    // console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
     if (JSON.stringify(loginResponce.message) != null) {
-        setError(
-            {
-                errorMsg:loginResponce.message,
-                errorStatus:loginResponce.error
-            }
-        )
+      setError(
+        {
+          errorMsg: loginResponce.message,
+          errorStatus: loginResponce.error
+        }
+      )
       // navigate to next screen.
       if (loginResponce.error == false) {
         navigation.navigate(navigationString.GetOtpScreen, {
@@ -88,7 +51,7 @@ const Login = ({navigation}) => {
     }
   }, [loginResponce]);
 
-  //Check for the Phone Number TextInput
+  /********* Check for the Phone Number TextInput *********/
   const checkTextInput = async () => {
     console.log('checkTextInput');
     if (!textInputPhoneNum.trim()) {
@@ -97,16 +60,18 @@ const Login = ({navigation}) => {
       alert('Please enter 10 digit valid mobile number');
     } else {
       //calling API login
+      <CheckInterNet />
       dispatch(loadLoginData(textInputPhoneNum));
     }
   };
 
+  /********* Check for the TextInput *********/
   const onChangeTextChar = enterString => {
     setError(
-        {
-            errorMsg:'',
-            errorStatus:false
-        }
+      {
+        errorMsg: '',
+        errorStatus: false
+      }
     )
     if (enterString.trim().length > 0) {
       // setError('false')
@@ -123,49 +88,50 @@ const Login = ({navigation}) => {
   };
 
   const showText = () => {
-   { <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>}
+    { <Text style={{ fontSize: 15, marginLeft: 14 }}> +91 </Text> }
     console.log("Click on Text Input")
-   //Alert.alert("Show")
-   textInputPhoneNum.setText == '+91'
+    //Alert.alert("Show")
+    textInputPhoneNum.setText == '+91'
   }
 
+  /************** Return UIView ***************/
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         animated={true}
-        style={{backgroundColor: 'rgba(247, 252, 255, 1)', flex: 1}}>
+        style={{ backgroundColor: 'rgba(247, 252, 255, 1)', flex: 1 }}>
         <View>
           <View style={styles.CircilePostion}></View>
         </View>
+        <CheckInterNet />
 
-        <ScrollView contentContainerStyle={{flex: 1}}>
-          <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
+        <ScrollView contentContainerStyle={{ flex: 1 }}>
+          <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
             <View style={styles.UpperView}>
-
               <BackgroundImg width={'190'} height={'190'} />
             </View>
+
             <View style={styles.BottomView}>
-               
               <Text style={styles.EnterText}>Enter Your</Text>
               <Text style={styles.MobileText}>Mobile Number</Text>
-              <Text style={styles.NormalText}>   
+              <Text style={styles.NormalText}>
                 {' '}
                 A 4 digit OTP will be sent to verify your number
               </Text>
-                 <View
+              <View
                 style={
                   responseerror.errorStatus == true
                     ? styles.TextInputViewError
                     : styles.TextInputView
                 }>
-                {/* {onFocus && (
-                  <Text style={{fontSize: 15, marginLeft: 14}}> +91 </Text>
-                )} */}
+                {onFocus && (
+                  <Text style={{ fontSize: 15, marginLeft: 14 }}> +91 </Text>
+                )}
 
                 <TextInput
                   placeholder="Enter 10 Digit Mobile No."
-                  onTouchStart={()=> showText()}
+                  //onTouchStart={()=> showText()}
                   placeholderTextColor="gray"
                   keyboardType={'phone-pad'}
                   maxLength={10}
@@ -185,19 +151,19 @@ const Login = ({navigation}) => {
                     }
                   }}
                   style={styles.TextInput}>
-                  </TextInput>
+                </TextInput>
               </View>
               {responseerror.errorStatus == true ? (
                 <Text style={styles.errorMsg}>{responseerror.errorMsg}</Text>
               ) : null}
               <TouchableOpacity
                 disabled={disbaleval}
-                style={[styles.OtpBtn, {backgroundColor: activeBtn}]}
+                style={[styles.OtpBtn, { backgroundColor: activeBtn }]}
                 onPress={() => checkTextInput()}>
                 <Text style={styles.OtpText}>GET OTP</Text>
               </TouchableOpacity>
             </View>
-          </View> 
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

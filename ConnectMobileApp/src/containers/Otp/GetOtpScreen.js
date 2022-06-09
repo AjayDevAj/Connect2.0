@@ -44,6 +44,8 @@ import {loadOtpData} from '../../actions/OtpScreenAction';
 import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
+import CheckInterNet from '../../utility/CheckInterNet';
+
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -59,6 +61,7 @@ const GetOtpScreen = ({navigation}) => {
 
   useEffect(() => {
     // console.log('otpResponce',otpResponce)
+
     if (otpResponce.code != null) {
       navigation.navigate(NavigationString.Location);
     }
@@ -72,7 +75,9 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
+    <CheckInterNet/>
       dispatch(loadOtpData(mobileNumber, otp));
+
   };
 
   const reSendOTP = () => {
@@ -88,7 +93,7 @@ const GetOtpScreen = ({navigation}) => {
         <View>
           <Bubble />
         </View>
-
+        <CheckInterNet/>
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <View style={styles.UpperView}>
@@ -140,6 +145,7 @@ const GetOtpScreen = ({navigation}) => {
                 onPress={() => VerifyOTPApi()}
                 style={[styles.VerifyButton, {backgroundColor: activeBtn}]}>
                 <Text style={styles.VerifyButtonText}>VERIFY</Text>
+
               </TouchableOpacity>
             </View>
           </View>

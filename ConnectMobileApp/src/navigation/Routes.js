@@ -32,8 +32,8 @@
 */
 
 import React from 'react';
-import { Text } from 'react-native';
-import {NavigationContainer, StackActions} from '@react-navigation/native';
+import { Text, View, Alert } from 'react-native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
@@ -43,6 +43,8 @@ import Storelocation from '../containers/Location/Storelocation';
 import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
+import InternetConnectionAlert from "react-native-internet-connection-alert";
+
 
 
 /*
@@ -79,24 +81,24 @@ const Stack = createNativeStackNavigator();
 /**
  * Routes matain the navigation stacks
  */
- const Routes = () => {
+const Routes = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer>     
       <Stack.Navigator initialRouteName="OnBoarding">
-        <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
-        <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
-        <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} 
-            options={{ 
-              headerTitle: (props) => <OtpScreen {...props} onPress={() => navigationString.goBack()} />
-            }}
+        <Stack.Screen name={navigationString.OnBoarding} component={OnBoarding} options={{ headerShown: false }} />
+        <Stack.Screen name={navigationString.LOGIN} component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name={navigationString.GetOtpScreen} component={GetOtpScreen} options={{ headerShown: false }} 
+          // options={{
+          //   headerTitle: (props) => <OtpScreen {...props} onPress={() => navigationString.goBack()} />
+          // }}
         />
         {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
-        <Stack.Screen name={navigationString.Location} component = {Storelocation} 
-            options={{ 
-              headerTitle: (props) => <StoreLocation {...props} />
-            }}
+        <Stack.Screen name={navigationString.Location} component={Storelocation}
+          options={{
+            headerTitle: (props) => <StoreLocation {...props} />
+          }}
         />
-        <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
+        <Stack.Screen name={navigationString.RouteTabBar} component={RouteTabBar} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
