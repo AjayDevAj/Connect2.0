@@ -66,6 +66,7 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
+import Count_Badge from '../component/Count_Badge';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -126,7 +127,9 @@ export default function RouteTabBar() {
                 name="chat"
                 size={24}
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              />
+              >
+                   {/* <Count_Badge topRight={20} top={10} /> */}
+                </Icon>
             );
           }}} />
         <Tab.Screen name={navigationString.Customers} component={CustomersScreen} options={{

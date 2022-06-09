@@ -18,7 +18,7 @@ export default Storelocation = ({navigation}) => {
       method: 'get',
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTQ3NzU3MTIsImRhdGEiOnsiaWQiOjUxMSwibW9iaWxlX251bWJlciI6Ijg3NTA4NzI5OTAiLCJuYW1lIjoiVG9ueSIsInJvbGVfaWQiOjEsImlzX3NpX3VzZXIiOjB9LCJpYXQiOjE2NTQxNzA5MTJ9.tGk2hwAQktTZFcDH0JCo1nz1yiezTqT8cCjC8olkEOk',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTUzOTQ4MjEsImRhdGEiOnsiaWQiOjYyLCJtb2JpbGVfbnVtYmVyIjoiOTQ2NzM5NjQxMiIsIm5hbWUiOiJIaW1hbnNodSBHYXJnIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MX0sImlhdCI6MTY1NDc5MDAyMX0.3pLMgVhpWWyIUfO01t8EZYtBZEFiIZcz6rQR7zBQyHY',
       },
     })
       .then(response => response.json())
@@ -26,7 +26,7 @@ export default Storelocation = ({navigation}) => {
       .catch(error => console.error(error));
   }, [LocationResonce]);
 
-  
+
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
