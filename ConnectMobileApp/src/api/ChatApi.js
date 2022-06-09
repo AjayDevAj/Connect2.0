@@ -65,6 +65,8 @@ const getChatList = async () => {
     bodyData.append('other_chat',0);
     bodyData.append('user_id',557);
 
+    console.log('Chat Body Data : ',bodyData)
+
     const response = await fetch(API_URL_STAGING + '/message/message-list', {
         method: 'POST',
         body:bodyData

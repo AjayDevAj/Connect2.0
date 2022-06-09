@@ -50,13 +50,19 @@ const tabViewStyles = StyleSheet.create({
     },
     tabViewIndicator: {
         backgroundColor: '#0070FC', 
-        width: '20%', 
-        left: 10,
+        width: '22%', 
+        left: 8,
+    },
+    activeTabTextColor: {
+        color: '#0070FC',
+    },
+    tabTextColor: {
+        color: '#657180',
+        
     },
     tabText: {
         alignSelf: 'flex-start',
         backgroundColor: '#F7FCFF',
-        color: '#0070FC',
         textTransform: 'uppercase',
         fontFamily: fontFamily.Alte_DIN,
         opacity: 1,
