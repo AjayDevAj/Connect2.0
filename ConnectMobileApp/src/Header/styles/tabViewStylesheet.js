@@ -44,12 +44,9 @@ const tabViewStyles = StyleSheet.create({
 
     tabViewContainer: {
         backgroundColor: '#F7FCFF',
-        top: 110,
-        height: '8%',
+        height: '57%',
         width: '100%',
-        shadowOffset: {width: 0, height: 1},
-        shadowOpacity: 0,
-        elevation: 0
+        elevation: 0,
     },
     tabText: {
         alignSelf: 'flex-start',

@@ -34,8 +34,19 @@ import { Text, View } from 'react-native';
 
 import openChatStyles from './styles/OpenChatStylesheet';
 
+const OpenChatData = [
+    {
+        id: 1,
+        logo: 'whatsapp',
+        name: 'Rahul Jaggi',
+        assignedTo: '',
+        message: '',
+        location: '',
+        time: ''
+    },
+];
+
 const OpenedChat = () => {
-  
     return (
         <View>
             {/* <Text style={ openChatStyles.openChatText }>Open</Text> */}
