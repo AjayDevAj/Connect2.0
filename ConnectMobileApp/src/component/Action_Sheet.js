@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import {View, FlatList, Text, StyleSheet} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 
@@ -64,26 +64,29 @@ const Item = ({title}) => (
 );
 
 const Action_Sheet = () => {
+  const actionSheetRef = useRef();
+
   const renderItem = ({item}) => <Item title={item.title} />;
 
   return (
-    <ActionSheet
+    <ActionSheet 
       id="helloworld_sheet"
       gestureEnabled={true}
-      ViewStyle={true}
-      boolean={true}
+      // ViewStyle={true}
+      // closable={false}
       initialOffsetFromBottom={0.4}
-      // headerAlwaysVisible={true}
-      onMomentumScrollEnd={() => console.log('onMomentumScrollEnd')}
-      // springOffset={300}
-      overlayColor='gray'
-      bottomOffset={50}
-            >
+    >
       <View style={{maxHeight: '80%'}}>
         <FlatList
+          // ref={scrollViewRef}
+          // nestedScrollEnabled={true}
+          // onMomentumScrollEnd={() =>
+          //   actionSheetRef.current?.handleChildScrollEnd()
+          // }
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          // style={{height:30}}
         />
       </View>
     </ActionSheet>
