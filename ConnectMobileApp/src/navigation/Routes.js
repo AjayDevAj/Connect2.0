@@ -85,7 +85,7 @@ const Stack = createNativeStackNavigator();
       <Stack.Navigator initialRouteName="OnBoarding">
         <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
-        <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen} 
+         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
             options={{ 
               headerTitle: (props) => <OtpScreen {...props} onPress={() => navigationString.goBack()} />
             }}
