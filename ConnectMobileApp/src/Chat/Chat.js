@@ -68,7 +68,7 @@ const Chat = () => {
                 filterHandler={filterHandler}
             />
             <HeaderTabView chatTabsTitleData={chatTabsTitleData} chatTabs={chatTabs} />
-            <HeaderNotification />
+            <HeaderNotification left="people" message="12 Open chats with team" right="chevron-right" />
             <View>
                 
             </View>
