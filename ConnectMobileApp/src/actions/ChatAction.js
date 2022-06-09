@@ -42,9 +42,11 @@ import { combineReducers } from "redux"
 ** 
 */
 
-const loadChatData = (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => ({
+const loadChatData = (is_important, location_id, unread, order_by, chat_status,
+     pagination, other_chat, user_id) => ({
    
-    type: CONSTANT.CHAT_DATA,is_important,location_id,unread,order_by,chat_status,pagination,other_chat,user_id,
+    type: CONSTANT.CHAT_DATA,is_important,location_id,
+    unread,order_by,chat_status,pagination,other_chat,user_id,
     
 })
 

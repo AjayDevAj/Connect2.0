@@ -1,7 +1,7 @@
 import React,{useRef} from 'react';
 import {View, FlatList, Text, StyleSheet} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-
+import fontFamily from '../utility/Font-Declarations'
 /**
  * Open action sheet
  */
@@ -72,11 +72,12 @@ const Action_Sheet = () => {
     <ActionSheet 
       id="helloworld_sheet"
       gestureEnabled={true}
-      // ViewStyle={true}
-      // closable={false}
       initialOffsetFromBottom={0.4}
+    
+      headerAlwaysVisible={true}
     >
       <View style={{maxHeight: '80%'}}>
+        <Text style={styles.headerStyle}>Incoming Chats</Text>
         <FlatList
           // ref={scrollViewRef}
           // nestedScrollEnabled={true}
@@ -86,7 +87,6 @@ const Action_Sheet = () => {
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
-          // style={{height:30}}
         />
       </View>
     </ActionSheet>
@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
+  headerStyle: {
+    color:'#000000',
+    fontFamily:fontFamily.Alte_DIN,
+    fontSize:18,
+  }
 });
 
 export default Action_Sheet;
