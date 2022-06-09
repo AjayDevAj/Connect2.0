@@ -41,7 +41,7 @@ const notificationStyles = StyleSheet.create({
         position: 'absolute',
         top: 170,
     },
-    notificationPeopleIcon: {
+    notificationLeftIcon: {
         color: '#657180',
         alignSelf: 'flex-start',
         left: 5,

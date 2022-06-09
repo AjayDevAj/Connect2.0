@@ -28,15 +28,19 @@ import TopHeader from '../Header/TopHeader';
 import HeaderTabView from '../Header/HeaderTabView';
 import HeaderNotification from '../Header/HeaderNotification';
 
-import chatStyles from './styles/chatStylesheet';
+import chatStyles from './styles/ChatStylesheet';
 
 import OpenedChat from './OpenedChat';
 import ClosedChat from './ClosedChat';
 import AssignedChat from './AssignedChat';
 
+import ChatList from './ChatList';
+import ChatSmsButton from './ChatSmsButton';
+
 const Chat = () => {
 
     const menuHandler = () => {
+        console.log("Menu Handler")
         alert("Menu Handler");
     };
 
@@ -62,16 +66,18 @@ const Chat = () => {
 
     return (
         <View style={ chatStyles.chatMainContainer }>
-            <TopHeader name="My Chats" 
+            <TopHeader firstIcon="menu"
+                secondIcon="search"
+                thirdIcon="filter-list"
+                name="My Chats" 
                 menuHandler={menuHandler} 
                 searchHandler={searchHandler} 
                 filterHandler={filterHandler}
             />
             <HeaderTabView chatTabsTitleData={chatTabsTitleData} chatTabs={chatTabs} />
-            <HeaderNotification />
-            <View>
-                
-            </View>
+            <HeaderNotification left="people" message="12 Open chats with team" right="chevron-right" />
+            <ChatList />
+            {/* <ChatSmsButton /> */}
         </View>
     );
 }
