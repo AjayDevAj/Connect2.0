@@ -44,7 +44,7 @@ const tabViewStyles = StyleSheet.create({
 
     tabViewContainer: {
         backgroundColor: '#F7FCFF',
-        height: '10%',
+        height: Platform.OS == 'ios' ? '8.5%':'10%',
         width: '100%',
         elevation: 0,
     },
