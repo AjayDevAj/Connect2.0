@@ -67,6 +67,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import Chat from '../Chat/Chat';
 
 function HomeScreen() {
@@ -106,10 +108,49 @@ const Tab = createBottomTabNavigator();
 export default function RouteTabBar() {
   return (
       <Tab.Navigator>
-        <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} />
-        <Tab.Screen name={navigationString.Chat} component={Chat} options={{headerShown: false}} />
-        <Tab.Screen name={navigationString.Customers} component={CustomersScreen} />
-        <Tab.Screen name={navigationString.Reviews} component={ReviewsScreen} />
+        <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
+          tabBarIcon: (tabInfo) => {
+            return (
+              <Icon
+                name="dashboard"
+                size={24}
+                color={tabInfo.focused ? "#00C158" : "#5F6368"}
+              />
+            );
+          },
+        }} />
+        <Tab.Screen name={navigationString.Chat} component={Chat} options={{headerShown: false, 
+          tabBarIcon: (tabInfo) => {
+            return (
+              <Icon
+                name="chat"
+                size={24}
+                color={tabInfo.focused ? "#00C158" : "#5F6368"}
+              />
+            );
+          }}} />
+        <Tab.Screen name={navigationString.Customers} component={CustomersScreen} options={{
+          tabBarIcon: (tabInfo) => {
+            return (
+              <Icon
+                name="group"
+                size={24}
+                color={tabInfo.focused ? "#00C158" : "#5F6368"}
+              />
+            );
+          },
+        }} />
+        <Tab.Screen name={navigationString.Reviews} component={ReviewsScreen} options={{
+          tabBarIcon: (tabInfo) => {
+            return (
+              <Icon
+                name="grade"
+                size={24}
+                color={tabInfo.focused ? "#00C158" : "#5F6368"}
+              />
+            );
+          },
+        }} />
       </Tab.Navigator>
   );
 }

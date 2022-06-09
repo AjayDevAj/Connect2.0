@@ -58,6 +58,7 @@ const HeaderTabView = ({ chatTabsTitleData, chatTabs }) => {
       renderTabBar={props => 
         <TabBar {...props} 
           indicatorStyle={ tabViewStyles.tabViewIndicator }
+          pressColor={{ color: '#F7FCFF'}}
           renderLabel={({route, focused, color}) => (
             <View>
               <Text style={ [focused ? tabViewStyles.activeTabTextColor : tabViewStyles.tabTextColor, tabViewStyles.tabText ]}>{route.title}</Text>
