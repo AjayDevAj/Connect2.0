@@ -30,16 +30,16 @@
 */
 
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import assignChatStyles from './styles/AssignedStylesheet';
+
+import ChatList from './ChatList';
 
 const AssignedChat = () => {
   
     return (
-        <View>
-            {/* <Text style={ assignChatStyles.assignChatText }>Assigned</Text> */}
-        </View>
+        <ChatList type="assigned" />
     );
 }
 

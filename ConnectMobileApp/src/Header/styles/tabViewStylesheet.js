@@ -30,7 +30,7 @@
 ** 
 */
 
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import fontFamily from '../../utility/Font-Declarations';
 
 const tabViewStyles = StyleSheet.create({
@@ -44,9 +44,14 @@ const tabViewStyles = StyleSheet.create({
 
     tabViewContainer: {
         backgroundColor: '#F7FCFF',
-        height: Platform.OS == 'ios' ? '48%': '57%',
+        height: '10%',
         width: '100%',
         elevation: 0,
+    },
+    tabViewIndicator: {
+        backgroundColor: '#0070FC', 
+        width: '20%', 
+        left: 10,
     },
     tabText: {
         alignSelf: 'flex-start',

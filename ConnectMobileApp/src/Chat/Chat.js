@@ -5,8 +5,8 @@
 **
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: ChatHeader.js
-** UsedFor: Chat Header at connect 2.0 app
+** FileName: Chat.js
+** UsedFor: Chat at connect 2.0 app
 ** Author:
 **
 ** ========================================================
@@ -15,7 +15,7 @@
 **
 *
 ** ==========================================================
-** Chat Header component
+**                  Chat component
 ** ==========================================================
 *
 **
@@ -34,8 +34,8 @@ import OpenedChat from './OpenedChat';
 import ClosedChat from './ClosedChat';
 import AssignedChat from './AssignedChat';
 
-import ChatList from './ChatList';
-import ChatSmsButton from './ChatSmsButton';
+import { ChatList } from './ChatList';
+// import ChatSmsButton from './ChatSmsButton';
 
 const Chat = () => {
 
@@ -76,7 +76,7 @@ const Chat = () => {
             />
             <HeaderTabView chatTabsTitleData={chatTabsTitleData} chatTabs={chatTabs} />
             <HeaderNotification left="people" message="12 Open chats with team" right="chevron-right" />
-            <ChatList />
+            {/* <ChatList type="closed" /> */}
             {/* <ChatSmsButton /> */}
         </View>
     );

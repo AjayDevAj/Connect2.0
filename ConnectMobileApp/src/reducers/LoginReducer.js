@@ -32,7 +32,8 @@
 
 import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";
-import otpDataReducer from './OtpReducer'
+import otpDataReducer from './OtpReducer';
+import ChatReducer from './ChatReducer';
 
 const loginDataReducer = (state = '', action) => {
 
@@ -48,7 +49,8 @@ const loginDataReducer = (state = '', action) => {
 
 const rootReducers = combineReducers({
     loginDataResponse: loginDataReducer,
-    OtpResponceData: otpDataReducer
+    OtpResponceData: otpDataReducer,
+    ChatResponseData: ChatReducer,
 })
 
 export default rootReducers;
