@@ -67,6 +67,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
 
+import Chat from '../Chat/Chat';
+
 function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -78,7 +80,7 @@ function HomeScreen() {
 function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Chat</Text>
+      <Chat />
     </View>
   );
 }
@@ -105,7 +107,7 @@ export default function RouteTabBar() {
   return (
       <Tab.Navigator>
         <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} />
-        <Tab.Screen name={navigationString.Chat} component={SettingsScreen} />
+        <Tab.Screen name={navigationString.Chat} component={Chat} options={{headerShown: false}} />
         <Tab.Screen name={navigationString.Customers} component={CustomersScreen} />
         <Tab.Screen name={navigationString.Reviews} component={ReviewsScreen} />
       </Tab.Navigator>
