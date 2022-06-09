@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import cardStyles from './styles/CardStylesheet';
 
@@ -12,7 +12,7 @@ const CardNameMessage = ({ name, assigned, message }) => {
             
             { assigned !== '' ? 
                 <View style={ cardStyles.assignedToContainer }>
-                    <Icon name="checkmark-done-outline" size={18} color="#0070FC" />
+                    <Icon name="done-all" size={18} color="#0070FC" />
                     <Text style={ cardStyles.chatAssignedTo }>{ assigned }</Text> 
                 </View>
             : 

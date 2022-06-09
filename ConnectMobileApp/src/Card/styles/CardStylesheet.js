@@ -99,14 +99,20 @@ const cardStyles = StyleSheet.create({
     },
 
     cardTimeIcon: {
-        top: 5,
+        alignItems: 'flex-end',
+        top: 15,
         left: 1,
+        width: 4,
+        height: 4,
+        opacity: 1,
+        backgroundColor: '#657180',
+        borderRadius: 3
     },
 
     cardTime: {
         color: '#657180',
-        left: 15,
-        top: -10,
+        left: 8,
+        top: 5,
         fontSize: 11,
         opacity: 1,
         letterSpacing: 0,
