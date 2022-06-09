@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import configureStore  from './src/store/Store';
 import Routes from './src/navigation/Routes';
 import Splash from './src/Splash/OnBoarding'
+import GetOtpScreen from './src/containers/Otp/GetOtpScreen';
 
 // const App = () => {
 //   const [isFirstLaunch, setIsFirstLaunch] = useState(true);

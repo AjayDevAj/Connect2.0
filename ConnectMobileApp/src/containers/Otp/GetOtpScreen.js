@@ -44,6 +44,7 @@ import {loadOtpData} from '../../actions/OtpScreenAction';
 import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
+import OtpErrorState from '../../component/OtpErrorState';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -57,11 +58,15 @@ const GetOtpScreen = ({navigation}) => {
   const [timerEnable, setTimerEnable] = useState(false);
 
 
+
   useEffect(() => {
+   
     // console.log('otpResponce',otpResponce)
     if (otpResponce.code != null) {
       navigation.navigate(NavigationString.Location);
     }
+
+   
   }, [otpResponce]);
 
   useEffect(() => {
@@ -73,11 +78,24 @@ const GetOtpScreen = ({navigation}) => {
    *  */
   const VerifyOTPApi = () => {
       dispatch(loadOtpData(mobileNumber, otp));
+      
   };
 
   const reSendOTP = () => {
     dispatch(loadOtpData_Resend(mobileNumber));
   };
+
+  const OtpErrorHandler = () => {
+    
+    if (otpResponce !== undefined && otpResponce.data !== undefined && otpResponce.data.code !=200)
+    {
+    
+      return(
+        <OtpErrorState/>
+      );
+     
+    }
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -133,6 +151,9 @@ const GetOtpScreen = ({navigation}) => {
               />
               <View style={styles.OtpTimerView}>
                 <OtpTimerHandler Resend={test => reSendOTP()} />
+                {
+               OtpErrorHandler()
+                }
               </View>
 
               <TouchableOpacity
