@@ -45,7 +45,7 @@ import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File'
 ** 
 */
 
-const getChatList = async () => {
+const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => {
 
     /*
     **
@@ -55,27 +55,34 @@ const getChatList = async () => {
     ** 
     */
 
-    const bodyData = new FormData(); 
-    bodyData.append('is_important',0);
-    bodyData.append('location_id',null);
-    bodyData.append('unread',0);
-    bodyData.append('order_by','DESC');
-    bodyData.append('chat_status','open');
-    bodyData.append('pagination',1);
-    bodyData.append('other_chat',0);
-    bodyData.append('user_id',557);
+    // const bodyData = new FormData(); 
+    const bodyRawData = {
+        "chat_status": chat_status,
+        "is_important": is_important,
+        "location_id": location_id,
+        "order_by": order_by,
+        "other_chat": other_chat,
+        "pagination": pagination,
+        "unread": unread,
+        "user_id": user_id
+    };
 
-    console.log('Chat Body Data : ',bodyData)
+    // console.log('Chat Body Data : ',bodyRawData);
 
-    const response = await fetch(API_URL_STAGING + '/message/message-list', {
+    var api_url = API_URL_STAGING + '/message/message-list';
+
+    var headers = {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU0NDQ0MDksImRhdGEiOnsiaWQiOjU1NywibW9iaWxlX251bWJlciI6IjMwMTExMTExMTEiLCJuYW1lIjoiU3VraGJpciBTaW5naCB0aGUgIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MH0sImlhdCI6MTY1NDgzOTYwOX0.BBYO_gCm9gO9vdNmgxXmYLUOBiFsaS7748adUbSI-0s',
+    };
+
+    const response = await fetch(api_url, {
         method: 'POST',
-        body:bodyData,
-        headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTUzOTQ4MjEsImRhdGEiOnsiaWQiOjYyLCJtb2JpbGVfbnVtYmVyIjoiOTQ2NzM5NjQxMiIsIm5hbWUiOiJIaW1hbnNodSBHYXJnIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MX0sImlhdCI6MTY1NDc5MDAyMX0.3pLMgVhpWWyIUfO01t8EZYtBZEFiIZcz6rQR7zBQyHY',
-          },
-    })
-
+        headers: headers,
+        body: JSON.stringify(bodyRawData)
+    });
+    
     /*
     **
     *
@@ -84,8 +91,8 @@ const getChatList = async () => {
     ** 
     */
 
-    const data = response.json()
-    console.log('Chat Message List : ',data)
+    const data = response.json();
+    // console.log('Chat Message List Response : ',data);
 
     /*
     **
@@ -94,9 +101,9 @@ const getChatList = async () => {
     *
     ** 
     */
-   console.log('Chat Message List response.status : ',response.status)
-
+    
     if (response.status > 400) {
+        // console.log('Chat Message Error : '+ data.errors);
         throw new Error(data.errors)
     }
 
