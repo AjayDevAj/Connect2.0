@@ -4,7 +4,7 @@ import fontFamily from '../../utility/Font-Declarations';
 const cardStyles = StyleSheet.create({
     card: {
         marginTop: 10,
-        marginHorizontal: 4,
+        // marginHorizontal: 4,
         marginVertical: 6,
         // width: '100%',
     },
