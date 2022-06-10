@@ -30,6 +30,7 @@
 */
 
 import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File'
+import {useSelector} from 'react-redux';
 
 
 
@@ -46,6 +47,7 @@ import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File'
 */
 
 const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => {
+    const otpResponce = useSelector(store => store.OtpResponceData);
 
     /*
     **
@@ -67,7 +69,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
         "user_id": user_id
     };
 
-    // console.log('Chat Body Data : ',bodyRawData);
+    console.log('Chat Body Data otpResponce: ',otpResponce);
 
     var api_url = API_URL_STAGING + '/message/message-list';
 

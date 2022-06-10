@@ -515,7 +515,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
-
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
@@ -595,7 +594,6 @@ SPEC CHECKSUMS:
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
   react-native-netinfo: 6c7f3c7812114e68ebe08e4fa6cbf8d163c66d9d
-
   react-native-pager-view: 7d13a6fd573f856cfef9a5cb24d6c605b6135983
   react-native-safe-area-context: 923e8a02d3bd88ca7a6b6c9b3db1b94591044b0c
   React-perflogger: 73732888d37d4f5065198727b167846743232882
@@ -621,7 +619,6 @@ SPEC CHECKSUMS:
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-
-PODFILE CHECKSUM: 28950e1e82fcd72ab5e3b93de62bd98b07b0e6e7
+PODFILE CHECKSUM: 11205a6f7cc9713c469b60ad8aac7940a57cca2a
 
 COCOAPODS: 1.11.3

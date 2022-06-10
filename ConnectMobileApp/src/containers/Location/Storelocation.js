@@ -10,15 +10,18 @@ import NavigationString from '../../utility/NavigationString';
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
   const LocationResonce = useSelector(store => store.StoreLocationDataResponse);
+  const otpResponce = useSelector(store => store.OtpResponceData);
+
   const [responceData, setData] = useState([]);
   console.log(responceData);
 
   useEffect(() => {
+    console.log('Storelocation otpResponce',otpResponce.data.token)
     fetch('https://test-chat-1.starify.co/user/auth/get-locations', {
       method: 'get',
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTUzOTQ4MjEsImRhdGEiOnsiaWQiOjYyLCJtb2JpbGVfbnVtYmVyIjoiOTQ2NzM5NjQxMiIsIm5hbWUiOiJIaW1hbnNodSBHYXJnIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MX0sImlhdCI6MTY1NDc5MDAyMX0.3pLMgVhpWWyIUfO01t8EZYtBZEFiIZcz6rQR7zBQyHY',
+          `Bearer ${otpResponce.data.token}`,
       },
     })
       .then(response => response.json())

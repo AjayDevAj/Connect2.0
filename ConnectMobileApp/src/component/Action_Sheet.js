@@ -2,10 +2,10 @@ import React, {useRef} from 'react';
 import {View, FlatList, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import fontFamily from '../utility/Font-Declarations';
-import Card from '../Card/Card';
-import CardIcon from '../Card/CardIcon';
-import CardNameMessage from '../Card/CardNameMessage';
-import CardLocationTime from '../Card/CardLocationTime';
+// import Card from '../Card/Card';
+// import CardIcon from '../Card/CardIcon';
+// import CardNameMessage from '../Card/CardNameMessage';
+// import CardLocationTime from '../Card/CardLocationTime';
 import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card'
 /**
  * Open action sheet
