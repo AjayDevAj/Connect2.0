@@ -44,7 +44,8 @@ import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
 import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
-import OTPTextInput from 'react-native-otp-textinput';
+//import OTPTextInput from 'react-native-otp-textinput';
+import OTPTextInput from '../../component/Otp-Form'
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
 import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
