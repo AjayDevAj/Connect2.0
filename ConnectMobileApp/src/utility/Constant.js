@@ -38,6 +38,9 @@ const CONSTANT = {
     CHAT_DATA_ERROR: 'CHAT_DATA_ERROR',
     CHAT_DATA_SUCCESS: 'CHAT_DATA_SUCCESS',
 
+    Unassigned_Chat_Data: 'Unassigned_Chat_DATA',
+    Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
+    Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 }
 
 export { CONSTANT }

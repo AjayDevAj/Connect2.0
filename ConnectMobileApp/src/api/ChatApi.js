@@ -94,7 +94,8 @@ const getChatList = async () => {
     *
     ** 
     */
-   
+   console.log('Chat Message List response.status : ',response.status)
+
     if (response.status > 400) {
         throw new Error(data.errors)
     }
