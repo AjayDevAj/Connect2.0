@@ -31,8 +31,6 @@
 
 import { CONSTANT } from "../utility/Constant";
 
-import { combineReducers } from "redux"
-
 /*
 **
 *

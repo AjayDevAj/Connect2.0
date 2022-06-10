@@ -10,6 +10,8 @@ import Draggable from 'react-native-draggable';
 import Count_Badge from '../../component/Count_Badge';
 import Sms_black_24dp from '../../../assets/svg/sms_black_24dp.svg';
 import Action_Sheet, {openSheet} from '../../component/Action_Sheet';
+import {Unassigned_Chat} from '../../actions/Unassigned_Chat_Action';
+import {useSelector, useDispatch} from 'react-redux';
 
 /**
  * This class is for imcoming chat icon.
@@ -21,9 +23,20 @@ const Incoming_Chat = () => {
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
   });
-
+  const dispatch = useDispatch();
   const [username, SetuserName] = useState('Priyanka11');
   const [isPanelActive, setIsPanelActive] = useState(true);
+  const unassigned_Chat_Response = useSelector(store => store.Unassigned_Chat);
+
+  useEffect(() => {
+    console.log('unassigned_Chat_Response:- ',unassigned_Chat_Response) 
+  }, [unassigned_Chat_Response]);
+
+
+  const unassigned_Chat_API_Call = () => {
+    console.log('unassigned_Chat_API_Call:- ') 
+    dispatch(Unassigned_Chat());
+  };
 
   return (
     <>
@@ -32,7 +45,8 @@ const Incoming_Chat = () => {
         x={Dimensions.get('window').width - 100}
         y={Dimensions.get('window').height - 170}
         onShortPressRelease={() => {
-          openSheet();
+          // openSheet();
+          unassigned_Chat_API_Call();
         }}>
         <View
           style={{

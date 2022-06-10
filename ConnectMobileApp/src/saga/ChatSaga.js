@@ -57,7 +57,7 @@ function* handleChatResponseData(action) {
             action.other_chat, 
             action.user_id
         );
-        console.log('Chat Data Response', data)
+        // console.log('Chat Data Response', data)
         yield put(getResponse(data))
     }
     catch(errors) {
@@ -76,6 +76,6 @@ function* handleChatResponseData(action) {
 
 
 export default function* ChatDataWatcherSaga() {
-    console.log('Chat Data Saga Watcher')
+    // console.log('Chat Data Saga Watcher')
     yield takeEvery(CONSTANT.CHAT_DATA, handleChatResponseData)
 }

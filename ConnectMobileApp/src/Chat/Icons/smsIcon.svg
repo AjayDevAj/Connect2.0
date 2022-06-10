@@ -1,7 +1,0 @@
-<svg id="sms_black_24dp" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <path id="Path_7787" data-name="Path 7787" d="M0,0H24V24H0Z" fill="none"/>
-  <g id="chat_black_24dp">
-    <path id="Path_169" data-name="Path 169" d="M0,0H24V24H0Z" fill="none"/>
-    <path id="Path_170" data-name="Path 170" d="M4,4H20V16H5.17L4,17.17V4M4,2A2,2,0,0,0,2.01,4L2,22l4-4H20a2.006,2.006,0,0,0,2-2V4a2.006,2.006,0,0,0-2-2ZM6,12h8v2H6ZM6,9H18v2H6ZM6,6H18V8H6Z" fill="#fff"/>
-  </g>
-</svg>
