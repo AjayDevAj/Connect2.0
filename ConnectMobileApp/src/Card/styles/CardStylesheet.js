@@ -76,21 +76,17 @@ const cardStyles = StyleSheet.create({
     }, 
 
     cardLocationContainer: {
-        alignSelf: 'flex-end',
-        position: 'relative',
-        top: -18,
-        left: -20,
+        flexDirection:'row',
+        justifyContent:'space-between',
     },
 
     cardLocation: {
         color: '#657180',
         textTransform: 'capitalize',
-        position: 'relative',
-        top: -18,
-        left: 18,
+        marginLeft: 5,
         opacity: 1,
-        letterSpacing: 0,
         fontFamily: fontFamily.Alte_DIN,
+        fontSize:13
     },
 
     cardTimeContainer: {

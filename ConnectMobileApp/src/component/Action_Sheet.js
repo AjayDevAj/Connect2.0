@@ -1,7 +1,12 @@
-import React,{useRef} from 'react';
-import {View, FlatList, Text, StyleSheet} from 'react-native';
+import React, {useRef} from 'react';
+import {View, FlatList, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-import fontFamily from '../utility/Font-Declarations'
+import fontFamily from '../utility/Font-Declarations';
+import Card from '../Card/Card';
+import CardIcon from '../Card/CardIcon';
+import CardNameMessage from '../Card/CardNameMessage';
+import CardLocationTime from '../Card/CardLocationTime';
+import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card'
 /**
  * Open action sheet
  */
@@ -31,36 +36,16 @@ const DATA = [
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba1',
     title: 'First Item',
   },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f632',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d7213',
-    title: 'Third Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-febd91aa97f632',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-1e45571e29d7213',
-    title: 'Third Item',
-  },
-  {
-    id: '3ac68afc-c6w05-48d3-a4f8-fbd91aa97f632',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3dae1-471f-bd96-145571e29d7213',
-    title: 'Third Item',
-  },
+  
 ];
-
+/**
+ * 
+ * @param {*} title for Incoming chat 
+ */
 const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
+ <Incoming_Chat_Card title={"Abhishek Singh"} onclick={() => 
+  SheetManager.hideAll()
+}/>
 );
 
 const Action_Sheet = () => {
@@ -69,13 +54,13 @@ const Action_Sheet = () => {
   const renderItem = ({item}) => <Item title={item.title} />;
 
   return (
-    <ActionSheet 
+    <ActionSheet
       id="helloworld_sheet"
       gestureEnabled={true}
       initialOffsetFromBottom={0.4}
-    
       headerAlwaysVisible={true}
-    >
+      extraScroll={DATA.length < 4 ? 250 :200}
+      >
       <View style={{maxHeight: '80%'}}>
         <Text style={styles.headerStyle}>Incoming Chats</Text>
         <FlatList
@@ -108,10 +93,13 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
   headerStyle: {
-    color:'#000000',
-    fontFamily:fontFamily.Alte_DIN,
-    fontSize:18,
-  }
+    color: '#000000',
+    fontFamily: fontFamily.Alte_DIN,
+    fontSize: 18,
+    marginLeft: 16,
+    marginTop: 30,
+    marginBottom: 13,
+  },
 });
 
 export default Action_Sheet;
