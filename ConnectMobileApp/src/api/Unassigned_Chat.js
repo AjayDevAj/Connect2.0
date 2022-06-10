@@ -1,7 +1,9 @@
 // /message/get-unassigned-chat
 import {API_URL_DEV, API_URL_STAGING} from '../utility/Config_File';
 
-export const Unassigned_Chat_Fetch_Call = async () => {
+
+export const Unassigned_Chat_Fetch_Call = async (token) => {
+  console.log('Chat Body Data otpResponce: ',token);
 
   /*
    **
@@ -15,7 +17,11 @@ export const Unassigned_Chat_Fetch_Call = async () => {
     const response = await fetch(
       API_URL_STAGING + '/message/get-unassigned-chat',
       {
-        method: 'GET',
+        method: 'get',
+        headers: {
+          Authorization:
+            `Bearer ${token}`,
+        },
       },
     );
 
@@ -28,6 +34,7 @@ export const Unassigned_Chat_Fetch_Call = async () => {
      */
 
     const data = response.json();
+    console.log('Chat Body Data data: ',JSON.stringify(response));
 
     /*
      **

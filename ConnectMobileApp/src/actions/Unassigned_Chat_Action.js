@@ -43,8 +43,8 @@ import { CONSTANT } from "../utility/Constant";
 ** 
 */
 
-const Unassigned_Chat= () => ({
-    type: CONSTANT.Unassigned_Chat_Data
+const Unassigned_Chat= (token) => ({
+    type: CONSTANT.Unassigned_Chat_Data,token
 })
 
 

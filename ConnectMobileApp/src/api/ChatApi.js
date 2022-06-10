@@ -47,6 +47,8 @@ import {useSelector} from 'react-redux';
 */
 
 const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => {
+    console.log('Chat Body Data otpResponce:');
+
     const otpResponce = useSelector(store => store.OtpResponceData);
 
     /*
@@ -74,10 +76,9 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     var api_url = API_URL_STAGING + '/message/message-list';
 
     var headers = {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU0NDQ0MDksImRhdGEiOnsiaWQiOjU1NywibW9iaWxlX251bWJlciI6IjMwMTExMTExMTEiLCJuYW1lIjoiU3VraGJpciBTaW5naCB0aGUgIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MH0sImlhdCI6MTY1NDgzOTYwOX0.BBYO_gCm9gO9vdNmgxXmYLUOBiFsaS7748adUbSI-0s',
-    };
+        Authorization:
+          `Bearer ${otpResponce.data.token}`,
+      }
 
     const response = await fetch(api_url, {
         method: 'POST',

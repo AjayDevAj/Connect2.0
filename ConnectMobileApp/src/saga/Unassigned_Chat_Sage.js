@@ -47,10 +47,10 @@ import { Unassigned_Chat_Fetch_Call} from '../api/Unassigned_Chat'
 ** 
 */
 
-function* handleUnassigned_ChatDataResponse() {
+function* handleUnassigned_ChatDataResponse(action) {
     try {
-        console.log('handleResendOtpDataResponse Response')
-        const data = yield call(Unassigned_Chat_Fetch_Call)
+        // console.log('handleResendOtpDataResponse Response')
+        const data = yield call(Unassigned_Chat_Fetch_Call,action.token)
         yield put(getResponse_Unassigned_Chat(data))
     }
      catch(errors) {
@@ -69,6 +69,5 @@ function* handleUnassigned_ChatDataResponse() {
 
 
 export default function* Unassigned_Chat_Data_Saga() {
-    console.log('OTP Screen Saga Watcher Resend')
     yield takeEvery(CONSTANT.Unassigned_Chat_Data, handleUnassigned_ChatDataResponse)
 }
