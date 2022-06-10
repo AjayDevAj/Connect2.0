@@ -93,8 +93,8 @@ const Stack = createNativeStackNavigator();
  const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RouteTabBar">
-      {/* <Stack.Navigator initialRouteName="OnBoarding"> */}
+      {/* <Stack.Navigator initialRouteName="RouteTabBar"> */}
+      <Stack.Navigator initialRouteName="OnBoarding">
         <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
          <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
