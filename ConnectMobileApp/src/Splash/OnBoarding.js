@@ -49,6 +49,8 @@ import SkipButton from './SkipButton';
 import navigationString from '../utility/NavigationString';
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 /*
 **
 *
@@ -75,6 +77,7 @@ const OnBoarding = ({ navigation }) => {
             slidesRef.current.scrollToIndex({ index: currentIndex + 1});
         } else {
             try {
+              AsyncStorage.setItem('@viewedOnboarding', 'true');
                 // navigate to login screen
                 navigation.navigate(navigationString.LOGIN)
             } catch (err) {
