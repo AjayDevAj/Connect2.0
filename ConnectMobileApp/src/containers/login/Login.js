@@ -92,7 +92,7 @@ const Login = ({navigation}) => {
   }, [loginResponce]);
 
   //Check for the Phone Number TextInput
-  const checkTextInput = async () => {
+   checkTextInput = async () => {
     console.log('checkTextInput');
     if (!textInputPhoneNum.trim()) {
       alert('Please Enter Mobile Number');
