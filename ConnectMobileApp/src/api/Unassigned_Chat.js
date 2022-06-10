@@ -1,7 +1,8 @@
 // /message/get-unassigned-chat
 import {API_URL_DEV, API_URL_STAGING} from '../utility/Config_File';
 
-export const Unassigned_Chat = async () => {
+export const Unassigned_Chat_Fetch_Call = async () => {
+
   /*
    **
    *
@@ -9,7 +10,8 @@ export const Unassigned_Chat = async () => {
    *
    **
    */
-  try {
+  // try {
+
     const response = await fetch(
       API_URL_STAGING + '/message/get-unassigned-chat',
       {
@@ -26,7 +28,6 @@ export const Unassigned_Chat = async () => {
      */
 
     const data = response.json();
-    console.log('mobile : ', data);
 
     /*
      **
@@ -41,7 +42,7 @@ export const Unassigned_Chat = async () => {
     }
     return data;
 
-  } catch (error) {
-    console.error(error);
-  }
+  // } catch (error) {
+  //   console.error(error);
+  // }
 };

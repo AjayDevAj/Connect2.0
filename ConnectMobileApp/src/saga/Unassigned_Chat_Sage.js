@@ -33,7 +33,7 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { CONSTANT } from '../utility/Constant'
 import { getError_Unassigned_Chat, getResponse_Unassigned_Chat } from '../actions/Unassigned_Chat_Action'
-import { Unassigned_Chat } from '../api/Unassigned_Chat'
+import { Unassigned_Chat_Fetch_Call} from '../api/Unassigned_Chat'
 
 
 
@@ -47,10 +47,10 @@ import { Unassigned_Chat } from '../api/Unassigned_Chat'
 ** 
 */
 
-function* handleResendOtpDataResponse() {
+function* handleUnassigned_ChatDataResponse() {
     try {
-        const data = yield call(Unassigned_Chat)
-        console.log('OTP Screen Resend Response', data)
+        console.log('handleResendOtpDataResponse Response')
+        const data = yield call(Unassigned_Chat_Fetch_Call)
         yield put(getResponse_Unassigned_Chat(data))
     }
      catch(errors) {
@@ -68,7 +68,7 @@ function* handleResendOtpDataResponse() {
 */
 
 
-export default function* ResendOtpDataWatcherSaga() {
+export default function* Unassigned_Chat_Data_Saga() {
     console.log('OTP Screen Saga Watcher Resend')
-    yield takeEvery(CONSTANT.Unassigned_Chat_Data, handleResendOtpDataResponse)
+    yield takeEvery(CONSTANT.Unassigned_Chat_Data, handleUnassigned_ChatDataResponse)
 }

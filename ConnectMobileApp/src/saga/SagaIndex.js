@@ -35,6 +35,7 @@ import LoginDataWatcherSaga from './LoginSaga';
 import OtpDataWatcherSaga from './OtpScreenSaga';
 import ResendOtpDataWatcherSaga from './ResendOTP';
 import ChatDataWatcherSaga from './ChatSaga';
+import Unassigned_Chat_Data_Saga from './Unassigned_Chat_Sage'
 
 
 export default function* rootSaga() {
@@ -42,6 +43,7 @@ export default function* rootSaga() {
         LoginDataWatcherSaga(),
         OtpDataWatcherSaga(),
         ResendOtpDataWatcherSaga(),
-        ChatDataWatcherSaga()
+        ChatDataWatcherSaga(),
+        Unassigned_Chat_Data_Saga()
     ]);
 }
