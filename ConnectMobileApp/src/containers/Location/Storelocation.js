@@ -17,9 +17,9 @@ export default Storelocation = ({navigation}) => {
   // const [responceData, setData] = useState([]);
   // console.log('Store Location old  :::==>>> ', responceData);
 
-  useEffect(() => {
-    console.log('Store Location Resonce js :- ', StoreLResponce);
-  }, [StoreLResponce]);
+  // useEffect(() => {
+  //   console.log('Store Location Resonce js :- ', StoreLResponce);
+  // }, [StoreLResponce]);
 
   useEffect(() => {dispatch(loadStoreLocationData())});
   const [panelProps, setPanelProps] = useState({
