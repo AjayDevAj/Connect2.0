@@ -31,8 +31,20 @@
 */
 
 import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
+import { CONSTANT } from '../utility/Constant';
 
 const getLogin = async (mobileNumber) => {
+
+
+    /*
+    **
+    *
+    ** constant defined to get otp from an api
+    *
+    ** 
+    */
+
+    
 
     const bodyData = new FormData(); 
     bodyData.append('phonenumber',mobileNumber)

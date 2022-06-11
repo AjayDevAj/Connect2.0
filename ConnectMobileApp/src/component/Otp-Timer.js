@@ -39,6 +39,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import fontFamily from '../utility/Font-Declarations';
+import OtpErrorState from './OtpErrorState';
+import {useRoute} from '@react-navigation/native';
+import {loadLoginData} from '../actions/LoginAction';
+import {useDispatch, useSelector} from 'react-redux';
 
 /*
  **
@@ -50,7 +54,19 @@ import fontFamily from '../utility/Font-Declarations';
  */
 
 const OtpTimerHandler = ({Resend, StopTimer}) => {
-  const [counter, setCounter] = useState(30);
+
+  const dispatch = useDispatch();
+  const route = useRoute();
+  const mobileNumber = route.params.mobile_Number;
+
+  const resendOtpResponce = useSelector(store => store.OtpResponceData);
+
+  const reSendOTP = () => {
+    dispatch(loadOtpData_Resend(mobileNumber));
+    console.log('hi')
+  };
+
+  const [counter, setCounter] = useState(20);
   useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -69,18 +85,21 @@ const OtpTimerHandler = ({Resend, StopTimer}) => {
           Time Left : {counter} sec
         </Text>
       ) : (
-        <Text
-          style={{
-            color: 'rgba(95, 99, 104, 1)',
-            fontSize: 12,
-            fontFamily: fontFamily.Poppins,
-            // marginBottom:10
-          }}>
-          Didn’t Received?{' '}
-          <TouchableOpacity onPress={Resend}>
-            <Text style={styles.ResentButtonText}>Resend</Text>
-          </TouchableOpacity>
-        </Text>
+        // <Text
+        //   style={{
+        //     color: 'rgba(95, 99, 104, 1)',
+        //     fontSize: 12,
+        //     fontFamily: fontFamily.Poppins,
+        //     // marginBottom:10
+        //   }}>
+        //   Didn’t Received?{' '}
+        //   <TouchableOpacity onPress={Resend}>
+        //     <Text style={styles.ResentButtonText}>Resend</Text>
+        //   </TouchableOpacity>
+        // </Text>
+
+           <OtpErrorState Resend={reSendOTP}/>
+         
       )}
     </View>
   );

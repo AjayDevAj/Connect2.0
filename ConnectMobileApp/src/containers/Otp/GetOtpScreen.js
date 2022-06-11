@@ -44,7 +44,7 @@ import EditPencilIcon from '../../component/EditPencilIcon';
 import OtpTimerHandler from '../../component/Otp-Timer';
 import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
-//import OTPTextInput from 'react-native-otp-textinput';
+
 import OTPTextInput from '../../component/Otp-Form'
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
@@ -57,6 +57,8 @@ import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass'
 import { otpResponse_Storage_Key } from "../../utility/Constant";
 
+
+import { CONSTANT } from '../../utility/Constant';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -112,6 +114,7 @@ const GetOtpScreen = ({navigation}) => {
 
   const reSendOTP = () => {
     dispatch(loadOtpData_Resend(mobileNumber));
+    
   };
 
   const OtpErrorHandler = () => {

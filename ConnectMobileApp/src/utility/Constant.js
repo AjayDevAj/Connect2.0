@@ -34,6 +34,7 @@ const CONSTANT = {
     Resend_OTP_DATA_ERROR: 'Resend_OTP_DATA_ERROR',
     Resend_OTP_DATA_SUCCESS: 'Resend_OTP_DATA_SUCCESS',
 
+
     CHAT_DATA: 'CHAT_DATA',
     CHAT_DATA_ERROR: 'CHAT_DATA_ERROR',
     CHAT_DATA_SUCCESS: 'CHAT_DATA_SUCCESS',
@@ -46,6 +47,10 @@ const CONSTANT = {
     Unassigned_Chat_Data: 'Unassigned_Chat_DATA',
     Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
     Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
+
+    
+
+
 }
 
 export { CONSTANT }
