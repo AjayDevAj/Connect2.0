@@ -34,6 +34,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducers from '../reducers/LoginReducer';
 import createSagaMiddleware from '@redux-saga/core';
 import rootSaga from '../saga/SagaIndex';
+import logger from 'redux-logger'
+
 
 const configureStore = () => {
 
@@ -41,7 +43,9 @@ const configureStore = () => {
     const store = createStore(
         rootReducers,
         compose(
-            applyMiddleware(sagaMiddleware)
+            applyMiddleware(sagaMiddleware),
+            applyMiddleware(logger)
+
         )
     )
     sagaMiddleware.run(rootSaga)
