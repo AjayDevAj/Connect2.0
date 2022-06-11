@@ -15,6 +15,8 @@ export default Storelocation = ({ navigation }) => {
   const dispatch = useDispatch();
   const StoreLocationResonce = useSelector(store => store.StoreLocationDataResponse);
   console.log("Store Location Resonce =====>>> ", StoreLocationResonce);
+  const LocationResonce = useSelector(store => store.StoreLocationDataResponse);
+  const otpResponce = useSelector(store => store.OtpResponceData);
 
   const [responceData, setData] = useState([]);
   console.log("Store Location :::==>>> ", responceData);
@@ -52,6 +54,18 @@ export default Storelocation = ({ navigation }) => {
     getData()
 
   }, [StoreLocationResonce]);
+    // console.log('Storelocation otpResponce',getOtpResponse("otp_response_Key"))
+  //   fetch('https://test-chat-1.starify.co/user/auth/get-locations', {
+  //     method: 'get',
+  //     headers: {
+  //       Authorization:
+  //         `Bearer ${otpResponce.data.token}`,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(d => setData([...responceData, d]))
+  //     .catch(error => console.error(error));
+  // }, [LocationResonce]);
 
 
   const [panelProps, setPanelProps] = useState({

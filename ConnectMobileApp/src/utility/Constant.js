@@ -42,6 +42,12 @@ const CONSTANT = {
     STORE_LOCATION_ERROR: 'STORE_LOCATION_ERROR',
     STORE_LOCATION_SUCCESS: 'STORE_LOCATION_SUCCESS',
 
+
+    Unassigned_Chat_Data: 'Unassigned_Chat_DATA',
+    Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
+    Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 }
 
 export { CONSTANT }
+
+export const otpResponse_Storage_Key = "otp_response_Key";

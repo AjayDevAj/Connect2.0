@@ -37,6 +37,8 @@ import ResendOtpDataWatcherSaga from './ResendOTP';
 import ChatDataWatcherSaga from './ChatSaga';
 import StoreLocationDataWatcherSaga from './StoreLocationSaga';
 
+import Unassigned_Chat_Data_Saga from './Unassigned_Chat_Sage'
+
 
 export default function* rootSaga() {
     yield all([
@@ -45,5 +47,6 @@ export default function* rootSaga() {
         ResendOtpDataWatcherSaga(),
         ChatDataWatcherSaga(),
         StoreLocationDataWatcherSaga(),
+        Unassigned_Chat_Data_Saga()
     ]);
 }

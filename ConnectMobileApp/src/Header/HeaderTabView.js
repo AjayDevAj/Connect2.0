@@ -31,22 +31,29 @@
 
 import React, { useState } from 'react';
 import { Text, View, useWindowDimensions } from 'react-native';
+import { TabView, TabBar } from 'react-native-tab-view';
 
 import tabViewStyles from './styles/tabViewStylesheet';
 
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import ChatList from '../Chat/ChatList';
 
-const HeaderTabView = ({ chatTabsTitleData, chatTabs }) => {
-
+const HeaderTabView = ({ chatTabsTitleData }) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
   const [routes] = useState(chatTabsTitleData);
 
-  const renderScene = SceneMap({
-    first: chatTabs[0]['component'],
-    second: chatTabs[1]['component'],
-    third: chatTabs[2]['component'],
-  });
+  const renderScene = ({ route }) => {
+    switch (route.key) {
+      case 'first':
+        return <ChatList type="open" />;
+      case 'second':
+        return <ChatList type="closed" />;
+      case 'third':
+        return <ChatList type="assigned" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <TabView
@@ -59,7 +66,7 @@ const HeaderTabView = ({ chatTabsTitleData, chatTabs }) => {
         <TabBar {...props} 
           indicatorStyle={ tabViewStyles.tabViewIndicator }
           pressColor={{ color: '#F7FCFF'}}
-          renderLabel={({route, focused, color}) => (
+          renderLabel={({route, focused }) => (
             <View>
               <Text style={ [focused ? tabViewStyles.activeTabTextColor : tabViewStyles.tabTextColor, tabViewStyles.tabText ]}>{route.title}</Text>
               {route.no_of_chat > 0 ? <Text style={ tabViewStyles.tabNoOfChat }>{route.no_of_chat}</Text> : <Text></Text>}

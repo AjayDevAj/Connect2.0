@@ -61,18 +61,31 @@
 ** 
 */
 
-import * as React from 'react';
+import React,{useEffect,useRef} from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
 import Count_Badge from '../component/Count_Badge';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Chat from '../Chat/Chat';
+// import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
 function HomeScreen() {
+  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+
+  const Incoming_Chat_Socket_Subscribe = () => {
+    ws.onopen = () => {
+        console.log("uWebsocket Connected to the server")
+        ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 52}));
+      };
+}
+  // const testSocket = () => {
+    
+  // }
+  useEffect(() => {
+    Incoming_Chat_Socket_Subscribe()
+  })
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dashboard</Text>

@@ -17,4 +17,5 @@ const CheckInterNet = () => {
             </View>    
     )
 }
+
 export default CheckInterNet;
