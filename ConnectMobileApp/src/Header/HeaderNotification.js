@@ -30,18 +30,20 @@
 */
 
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View ,TouchableOpacity} from 'react-native';
 
 import notificationStyles from './styles/NotificationStylesheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const HeaderNotification = ({ left, message, right }) => {
+const HeaderNotification = ({ left, message, right,openAllChat }) => {
     return (
-        <View style={ notificationStyles.notificationMainContainer }>
+<TouchableOpacity style={notificationStyles.notificationMainContainer } onPress={openAllChat}>
+        <View>
             <Icon name={left} size={20} style={ notificationStyles.notificationLeftIcon } />
             <Text style={ notificationStyles.notificationText }>{message}</Text>
             <Icon name={right} size={18} style={ notificationStyles.notificationRightIcon } />
         </View>
+</TouchableOpacity>
     );
 }
 

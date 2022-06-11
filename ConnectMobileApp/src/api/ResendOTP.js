@@ -29,7 +29,7 @@
 *
 ** 
 */
-import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
+import {PI_URL_STAGING} from '../utility/Config_File'
 
 
 

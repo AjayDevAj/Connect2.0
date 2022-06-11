@@ -23,15 +23,12 @@
 
 import React, {useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
-
-
-import chatStyles from './styles/ChatStylesheet';
-
+import chatStyles from './styles/AllChatChatStylesheet';
 import Card from '../Card/Card';
 import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
     
-const ChatList = ({data}) => {
+const AllChatList = ({data}) => {
     return (
         <View style={ chatStyles.chatListMainContainer }>
             <FlatList 
@@ -49,5 +46,5 @@ const ChatList = ({data}) => {
     );
 }
 
-export default ChatList;
+export default AllChatList;
 

@@ -29,9 +29,9 @@
 ** 
 */
 
-import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File'
-import {useSelector} from 'react-redux';
-
+import {API_URL_STAGING } from '../utility/Config_File'
+import {getOtpResponse} from '../utility/StorageClass'
+import {otpResponse_Storage_Key} from '../utility/Constant'
 
 
 /*
@@ -47,9 +47,7 @@ import {useSelector} from 'react-redux';
 */
 
 const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => {
-    console.log('Chat Body Data otpResponce:');
-
-    const otpResponce = useSelector(store => store.OtpResponceData);
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     /*
     **
@@ -60,30 +58,41 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     */
 
     // const bodyData = new FormData(); 
-    const bodyRawData = {
-        "chat_status": chat_status,
-        "is_important": is_important,
-        "location_id": location_id,
-        "order_by": order_by,
-        "other_chat": other_chat,
-        "pagination": pagination,
-        "unread": unread,
-        "user_id": user_id
-    };
+    // const bodyRawData = {
+    //     "chat_status": chat_status,
+    //     "is_important": is_important,
+    //     "location_id": location_id,
+    //     "order_by": order_by,
+    //     "other_chat": other_chat,
+    //     "pagination": pagination,
+    //     "unread": unread,
+    //     "user_id": token_Value.user.id
+    // };
 
-    console.log('Chat Body Data otpResponce: ',otpResponce);
+    const bodyRawData = new FormData(); 
+    bodyRawData.append('chat_status',chat_status)
+    bodyRawData.append('is_important',is_important)
+    // bodyRawData.append('location_id',location_id)
+    bodyRawData.append('order_by',order_by)
+    bodyRawData.append('other_chat',other_chat)
+    bodyRawData.append('pagination',pagination)
+    bodyRawData.append('unread',unread)
+    bodyRawData.append('user_id',token_Value.user.id)
+
+    console.log('Chat Message List Response : Api Call pre',token_Value.token,token_Value.user.id);
+
 
     var api_url = API_URL_STAGING + '/message/message-list';
 
     var headers = {
         Authorization:
-          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU0NjkyNjEsImRhdGEiOnsiaWQiOjU1NywibW9iaWxlX251bWJlciI6IjMwMTExMTExMTEiLCJuYW1lIjoiU3VraGJpciBTaW5naCB0aGUgIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MH0sImlhdCI6MTY1NDg2NDQ2MX0.RrSEixe6ypsLbm_W1iz7biCFQxmqFpdFz7Sh8ijojqg`,
+        `Bearer ${token_Value.token}`,
       }
 
     const response = await fetch(api_url, {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(bodyRawData)
+        body: bodyRawData
     });
     
     /*
@@ -95,7 +104,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     */
 
     const data = response.json();
-    // console.log('Chat Message List Response : ',data);
+    // console.log('Chat Message List Response Abhishek: ',JSON.stringify(data));
 
     /*
     **
@@ -104,22 +113,22 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-   console.log('response.status',response.status)
-    switch (response.status) {
-        case response.status > 400 :
-            throw new Error(data.errors)
+//    console.log('response.status',response.status)
+//     switch (response.status) {
+//         case response.status > 400 :
+//             throw new Error(data.errors)
 
-            break
-        case 204 :
-            throw new Error("NO Data")
-            break
+//             break
+//         case 204 :
+//             throw new Error("NO Data")
+//             break
 
-        default:break
+//         default:break
+//     }
+    if (response.status > 400) {
+        // console.log('Chat Message Error : '+ data.errors);
+        throw new Error(data.errors)
     }
-    // if (response.status > 400) {
-    //     // console.log('Chat Message Error : '+ data.errors);
-    //     throw new Error(data.errors)
-    // }
 
     return data;
 }

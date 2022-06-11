@@ -29,7 +29,7 @@
 ** 
 */
 
-import { API_URL_DEV, API_URL_STAGING } from '../utility/Config_File';
+import { API_URL_STAGING } from '../utility/Config_File';
 import { DeviceInfo } from 'react-native-device-info';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 

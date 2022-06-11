@@ -30,7 +30,7 @@
 ** 
 */
 
-import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
+import {API_URL_STAGING} from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 
 const getLogin = async (mobileNumber) => {

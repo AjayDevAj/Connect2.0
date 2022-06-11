@@ -1,5 +1,5 @@
 // /message/get-unassigned-chat
-import {API_URL_DEV, API_URL_STAGING} from '../utility/Config_File';
+import { API_URL_STAGING} from '../utility/Config_File';
 
 
 export const Unassigned_Chat_Fetch_Call = async (token) => {

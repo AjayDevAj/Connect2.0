@@ -40,7 +40,6 @@ const chatStyles = StyleSheet.create({
     },
     chatListMainContainer: {
         backgroundColor: '#fff', 
-        top: 50,
         flex:1
     },
     chatSmsButtonContainer: {

@@ -25,17 +25,16 @@ import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import HeaderNotification from '../Header/HeaderNotification';
-import chatStyles from './styles/ChatStylesheet';
+import chatStyles from './styles/AllChatChatStylesheet';
 import {SegmentComponent} from '../component/SegmentComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
-import ChatList from '../Chat/ChatList';
-import navigationString from '../utility/NavigationString';
+import ChatList from '../AllChat/AllChatList';
+import { useIsFocused } from '@react-navigation/native';
 
-const Chat = ({navigation}) => {
+const AllChat = ({navigation}) => {
   const menuHandler = () => {
-    console.log('Menu Handler');
-    alert('Menu Handler');
+    navigation.goBack()
   };
 
   const searchHandler = () => {
@@ -47,14 +46,17 @@ const Chat = ({navigation}) => {
   };
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
+  const isFocused = useIsFocused();
 
-  // useEffect(() => {
-  //   dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
-  // });
-  // useEffect(() => {
-  //   console.log('chatResponseData Abhishek', chatResponseData);
+  useEffect(() => {
+    if (isFocused) {
+    dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 1, 557));
+    }
+  },[isFocused]);
+  useEffect(() => {
+    console.log('chatResponseData AllChat Abhishek', chatResponseData);
    
-  // }, [chatResponseData]);
+  }, [chatResponseData]);
 
   return (
     <View style={chatStyles.chatMainContainer}>
@@ -62,29 +64,15 @@ const Chat = ({navigation}) => {
         firstIcon="menu"
         secondIcon="search"
         thirdIcon="filter-list"
-        name="My Chats"
+        name="All Chats"
         menuHandler={menuHandler}
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
       <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
-      <ChatList data={[]}/>
-      {/* {chatResponseData.data != undefined &&
-        chatResponseData.data.otherMessageCount != undefined && ( */}
-          <HeaderNotification
-            left="people"
-            // message={`${chatResponseData.data.otherMessageCount} Open chats with team`}
-            message={`Open chats with team`}
-            right="chevron-right"
-            openAllChat={() =>
-                navigation.navigate(navigationString.AllChat)
-                // console.log('check gkp',navigation)
-            }
-          />
-        {/* ) */}
-        {/* } */}
+      {/* <ChatList data={[]}/> */}
     </View>
   );
 };
 
-export default Chat;
+export default AllChat;

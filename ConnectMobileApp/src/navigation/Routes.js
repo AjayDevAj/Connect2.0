@@ -46,7 +46,7 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import AllChat from '../AllChat/AllChat';
 /*
 **
 *
@@ -129,6 +129,8 @@ const Stack = createNativeStackNavigator();
             }}
         />
         <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
+        <Stack.Screen name={navigationString.AllChat} component = {AllChat} 
+        options={{headerShown: false}} />
       </Stack.Navigator>
       <Incoming_Chat />
 

@@ -27,7 +27,8 @@ export default {
     OnBoarding:"OnBoarding",
     Location:"Storelocation",
     RouteTabBar:"RouteTabBar",
-
+    AllChat: "AllChat",
+    
 
 /*
 **
