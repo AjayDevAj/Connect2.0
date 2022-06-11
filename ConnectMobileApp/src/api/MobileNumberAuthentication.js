@@ -31,6 +31,7 @@
 */
 
 import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
+import { CONSTANT } from '../utility/Constant';
 
 
 
@@ -56,6 +57,7 @@ const getLogin = async (mobileNumber) => {
     ** 
     */
 
+    
     const bodyData = new FormData(); 
     bodyData.append('phonenumber',mobileNumber)
     const response = await fetch(API_URL_STAGING + '/user/auth/getOTP', {
