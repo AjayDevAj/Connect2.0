@@ -72,17 +72,23 @@ const GetOtpScreen = ({navigation}) => {
   });
   const [disbaleval, setVisbal] = useState(true);
   const [timerEnable, setTimerEnable] = useState(false);
+   const[isErrorstate,setisErrorState]=useState(false)
 
 //let fontsize = Dimensions.get('window').height
 
   useEffect(() => {
 
-  
+   
+     console.log('otp error code for timer in getotpsreen.js',isErrorstate)
+    
     if (otpResponce.code != null) {
       navigation.navigate(NavigationString.Location);
     }
     if (otpResponce != '') {
       if (otpResponce.data.code == 400) {
+       
+        setisErrorState(true)
+       
         setOtptextColor({
           textcolor: 'rgba(164, 34, 22, 1)',
           tintColor: 'rgba(164, 34, 22, 1)',
@@ -90,6 +96,7 @@ const GetOtpScreen = ({navigation}) => {
           backgroundColor: 'rgba(255, 255, 255, 1)',
         });
       }
+     
     }
   }, [otpResponce]);
 
@@ -109,15 +116,16 @@ const GetOtpScreen = ({navigation}) => {
     
   };
 
-  const OtpErrorHandler = () => {
-    if (
-      otpResponce != undefined &&
-      otpResponce.data != undefined &&
-      otpResponce.data.code != 200
-    ) {
-      return (<OtpErrorState />);
-    }
-  };
+  /** depricated function */
+  // const OtpErrorHandler = () => {
+  //   if (
+  //     otpResponce != undefined &&
+  //     otpResponce.data != undefined &&
+  //     otpResponce.data.code != 200
+  //   ) {
+  //     return (<OtpErrorState />);
+  //   }
+  // };
 
   return (
     <View style={{flex: 1}}>
@@ -182,9 +190,12 @@ const GetOtpScreen = ({navigation}) => {
                   }
                 }}
               />
-              {OtpErrorHandler()}
+              {/* {OtpErrorHandler()} */}
               <View style={styles.OtpTimerView}>
-                <OtpTimerHandler Resend={test => reSendOTP()} />
+
+                <OtpTimerHandler isErrorstate={isErrorstate}/>
+
+                {/* <OtpTimerHandler Resend={test => reSendOTP()}/> */}
               </View>
 
               <TouchableOpacity

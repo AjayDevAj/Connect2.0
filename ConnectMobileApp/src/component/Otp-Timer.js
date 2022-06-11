@@ -49,11 +49,12 @@ import {useDispatch, useSelector} from 'react-redux';
  *
  ** It holds the no. of second an OTP is valid for
  ** This component handles for approx 60 sec
- *
+ **
  **
  */
 
-const OtpTimerHandler = ({Resend, StopTimer}) => {
+const OtpTimerHandler = ({Resend, StopTimer,isErrorstate}) => {
+  console.log('error code from otp scren',isErrorstate)
 
   const dispatch = useDispatch();
   const route = useRoute();
@@ -63,7 +64,8 @@ const OtpTimerHandler = ({Resend, StopTimer}) => {
 
   const reSendOTP = () => {
     dispatch(loadOtpData_Resend(mobileNumber));
-    console.log('hi')
+    console.log('resendotp',mobileNumber)
+    
   };
 
   const [counter, setCounter] = useState(20);
@@ -75,7 +77,8 @@ const OtpTimerHandler = ({Resend, StopTimer}) => {
 
   return (
     <View>
-      {counter > 0 ? (
+      {counter > 0 && isErrorstate ==false ? (
+       
         <Text
           style={{
             color: 'rgba(95, 99, 104, 1)',
@@ -97,10 +100,15 @@ const OtpTimerHandler = ({Resend, StopTimer}) => {
         //     <Text style={styles.ResentButtonText}>Resend</Text>
         //   </TouchableOpacity>
         // </Text>
+        <>
+{
+
 
            <OtpErrorState Resend={reSendOTP}/>
-         
+} 
+</>
       )}
+
     </View>
   );
 };
