@@ -58,41 +58,30 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     */
 
     // const bodyData = new FormData(); 
-    // const bodyRawData = {
-    //     "chat_status": chat_status,
-    //     "is_important": is_important,
-    //     "location_id": location_id,
-    //     "order_by": order_by,
-    //     "other_chat": other_chat,
-    //     "pagination": pagination,
-    //     "unread": unread,
-    //     "user_id": token_Value.user.id
-    // };
-
-    const bodyRawData = new FormData(); 
-    bodyRawData.append('chat_status',chat_status)
-    bodyRawData.append('is_important',is_important)
-    // bodyRawData.append('location_id',location_id)
-    bodyRawData.append('order_by',order_by)
-    bodyRawData.append('other_chat',other_chat)
-    bodyRawData.append('pagination',pagination)
-    bodyRawData.append('unread',unread)
-    bodyRawData.append('user_id',token_Value.user.id)
-
-    console.log('Chat Message List Response : Api Call pre',token_Value.token,token_Value.user.id);
-
+    const bodyRawData = {
+        "chat_status": chat_status,
+        "is_important": is_important,
+        "location_id": location_id,
+        "order_by": order_by,
+        "other_chat": other_chat,
+        "pagination": pagination,
+        "unread": unread,
+        "user_id": token_Value.user.id,
+    };
 
     var api_url = API_URL_STAGING + '/message/message-list';
 
     var headers = {
         Authorization:
         `Bearer ${token_Value.token}`,
+        'Content-Type': 'application/json',
+
       }
 
     const response = await fetch(api_url, {
         method: 'POST',
         headers: headers,
-        body: bodyRawData
+        body: JSON.stringify(bodyRawData),
     });
     
     /*
@@ -104,6 +93,8 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     */
 
     const data = response.json();
+    console.log('Chat Message List Response : Api Call response',data);
+
     // console.log('Chat Message List Response Abhishek: ',JSON.stringify(data));
 
     /*

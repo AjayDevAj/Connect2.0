@@ -21,7 +21,7 @@
  **
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import {View} from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import HeaderNotification from '../Header/HeaderNotification';
@@ -31,8 +31,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
+import {useIsFocused} from '@react-navigation/native';
 
 const Chat = ({navigation}) => {
+  const isFocused = useIsFocused();
+  const [reloadFlatlist,setReloadFlatlist] = useState(false)
+
   const menuHandler = () => {
     console.log('Menu Handler');
     alert('Menu Handler');
@@ -48,13 +52,16 @@ const Chat = ({navigation}) => {
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
 
-  // useEffect(() => {
-  //   dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
-  // });
-  // useEffect(() => {
-  //   console.log('chatResponseData Abhishek', chatResponseData);
-   
-  // }, [chatResponseData]);
+  useEffect(() => {
+    if (isFocused) {
+      console.log('chatResponseData API check')
+      dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
+    }
+  },[isFocused]);
+  useEffect(() => {  
+    // setReloadFlatlist(true)
+    console.log('chatResponseData response check')
+  }, [chatResponseData]);
 
   return (
     <View style={chatStyles.chatMainContainer}>
@@ -68,21 +75,22 @@ const Chat = ({navigation}) => {
         filterHandler={filterHandler}
       />
       <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
-      <ChatList data={[]}/>
-      {/* {chatResponseData.data != undefined &&
-        chatResponseData.data.otherMessageCount != undefined && ( */}
+      {chatResponseData.data != undefined &&
+        chatResponseData.data.otherMessageCount != undefined && (
           <HeaderNotification
             left="people"
-            // message={`${chatResponseData.data.otherMessageCount} Open chats with team`}
-            message={`Open chats with team`}
+            message={`${chatResponseData.data.otherMessageCount} Open chats with team`}
             right="chevron-right"
             openAllChat={() =>
                 navigation.navigate(navigationString.AllChat)
                 // console.log('check gkp',navigation)
             }
           />
-        {/* ) */}
-        {/* } */}
+        )}
+       
+       {reloadFlatlist &&
+        <ChatList data={chatResponseData.data.result}/>
+      }
     </View>
   );
 };

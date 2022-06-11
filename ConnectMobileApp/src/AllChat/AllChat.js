@@ -29,12 +29,12 @@ import chatStyles from './styles/AllChatChatStylesheet';
 import {SegmentComponent} from '../component/SegmentComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
-import ChatList from '../AllChat/AllChatList';
-import { useIsFocused } from '@react-navigation/native';
+import ChatList from '../Chat/ChatList';
+import {useIsFocused} from '@react-navigation/native';
 
 const AllChat = ({navigation}) => {
   const menuHandler = () => {
-    navigation.goBack()
+    navigation.goBack();
   };
 
   const searchHandler = () => {
@@ -50,18 +50,15 @@ const AllChat = ({navigation}) => {
 
   useEffect(() => {
     if (isFocused) {
-    dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 1, 557));
+      dispatch(loadChatData(0, null, 0, 'DESC', 'open', '1', 1, 557));
     }
-  },[isFocused]);
-  useEffect(() => {
-    console.log('chatResponseData AllChat Abhishek', chatResponseData);
-   
-  }, [chatResponseData]);
+  }, [isFocused]);
+  useEffect(() => {}, [chatResponseData]);
 
   return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader
-        firstIcon="menu"
+        firstIcon="arrow-back"
         secondIcon="search"
         thirdIcon="filter-list"
         name="All Chats"
@@ -70,7 +67,11 @@ const AllChat = ({navigation}) => {
         filterHandler={filterHandler}
       />
       <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
-      {/* <ChatList data={[]}/> */}
+      {
+        (typeof(chatResponseData.data.result ) !== 'undefined' && value != chatResponseData.data.result )  &&
+        <ChatList data={chatResponseData.data.result}/>
+      }
+      
     </View>
   );
 };
