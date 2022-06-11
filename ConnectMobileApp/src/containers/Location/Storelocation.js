@@ -11,19 +11,17 @@ import {loadStoreLocationData} from '../../actions/StoreLocationAction';
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const SLResponce = useSelector(store => store.StoreLocationDataResponse);
-  //const {StoreLocationResonce} = useSelector(store => store.StoreLocationDataResponse);
-  console.log('Store Location new  :::==>>', SLResponce);
+  const StoreLResponce = useSelector(store => store.StoreLocationDataResponse);
+  console.log('Store Location new  :::==>>', StoreLResponce);
 
-
-  const [responceData, setData] = useState([]);
-  console.log('Store Location old  :::==>>> ', responceData);
+  // const [responceData, setData] = useState([]);
+  // console.log('Store Location old  :::==>>> ', responceData);
 
   useEffect(() => {
-    console.log('Store Location Resonce js :- ', SLResponce);
-  }, [SLResponce]);
+    console.log('Store Location Resonce js :- ', StoreLResponce);
+  }, [StoreLResponce]);
 
-  useEffect(() => dispatch(loadStoreLocationData()));
+  useEffect(() => {dispatch(loadStoreLocationData())});
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
@@ -139,12 +137,13 @@ export default Storelocation = ({navigation}) => {
           isActive={isPanelActive}>
         
           <ScrollView>
-            {responceData.length > 0 && responceData.map(item => {
+            {StoreLResponce.length > 0 && StoreLResponce.map(item => {
               return (
                 <View style={{}}>
                   <Text
                     style={{
-                      color: '#000000',
+                      //color: '#000000',
+                      color: 'red',
                       opacity: 100,
                       fontSize: 18,
                       fontWeight: 'bold',
