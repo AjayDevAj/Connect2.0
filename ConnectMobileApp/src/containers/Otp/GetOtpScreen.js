@@ -56,9 +56,8 @@ import CheckInterNet from '../../utility/CheckInterNet';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass'
 import { otpResponse_Storage_Key } from "../../utility/Constant";
-
-
 import { CONSTANT } from '../../utility/Constant';
+import Loader from '../../utility/Loader';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -100,7 +99,7 @@ const GetOtpScreen = ({navigation}) => {
           backgroundColor: 'rgba(255, 255, 255, 1)',
         });
       }
-     
+    
     }
   }, [otpResponce]);
 
@@ -119,10 +118,12 @@ const GetOtpScreen = ({navigation}) => {
 
   };
 
-  const reSendOTP = () => {
-    dispatch(loadOtpData_Resend(mobileNumber));
+  // const reSendOTP = () => {
+  //  // dispatch(loadOtpData_Resend(mobileNumber));
+  
+  //   Loader(true)
     
-  };
+  // };
 
   /** depricated function */
   // const OtpErrorHandler = () => {
@@ -203,6 +204,7 @@ const GetOtpScreen = ({navigation}) => {
               <View style={styles.OtpTimerView}>
 
                 <OtpTimerHandler isErrorstate={isErrorstate}/>
+                
 
                 {/* <OtpTimerHandler Resend={test => reSendOTP()}/> */}
               </View>

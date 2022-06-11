@@ -41,7 +41,10 @@ import {
 import fontFamily from '../utility/Font-Declarations';
 import OtpErrorState from './OtpErrorState';
 import {useRoute} from '@react-navigation/native';
-import {loadLoginData} from '../actions/LoginAction';
+import Loader from '../utility/Loader';
+import {loadOtpData_Resend} from '../actions/ResendOTPAction';
+
+
 import {useDispatch, useSelector} from 'react-redux';
 
 /*
@@ -59,12 +62,14 @@ const OtpTimerHandler = ({Resend, StopTimer,isErrorstate}) => {
   const dispatch = useDispatch();
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
+  const [loading, setLoading] = useState(false);
 
   const resendOtpResponce = useSelector(store => store.OtpResponceData);
 
   const reSendOTP = () => {
-    dispatch(loadOtpData_Resend(mobileNumber));
+    //dispatch(loadOtpData_Resend(mobileNumber));
     console.log('resendotp',mobileNumber)
+  
     
   };
 
@@ -77,6 +82,7 @@ const OtpTimerHandler = ({Resend, StopTimer,isErrorstate}) => {
 
   return (
     <View>
+      
       {counter > 0 && isErrorstate ==false ? (
        
         <Text
@@ -104,7 +110,7 @@ const OtpTimerHandler = ({Resend, StopTimer,isErrorstate}) => {
 {
 
 
-           <OtpErrorState Resend={reSendOTP}/>
+           <OtpErrorState Resend={reSendOTP()}/>
 } 
 </>
       )}
