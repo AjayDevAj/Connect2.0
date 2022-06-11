@@ -10,15 +10,18 @@ import {loadStoreLocationData} from '../../actions/StoreLocationAction';
 
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
-  const StoreLocationResonce = useSelector(
-    store => store.StoreLocationDataResponse,
-  );
+
+  const SLResponce = useSelector(store => store.StoreLocationDataResponse);
+  //const {StoreLocationResonce} = useSelector(store => store.StoreLocationDataResponse);
+  console.log('Store Location new  :::==>>', SLResponce);
+
+
   const [responceData, setData] = useState([]);
-  console.log('Store Location :::==>>> ', responceData);
+  console.log('Store Location old  :::==>>> ', responceData);
 
   useEffect(() => {
-    console.log('StoreLocationResonce :- ', StoreLocationResonce);
-  }, [StoreLocationResonce]);
+    console.log('Store Location Resonce js :- ', SLResponce);
+  }, [SLResponce]);
 
   useEffect(() => dispatch(loadStoreLocationData()));
   const [panelProps, setPanelProps] = useState({

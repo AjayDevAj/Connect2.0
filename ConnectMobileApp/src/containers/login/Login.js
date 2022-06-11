@@ -130,7 +130,6 @@ const Login = ({navigation}) => {
   return (
     <View style={{flex:1}}>
       <Loader loading={loading} />
-
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         animated={true}
@@ -139,7 +138,6 @@ const Login = ({navigation}) => {
           <View style={styles.CircilePostion}></View>
         </View>
         <CheckInterNet/>
-
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <View style={styles.UpperView}>
@@ -168,7 +166,6 @@ const Login = ({navigation}) => {
                 )}
                 <TextInput
                   behavior={Platform.OS == "ios" ? "alignItems" : "center"}
-
                   placeholder="Enter 10 Digit Mobile No."
                   placeholderTextColor="gray"
                   keyboardType={'phone-pad'}
