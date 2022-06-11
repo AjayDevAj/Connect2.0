@@ -35,18 +35,6 @@ import { CONSTANT } from '../utility/Constant'
 import { getLogin } from '../api/MobileNumberAuthentication'
 import { getError, getResponse } from '../actions/LoginAction'
 
-
-/*
-**
-*
-** //Worker Saga...
-** Please add comment with input/output. 
-* * Agar kuch hignlight karna h to 2 star lagao
-* @param {*} action 
-*
-** 
-*/
-
 function* handleLoginDataResponse(action) {
     try {
         const data = yield call(getLogin,action.mobileNumber)
@@ -57,15 +45,6 @@ function* handleLoginDataResponse(action) {
         yield put(getError(errors.toString()))
     }
 }
-
-
-/*
-**
-*
-** Watcher Saga...
-*
-** 
-*/
 
 
 export default function* LoginDataWatcherSaga() {

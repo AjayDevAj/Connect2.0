@@ -93,7 +93,7 @@ const Stack = createNativeStackNavigator();
  const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RouteTabBar">
+      <Stack.Navigator initialRouteName="Login">
       {/* <Stack.Navigator initialRouteName="OnBoarding"> */}
         <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
         <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
@@ -113,15 +113,17 @@ const Stack = createNativeStackNavigator();
         {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
         <Stack.Screen name={navigationString.Location} component = {Storelocation} 
             options={{ 
-              headerTintColor: '#000',
-              headerStyle: {
-                padding: 10,
-                backgroundColor: '#F7FCFF',
-                shadowColor: 'transparent', // this covers iOS
-                elevation: 0, // this covers Android
-              },
-              headerShadowVisible: false,
-              headerTitle: (props) => <StoreLocation {...props} />
+              headerShown: false
+
+              // headerTintColor: '#000',
+              // headerStyle: {
+              //   padding: 10,
+              //   backgroundColor: '#F7FCFF',
+              //   shadowColor: 'transparent', // this covers iOS
+              //   elevation: 0, // this covers Android
+              // },
+              // headerShadowVisible: false,
+              // headerTitle: (props) => <StoreLocation {...props} />
             }}
         />
         <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
