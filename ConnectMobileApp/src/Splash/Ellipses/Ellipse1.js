@@ -69,10 +69,11 @@ const styles = StyleSheet.create({
         borderRadius:197/2,
         top:-55,
         left:-43,
+        alignSelf: 'flex-start',
     },
     image3624: {
         opacity: 0.2,
-        top: -20,
+        top: -120,
         left: 112,
         // width: 146,
         // height: 146,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
         height:99,
         backgroundColor:'#0070FC',
         borderRadius:99/2,
+        alignSelf: 'flex-end'
     },
     image3625: {
         opacity: 0.1,

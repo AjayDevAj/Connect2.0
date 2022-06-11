@@ -34,6 +34,7 @@ import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
     
 const ChatList = ({ type }) => {
+    // console.log(type);
     const [OpenChatData, setOpenChatData] = useState([]);
     const [closeChatData, setcloseChatData] = useState([]);
     const [assignedChatData, setassignedChatData] = useState([]);
@@ -57,6 +58,7 @@ const ChatList = ({ type }) => {
     
     useEffect(() => {
         try {
+            console.log(chatResponseData.data);
             if (chatResponseData.data.totalCount > 0) {
                 var chatResponse = chatResponseData.data.result;
     

@@ -31,7 +31,7 @@
 ** 
 */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -44,6 +44,8 @@ import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /*
 **
@@ -91,45 +93,104 @@ const Stack = createNativeStackNavigator();
  * Routes matain the navigation stacks
  */
  const Routes = () => {
-  return (
-    <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="RouteTabBar"> */}
-      <Stack.Navigator initialRouteName="OnBoarding">
-        <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
-        <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
-         <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
-            options={{ 
-              headerTintColor: '#000',
-              headerStyle: {
-                backgroundColor: '#F7FCFF',
-                height: 60,
-                shadowColor: '#F7FCFF', // this covers iOS
-                elevation: 0, // this covers Android
-              },
-              headerShadowVisible: false,
-              headerTitle: () => <OtpScreen onPress={() => navigationString.goBack()} />
-            }}
-        />
-        {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
-        <Stack.Screen name={navigationString.Location} component = {Storelocation} 
-            options={{ 
-              headerTintColor: '#000',
-              headerStyle: {
-                padding: 10,
-                backgroundColor: '#F7FCFF',
-                shadowColor: 'transparent', // this covers iOS
-                elevation: 0, // this covers Android
-              },
-              headerShadowVisible: false,
-              headerTitle: (props) => <StoreLocation {...props} />
-            }}
-        />
-        <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
-      </Stack.Navigator>
-      <Incoming_Chat />
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+  const [viewedOnboarding, setViewedOnboarding] = useState(false);
 
-    </NavigationContainer>
-  )
+  const checkOnboarding = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@viewedOnboarding');
+
+      if (value !== null) {
+        setViewedOnboarding(true);
+      }
+    } catch (err) {
+      console.log('Error @checkOnboarding: ', err);
+    } finally {
+      setIsFirstLaunch(false);
+    }
+  };
+
+  useEffect(() => {
+    checkOnboarding();
+  }, []);
+
+  if (viewedOnboarding == true) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="RouteTabBar">        
+          <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
+           <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
+              options={{ 
+                headerTintColor: '#000',
+                headerStyle: {
+                  backgroundColor: '#F7FCFF',
+                  height: 60,
+                  shadowColor: '#F7FCFF', // this covers iOS
+                  elevation: 0, // this covers Android
+                },
+                headerShadowVisible: false,
+                headerTitle: () => <OtpScreen onPress={() => navigationString.goBack()} />
+              }}
+          />
+          {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
+          <Stack.Screen name={navigationString.Location} component = {Storelocation} 
+              options={{ 
+                headerTintColor: '#000',
+                headerStyle: {
+                  padding: 10,
+                  backgroundColor: '#F7FCFF',
+                  shadowColor: 'transparent', // this covers iOS
+                  elevation: 0, // this covers Android
+                },
+                headerShadowVisible: false,
+                headerTitle: (props) => <StoreLocation {...props} />
+              }}
+          />
+          <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
+        </Stack.Navigator>
+        <Incoming_Chat />
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="OnBoarding">
+          <Stack.Screen name={navigationString.OnBoarding} component = {OnBoarding} options={{headerShown: false}} />
+          <Stack.Screen name={navigationString.LOGIN} component = {Login} options={{headerShown: false}} />
+           <Stack.Screen name={navigationString.GetOtpScreen} component = {GetOtpScreen}  
+              options={{ 
+                headerTintColor: '#000',
+                headerStyle: {
+                  backgroundColor: '#F7FCFF',
+                  height: 60,
+                  shadowColor: '#F7FCFF', // this covers iOS
+                  elevation: 0, // this covers Android
+                },
+                headerShadowVisible: false,
+                headerTitle: () => <OtpScreen onPress={() => navigationString.goBack()} />
+              }}
+          />
+          {/* <Stack.Screen name={navigationString.Location} component = {Storelocation} options={{headerShown: false}}/> */}
+          <Stack.Screen name={navigationString.Location} component = {Storelocation} 
+              options={{ 
+                headerTintColor: '#000',
+                headerStyle: {
+                  padding: 10,
+                  backgroundColor: '#F7FCFF',
+                  shadowColor: 'transparent', // this covers iOS
+                  elevation: 0, // this covers Android
+                },
+                headerShadowVisible: false,
+                headerTitle: (props) => <StoreLocation {...props} />
+              }}
+          />
+          <Stack.Screen name={navigationString.RouteTabBar} component = {RouteTabBar} options={{headerShown: false}}/>
+        </Stack.Navigator>
+        <Incoming_Chat />
+      </NavigationContainer>
+    );
+  }
+  
 }
 
 export default Routes;

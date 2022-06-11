@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
         height:99,
         backgroundColor:'#0070FC',
         borderRadius:99/2,
-        top: -15,
-        left: -25,
+        top: -21,
+        left: -40,
     },
     image3625: {
         opacity: 0.1,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         height:65,
         backgroundColor:'#00C158',
         borderRadius:65/2,
-        top: 180,
+        top: 181,
         left: -140,
     },
     image3623: {
