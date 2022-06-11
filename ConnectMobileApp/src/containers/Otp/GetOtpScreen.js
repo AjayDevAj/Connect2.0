@@ -55,6 +55,7 @@ import OtpErrorState from '../../component/OtpErrorState';
 import CheckInterNet from '../../utility/CheckInterNet';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass'
+import { otpResponse_Storage_Key } from "../../utility/Constant";
 
 
 const GetOtpScreen = ({navigation}) => {
@@ -74,13 +75,12 @@ const GetOtpScreen = ({navigation}) => {
   const [disbaleval, setVisbal] = useState(true);
   const [timerEnable, setTimerEnable] = useState(false);
 
-//let fontsize = Dimensions.get('window').height
 
   useEffect(() => {
 
   
     if (otpResponce.code != null) {
-      saveObject(otpResponce.data,"otp_response_Key")
+      saveObject(otpResponce.data,otpResponse_Storage_Key)
       navigation.navigate(NavigationString.Location);
     }
     if (otpResponce != '') {
