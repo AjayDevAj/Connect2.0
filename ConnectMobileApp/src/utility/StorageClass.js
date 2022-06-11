@@ -22,7 +22,8 @@ export const getOtpResponse = async (Store_Key) => {
         const value = await AsyncStorage.getItem(Store_Key);
         if (value !== null) {
             // We have data!!
-            console.log(JSON.parse(value));
+            console.log('stored value:- ', JSON.parse(value));
+            return JSON.parse(value)
         }
     } catch (error) {
         // Error retrieving data

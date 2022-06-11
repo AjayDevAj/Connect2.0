@@ -1,20 +1,24 @@
 
 import {API_URL_DEV,API_URL_STAGING} from '../utility/Config_File'
+import {getOtpResponse} from '../utility/StorageClass'
+import {otpResponse_Storage_Key} from '../utility/Constant'
 
 const getStoreLocations = async () => {
    
-    const token_Value = await AsyncStorage.getItem('Token')
-    console.log('Store Locations token_Value : ',token_Value)
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+    console.log('Store Locations token_Value Abhishek : ', token_Value)
+
+    console.log('Store Locations token_Value Abhishek : ', token_Value.token)
 
     const response = await fetch(API_URL_STAGING + '/user/auth/get-locations', {
         method: 'GET',
         headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU0NjQ1MzIsImRhdGEiOnsiaWQiOjU5OSwibW9iaWxlX251bWJlciI6IjI1NTU1NTU1NTUiLCJuYW1lIjoiU3VraGJpciBTaW5naCBkZXN3YWwiLCJyb2xlX2lkIjoxLCJpc19zaV91c2VyIjowfSwiaWF0IjoxNjU0ODU5NzMyfQ.LD-f0Mylrx7d4tbfHb0MT56800T1WmEr9gKojmVpTn0',
+          `Bearer ${token_Value.token}`,
       }
     })
     const data = response.json()
-    console.log('Store Locations : ',data)
+    console.log('Store Locations Abhishek: ',data)
    
     if (response.status > 400) {
         throw new Error(data.errors)

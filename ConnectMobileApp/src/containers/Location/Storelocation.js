@@ -23,7 +23,7 @@ export default Storelocation = ({ navigation }) => {
 
   //Getting Token from OTP screen.
   const otpResponceToken = useSelector(store => store.OtpResponceData);
-  console.log("Otp Responce Token ==>>> ", otpResponceToken.data.token)
+  // console.log("Otp Responce Token ==>>> ", otpResponceToken.data.token)
 
   const [myToken, setmyToken] = useState('');
 
