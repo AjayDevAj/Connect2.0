@@ -1,73 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import UpperviewBG from '../../../assets/svg/Group2491.svg';
 import styles from './StorleLocationStylesheet';
-import { SwipeablePanel } from 'rn-swipeable-panel';
+import {SwipeablePanel} from 'rn-swipeable-panel';
 import fontFamily from '../../utility/Font-Declarations';
 import NavigationString from '../../utility/NavigationString';
-import { loadStoreLocationData } from '../../actions/StoreLocationAction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {loadStoreLocationData} from '../../actions/StoreLocationAction';
 
-
-export default Storelocation = ({ navigation }) => {
-
+export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
-  const StoreLocationResonce = useSelector(store => store.StoreLocationDataResponse);
-  console.log("Store Location Resonce =====>>> ", StoreLocationResonce);
-  const LocationResonce = useSelector(store => store.StoreLocationDataResponse);
-  const otpResponce = useSelector(store => store.OtpResponceData);
-
+  const StoreLocationResonce = useSelector(
+    store => store.StoreLocationDataResponse,
+  );
   const [responceData, setData] = useState([]);
-  console.log("Store Location :::==>>> ", responceData);
-
-  //Getting Token from OTP screen.
-  const otpResponceToken = useSelector(store => store.OtpResponceData);
-  // console.log("Otp Responce Token ==>>> ", otpResponceToken.data.token)
-
-  const [myToken, setmyToken] = useState('');
-
-  const storeData = async () => {
-    try {
-      await AsyncStorage.setItem('Token', otpResponceToken.data.token)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const getData = async () => {
-    try {
-      const token_Value = await AsyncStorage.getItem('Token')
-      setmyToken(token_Value)
-      console.log("token_Value 2 :", token_Value)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-
+  console.log('Store Location :::==>>> ', responceData);
 
   useEffect(() => {
-    //Calling Store Location API
-    dispatch(loadStoreLocationData())
-    storeData()
-    getData()
-
+    console.log('StoreLocationResonce :- ', StoreLocationResonce);
   }, [StoreLocationResonce]);
-    // console.log('Storelocation otpResponce',getOtpResponse("otp_response_Key"))
-  //   fetch('https://test-chat-1.starify.co/user/auth/get-locations', {
-  //     method: 'get',
-  //     headers: {
-  //       Authorization:
-  //         `Bearer ${otpResponce.data.token}`,
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(d => setData([...responceData, d]))
-  //     .catch(error => console.error(error));
-  // }, [LocationResonce]);
 
-
+  useEffect(() => dispatch(loadStoreLocationData()));
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
@@ -88,32 +41,32 @@ export default Storelocation = ({ navigation }) => {
   return (
     <>
       {/* // Uper View */}
-      <View style={{
-        flex: 2,
-        // backgroundColor: 'orange',
-        // backgroundColor: 'rgba(247, 252, 255, 1)'
-      }}>
+      <View
+        style={{
+          flex: 2,
+          // backgroundColor: 'orange',
+          // backgroundColor: 'rgba(247, 252, 255, 1)'
+        }}>
         <View
           style={{
             flex: 1,
             justifyContent: 'flex-end',
             padding: 30,
-          }}>
-        </View>
+          }}></View>
         <View
           style={{
             flex: 1,
             justifyContent: 'flex-end',
             padding: 30,
-           // backgroundColor: 'green'
+            // backgroundColor: 'green'
           }}>
-          <View style={{
-            alignItems: 'flex-start',
-            flexDirection: 'row',
-            marginBottom: 10,
-           // backgroundColor: 'yellow'
-
-          }}>
+          <View
+            style={{
+              alignItems: 'flex-start',
+              flexDirection: 'row',
+              marginBottom: 10,
+              // backgroundColor: 'yellow'
+            }}>
             <Text
               style={{
                 color: '#000000',
@@ -141,14 +94,14 @@ export default Storelocation = ({ navigation }) => {
           </Text>
         </View>
         <View
-            style={{
+          style={{
             flex: 3,
             justifyContent: 'flex-end',
             alignItems: 'flex-end',
             marginEnd: 20,
-           // backgroundColor: 'black',
-             }}>
-              <UpperviewBG width={'60%'} height={'60%'} />
+            // backgroundColor: 'black',
+          }}>
+          <UpperviewBG width={'60%'} height={'60%'} />
         </View>
       </View>
 
@@ -157,11 +110,10 @@ export default Storelocation = ({ navigation }) => {
       <View
         style={{
           flex: 0.8,
-         // backgroundColor: 'red',
-
+          // backgroundColor: 'red',
         }}>
         <SwipeablePanel
-          barStyle={{ backgroundColor: '#2F6EF329' }}
+          barStyle={{backgroundColor: '#2F6EF329'}}
           style={{
             shadowRadius: 5,
             shadowOpacity: 2,
@@ -174,7 +126,7 @@ export default Storelocation = ({ navigation }) => {
             shadowColor: 'rgba(47, 110, 243, 0.16)',
             padding: 20,
             bottom: -70,
-            shadowColor: 'red'
+            shadowColor: 'red',
           }}
           // smallPanelHeight={200}
           disableSwipeIcon={false}
@@ -182,23 +134,51 @@ export default Storelocation = ({ navigation }) => {
           //scrollViewProps={{backgroundColor:'red'}}
           {...panelProps}
           isActive={isPanelActive}>
+        
           <ScrollView>
-            {
-              responceData.map((item) => {
-                return (
-                  <View style={{}}>
-                    <Text style={{ color: '#000000', opacity: 100, fontSize: 18, fontWeight: 'bold', marginTop: 15 }}>
-                      {item.data.locations[0].name}
-                    </Text>
-                    <Text style={{ color: 'gray', opacity: 70, fontSize: 15, marginTop: 10 }}>
-                      {item.data.locations[0].address1 + '' + item.data.locations[0].address2 + '' + item.data.locations[0].locality + '' + item.data.locations[0].city + ' ' + item.data.locations[0].pincode + ''}
-                    </Text>
-                    <View style={{ width: '99%', height: 1, backgroundColor: '#2F6EF329', marginTop: 15 }}></View>
-                  </View>
-                )
-              })
-            }
+            {responceData.length > 0 && responceData.map(item => {
+              return (
+                <View style={{}}>
+                  <Text
+                    style={{
+                      color: '#000000',
+                      opacity: 100,
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      marginTop: 15,
+                    }}>
+                    {item.data.locations[0].name}
+                  </Text>
+                  <Text
+                    style={{
+                      color: 'gray',
+                      opacity: 70,
+                      fontSize: 15,
+                      marginTop: 10,
+                    }}>
+                    {item.data.locations[0].address1 +
+                      '' +
+                      item.data.locations[0].address2 +
+                      '' +
+                      item.data.locations[0].locality +
+                      '' +
+                      item.data.locations[0].city +
+                      ' ' +
+                      item.data.locations[0].pincode +
+                      ''}
+                  </Text>
+                  <View
+                    style={{
+                      width: '99%',
+                      height: 1,
+                      backgroundColor: '#2F6EF329',
+                      marginTop: 15,
+                    }}></View>
+                </View>
+              );
+            })}
           </ScrollView>
+      
         </SwipeablePanel>
       </View>
       <View

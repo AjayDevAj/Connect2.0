@@ -6,10 +6,6 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 const getStoreLocations = async () => {
    
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-    console.log('Store Locations token_Value Abhishek : ', token_Value)
-
-    console.log('Store Locations token_Value Abhishek : ', token_Value.token)
-
     const response = await fetch(API_URL_STAGING + '/user/auth/get-locations', {
         method: 'GET',
         headers: {
@@ -18,8 +14,7 @@ const getStoreLocations = async () => {
       }
     })
     const data = response.json()
-    console.log('Store Locations Abhishek: ',data)
-   
+       
     if (response.status > 400) {
         throw new Error(data.errors)
     }

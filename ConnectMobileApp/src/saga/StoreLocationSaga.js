@@ -7,7 +7,7 @@ import { getStoreLocationError, getStoreLocationResponse } from '../actions/Stor
 function* handleStoreLocationResponse(action) {
     try {
         const data = yield call(getStoreLocations)
-        console.log('Store Location Response', data)
+        // console.log('Store Location Response', data)
         yield put(getStoreLocationResponse(data))
     }
     catch(errors) {
