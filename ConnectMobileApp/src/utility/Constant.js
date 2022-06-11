@@ -44,3 +44,5 @@ const CONSTANT = {
 }
 
 export { CONSTANT }
+
+export const otpResponse_Storage_Key = "otp_response_Key";

@@ -52,11 +52,9 @@ import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import OtpErrorState from '../../component/OtpErrorState';
-
 import CheckInterNet from '../../utility/CheckInterNet';
-
-
 import fontFamily from '../../utility/Font-Declarations';
+import {saveObject} from '../../utility/StorageClass'
 
 
 const GetOtpScreen = ({navigation}) => {
@@ -82,6 +80,7 @@ const GetOtpScreen = ({navigation}) => {
 
   
     if (otpResponce.code != null) {
+      saveObject(otpResponce.data,"otp_response_Key")
       navigation.navigate(NavigationString.Location);
     }
     if (otpResponce != '') {

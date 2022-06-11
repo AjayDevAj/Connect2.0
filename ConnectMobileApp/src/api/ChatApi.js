@@ -77,7 +77,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
 
     var headers = {
         Authorization:
-          `Bearer ${otpResponce.data.token}`,
+          `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU0NjkyNjEsImRhdGEiOnsiaWQiOjU1NywibW9iaWxlX251bWJlciI6IjMwMTExMTExMTEiLCJuYW1lIjoiU3VraGJpciBTaW5naCB0aGUgIiwicm9sZV9pZCI6MSwiaXNfc2lfdXNlciI6MH0sImlhdCI6MTY1NDg2NDQ2MX0.RrSEixe6ypsLbm_W1iz7biCFQxmqFpdFz7Sh8ijojqg`,
       }
 
     const response = await fetch(api_url, {
@@ -104,11 +104,22 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-    
-    if (response.status > 400) {
-        // console.log('Chat Message Error : '+ data.errors);
-        throw new Error(data.errors)
+   console.log('response.status',response.status)
+    switch (response.status) {
+        case response.status > 400 :
+            throw new Error(data.errors)
+
+            break
+        case 204 :
+            throw new Error("NO Data")
+            break
+
+        default:break
     }
+    // if (response.status > 400) {
+    //     // console.log('Chat Message Error : '+ data.errors);
+    //     throw new Error(data.errors)
+    // }
 
     return data;
 }

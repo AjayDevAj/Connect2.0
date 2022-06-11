@@ -12,6 +12,8 @@ import Sms_black_24dp from '../../../assets/svg/sms_black_24dp.svg';
 import Action_Sheet, {openSheet} from '../../component/Action_Sheet';
 import {Unassigned_Chat} from '../../actions/Unassigned_Chat_Action';
 import {useSelector, useDispatch} from 'react-redux';
+import {getOtpResponse} from '../../utility/StorageClass'
+
 /**
  * This class is for imcoming chat icon.
  * * Its visible when atleast incoming count is one.
@@ -26,14 +28,17 @@ const Incoming_Chat = () => {
   const [username, SetuserName] = useState('Priyanka11');
   const [isPanelActive, setIsPanelActive] = useState(true);
   const unassigned_Chat_Response = useSelector(store => store.Unassigned_Chat);
+  const unassigned_Chat_Response_Error = useSelector(store => store.unassigned_Chat_Response_Error);
+
   const otpResponce = useSelector((store) => store.OtpResponceData) 
 
   useEffect(() => {
-    console.log('unassigned_Chat_Response:- ',unassigned_Chat_Response) 
-  }, [unassigned_Chat_Response]);
+    console.log('unassigned_Chat_Response:- ',getOtpResponse("otp_response_Key")) 
+  }, [unassigned_Chat_Response,unassigned_Chat_Response_Error]);
 
 
   const unassigned_Chat_API_Call = () => {
+
     dispatch(Unassigned_Chat(otpResponce.data.token));
   };
 

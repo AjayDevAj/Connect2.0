@@ -16,7 +16,7 @@ export default Storelocation = ({navigation}) => {
   console.log(responceData);
 
   useEffect(() => {
-    console.log('Storelocation otpResponce',otpResponce.data.token)
+    // console.log('Storelocation otpResponce',getOtpResponse("otp_response_Key"))
     fetch('https://test-chat-1.starify.co/user/auth/get-locations', {
       method: 'get',
       headers: {
