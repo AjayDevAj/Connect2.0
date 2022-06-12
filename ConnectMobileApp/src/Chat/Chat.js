@@ -32,10 +32,10 @@ import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
+import Loader from '../utility/Loader';
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
-  const [reloadFlatlist,setReloadFlatlist] = useState(false)
 
   const menuHandler = () => {
     console.log('Menu Handler');
@@ -54,14 +54,15 @@ const Chat = ({navigation}) => {
 
   useEffect(() => {
     if (isFocused) {
-      console.log('chatResponseData API check')
-      dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 0, 557));
+      callAPI()
     }
   },[isFocused]);
   useEffect(() => {  
-    // setReloadFlatlist(true)
-    console.log('chatResponseData response check')
   }, [chatResponseData]);
+
+  const callAPI = (type ='open' ) => {
+    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557));
+  }
 
   return (
     <View style={chatStyles.chatMainContainer}>
@@ -74,7 +75,9 @@ const Chat = ({navigation}) => {
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
-      <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
+      
+      <SegmentComponent onClickSegmentChanged={value => callAPI(value)} />
+     
       {chatResponseData.data != undefined &&
         chatResponseData.data.otherMessageCount != undefined && (
           <HeaderNotification
@@ -83,12 +86,11 @@ const Chat = ({navigation}) => {
             right="chevron-right"
             openAllChat={() =>
                 navigation.navigate(navigationString.AllChat)
-                // console.log('check gkp',navigation)
             }
           />
         )}
        
-       {reloadFlatlist &&
+       {(chatResponseData.data != null )&&
         <ChatList data={chatResponseData.data.result}/>
       }
     </View>

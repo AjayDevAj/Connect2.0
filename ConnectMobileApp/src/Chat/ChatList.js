@@ -35,6 +35,7 @@ const ChatList = ({data}) => {
     return (
         <View style={ chatStyles.chatListMainContainer }>
             <FlatList 
+                animation={true}
                 data={data}
                 renderItem={( { item }) => (
                     <TouchableOpacity onPress={() => console.log('Chat List')}>

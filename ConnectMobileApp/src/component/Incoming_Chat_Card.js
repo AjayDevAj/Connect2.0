@@ -10,13 +10,13 @@ import CardLocation from '../Card/CardLocation';
  * * Its visible when atleast incoming count is one.
  */
 
-export const Incoming_Chat_Card = ({title,onclick}) => {
+export const Incoming_Chat_Card = ({title,location,onclick}) => {
   return (
     <View>
       <Card>
         <View style={styles.viewStyle}>
           <Text style={styles.titleStyle}>{title}</Text>
-          <CardLocation location={'Sikandarpur'} />
+          <CardLocation location={location} />
         </View>
         <Text style={styles.deception}>Do you have nike shoes at store?</Text>
         <TouchableOpacity onPress={() => onclick()}>

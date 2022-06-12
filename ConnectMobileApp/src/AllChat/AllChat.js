@@ -21,7 +21,7 @@
  **
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import HeaderNotification from '../Header/HeaderNotification';
@@ -50,10 +50,14 @@ const AllChat = ({navigation}) => {
 
   useEffect(() => {
     if (isFocused) {
-      dispatch(loadChatData(0, null, 0, 'DESC', 'open', '1', 1, 557));
+      callAPI()
     }
   }, [isFocused]);
   useEffect(() => {}, [chatResponseData]);
+
+  const callAPI = (type ='open' ) => {
+    dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ""));
+  }
 
   return (
     <View style={chatStyles.chatMainContainer}>
@@ -66,12 +70,10 @@ const AllChat = ({navigation}) => {
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
-      <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
-      {
-        (typeof(chatResponseData.data.result ) !== 'undefined' && value != chatResponseData.data.result )  &&
-        <ChatList data={chatResponseData.data.result}/>
-      }
-      
+      <SegmentComponent onClickSegmentChanged={value => callAPI(value)} />
+      {chatResponseData.data != null && (
+        <ChatList data={chatResponseData.data.result} />
+      )}
     </View>
   );
 };
