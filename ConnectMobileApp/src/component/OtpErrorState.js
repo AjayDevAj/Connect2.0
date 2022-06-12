@@ -3,7 +3,7 @@ import React from 'react';
 import fontFamily from '../utility/Font-Declarations';
 
 export default function OtpErrorState({Resend}) {
-  console.log('Error State is here');
+  
 
   
   return (

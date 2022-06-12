@@ -45,6 +45,7 @@ import { CONSTANT } from "../utility/Constant";
 
 const loadOtpData_Resend = (mobileNumber) => ({
     type: CONSTANT.Resend_OTP_DATA,mobileNumber
+    
 })
 
 

@@ -29,6 +29,7 @@ export default Storelocation = ({navigation}) => {
     }
   }, [isFocused]);
 
+
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
