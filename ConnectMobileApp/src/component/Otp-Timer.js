@@ -48,6 +48,7 @@ import { useIsFocused } from '@react-navigation/native';
 
 
 import {useDispatch, useSelector} from 'react-redux';
+import OTPTextView from 'react-native-otp-textinput';
 
 /*
  **
@@ -77,15 +78,16 @@ const OtpTimerHandler = ({ StopTimer,isErrorstate}) => {
   
   const reSendOTP = () => {
    //dispatch(loadOtpData_Resend(mobileNumber));
-    console.log('resendotp---------------------77777777777',resendOtpResponce)
+    console.log('resendotp--------------------->',resendOtpResponce)
   
     
   };
 
-  const [counter, setCounter] = useState(20);
+  const [counter, setCounter] = useState(30);
   useEffect(() => {
     // dispatch(loadOtpData_Resend(mobileNumber))
     // console.log('resendotp------------------------',resendOtpResponce)
+   
    
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);

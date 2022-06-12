@@ -42,6 +42,7 @@ import resendotpDataReducer from "./ResendOtpReducer";
 const loginDataReducer = (state = '', action) => {
 
     if(action.type == CONSTANT.DATA_SUCCESS) {
+       
         return action.payload;
     }
 
@@ -51,14 +52,36 @@ const loginDataReducer = (state = '', action) => {
     return state;
 }
 
+
+// const appReducer = combineReducers({
+//     /* your app’s top-level reducers */
+//     loginDataResponse: loginDataReducer,
+//     OtpResponceData: otpDataReducer,
+//     ChatResponseData: ChatReducer,
+//     StoreLocationDataResponse: storeLocationDataReducer,
+//     Unassigned_Chat_Data: Unassigned_Chat_Reducer,
+//     ResendOtpResonceData:resendotpDataReducer
+//   })
+
+//   const rootReducers = (state, action) => {
+//     // when a  action is dispatched it will reset redux state
+//     // if (action.type === CONSTANT.OTP_DATA_SUCCESS) {
+//     //   state = undefined;
+//     //   console.log('reset staTE FROM THE reducer ---------------->',state)
+//     // }
+  
+//     return appReducer(state, action);
+//   };
+
+
 const rootReducers = combineReducers({
+    
     loginDataResponse: loginDataReducer,
     OtpResponceData: otpDataReducer,
     ChatResponseData: ChatReducer,
     StoreLocationDataResponse: storeLocationDataReducer,
     Unassigned_Chat_Data: Unassigned_Chat_Reducer,
     ResendOtpResonceData:resendotpDataReducer
-
 
 })
 
