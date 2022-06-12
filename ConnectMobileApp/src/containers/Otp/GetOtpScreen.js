@@ -83,12 +83,12 @@ const GetOtpScreen = ({navigation}) => {
    
      console.log('otp error code for timer in getotpsreen.js',isErrorstate)
     
-    if (otpResponce.code != null) {
+    if (otpResponce.code != null ) {
       saveObject(otpResponce.data,otpResponse_Storage_Key)
       navigation.navigate(NavigationString.Location);
     }
-    if (otpResponce != '') {
-      if (otpResponce.data.code == 400) {
+    if (otpResponce != '' ) {
+      if (otpResponce.data.code == 400 ) {
        
         setisErrorState(true)
        

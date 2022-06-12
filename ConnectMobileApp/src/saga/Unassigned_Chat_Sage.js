@@ -47,10 +47,9 @@ import { Unassigned_Chat_Fetch_Call} from '../api/Unassigned_Chat'
 ** 
 */
 
-function* handleUnassigned_ChatDataResponse(action) {
+function* handleUnassigned_ChatDataResponse() {
     try {
-        // console.log('handleResendOtpDataResponse Response')
-        const data = yield call(Unassigned_Chat_Fetch_Call,action.token)
+        const data = yield call(Unassigned_Chat_Fetch_Call)
         yield put(getResponse_Unassigned_Chat(data))
     }
      catch(errors) {

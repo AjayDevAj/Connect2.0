@@ -21,7 +21,7 @@
  **
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import HeaderNotification from '../Header/HeaderNotification';
@@ -29,12 +29,12 @@ import chatStyles from './styles/AllChatChatStylesheet';
 import {SegmentComponent} from '../component/SegmentComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
-import ChatList from '../AllChat/AllChatList';
-import { useIsFocused } from '@react-navigation/native';
+import ChatList from '../Chat/ChatList';
+import {useIsFocused} from '@react-navigation/native';
 
 const AllChat = ({navigation}) => {
   const menuHandler = () => {
-    navigation.goBack()
+    navigation.goBack();
   };
 
   const searchHandler = () => {
@@ -50,18 +50,19 @@ const AllChat = ({navigation}) => {
 
   useEffect(() => {
     if (isFocused) {
-    dispatch(loadChatData(0, null, 0, 'DESC', 'open', 1, 1, 557));
+      callAPI()
     }
-  },[isFocused]);
-  useEffect(() => {
-    console.log('chatResponseData AllChat Abhishek', chatResponseData);
-   
-  }, [chatResponseData]);
+  }, [isFocused]);
+  useEffect(() => {}, [chatResponseData]);
+
+  const callAPI = (type ='open' ) => {
+    dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ""));
+  }
 
   return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader
-        firstIcon="menu"
+        firstIcon="arrow-back"
         secondIcon="search"
         thirdIcon="filter-list"
         name="All Chats"
@@ -69,8 +70,10 @@ const AllChat = ({navigation}) => {
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
-      <SegmentComponent onClickSegmentChanged={value => console.log(value)} />
-      {/* <ChatList data={[]}/> */}
+      <SegmentComponent onClickSegmentChanged={value => callAPI(value)} />
+      {chatResponseData.data != null && (
+        <ChatList data={chatResponseData.data.result} />
+      )}
     </View>
   );
 };

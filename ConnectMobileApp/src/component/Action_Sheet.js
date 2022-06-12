@@ -10,7 +10,10 @@ import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card'
 /**
  * Open action sheet
  */
-export const openSheet = () => {
+export const openSheet = (Incoming_Chat) => {
+  console.log('unassigned_Chat_Response:- openSheet',Incoming_Chat)
+
+  DATA = Incoming_Chat
   SheetManager.show('helloworld_sheet');
 };
 
@@ -19,31 +22,15 @@ export const openSheet = () => {
  * * Its visible when atleast incoming count is one.
  */
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d721',
-    title: 'Third Item',
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba1',
-    title: 'First Item',
-  },
-  
+var DATA = [
+ 
 ];
 /**
  * 
  * @param {*} title for Incoming chat 
  */
-const Item = ({title}) => (
- <Incoming_Chat_Card title={"Abhishek Singh"} onclick={() => 
+const Item = ({title,location}) => (
+ <Incoming_Chat_Card title={title} location={location} onclick={() => 
   SheetManager.hideAll()
 }/>
 );
@@ -51,7 +38,7 @@ const Item = ({title}) => (
 const Action_Sheet = () => {
   const actionSheetRef = useRef();
 
-  const renderItem = ({item}) => <Item title={item.title} />;
+  const renderItem = ({item}) => <Item title={item.display_name} location={item.location_name} />;
 
   return (
     <ActionSheet

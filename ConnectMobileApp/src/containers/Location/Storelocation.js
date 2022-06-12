@@ -23,7 +23,11 @@ export default Storelocation = ({navigation}) => {
     console.log('Store Location Resonce js :- ', SLResponce);
   }, [SLResponce]);
 
+
   useEffect(() => {dispatch(loadStoreLocationData())});
+
+  // useEffect(() => dispatch(loadStoreLocationData()));
+
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),

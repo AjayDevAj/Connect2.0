@@ -29,7 +29,7 @@
  **
  */
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect ,} from 'react';
 import {
   View,
   Dimensions,
@@ -43,6 +43,8 @@ import OtpErrorState from './OtpErrorState';
 import {useRoute} from '@react-navigation/native';
 import Loader from '../utility/Loader';
 import {loadOtpData_Resend} from '../actions/ResendOTPAction';
+import { useIsFocused } from '@react-navigation/native';
+
 
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -56,25 +58,35 @@ import {useDispatch, useSelector} from 'react-redux';
  **
  */
 
-const OtpTimerHandler = ({Resend, StopTimer,isErrorstate}) => {
+const OtpTimerHandler = ({ StopTimer,isErrorstate}) => {
   console.log('error code from otp scren',isErrorstate)
+
+
+
 
   const dispatch = useDispatch();
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
   const [loading, setLoading] = useState(false);
 
-  const resendOtpResponce = useSelector(store => store.OtpResponceData);
+  const resendOtpResponce = useSelector(store => store.ResendOtpResonceData);
 
+ 
+
+
+  
   const reSendOTP = () => {
-    //dispatch(loadOtpData_Resend(mobileNumber));
-    console.log('resendotp',mobileNumber)
+   //dispatch(loadOtpData_Resend(mobileNumber));
+    console.log('resendotp---------------------77777777777',resendOtpResponce)
   
     
   };
 
   const [counter, setCounter] = useState(20);
   useEffect(() => {
+    // dispatch(loadOtpData_Resend(mobileNumber))
+    // console.log('resendotp------------------------',resendOtpResponce)
+   
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);

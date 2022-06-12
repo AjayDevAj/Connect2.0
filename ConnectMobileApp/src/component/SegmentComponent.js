@@ -40,8 +40,6 @@ export const SegmentComponent = ({onClickSegmentChanged}) => {
         <SegmentedControlTab
           tabsContainerStyle={styles.tabsContainerStyle}
           tabStyle={styles.tabStyle}
-        //   firstTabStyle={styles.firstTabStyle}
-        //   lastTabStyle={styles.lastTabStyle}
           tabTextStyle={styles.tabTextStyle}
           activeTabStyle={styles.activeTabStyle}
           activeTabTextStyle={styles.activeTabTextStyle}
@@ -55,7 +53,7 @@ export const SegmentComponent = ({onClickSegmentChanged}) => {
           values={['OPEN', 'CLOSED', 'ASSIGNED']}
           onTabPress={index => {
             setSelectedIndex(index)
-            onClickSegmentChanged(index)
+            onClickSegmentChanged(index == 0 ? 'open' : index == 1 ? 'closed':'assigned')
           }}
         />
       </View>
