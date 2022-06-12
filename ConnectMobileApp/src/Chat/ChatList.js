@@ -31,14 +31,14 @@ import Card from '../Card/Card';
 import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
     
-const ChatList = ({data,onPress}) => {
+const ChatList = ({data,onPress_Chat}) => {
     return (
         <View style={ chatStyles.chatListMainContainer }>
             <FlatList 
                 animation={true}
                 data={data}
                 renderItem={( { item }) => (
-                    <TouchableOpacity onPress={() => console.log('Chat List',item)}>
+                    <TouchableOpacity onPress={() => onPress_Chat(item)}>
                         <Card>
                         <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} />
                         <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} />

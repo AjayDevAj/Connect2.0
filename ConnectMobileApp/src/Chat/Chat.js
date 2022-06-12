@@ -91,7 +91,13 @@ const Chat = ({navigation}) => {
         )}
        
        {(chatResponseData.data != null )&&
-        <ChatList data={chatResponseData.data.result}/>
+        <ChatList onPress_Chat={(selected_Item) => 
+          // console.log('testObj',testObj)
+          navigation.navigate(navigationString.Message,{selected_Item})
+
+        } data={
+          chatResponseData.data.result
+        }/>
       }
     </View>
   );
