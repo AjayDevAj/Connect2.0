@@ -56,3 +56,5 @@ const CONSTANT = {
 export { CONSTANT }
 
 export const otpResponse_Storage_Key = "otp_response_Key";
+export const location_Data_Key = "location_Data_Key";
+export const viewed_Onboarding = "viewed_Onboarding";

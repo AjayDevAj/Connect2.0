@@ -1,7 +1,11 @@
 import React, {useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
+/**
+ * * This function is for storing data in local storage(AsyncStorage)
+ * @param {*} storeObject 
+ * @param {*} Store_Key 
+ */
 export const saveObject = async (storeObject,Store_Key) => {
     console.log("Before storage",JSON.stringify(storeObject));
 
@@ -10,22 +14,31 @@ export const saveObject = async (storeObject,Store_Key) => {
             console.log("an error");
             throw err;
         }
-        // console.log("successfully stored");
     }).catch((err)=> {
         console.log("error is fail to store: " + err);
     });
 
 } 
-
+/**
+ * * This function is to fetch data into local storage(AsyncStorage)
+ * @param {*} Store_Key 
+ */
 export const getOtpResponse = async (Store_Key) => {
     try {
         const value = await AsyncStorage.getItem(Store_Key);
         if (value !== null) {
-            // We have data!!
-            // console.log('stored value:- ', JSON.parse(value));
             return JSON.parse(value)
         }
     } catch (error) {
-        // Error retrieving data
+    }
+}
+
+/**
+ * Delete all data 
+ */
+export const deleteAll = () => {
+    try {
+        AsyncStorage.clear();
+    } catch (error) {
     }
 }

@@ -28,6 +28,7 @@ export default {
     Location:"Storelocation",
     RouteTabBar:"RouteTabBar",
     AllChat: "AllChat",
+    Message:"Message",
     
 
 /*

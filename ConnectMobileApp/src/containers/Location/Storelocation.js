@@ -7,23 +7,28 @@ import {SwipeablePanel} from 'rn-swipeable-panel';
 import fontFamily from '../../utility/Font-Declarations';
 import NavigationString from '../../utility/NavigationString';
 import {loadStoreLocationData} from '../../actions/StoreLocationAction';
+import {useIsFocused} from '@react-navigation/native';
+import {saveObject} from '../../utility/StorageClass';
+import {location_Data_Key} from '../../utility/Constant';
 
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
-
+  const isFocused = useIsFocused();
   const SLResponce = useSelector(store => store.StoreLocationDataResponse);
-  //const {StoreLocationResonce} = useSelector(store => store.StoreLocationDataResponse);
-  console.log('Store Location new  :::==>>', SLResponce);
-
-
   const [responceData, setData] = useState([]);
-  console.log('Store Location old  :::==>>> ', responceData);
 
   useEffect(() => {
-    console.log('Store Location Resonce js :- ', SLResponce);
+    if (SLResponce.data != undefined) {
+      setData(SLResponce.data.locations);
+    }
   }, [SLResponce]);
 
-  // useEffect(() => dispatch(loadStoreLocationData()));
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(loadStoreLocationData());
+    }
+  }, [isFocused]);
+
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
@@ -41,14 +46,17 @@ export default Storelocation = ({navigation}) => {
     setIsPanelActive(true);
   };
 
+  const continueOnpress = () => {
+    saveObject(SLResponce.data, location_Data_Key);
+    navigation.navigate(NavigationString.RouteTabBar)
+  };
+
   return (
     <>
       {/* // Uper View */}
       <View
         style={{
           flex: 2,
-          // backgroundColor: 'orange',
-          // backgroundColor: 'rgba(247, 252, 255, 1)'
         }}>
         <View
           style={{
@@ -113,7 +121,6 @@ export default Storelocation = ({navigation}) => {
       <View
         style={{
           flex: 0.8,
-          // backgroundColor: 'red',
         }}>
         <SwipeablePanel
           barStyle={{backgroundColor: '#2F6EF329'}}
@@ -137,53 +144,53 @@ export default Storelocation = ({navigation}) => {
           //scrollViewProps={{backgroundColor:'red'}}
           {...panelProps}
           isActive={isPanelActive}>
-        
           <ScrollView>
-            {responceData.length > 0 && responceData.map(item => {
-              return (
-                <View style={{}}>
-                  <Text
-                    style={{
-                      color: '#000000',
-                      opacity: 100,
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      marginTop: 15,
-                    }}>
-                    {item.data.locations[0].name}
-                  </Text>
-                  <Text
-                    style={{
-                      color: 'gray',
-                      opacity: 70,
-                      fontSize: 15,
-                      marginTop: 10,
-                    }}>
-                    {item.data.locations[0].address1 +
-                      '' +
-                      item.data.locations[0].address2 +
-                      '' +
-                      item.data.locations[0].locality +
-                      '' +
-                      item.data.locations[0].city +
-                      ' ' +
-                      item.data.locations[0].pincode +
-                      ''}
-                  </Text>
-                  <View
-                    style={{
-                      width: '99%',
-                      height: 1,
-                      backgroundColor: '#2F6EF329',
-                      marginTop: 15,
-                    }}></View>
-                </View>
-              );
-            })}
+            {responceData.length > 0 &&
+              responceData.map(item => {
+                return (
+                  <View style={{}}>
+                    <Text
+                      style={{
+                        color: '#000000',
+                        opacity: 100,
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                        marginTop: 15,
+                      }}>
+                      {item.name}
+                    </Text>
+                    <Text
+                      style={{
+                        color: 'gray',
+                        opacity: 70,
+                        fontSize: 15,
+                        marginTop: 10,
+                      }}>
+                      {item.address1 +
+                        ', ' +
+                        item.address2 +
+                        ' ' +
+                        item.locality +
+                        ' ' +
+                        item.city +
+                        ' ' +
+                        item.pincode +
+                        ' '}
+                    </Text>
+                    <View
+                      style={{
+                        width: '99%',
+                        height: 1,
+                        backgroundColor: '#2F6EF329',
+                        marginTop: 15,
+                      }}></View>
+                  </View>
+                );
+              })}
           </ScrollView>
-      
         </SwipeablePanel>
       </View>
+
       <View
         style={{
           height: 80,
@@ -191,7 +198,9 @@ export default Storelocation = ({navigation}) => {
           backgroundColor: '#fff',
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate(NavigationString.RouteTabBar)}
+          onPress={() =>
+            continueOnpress()
+          }
           style={styles.ContinueButton}>
           <Text style={styles.ContinueButtonText}>CONTINUE</Text>
         </TouchableOpacity>

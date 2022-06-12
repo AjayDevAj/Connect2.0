@@ -45,6 +45,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import skipButtonStyles from './styles/SkipButtonStyleSheet';
 import navigationString from '../utility/NavigationString'
+import {viewed_Onboarding} from '../utility/Constant'
 
 
 /*
@@ -65,7 +66,7 @@ const SkipButton = ({ navigation }) => {
     ** 
     */
     const goToLoginPage = () => {
-        AsyncStorage.setItem('@viewedOnboarding', 'true');
+        AsyncStorage.setItem(viewed_Onboarding, 'true');
 
         navigation.navigate(navigationString.LOGIN)
     }
