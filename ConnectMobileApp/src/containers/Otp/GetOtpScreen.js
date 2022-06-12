@@ -81,16 +81,18 @@ const GetOtpScreen = ({navigation}) => {
   useEffect(() => {
 
    
-     console.log('otp error code for timer in getotpsreen.js',isErrorstate)
+     
     
     if (otpResponce.code != null ) {
       saveObject(otpResponce.data,otpResponse_Storage_Key)
       navigation.navigate(NavigationString.Location);
     }
-    if (otpResponce != '' ) {
-      if (otpResponce.data.code == 400 ) {
+    if (otpResponce != '' && otpResponce.data.code != null && otpResponce.data.code == 400) {
+      // if (otpResponce.data.code == 400) {
        
         setisErrorState(true)
+
+        console.log('Error State-------------->',isErrorstate)
        
         setOtptextColor({
           textcolor: 'rgba(164, 34, 22, 1)',
@@ -100,7 +102,7 @@ const GetOtpScreen = ({navigation}) => {
         });
       }
     
-    }
+   // }
   }, [otpResponce]);
 
   useEffect(() => {
