@@ -48,13 +48,14 @@ const CONSTANT = {
     Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
     Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 
-    loadAllChat_Conversation_Data:'loadAllChat_Conversation_Data',
-    loadAllChat_Conversation_ERROR:'loadAllChat_Conversation_ERROR',
-    loadAllChat_Conversation_SUCCESS:'loadAllChat_Conversation_SUCCESS',
-
     IsImportant_Data: 'IsImportant_Data',
     IsImportant_ERROR: 'IsImportant_ERROR',
     IsImportant_SUCCESS: 'IsImportant_SUCCESS',
+
+    SEARCH_DATA: 'SEARCH_DATA',
+    SEARCH_DATA_ERROR: 'SEARCH_DATA_ERROR',
+    SEARCH_DATA_SUCCESS: 'SEARCH_DATA_SUCCESS',
+
 
 }
 

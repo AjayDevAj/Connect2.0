@@ -40,22 +40,8 @@ const chatStyles = StyleSheet.create({
     },
     chatListMainContainer: {
         backgroundColor: '#fff', 
-        top: 46,
+        width: '100%',
         flex:1,
-    },
-    chatSmsButtonContainer: {
-        width: 70,  
-        height: 70,   
-        borderRadius: 70 /2 ,            
-        backgroundColor: '#0070FC',                                    
-        position: 'absolute',                                          
-        bottom: 30,                                                    
-        right: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        opacity: 1,
-        shadowColor: '#00000029',
-        shadowRadius: 6,
     },
 });
 

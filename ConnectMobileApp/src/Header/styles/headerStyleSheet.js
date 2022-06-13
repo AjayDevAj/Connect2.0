@@ -48,35 +48,32 @@ const headerStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
+        position: 'relative'
     },
     headerMenuIcon: {
-        position: 'absolute',
-        left: 19,
-        top: 46,
-        color: '#fff'
+        color: '#fff',
+        alignSelf: 'flex-start',
+        marginLeft: '8%',
     },
     headerText: {
-        position: 'absolute',
         color: '#FFFFFF',
-        left: 65,
-        top: 46,
         opacity: 1,
         fontFamily: fontFamily.Alte_DIN,
         fontSize: 20,
+        marginLeft: '8%',
     },
     headerSearchIcon: {
         color: '#FFFFFF',
         opacity: 1,
-        alignSelf: 'flex-end',
-        top: 46,
-        right: 80
+        alignSelf: 'flex-start',
+        
+        marginLeft: '45%',
     },
     headerFilterIcon: {
         color: '#FFFFFF',
         opacity: 1,
         alignSelf: 'flex-end',
-        top: 18,
-        right: 30
+        marginRight: '8%',
     },
 });
 
