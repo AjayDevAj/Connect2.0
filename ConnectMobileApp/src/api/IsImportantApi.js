@@ -36,7 +36,7 @@ const getIsImportantData = async (conversation_id, is_important) => {
     })
 
     const data = response.json()
-    console.log('isImportant API data :: ',data)
+    console.log('isImportant API data : ',data)
    
     if (response.status > 400) {
         throw new Error(data.errors)
