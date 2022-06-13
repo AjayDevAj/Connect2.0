@@ -37,7 +37,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import GetOtpBg from '../../../assets/svg/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
@@ -45,7 +45,7 @@ import OtpTimerHandler from '../../component/Otp-Timer';
 import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
 
-import OTPTextInput from '../../component/Otp-Form'
+import OTPTextInput from '../../component/Otp-Form';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
 import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
@@ -54,16 +54,14 @@ import NavigationString from '../../utility/NavigationString';
 import OtpErrorState from '../../component/OtpErrorState';
 import CheckInterNet from '../../utility/CheckInterNet';
 import fontFamily from '../../utility/Font-Declarations';
-import {saveObject} from '../../utility/StorageClass'
-import { otpResponse_Storage_Key } from "../../utility/Constant";
-import { CONSTANT } from '../../utility/Constant';
+import {saveObject} from '../../utility/StorageClass';
+import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {CONSTANT} from '../../utility/Constant';
 import Loader from '../../utility/Loader';
-
-
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
-  
+
   const otpResponce = useSelector(store => store.OtpResponceData);
   const resendOtpResponce = useSelector(store => store.OtpResponceData);
   const route = useRoute();
@@ -78,34 +76,44 @@ const GetOtpScreen = ({navigation}) => {
   });
   const [disbaleval, setVisbal] = useState(true);
   const [timerEnable, setTimerEnable] = useState(false);
-   const[isErrorstate,setisErrorState]=useState(false)
-
+  const [isErrorstate, setisErrorState] = useState(false);
 
   useEffect(() => {
-
-   
-     
-    
-    if (otpResponce.code != null ) {
-      saveObject(otpResponce.data,otpResponse_Storage_Key)
-      navigation.navigate(NavigationString.Location,{userName:otpResponce.data.user.name});
+    if (otpResponce.code != null) {
+      saveObject(otpResponce.data, otpResponse_Storage_Key);
+      navigation.navigate(NavigationString.Location, {
+        userName: otpResponce.data.user.name,
+      });
     }
-    if (otpResponce != '' && otpResponce.data.code != null && otpResponce.data.code == 400) {
+    if (
+      otpResponce != '' &&
+      otpResponce.data.code != null &&
+      otpResponce.data.code == 400
+    ) {
       // if (otpResponce.data.code == 400) {
-       
-        setisErrorState(true)
 
-        console.log('Error State-------------->',isErrorstate)
-       
-        setOtptextColor({
-          textcolor: 'rgba(164, 34, 22, 1)',
-          tintColor: 'rgba(164, 34, 22, 1)',
-          offTintColor: 'rgba(164, 34, 22, 1)',
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-        });
-      }
-    
-   // }
+      setisErrorState(true);
+
+      console.log('Error State-------------->', isErrorstate);
+
+      setOtptextColor({
+        textcolor: 'rgba(164, 34, 22, 1)',
+        tintColor: 'rgba(164, 34, 22, 1)',
+        offTintColor: 'rgba(164, 34, 22, 1)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+      });
+    } else {
+      
+      setisErrorState(false);
+      setOtptextColor({
+        textcolor: '#5F6368',
+        tintColor: 'rgba(239, 240, 242, 1)',
+        offTintColor: 'rgba(239, 240, 242, 1)',
+        backgroundColor: 'rgba(239, 240, 242, 1)',
+      });
+    }
+
+    // }
   }, [otpResponce]);
 
   useEffect(() => {
@@ -116,18 +124,15 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
-
-      <CheckInterNet/> 
-      dispatch(loadOtpData(mobileNumber, otp));
-      
-
+    <CheckInterNet />;
+    dispatch(loadOtpData(mobileNumber, otp));
   };
 
   // const reSendOTP = () => {
   //  // dispatch(loadOtpData_Resend(mobileNumber));
-  
+
   //   Loader(true)
-    
+
   // };
 
   /** depricated function */
@@ -150,7 +155,7 @@ const GetOtpScreen = ({navigation}) => {
         <View>
           <Bubble />
         </View>
-        <CheckInterNet/>
+        <CheckInterNet />
 
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
@@ -180,36 +185,36 @@ const GetOtpScreen = ({navigation}) => {
                 </Text>
               </View>
               {/* OTP input */}
-              <OTPTextInput
-                ref={e => console.log(';sdd')}
-                containerStyle={{borderColor: 'red'}}
-                adjustFontSizeToFit={true}
-                numberOfLines={1}
-                textInputStyle={{
-                  color: otptextcolor.textcolor,
-                  backgroundColor: otptextcolor.backgroundColor,
-                  fontFamily: fontFamily.Alte_DIN,
-                  fontSize:21
-                  
-                }}
-                tintColor={otptextcolor.tintColor}
-                offTintColor={otptextcolor.offTintColor}
-                handleTextChange={text => {
-                  if (text.trim().length === 4) {
-                    setOtpNum(text);
-                    setActiveBtn('rgba(rgba(14, 0, 113, 1))');
-                    setVisbal(false);
-                  } else {
-                    setActiveBtn('rgba(112, 112, 112, 0.22)');
-                    setVisbal(true);
-                  }
-                }}
-              />
+              <View
+                style={{display: isErrorstate == 'false' ? 'none' : 'flex'}}>
+                <OTPTextInput
+                  ref={e => console.log(';sdd')}
+                  containerStyle={{borderColor: 'red'}}
+                  adjustFontSizeToFit={true}
+                  numberOfLines={1}
+                  textInputStyle={{
+                    color: otptextcolor.textcolor,
+                    backgroundColor: otptextcolor.backgroundColor,
+                    fontFamily: fontFamily.Alte_DIN,
+                    fontSize: 21,
+                  }}
+                  tintColor={otptextcolor.tintColor}
+                  offTintColor={otptextcolor.offTintColor}
+                  handleTextChange={text => {
+                    if (text.trim().length === 4) {
+                      setOtpNum(text);
+                      setActiveBtn('rgba(rgba(14, 0, 113, 1))');
+                      setVisbal(false);
+                    } else {
+                      setActiveBtn('rgba(112, 112, 112, 0.22)');
+                      setVisbal(true);
+                    }
+                  }}
+                />
+              </View>
               {/* {OtpErrorHandler()} */}
               <View style={styles.OtpTimerView}>
-
-                <OtpTimerHandler isErrorstate={isErrorstate}/>
-                
+                <OtpTimerHandler isErrorstate={isErrorstate} />
 
                 {/* <OtpTimerHandler Resend={test => reSendOTP()}/> */}
               </View>
