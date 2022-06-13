@@ -48,6 +48,10 @@ const CONSTANT = {
     Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
     Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 
+    IsImportant_Data: 'IsImportant_Data',
+    IsImportant_ERROR: 'IsImportant_ERROR',
+    IsImportant_SUCCESS: 'IsImportant_SUCCESS',
+
     
 
 

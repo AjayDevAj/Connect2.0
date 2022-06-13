@@ -66,7 +66,8 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
         "other_chat": other_chat,
         "pagination": pagination,
         "unread": unread,
-        "user_id": user_id != "" ?token_Value.user.id:"",
+        "user_id": user_id != "" ?token_Value.user.id:""
+        
     };
 
     var api_url = API_URL_STAGING + '/message/message-list';

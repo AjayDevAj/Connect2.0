@@ -55,7 +55,9 @@ function* handleChatResponseData(action) {
             action.chat_status, 
             action.pagination, 
             action.other_chat, 
-            action.user_id
+            action.user_id,
+            action.search,
+
         );
         // console.log('Chat Data Response', data)
         yield put(getResponse(data))
