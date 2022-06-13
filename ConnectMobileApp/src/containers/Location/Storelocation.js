@@ -10,14 +10,20 @@ import {loadStoreLocationData} from '../../actions/StoreLocationAction';
 import {useIsFocused} from '@react-navigation/native';
 import {saveObject} from '../../utility/StorageClass';
 import {location_Data_Key} from '../../utility/Constant';
+import {useRoute} from '@react-navigation/native';
 
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
+  const route = useRoute();
   const SLResponce = useSelector(store => store.StoreLocationDataResponse);
   const [responceData, setData] = useState([]);
+  const userName = route.params.userName;
+  console.log(userName)
+  
 
   useEffect(() => {
+    SetuserName(userName)
     if (SLResponce.data != undefined) {
       setData(SLResponce.data.locations);
     }
@@ -36,8 +42,10 @@ export default Storelocation = ({navigation}) => {
     onPressCloseButton: () => closePanel(),
   });
 
-  const [username, SetuserName] = useState('Priyanka11');
+  const [username, SetuserName] = useState('');
   const [isPanelActive, setIsPanelActive] = useState(true);
+
+  
 
   const openPanel = () => {
     setIsPanelActive(true);
