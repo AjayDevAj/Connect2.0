@@ -46,7 +46,7 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 ** 
 */
 
-const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id) => {
+const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id, search_text) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     /*
@@ -66,11 +66,14 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
         "other_chat": other_chat,
         "pagination": pagination,
         "unread": unread,
-        "user_id": user_id != "" ?token_Value.user.id:""
-        
+        "user_id": user_id != "" ?token_Value.user.id:"",
     };
 
-    var api_url = API_URL_STAGING + '/message/message-list';
+    if (search_text) {
+        var api_url = API_URL_STAGING + '/message/message-list?search='+search_text
+    } else {
+        var api_url = API_URL_STAGING + '/message/message-list';
+    }
 
     var headers = {
         Authorization:

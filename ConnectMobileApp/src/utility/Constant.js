@@ -52,7 +52,9 @@ const CONSTANT = {
     IsImportant_ERROR: 'IsImportant_ERROR',
     IsImportant_SUCCESS: 'IsImportant_SUCCESS',
 
-    
+    SEARCH_DATA: 'SEARCH_DATA',
+    SEARCH_DATA_ERROR: 'SEARCH_DATA_ERROR',
+    SEARCH_DATA_SUCCESS: 'SEARCH_DATA_SUCCESS',
 
 
 }
