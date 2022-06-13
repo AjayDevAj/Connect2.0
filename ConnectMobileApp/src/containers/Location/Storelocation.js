@@ -73,8 +73,10 @@ export default Storelocation = ({navigation}) => {
           color="#000000"
           marginTop={30}
           padding={30}
+
+          //onPress={() => {navigation.goBack()}}
+
           onPress={()=> navigation.goBack()} 
-         
          
           backgroundColor="transparent">
           <Text

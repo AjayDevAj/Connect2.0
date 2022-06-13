@@ -38,7 +38,7 @@ import storeLocationDataReducer from "./StoreLocationReducer";
 import Unassigned_Chat_Reducer from "./Unassigned_Chat_Reducer";
 import resendotpDataReducer from "./ResendOtpReducer";
 import allChat_Conversation_Reducer from "./AllChat_Conversation_Reducer";
-
+import isImportantDataReducer from "./IsImportantReducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -83,7 +83,11 @@ const rootReducers = combineReducers({
     ChatResponseData: ChatReducer,
     StoreLocationDataResponse: storeLocationDataReducer,
     Unassigned_Chat_Data: Unassigned_Chat_Reducer,
-    allChat_Conversation_Data:allChat_Conversation_Reducer
+    allChat_Conversation_Data:allChat_Conversation_Reducer,
+    ResendOtpResonceData:resendotpDataReducer,
+    isImportantResonceData: isImportantDataReducer,
+    
+    
 
 })
 

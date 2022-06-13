@@ -52,6 +52,9 @@ const CONSTANT = {
     loadAllChat_Conversation_ERROR:'loadAllChat_Conversation_ERROR',
     loadAllChat_Conversation_SUCCESS:'loadAllChat_Conversation_SUCCESS',
 
+    IsImportant_Data: 'IsImportant_Data',
+    IsImportant_ERROR: 'IsImportant_ERROR',
+    IsImportant_SUCCESS: 'IsImportant_SUCCESS',
 
 }
 

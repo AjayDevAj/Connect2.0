@@ -38,6 +38,7 @@ import ChatDataWatcherSaga from './ChatSaga';
 import StoreLocationDataWatcherSaga from './StoreLocationSaga';
 import Unassigned_Chat_Data_Saga from './Unassigned_Chat_Sage';
 import AllChat_ConversationDataWatcherSaga from './AllChat_Conversation_Saga';
+import isImportantDataWatcherSaga from './IsImportantSaga';
 
 
 export default function* rootSaga() {
@@ -48,6 +49,7 @@ export default function* rootSaga() {
         ChatDataWatcherSaga(),
         StoreLocationDataWatcherSaga(),
         Unassigned_Chat_Data_Saga(),
-        AllChat_ConversationDataWatcherSaga()
+        AllChat_ConversationDataWatcherSaga(),
+        isImportantDataWatcherSaga(),
     ]);
 }
