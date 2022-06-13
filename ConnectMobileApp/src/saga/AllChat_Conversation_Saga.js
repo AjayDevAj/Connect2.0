@@ -18,7 +18,6 @@ function* handleAllChat_ConversationResponse(action) {
       action.chat_status_type,
     );
 
-    console.log('Store Location Response Saga :-', data);
     yield put(AllChat_Conversation_Response(data));
   } catch (errors) {
     yield put(AllChat_Conversation_Error(errors.toString()));
@@ -26,7 +25,6 @@ function* handleAllChat_ConversationResponse(action) {
 }
 
 export default function* AllChat_ConversationDataWatcherSaga() {
-  console.log('StoreLocation Saga Watcher');
   yield takeEvery(
     CONSTANT.loadAllChat_Conversation_Data,
     handleAllChat_ConversationResponse,

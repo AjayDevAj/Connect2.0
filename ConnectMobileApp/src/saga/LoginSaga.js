@@ -38,7 +38,6 @@ import { getError, getResponse } from '../actions/LoginAction'
 function* handleLoginDataResponse(action) {
     try {
         const data = yield call(getLogin,action.mobileNumber)
-        console.log('LogIn Response', data)
         yield put(getResponse(data))
     }
     catch(errors) {
@@ -48,6 +47,5 @@ function* handleLoginDataResponse(action) {
 
 
 export default function* LoginDataWatcherSaga() {
-    console.log('LogIn Saga Watcher')
     yield takeEvery(CONSTANT.LOGIN_DATA, handleLoginDataResponse)
 }

@@ -34,8 +34,8 @@ import {API_URL_STAGING} from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 
 const getLogin = async (mobileNumber) => {
-    let controller = new AbortController();
-    setTimeout(() => controller.abort(), 20000);
+    // let controller = new AbortController();
+    // setTimeout(() => controller.abort(), 20000);
 
     /*
     **
@@ -53,7 +53,7 @@ const getLogin = async (mobileNumber) => {
     const response = await fetch(API_URL_STAGING + '/user/auth/getOTP', {
         method: 'POST',
         body:bodyData,
-        signal: controller.signal
+        // signal: controller.signal
 
     })
 
@@ -66,11 +66,11 @@ const getLogin = async (mobileNumber) => {
     return data;
 
 } catch(err) {
-    if (err.name == 'AbortError') { // handle abort()
-      alert("Aborted!");
-    } else {
-      throw err;
-    }
+    // if (err.name == 'AbortError') { // handle abort()
+    //   alert("Aborted!");
+    // } else {
+    //   throw err;
+    // }
   }
 }
 

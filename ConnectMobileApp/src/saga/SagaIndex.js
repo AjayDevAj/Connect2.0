@@ -49,7 +49,7 @@ export default function* rootSaga() {
         ChatDataWatcherSaga(),
         StoreLocationDataWatcherSaga(),
         Unassigned_Chat_Data_Saga(),
-        AllChat_ConversationDataWatcherSaga(),
         isImportantDataWatcherSaga(),
+        AllChat_ConversationDataWatcherSaga(),
     ]);
 }

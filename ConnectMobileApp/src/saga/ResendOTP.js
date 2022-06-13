@@ -50,7 +50,6 @@ import { resendOTP } from '../api/ResendOTP'
 function* handleResendOtpDataResponse(action) {
     try {
         const data = yield call(resendOTP,action.mobileNumber)
-        console.log('OTP Screen Resend Response', data)
         yield put(getResponse_Resend(data))
     }
      catch(errors) {
@@ -69,6 +68,5 @@ function* handleResendOtpDataResponse(action) {
 
 
 export default function* ResendOtpDataWatcherSaga() {
-    console.log('OTP Screen Saga Watcher Resend')
     yield takeEvery(CONSTANT.Resend_OTP_DATA, handleResendOtpDataResponse)
 }
