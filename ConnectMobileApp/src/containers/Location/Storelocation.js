@@ -57,21 +57,25 @@ export default Storelocation = ({navigation}) => {
   };
 
   return (
+    
     <>
+   
       {/* // Uper View */}
       <View
         style={{
           flex: 2,
         }}>
-        {/* <Icon name="arrow-back" size={30} color="black"  marginTop={30} onPress={()=>Alert.alert('yes')}/> */}
-
+          
+          
         <Icon.Button
           name="arrow-back"
           size={30}
-          color="Black"
+          color="#000000"
           marginTop={30}
           padding={30}
-          onPress={()=> navigation.navigate.goBack()} 
+          onPress={()=> navigation.goBack()} 
+         
+         
           backgroundColor="transparent">
           <Text
             style={{
@@ -85,6 +89,7 @@ export default Storelocation = ({navigation}) => {
           </Text>
         </Icon.Button>
 
+        {/* <Icon name='arrow-back' size={30}  onPress={()=> navigation.goBack()}> <Text style={{fontSize:18,fontFamily: fontFamily.Alte_DIN,fontWeight: 'bold',}}> Store Location</Text> </Icon> */}
         
         <View
           style={{
@@ -97,6 +102,7 @@ export default Storelocation = ({navigation}) => {
             justifyContent: 'flex-end',
             padding: 30,
           }}>
+            
           <View
             style={{
               alignItems: 'flex-start',
@@ -122,6 +128,7 @@ export default Storelocation = ({navigation}) => {
               </Text>
             </Text>
           </View>
+         
           <Text
             style={{
               fontSize: 12,
@@ -140,6 +147,7 @@ export default Storelocation = ({navigation}) => {
 
             // backgroundColor: 'black',
           }}>
+             
           <UpperviewBG width={'70%'} height={'75%'} />
         </View>
       </View>
@@ -149,9 +157,12 @@ export default Storelocation = ({navigation}) => {
       <View
         style={{
           flex: 0.8,
+          
         }}>
+         
         <SwipeablePanel
           barStyle={{backgroundColor: '#2F6EF329'}}
+          allowTouchOutside={true}
           style={{
             shadowRadius: 5,
             shadowOpacity: 2,
@@ -174,9 +185,9 @@ export default Storelocation = ({navigation}) => {
           isActive={isPanelActive}>
           <ScrollView>
             {responceData.length > 0 &&
-              responceData.map(item => {
+              responceData.map((item) => {
                 return (
-                  <View style={{}}>
+                  <View style={{}} key={item.id}>
                     <Text
                       style={{
                         color: '#000000',
@@ -189,7 +200,7 @@ export default Storelocation = ({navigation}) => {
                     </Text>
                     <Text
                       style={{
-                        color: 'gray',
+                        color: '#808080',
                         opacity: 70,
                         fontSize: 15,
                         marginTop: 10,
@@ -224,13 +235,16 @@ export default Storelocation = ({navigation}) => {
           height: 80,
           // bottom: 20,
           backgroundColor: '#fff',
+        
         }}>
         <TouchableOpacity
           onPress={() => continueOnpress()}
           style={styles.ContinueButton}>
           <Text style={styles.ContinueButtonText}>CONTINUE</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+         
       </View>
+      
     </>
   );
 };
