@@ -31,6 +31,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import {useIsFocused} from '@react-navigation/native';
+import navigationString from '../utility/NavigationString';
 
 const AllChat = ({navigation}) => {
   const menuHandler = () => {
@@ -71,9 +72,22 @@ const AllChat = ({navigation}) => {
         filterHandler={filterHandler}
       />
       <SegmentComponent onClickSegmentChanged={value => callAPI(value)} />
-      {chatResponseData.data != null && (
-        <ChatList data={chatResponseData.data.result} />
-      )}
+      {/* {chatResponseData.data != null && (
+        <ChatList data={chatResponseData.data.result} 
+        onPress_Chat={(selected_Item) => 
+          // console.log('testObj',testObj)
+          navigation.navigate(navigationString.Message,{selected_Item})
+
+        } */}
+            {(chatResponseData.data != null )&&
+        <ChatList onPress_Chat={(selected_Item) => 
+          // console.log('testObj',testObj)
+          navigation.navigate(navigationString.Message,{selected_Item})
+
+        } data={
+          chatResponseData.data.result
+        }/>
+      }
     </View>
   );
 };
