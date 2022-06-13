@@ -60,6 +60,7 @@ import { CONSTANT } from '../../utility/Constant';
 import Loader from '../../utility/Loader';
 
 
+
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
   
