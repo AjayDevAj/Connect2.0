@@ -59,8 +59,10 @@ import { otpResponse_Storage_Key } from "../../utility/Constant";
 import { CONSTANT } from '../../utility/Constant';
 import Loader from '../../utility/Loader';
 
+
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
+  
   const otpResponce = useSelector(store => store.OtpResponceData);
   const resendOtpResponce = useSelector(store => store.OtpResponceData);
   const route = useRoute();
@@ -85,7 +87,7 @@ const GetOtpScreen = ({navigation}) => {
     
     if (otpResponce.code != null ) {
       saveObject(otpResponce.data,otpResponse_Storage_Key)
-      navigation.navigate(NavigationString.Location);
+      navigation.navigate(NavigationString.Location,{userName:otpResponce.data.user.name});
     }
     if (otpResponce != '' && otpResponce.data.code != null && otpResponce.data.code == 400) {
       // if (otpResponce.data.code == 400) {
