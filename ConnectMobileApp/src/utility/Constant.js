@@ -48,7 +48,9 @@ const CONSTANT = {
     Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
     Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 
-    
+    loadAllChat_Conversation_Data:'loadAllChat_Conversation_Data',
+    loadAllChat_Conversation_ERROR:'loadAllChat_Conversation_ERROR',
+    loadAllChat_Conversation_SUCCESS:'loadAllChat_Conversation_SUCCESS',
 
 
 }

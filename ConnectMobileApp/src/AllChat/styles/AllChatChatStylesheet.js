@@ -36,7 +36,7 @@ const chatStyles = StyleSheet.create({
     chatMainContainer: {
         backgroundColor: '#F7FCFF',
         width: '100%', 
-        height: '100%',
+        flex:1
     },
     chatListMainContainer: {
         backgroundColor: '#fff', 
