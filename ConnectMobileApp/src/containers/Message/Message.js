@@ -5,45 +5,59 @@ import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {GiftedChat, InputToolbar, Composer} from 'react-native-gifted-chat';
-import {renderComposer, renderSend, renderInputToolbar,renderBubble} from './BottomToolbar';
+import {
+  renderComposer,
+  renderSend,
+  renderInputToolbar,
+  renderBubble,
+} from './BottomToolbar';
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../../utility/Constant'
+import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {loadIsImportantData} from '../../actions/IsImportantAction';
 
 const Message = ({navigation, route}) => {
   const [loginUserData, setLoginUserData] = useState();
 
   const getUserData = async () => {
-   var test = await getOtpResponse(otpResponse_Storage_Key);
-   setLoginUserData(test)
-  }
+    var test = await getOtpResponse(otpResponse_Storage_Key);
+    setLoginUserData(test);
+  };
   const menuHandler = () => {
     navigation.goBack();
   };
 
   const searchHandler = () => {
     alert('Search Handler');
+    dispatch(
+      loadIsImportantData(
+        getDataFromParam.selected_Item.conversation_id,
+        getDataFromParam.selected_Item.is_important == 1 ? 0 : 1,
+      ),
+    );
   };
 
   const filterHandler = () => {
     alert('Filter Handler');
   };
   const dispatch = useDispatch();
-  const allChat_Conversation_Data = useSelector(store => store.allChat_Conversation_Data);
+  const allChat_Conversation_Data = useSelector(
+    store => store.allChat_Conversation_Data,
+  );
   const isFocused = useIsFocused();
   const getDataFromParam = route.params;
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     if (isFocused) {
-    getUserData()
-    callAPI()
+      getUserData();
+      callAPI();
     }
   }, [isFocused]);
 
   useEffect(() => {
     if (allChat_Conversation_Data.data) {
-    setMessages(allChat_Conversation_Data.data.data)
+      setMessages(allChat_Conversation_Data.data.data);
     }
   }, [allChat_Conversation_Data]);
 
@@ -77,27 +91,26 @@ const Message = ({navigation, route}) => {
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
-      <View style={{flex:1}}>
-      {console.log('loginUserData',loginUserData)}
+      <View style={{flex: 1}}>
+        {console.log('loginUserData', loginUserData)}
 
-        {allChat_Conversation_Data.data && loginUserData != undefined &&
-      <GiftedChat
-        infiniteScroll={true}
-        alignTop={true}
-        messages={messages}
-        onSend={messages => onSend(messages)}
-        renderComposer={renderComposer}
-        renderSend={renderSend}
-        renderInputToolbar={renderInputToolbar}
-        renderBubble={renderBubble}
-        user={{
-          // _id: 'a',
-          agent_name: loginUserData.user.name,
-        }}
-      />
-}
-    </View>
-
+        {allChat_Conversation_Data.data && loginUserData != undefined && (
+          <GiftedChat
+            infiniteScroll={true}
+            alignTop={true}
+            messages={messages}
+            onSend={messages => onSend(messages)}
+            renderComposer={renderComposer}
+            renderSend={renderSend}
+            renderInputToolbar={renderInputToolbar}
+            renderBubble={renderBubble}
+            user={{
+              // _id: 'a',
+              agent_name: loginUserData.user.name,
+            }}
+          />
+        )}
+      </View>
     </View>
   );
 };
