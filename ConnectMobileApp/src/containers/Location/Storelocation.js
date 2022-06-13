@@ -12,8 +12,9 @@ import {saveObject} from '../../utility/StorageClass';
 import {location_Data_Key} from '../../utility/Constant';
 import {useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import GetOtpScreen from '../Otp/GetOtpScreen';
 
-export default Storelocation = ({ navigation: { goBack } }) => {
+export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
   const route = useRoute();
@@ -70,7 +71,7 @@ export default Storelocation = ({ navigation: { goBack } }) => {
           color="Black"
           marginTop={30}
           padding={30}
-          onPress={() => {navigation.goBack()}}
+          onPress={()=> navigation.navigate.goBack()} 
           backgroundColor="transparent">
           <Text
             style={{
@@ -84,6 +85,7 @@ export default Storelocation = ({ navigation: { goBack } }) => {
           </Text>
         </Icon.Button>
 
+        
         <View
           style={{
             flex: 1,
