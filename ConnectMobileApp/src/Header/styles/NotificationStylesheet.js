@@ -38,8 +38,8 @@ const notificationStyles = StyleSheet.create({
         backgroundColor: '#fff', 
         width: '100%', 
         height: '5%',
-        position: 'absolute',
-        top: 170,
+        justifyContent: 'flex-start',
+        marginVertical: '3%',
     },
     notificationLeftIcon: {
         color: '#657180',
@@ -56,7 +56,7 @@ const notificationStyles = StyleSheet.create({
       fontFamily: fontFamily.Poppins,
       letterSpacing: -0.28,
       opacity: 1,
-      top: 2
+    //   top: 2
 
     },
     notificationRightIcon: {
