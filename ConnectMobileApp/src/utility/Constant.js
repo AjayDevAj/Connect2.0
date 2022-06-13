@@ -56,6 +56,9 @@ const CONSTANT = {
     SEARCH_DATA_ERROR: 'SEARCH_DATA_ERROR',
     SEARCH_DATA_SUCCESS: 'SEARCH_DATA_SUCCESS',
 
+    loadAllChat_Conversation_Data:'loadAllChat_Conversation_Data',
+    loadAllChat_Conversation_ERROR:'loadAllChat_Conversation_ERROR',
+    loadAllChat_Conversation_SUCCESS:'loadAllChat_Conversation_SUCCESS',
 
 }
 

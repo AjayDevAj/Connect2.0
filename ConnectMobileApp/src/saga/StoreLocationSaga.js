@@ -7,7 +7,6 @@ import { getStoreLocationError, getStoreLocationResponse } from '../actions/Stor
 function* handleStoreLocationResponse(action) {
     try {
         const data = yield call(getStoreLocations)
-         console.log('Store Location Response Saga :-', data)
         yield put(getStoreLocationResponse(data))
     }
     catch(errors) {
@@ -16,6 +15,5 @@ function* handleStoreLocationResponse(action) {
 }
 
 export default function* StoreLocationDataWatcherSaga() {
-    console.log('StoreLocation Saga Watcher')
     yield takeEvery(CONSTANT.STORE_LOCATION_DATA, handleStoreLocationResponse)
 }
