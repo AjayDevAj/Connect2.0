@@ -117,6 +117,10 @@ const GetOtpScreen = ({navigation}) => {
   }, [otpResponce]);
 
   useEffect(() => {
+    if(otpResponce != undefined && otpResponce.data != undefined && otpResponce.data.code==401)
+    {
+      navigation.goBack()
+    }
     // setTimerEnable(true)
   }, [resendOtpResponce]);
 
