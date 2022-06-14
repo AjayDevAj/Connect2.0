@@ -33,7 +33,7 @@ import ChatList from '../Chat/ChatList';
 import {useIsFocused} from '@react-navigation/native';
 import navigationString from '../utility/NavigationString';
 
-const AllChat = ({navigation}) => {
+const AllChat = ({navigation,route}) => {
   const menuHandler = () => {
     navigation.goBack();
   };
@@ -48,10 +48,11 @@ const AllChat = ({navigation}) => {
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
   const isFocused = useIsFocused();
+  const [currentTabStatus, setCurrentTabStatus] = useState(route.params.openTab);
 
   useEffect(() => {
     if (isFocused) {
-      callAPI()
+      callAPI(currentTabStatus);
     }
   }, [isFocused]);
   useEffect(() => {}, [chatResponseData]);
@@ -71,17 +72,26 @@ const AllChat = ({navigation}) => {
         searchHandler={searchHandler}
         filterHandler={filterHandler}
       />
-      <SegmentComponent onClickSegmentChanged={value => callAPI(value)} />
-      {/* {chatResponseData.data != null && (
-        <ChatList data={chatResponseData.data.result} 
-        onPress_Chat={(selected_Item) => 
-          // console.log('testObj',testObj)
-          navigation.navigate(navigationString.Message,{selected_Item})
+      {chatResponseData.data != null && (
+        <SegmentComponent
+          onClickSegmentChanged={value => {
+            setCurrentTabStatus(value);
+            callAPI(value);
+          }}
+          style={{position: 'relative'}}
+          badgesValue={[
+            chatResponseData.data.openMessageCount,
+            chatResponseData.data.closedMessageCount,
+            chatResponseData.data.assignedMessageCount,
+          ]}
+          selectedIndexTab={route.params.openTab == "closed" ? 1 : 
+          route.params.openTab == 'assign_chat' ? 2 : 0}
+        />
+      )}
 
-        } */}
+    
             {(chatResponseData.data != null )&&
         <ChatList onPress_Chat={(selected_Item) => 
-          // console.log('testObj',testObj)
           navigation.navigate(navigationString.Message,{selected_Item})
 
         } data={

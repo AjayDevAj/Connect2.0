@@ -40,6 +40,7 @@ export const API_URL_DEV = 'https://test-chat.starify.co';
 *
 ** 
 */
+export const API_URL_STAGING = 'https://test-chat.starify.co';
 
-export const API_URL_STAGING = 'https://test-chat-1.starify.co';
+// export const API_URL_STAGING = 'https://test-chat-1.starify.co';
 

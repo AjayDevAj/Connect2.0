@@ -4,12 +4,14 @@ import TopHeader from '../../Header/TopHeader';
 import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
-import {GiftedChat, InputToolbar, Composer} from 'react-native-gifted-chat';
+import {GiftedChat,Time} from 'react-native-gifted-chat';
 import {
   renderComposer,
   renderSend,
   renderInputToolbar,
   renderBubble,
+  renderDays,
+  renderTime,
 } from './BottomToolbar';
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
@@ -57,9 +59,44 @@ const Message = ({navigation, route}) => {
 
   useEffect(() => {
     if (allChat_Conversation_Data.data) {
+      console.log('allChat_Conversation_Data ',allChat_Conversation_Data.data.data)
       setMessages(allChat_Conversation_Data.data.data);
     }
   }, [allChat_Conversation_Data]);
+
+  // useEffect(() => {
+  //   setMessages([
+  //     {
+  //       _id: 1,
+  //       text: 'Hello',
+  //       createdAt: new Date(),
+  //       user: {
+  //         _id: 2,
+  //         name: 'React Native',
+  //         avatar: 'https://placeimg.com/140/140/any',
+  //       },
+  //     },
+  //     {
+  //       _id: 1,
+  //       text: 'My message',
+  //       createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
+  //       user: {
+  //         _id: 2,
+  //         name: 'React Native',
+  //         // avatar: 'https://facebook.github.io/react/img/logo_og.png',
+  //       },
+  //       image: 'https://placeimg.com/140/140/any',
+  //       // You can also add a video prop:
+  //       // Mark the message as sent, using one tick
+  //       sent: true,
+  //       // Mark the message as received, using two tick
+  //       received: true,
+  //       // Mark the message as pending with a clock loader
+  //       pending: true,
+  //       // Any additional custom parameters are passed through
+  //     }
+  //   ])
+  // }, [])
 
   const callAPI = () => {
     dispatch(
@@ -92,7 +129,7 @@ const Message = ({navigation, route}) => {
         filterHandler={filterHandler}
       />
       <View style={{flex: 1}}>
-        {console.log('loginUserData', loginUserData)}
+        {console.log('messages data verify', messages)}
 
         {allChat_Conversation_Data.data && loginUserData != undefined && (
           <GiftedChat
@@ -105,9 +142,11 @@ const Message = ({navigation, route}) => {
             renderInputToolbar={renderInputToolbar}
             renderBubble={renderBubble}
             user={{
-              // _id: 'a',
+              _id: 'a',
               agent_name: loginUserData.user.name,
             }}
+            renderDay={renderDays}
+            renderTime={renderTime}
           />
         )}
       </View>

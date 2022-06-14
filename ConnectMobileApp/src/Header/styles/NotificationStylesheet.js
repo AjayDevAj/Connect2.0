@@ -56,6 +56,8 @@ const notificationStyles = StyleSheet.create({
       fontFamily: fontFamily.Poppins,
       letterSpacing: -0.28,
       opacity: 1,
+      textTransform: 'capitalize',
+
     //   top: 2
 
     },
