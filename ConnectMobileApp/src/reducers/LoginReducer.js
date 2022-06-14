@@ -39,6 +39,7 @@ import Unassigned_Chat_Reducer from "./Unassigned_Chat_Reducer";
 import resendotpDataReducer from "./ResendOtpReducer";
 import allChat_Conversation_Reducer from "./AllChat_Conversation_Reducer";
 import isImportantDataReducer from "./IsImportantReducer";
+import AcceptRejectChatDataReducer from "./AcceptRejectChatReducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -75,6 +76,7 @@ const loginDataReducer = (state = '', action) => {
 //     return appReducer(state, action);
 //   };
 
+/****************** All combine reducers *******************/
 
 const rootReducers = combineReducers({
     
@@ -86,9 +88,8 @@ const rootReducers = combineReducers({
     allChat_Conversation_Data:allChat_Conversation_Reducer,
     ResendOtpResonceData:resendotpDataReducer,
     isImportantResonceData: isImportantDataReducer,
+    AcceptRejectChatResponceData: AcceptRejectChatDataReducer,
     
-    
-
 })
 
 export default rootReducers;

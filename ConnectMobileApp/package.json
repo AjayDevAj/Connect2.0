@@ -43,6 +43,7 @@
     "react-native-swipe-up-panel": "^1.2.22",
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.1.0",
+    "react-navigation-drawer": "^2.7.2",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
