@@ -29,10 +29,10 @@
  **
  */
 
-import React, {useState, useEffect} from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {NavigationContainer, StackActions} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
@@ -44,8 +44,10 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
-import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
-import Message from '../containers/Message/Message'
+import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
+import Message from '../containers/Message/Message';
+
+
 /*
  **
  *
@@ -83,6 +85,7 @@ const OtpScreen = () => {
 
 const Stack = createNativeStackNavigator();
 
+
 /**
  * Routes matain the navigation stacks
  */
@@ -91,7 +94,7 @@ const Routes = () => {
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-      getUserState();
+    getUserState();
   });
 
   const getUserState = async () => {
@@ -119,17 +122,17 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
-          {console.log('Get all keys :- before initialRouteName set',initialState )}
+          {console.log('Get all keys :- before initialRouteName set', initialState)}
           <Stack.Navigator initialRouteName={initialState}>
             <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name={navigationString.LOGIN}
               component={Login}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name={navigationString.GetOtpScreen}
@@ -158,19 +161,23 @@ const Routes = () => {
             <Stack.Screen
               name={navigationString.RouteTabBar}
               component={RouteTabBar}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name={navigationString.AllChat}
               component={AllChat}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name={navigationString.Message}
               component={Message}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
+
+          
+
+
           <Incoming_Chat />
         </NavigationContainer>
       )}

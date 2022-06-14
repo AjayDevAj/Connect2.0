@@ -60,6 +60,11 @@ const CONSTANT = {
     loadAllChat_Conversation_ERROR:'loadAllChat_Conversation_ERROR',
     loadAllChat_Conversation_SUCCESS:'loadAllChat_Conversation_SUCCESS',
 
+    ACCEPT_REJECT_CHAT_DATA: 'ACCEPT_REJECT_CHAT_DATA',
+    ACCEPT_REJECT_CHAT_ERROR: 'ACCEPT_REJECT_CHAT_ERROR',
+    ACCEPT_REJECT_CHAT_SUCCESS: 'ACCEPT_REJECT_CHAT_SUCCESS',
+
+
 }
 
 export { CONSTANT }
