@@ -32,15 +32,7 @@ export default Filter = () => {
     <SafeAreaView style={styles.container}>
       {/* Top header buttons */}
 
-      <View
-        style={{
-          justifyContent: 'space-evenly',
-          padding: 5,
-          flexDirection: 'row',
-          width: '100%',
-          height: 48,
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-        }}>
+      <View style={styles.header}>
         <Icon.Button
           name="filter-alt"
           size={30}
@@ -122,17 +114,9 @@ export default Filter = () => {
             opacity: 40,
           }}></View>
       </View>
+{/* Bottom container for footer */}
 
-      <View
-        style={{
-          paddingBottom: 0,
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-          height: 48,
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-        }}>
+      <View style={styles.footer}>
         <TouchableOpacity
           onPress={() => {
             {
@@ -192,5 +176,35 @@ const styles = StyleSheet.create({
     opacity: 100,
     fontFamily: fontfaimily.Alte_DIN,
     size: 16,
+  },
+
+  header: {
+    justifyContent: 'space-evenly',
+    padding: 5,
+    flexDirection: 'row',
+    width: '100%',
+    height: 48,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    shadowColor: 'rgba(0, 0, 0, 0.03)',
+    shadowRadius: 2,
+    shadowOffset: {
+      width:1,
+      height:5
+    },
+    shadowOpacity:0.1,
+  },
+  footer: {
+    paddingBottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    height: 48,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+
+    shadowColor: 'rgba(0, 0, 0, 0.03)',
+    shadowRadius: '',
+    shadowOffset: '',
+    shadowOpacity: '',
   },
 });

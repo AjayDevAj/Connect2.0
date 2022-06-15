@@ -121,7 +121,7 @@ const Routes = () => {
       {statusKeyLoaded && (
         <NavigationContainer>
           {console.log('Get all keys :- before initialRouteName set',initialState )}
-          <Stack.Navigator initialRouteName={OnBoarding}>
+          <Stack.Navigator initialRouteName={Filter}>
             <Stack.Screen
               name={navigationString.OnBoarding}
               component={Filter}
