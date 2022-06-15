@@ -8,7 +8,7 @@ import { getIsImportantData} from '../api/IsImportantApi'
 
 function* handleIsImportantDataResponse(action) {
     try {
-        const data = yield call(getIsImportantData.action.conversation_id, action.is_important)
+        const data = yield call(getIsImportantData,action.conversation_id, action.is_important);
         yield put(getIsImportantResponse(data))
     }
     catch(errors) {

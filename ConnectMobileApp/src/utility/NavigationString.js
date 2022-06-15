@@ -44,4 +44,17 @@ Chat: "Chat",
 Customers: "Customers",
 Reviews: "Reviews",
 
+
+/*
+**
+*
+** Drawer bar navigations
+*
+** 
+*/
+
+Posts: "Posts",
+Offers: "Offers",
+
+
 }
