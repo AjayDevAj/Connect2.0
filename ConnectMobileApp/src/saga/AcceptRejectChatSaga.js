@@ -9,7 +9,7 @@ import { getAcceptRejectChatData } from '../api/AcceptRejectChatApi'
 
 function* handleAcceptRejectChatDataResponse(action) {
     try {
-        const data = yield call(getAcceptRejectChatData.action.conversation_id, action.is_important)
+        const data = yield call(getAcceptRejectChatData,action.conversation_id, action.is_important)
         yield put(getAccept_RejectChat_Response(data))
     }
     catch(errors) {

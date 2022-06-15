@@ -30,51 +30,32 @@
 ** 
 */
 
-import {API_URL_STAGING} from '../utility/Config_File'
-import { CONSTANT } from '../utility/Constant';
-
+import { API_URL_STAGING } from '../utility/Config_File'
 const getLogin = async (mobileNumber) => {
-    // let controller = new AbortController();
-    // setTimeout(() => controller.abort(), 20000);
 
-    /*
-    **
-    *
-    ** constant defined to get otp from an api
-    *
-    ** 
-    */
+    /****** constant defined to get login from an api ****/
 
-    
-
-    const bodyData = new FormData(); 
-    bodyData.append('phonenumber',mobileNumber)
+    const bodyData = new FormData();
+    bodyData.append('phonenumber', mobileNumber)
     try {
-    const response = await fetch(API_URL_STAGING + '/user/auth/getOTP', {
-        method: 'POST',
-        body:bodyData,
-        // signal: controller.signal
+        const response = await fetch(API_URL_STAGING + '/user/auth/getOTP', {
+            method: 'POST',
+            body: bodyData,
+        })
+        const data = response.json()
+        console.log('login data  : ', data)
 
-    })
+        if (response.status > 400) {
+            throw new Error(data.errors)
+        }
+        return data;
 
-    const data = response.json()
-    console.log('mobile : ',data)
-   
-    if (response.status > 400) {
-        throw new Error(data.errors)
+    } catch (err) {
+        console.log("Show Error :: ", err)
     }
-    return data;
-
-} catch(err) {
-    // if (err.name == 'AbortError') { // handle abort()
-    //   alert("Aborted!");
-    // } else {
-    //   throw err;
-    // }
-  }
 }
 
-export {getLogin}
-   
+export { getLogin }
 
-     
+
+

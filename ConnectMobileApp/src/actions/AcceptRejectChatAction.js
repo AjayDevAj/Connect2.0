@@ -11,6 +11,9 @@
 
 import { CONSTANT } from "../utility/Constant";
 
+/********** In loadAccept_RejectChat_Data method to pass two Parameter 
+  "conversation_id" as string value , "is_important" as int value...   *********/
+
 const loadAccept_RejectChat_Data = (conversation_id, is_important) => ({
     type: CONSTANT.ACCEPT_REJECT_CHAT_DATA,conversation_id, is_important
 })

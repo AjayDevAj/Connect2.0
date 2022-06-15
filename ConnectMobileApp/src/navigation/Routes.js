@@ -46,7 +46,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
 import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
+
 import { CommonActions } from '@react-navigation/native';
+import Drawer from './Drawer';
 
 
 
@@ -86,6 +88,8 @@ const OtpScreen = () => {
 };
 
 const Stack = createNativeStackNavigator();
+// const Drawer = createDrawerNavigator();
+
 
 
 /**
@@ -124,11 +128,20 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
+
+         {/* <Drawer.Navigator
+            screenOptions={{ headerShown: false}}/>
+            <Drawer.Screen component = {Posts} name={navigationString.Posts} />
+            <Drawer.Screen component = {Offers} name={navigationString.Offers} />
+
+
+         </Drawer.Navigator>  */}
+
           {console.log('Get all keys :- before initialRouteName set', initialState)}
-          <Stack.Navigator initialRouteName={initialState}>
+          <Stack.Navigator initialRouteName={Drawer}>
             <Stack.Screen
               name={navigationString.OnBoarding}
-              component={OnBoarding}
+              component={Drawer}
               options={{ headerShown: false }}
             />
             <Stack.Screen
