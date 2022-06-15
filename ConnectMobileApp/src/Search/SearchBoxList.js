@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { Button, FlatList, Text, View } from 'react-native';
 import searchStyles from './styles/SearchStylesheet';
 
 const SearchBoxList = () => {
@@ -57,7 +57,14 @@ const SearchBoxList = () => {
     //   };
 
     return (
-      <View style={{ alignItems: 'flex-start', zIndex: 1, height: '100%'}}>
+      <View style={{ flexDirection: 'row', alignItems: 'flex-start', zIndex: 1, height: '100%', }}>
+        <View>
+          <Text style={{ textAlign: 'left' }}>RECENT SEARCHES</Text>
+          <Button title="Clear all"  />
+        </View>
+        <View>
+          
+        </View>
         <FlatList
             data={[
             {key: 'Sales Management'},

@@ -8,7 +8,7 @@ import TopHeader from '../Header/TopHeader';
 
 import searchStyles from './styles/SearchStylesheet';
 
-const SearchBox = ({ clicked, searchText, chatSearchHandler, menuHandler, searchHandler, filterHandler }) => {
+const SearchBox = ({ clicked, searchText, chatSearchHandler }) => {
     const [backBtnClicked, setBackBtnClicked] = useState(false);
     const [searchBtnClicked, setSearchBtnClicked] = useState(false);
 
@@ -30,14 +30,26 @@ const SearchBox = ({ clicked, searchText, chatSearchHandler, menuHandler, search
         }
     }
 
+    const menuHandler = () => {
+        // console.log('Menu Handler');
+        alert('Menu Handler');
+      };
+    
+      const searchHandler = () => {
+        alert('Search Handler');
+      };
+    
+      const filterHandler = () => {
+        alert('Filter Handler');
+      };
+
     return (
-        <View>
-            <View style={searchStyles.searchMainContainer}>
-                <KeyboardAvoidingView 
+            <View style={clicked == true ? [searchStyles.searchMainContainer, {height: '25%', }] : [searchStyles.searchMainContainer, {height: '15%', }]}>
+                {/* <KeyboardAvoidingView 
                     behavior={Platform.OS === 'ios' ? 'padding' : ''}
                     animated={true}
                     style={{ flex: 1, }}
-                >
+                > */}
                     <View style={clicked ? searchStyles.searchBarView__clicked : searchStyles.searchBarView__unclicked}>
                         {/* Back Icon */}
                         <View style={{ position: "absolute", zIndex: 1, marginLeft: '6.5%', paddingTop: 40 }}>
@@ -76,16 +88,17 @@ const SearchBox = ({ clicked, searchText, chatSearchHandler, menuHandler, search
 
                         {/* cross Icon, depending on whether the search bar is clicked or not */}
                         <View style={{ position: "absolute", zIndex: 1, right: 15, paddingTop: 35 }}>
-                            {clicked && (<SearchBoxIcon rightIconName="search" searchIconSize={26} searchTextColor="#657180" searchHandler={searchIconHandler} />)}
+                            {clicked && (<SearchBoxIcon rightIconName="search" searchIconSize={26} searchTextColor="#657180" />)}
                         </View>
                     </View>
 
-                </KeyboardAvoidingView>
-                
+                {/* </KeyboardAvoidingView> */}
+
                 {/* <SearchBoxList /> */}
+                {/* {searchBtnClicked ? <SearchBoxList /> : <Text></Text>} */}
             </View>
-            {searchBtnClicked ? <SearchBoxList /> : <Text></Text>}
-        </View>
+            
+        
         
     );
 };
