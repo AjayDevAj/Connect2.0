@@ -40,37 +40,47 @@ const searchStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        alignItems: "center",
+        alignItems: "flex-start",
         flexDirection: "row",
-        // position: 'absolute'
-        
     },
-    searchTextinput: {
-        fontSize: 18,
-        width: "90%",
+    searchBarView__unclicked: {
         flex: 1,
-        backgroundColor: '#FFF',
-        borderRadius: 9,
-        borderColor: '#C3C7D988',
-        color: '#5F6368',
-        height: '100%',
-        paddingLeft: 20,
-    },
-    searchBar__unclicked: {
-        // padding: 10,
         flexDirection: "row",
         width: "95%",
         borderRadius: 15,
         alignItems: "center",
     },
-    searchBar__clicked: {
-        // padding: 10,
+    searchBarView__clicked: {
+        flex: 1,
         flexDirection: "row",
         width: "95%",
         borderRadius: 15,
         alignItems: "center",
         justifyContent: "space-evenly",
-        marginTop: '8%',
+        // marginTop: '8%',
+        position: 'absolute'
+    },
+    searchTextinputView: {
+        flex: 1,
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+        backgroundColor: '#FFF',
+        borderRadius: 9,
+        borderColor: '#C3C7D988',
+        marginLeft: '4%',
+        marginTop: '10%',
+    },
+    searchTextinput: {
+        fontSize: 18,
+        fontFamily: fontFamily.Alte_DIN,
+        width: "90%",
+        // flex: 2,
+        // backgroundColor: '#FFF',
+        // borderRadius: 9,
+        // borderColor: '#C3C7D988',
+        color: '#5F6368',
+        height: '100%',
+        paddingLeft: 45,
     },
     searchItemList: {
         backgroundColor: '#FFF',
@@ -79,7 +89,6 @@ const searchStyles = StyleSheet.create({
         borderBottomEndRadius: 15,
         zIndex: 2,
         height: '50%'
-        
     },
     searchItemText: {
         fontSize: 14,
