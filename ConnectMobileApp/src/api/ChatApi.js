@@ -68,13 +68,15 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
         "unread": unread,
         "user_id": user_id != "" ?token_Value.user.id:"",
     };
-
-    if (search_text) {
-        var api_url = API_URL_STAGING + '/message/message-list?search='+search_text
+    console.log('Chat Status', chat_status);
+    // alert('Search Text', search_text);
+    if (search_text !== '') {
+        const encodedSearchValue = encodeURIComponent(search_text);
+        var api_url = API_URL_STAGING + '/message/message-list?search='+encodedSearchValue
     } else {
         var api_url = API_URL_STAGING + '/message/message-list';
     }
-
+    console.log('APi url', api_url);
     var headers = {
         Authorization:
         `Bearer ${token_Value.token}`,
@@ -121,7 +123,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
 //         default:break
 //     }
     if (response.status > 400) {
-        // console.log('Chat Message Error : '+ data.errors);
+        console.log('Chat Message Error : '+ data.errors);
         throw new Error(data.errors)
     }
 
