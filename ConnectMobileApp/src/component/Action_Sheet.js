@@ -13,8 +13,13 @@ import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
 export const openSheet = Incoming_Chat => {
   console.log('unassigned_Chat_Response:- openSheet', Incoming_Chat);
 
+
   DATA = Incoming_Chat;
   SheetManager.show('helloworld_sheet');
+
+  DATA = Incoming_Chat
+  SheetManager.show('ConnectAppCommonBottomSheet');
+
 };
 
 /**
@@ -49,7 +54,7 @@ const Action_Sheet = () => {
 
   return (
     <ActionSheet
-      id="helloworld_sheet"
+      id="ConnectAppCommonBottomSheet"
       gestureEnabled={true}
       initialOffsetFromBottom={0.4}
       headerAlwaysVisible={true}
@@ -68,6 +73,11 @@ const Action_Sheet = () => {
         />
       </View>
     </ActionSheet>
+ 
+   
+
+
+
   );
 };
 

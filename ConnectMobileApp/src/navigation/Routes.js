@@ -44,10 +44,16 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
+<<<<<<< HEAD
 import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
 
 
+=======
+import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
+import Message from '../containers/Message/Message'
+import Filter from '../containers/dashboard/Filter';
+>>>>>>> Sub_Branch
 /*
  **
  *
@@ -122,12 +128,21 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
+<<<<<<< HEAD
           {console.log('Get all keys :- before initialRouteName set', initialState)}
           <Stack.Navigator initialRouteName={initialState}>
             <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
               options={{ headerShown: false }}
+=======
+          {console.log('Get all keys :- before initialRouteName set',initialState )}
+          <Stack.Navigator initialRouteName={OnBoarding}>
+            <Stack.Screen
+              name={navigationString.OnBoarding}
+              component={Filter}
+              options={{headerShown: false}}
+>>>>>>> Sub_Branch
             />
             <Stack.Screen
               name={navigationString.LOGIN}
