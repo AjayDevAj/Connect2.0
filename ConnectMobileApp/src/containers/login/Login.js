@@ -55,8 +55,8 @@ import Loader from '../../utility/Loader';
 import { loadIsImportantData } from '../../actions/IsImportantAction';
 
 
-const Login = ({navigation}) => {
-  const[loginrespoince,setloginresponce]=('')
+// const Login = ({navigation}) => {
+//   const[loginrespoince,setloginresponce]=('')
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
