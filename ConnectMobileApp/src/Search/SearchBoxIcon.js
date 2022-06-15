@@ -1,9 +1,9 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const SearchBoxIcon = ({ rightIconName, searchIconSize, searchTextColor }) => {
+const SearchBoxIcon = ({ rightIconName, searchIconSize, searchTextColor, searchHandler }) => {
     return (
-        <Icon name={rightIconName} size={searchIconSize} color={searchTextColor} />
+        <Icon name={rightIconName} size={searchIconSize} color={searchTextColor} onPress={searchHandler} />
     );
 };
 

@@ -125,6 +125,7 @@ export default function RouteTabBar() {
                 name="dashboard"
                 size={24}
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
+
               />
             );
           },
