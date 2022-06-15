@@ -174,10 +174,6 @@ const Routes = () => {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
-
-          
-
-
           <Incoming_Chat />
         </NavigationContainer>
       )}
@@ -186,3 +182,10 @@ const Routes = () => {
 };
 
 export default Routes;
+
+export const resetNavigation = (navigation) => {
+  navigation.reset({
+    index: 0,
+    routes: [{ name: navigationString.RouteTabBar }]
+})
+}

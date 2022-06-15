@@ -8,20 +8,12 @@ import {getOtpResponse} from '../utility/StorageClass'
 const getIsImportantData = async (conversation_id, is_important) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
-
-    /*
-    **
-    *
-    ** constant defined to get otp from an api
-    *
-    ** 
-    */
-
     const bodyRawData = {
         "conversation_id": conversation_id, //d77fde6b41494837f42b8e26
-        "is_important": is_important,  //1
+        "is_important": is_important, //1
     };
 
+    console.log('Message importent mark ',bodyRawData)
     var api_url = API_URL_STAGING + '/message/mark-as-important';
     var headers = {
         Authorization:

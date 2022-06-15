@@ -153,7 +153,7 @@ const Chat = ({navigation}) => {
       {chatResponseData.data != null && (
         <ChatList
           onPress_Chat={selected_Item =>
-            navigation.navigate(navigationString.Message, {selected_Item})
+            navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
           }
           data={chatResponseData.data.result}
         />

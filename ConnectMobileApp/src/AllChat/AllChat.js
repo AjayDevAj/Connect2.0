@@ -52,6 +52,7 @@ const AllChat = ({navigation,route}) => {
 
   useEffect(() => {
     if (isFocused) {
+      console.log('all_chat ',route.params)
       callAPI(currentTabStatus);
     }
   }, [isFocused]);
@@ -90,13 +91,15 @@ const AllChat = ({navigation,route}) => {
       )}
 
     
-            {(chatResponseData.data != null )&&
+      {(chatResponseData.data != null )&&
         <ChatList onPress_Chat={(selected_Item) => 
-          navigation.navigate(navigationString.Message,{selected_Item})
+          navigation.navigate(navigationString.Message,{selected_Item,allChat:true})
 
         } data={
           chatResponseData.data.result
-        }/>
+        }
+        />
+        
       }
     </View>
   );

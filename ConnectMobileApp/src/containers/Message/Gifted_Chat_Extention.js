@@ -7,7 +7,7 @@ import {
   Day,
   Time,
 } from 'react-native-gifted-chat';
-import {View, Dimensions, TouchableOpacity, Text} from 'react-native';
+import {View, Dimensions, TouchableOpacity, Text,Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontFamily from '../../utility/Font-Declarations';
 import {decode} from 'html-entities';
@@ -29,6 +29,10 @@ export const renderInputToolbar = props => (
   />
 );
 
+export const render_Blank_InputToolbar = props => (
+  <></>
+);
+
 export const renderComposer = props => (
   <Composer
     {...props}
@@ -43,7 +47,7 @@ export const renderComposer = props => (
   />
 );
 
-export const renderSend = props => (
+export  const renderSend = (props) => (
   <View
     style={{
       flexDirection: 'row',
@@ -52,7 +56,7 @@ export const renderSend = props => (
     }}>
     <TouchableOpacity
     //   hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
-    // onPress={() => actionSheetRef.current?.setModalVisible()}
+    // onPress={() => onclick}
     >
       <View
         style={{
@@ -117,26 +121,11 @@ export const renderBubble = props => {
           paddingBottom: 15,
           marginLeft: -20,
         },
-        // right: {
-        //   paddingBottom: 4,
-        // },
+        right: {
+          paddingBottom: 15,
+          marginRight: 16,
+        },
       }}
-      // timeTextStyle={{
-      //   left: {
-      //     color: '#5F6368',
-      //     paddingTop: 4,
-      //     margin:3,
-      //     fontFamily: fontFamily.Poppins,
-      //     fontSize:10,
-      //     right:13
-      //   },
-      // right: {
-      //   // color: '#67696A',
-      // paddingTop: 4,
-      // textAlign: 'right',
-      // marginRight: -8,
-      // },
-      // }}
       wrapperStyle={{
         left: {
           backgroundColor: '#FFFFFF',
@@ -148,7 +137,7 @@ export const renderBubble = props => {
           elevation: 1,
         },
         right: {
-          backgroundColor: 'red',
+          backgroundColor: '#F4FBFF',
           borderBottomLeftRadius: 0,
           padding: 8,
           shadowColor: '#000',
@@ -183,16 +172,17 @@ export const renderTime = props => {
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'flex-end',
-        flex:1,
+        justifyContent: 'flex-end',
+        flex: 1,
+        // backgroundColor:'red'
       }}>
       <View
-      style={{
-      backgroundColor:'#5F6368',
-      height:4,
-      width:4,
-      borderRadius:2
-      }}></View>
+        style={{
+          backgroundColor: '#5F6368',
+          height: 4,
+          width: 4,
+          borderRadius: 2,
+        }}></View>
       <Time
         {...props}
         timeTextStyle={{
@@ -202,13 +192,67 @@ export const renderTime = props => {
             fontFamily: fontFamily.Poppins,
             fontSize: 10,
           },
+          right: {
+            color: '#5F6368',
+            paddingTop: 4,
+            fontFamily: fontFamily.Poppins,
+            fontSize: 10,
+          },
         }}
         containerStyle={{
           left: {
+            marginLeft: 5,
+          },
+          right: {
+            marginLeft: 5,
           },
         }}
         // dateFormat={'YY MMM YYYY'}
       />
     </View>
+  );
+};
+
+export const renderCustomView = ({currentMessage, ...props}) => {
+  return (
+    <>
+      {currentMessage.media_type == 'file' && (
+        <View>
+        </View>
+      )}
+    </>
+  );
+};
+
+// renderMessageImage
+export const renderMessageImage = ({currentMessage, ...props}) => {
+  return (
+    <>
+      {/* {currentMessage.media_type == 'file' && ( */}
+         <View
+         style={{
+           width: 150,
+           height: 100,
+         }}>
+         {/* <ImageBackground
+           source={require('../../assets/images/placholder_image.png')}
+           resizeMode="contain"
+           style={{flex: 1, justifyContent: 'center'}}> */}
+           {/* <SingleImage uri={currentMessage.image}> */}
+             <Image
+               key={new Date()}
+               source={{uri: currentMessage.image}}
+               style={{
+                 width: 150,
+                 height: 100,
+               }}
+               resizeMode="cover"
+             />
+           {/* </SingleImage> */}
+         {/* </ImageBackground> */}
+     
+       </View>
+      {/* )} */}
+    </>
   );
 };

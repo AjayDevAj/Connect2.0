@@ -64,6 +64,10 @@ const CONSTANT = {
     ACCEPT_REJECT_CHAT_ERROR: 'ACCEPT_REJECT_CHAT_ERROR',
     ACCEPT_REJECT_CHAT_SUCCESS: 'ACCEPT_REJECT_CHAT_SUCCESS',
 
+    Send_message_DATA: 'Send_message_DATA',
+    Send_message_ERROR: 'Send_message_ERROR',
+    Send_message_SUCCESS: 'Send_message_SUCCESS',
+
 
 }
 
