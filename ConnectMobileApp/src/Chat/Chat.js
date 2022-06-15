@@ -34,13 +34,16 @@
  import {useIsFocused} from '@react-navigation/native';
  import Loader from '../utility/Loader';
  import SearchBox from '../Search/SearchBox';
+ import Drawer from '../navigation/Drawer';
  
  const Chat = ({navigation}) => {
    const isFocused = useIsFocused();
  
    const menuHandler = () => {
      console.log('Menu Handler');
-     alert('Menu Handler');
+     //alert('Menu Handler');
+    navigation.openDrawer()
+    
    };
  
    const searchHandler = () => {
@@ -82,6 +85,7 @@
  
    return (
      <View style={chatStyles.chatMainContainer}>
+      
        {!clicked ? (
          <TopHeader
            firstIcon="menu"
@@ -91,6 +95,7 @@
            menuHandler={menuHandler}
            searchHandler={searchHandler}
            filterHandler={filterHandler}
+          // navigation={navigation}
          />
        ) : 
          <SearchBox 

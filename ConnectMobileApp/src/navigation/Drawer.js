@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { Button, View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Button, View, StyleSheet } from 'react-native';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import RouteTabBar from './RouteTabBar';
 
 
+
 function Posts({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}>
       <Button
         onPress={() => navigation.navigate('Notifications')}
         title="Go to notifications"
@@ -26,18 +27,38 @@ function Offers({ navigation }) {
 
 const Drawerbar = createDrawerNavigator();
 
-export default function Drawer() {
+export default function Drawer(props) {
   return (
-   
-      <Drawerbar.Navigator initialRouteName="Home">
-        <Drawerbar.Screen name="Posts" component={RouteTabBar} />
-        <Drawerbar.Screen name="Offers" component={Offers} />
-        <Drawerbar.Screen name="Locations" component={Offers} />
-        <Drawerbar.Screen name="Manage Team" component={Offers} />
-        <Drawerbar.Screen name="Profile" component={Offers} />
+
+    <Drawerbar.Navigator initialRouteName="Home">
+
+    {/* <DrawerContentScrollView {...props}>
+
+      <View style={styles.menuContainer}>
+        <View
+          style={{backgroundColor: 'red'}}>
+        </View>
+
+      </View>
+
+    </DrawerContentScrollView> */}
 
 
-      </Drawerbar.Navigator>
-    
+
+      <Drawerbar.Screen name="Posts" component={RouteTabBar} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Offers" component={Offers} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Locations" component={Offers} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Manage Team" component={Offers} />
+      <Drawerbar.Screen name="Profile" component={Offers} />
+    </Drawerbar.Navigator>
+
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
