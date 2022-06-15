@@ -32,6 +32,7 @@ import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import {useIsFocused} from '@react-navigation/native';
 import navigationString from '../utility/NavigationString';
+import {AllChat_Open_Team} from './AllChat_Open_Team'
 
 const AllChat = ({navigation,route}) => {
   const menuHandler = () => {
@@ -43,7 +44,11 @@ const AllChat = ({navigation,route}) => {
   };
 
   const filterHandler = () => {
-    alert('Filter Handler');
+    // alert('Filter Handler');
+    // navigation.pre
+    render (
+      <AllChat_Open_Team/>
+    )
   };
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
@@ -101,6 +106,7 @@ const AllChat = ({navigation,route}) => {
         />
         
       }
+       <AllChat_Open_Team/>
     </View>
   );
 };

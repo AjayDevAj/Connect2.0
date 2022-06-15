@@ -47,6 +47,7 @@ const Message = ({navigation, route}) => {
   const filterHandler = async () => {
    const getVal = await OpenGalary()
    console.log('getImages',getVal)
+   dispatch(send_Chat_Message_Data())
   };
   const dispatch = useDispatch();
   const allChat_Conversation_Data = useSelector(
@@ -83,6 +84,7 @@ const Message = ({navigation, route}) => {
 
   useEffect(() => {
     if (isImportantResonceData.data != undefined) {
+      console.log('isImportantResonceData.data',isImportantResonceData)
       setReloadTopView(true);
     }
   }, [isImportantResonceData]);

@@ -15,4 +15,3 @@ export const  OpenCam = async () => {
   const result = await launchCamera();
   console.log('selected item',result)
 }
-

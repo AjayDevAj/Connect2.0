@@ -33,7 +33,6 @@ import {API_URL_STAGING } from '../utility/Config_File'
 import {getOtpResponse} from '../utility/StorageClass'
 import {otpResponse_Storage_Key} from '../utility/Constant'
 
-
 /*
 **
 *
@@ -109,21 +108,28 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     ** 
     */
 //    console.log('response.status',response.status)
-//     switch (response.status) {
-//         case response.status > 400 :
-//             throw new Error(data.errors)
+    switch (response.status) {
+        case 401 :
+            console.log('response.status getChatList 401',response.status)
+            throw new Error(401)
+        break
 
-//             break
-//         case 204 :
-//             throw new Error("NO Data")
-//             break
+        case response.status > 400 :
+            console.log('response.status getChatList 400',response.status)
+            throw new Error(data.errors)
+        break
+        
+        case 204 :
+            console.log('response.status getChatList 204',response.status)
+            throw new Error("NO Data")
+        break
 
-//         default:break
-//     }
-    if (response.status > 400) {
-        // console.log('Chat Message Error : '+ data.errors);
-        throw new Error(data.errors)
+        default:break
     }
+    // if (response.status > 400) {
+    //     // console.log('Chat Message Error : '+ data.errors);
+    //     throw new Error(data.errors)
+    // }
 
     return data;
 }

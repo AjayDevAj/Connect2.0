@@ -31,7 +31,9 @@ const Item = ({title, location, last_message}) => (
   <Incoming_Chat_Card
     title={title}
     location={location}
-    onclick={() => SheetManager.hideAll()}
+    onclick={() => 
+      SheetManager.hideAll()
+    }
     last_message={last_message}
   />
 );

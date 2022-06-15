@@ -34,6 +34,7 @@ import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../utility/Loader';
 import SearchBox from '../Search/SearchBox';
+import {signOut} from '../navigation/Routes'
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -67,7 +68,10 @@ const Chat = ({navigation}) => {
   }, [isFocused]);
 
   useEffect(() => {
-    console.log('chatResponseData', chatResponseData);
+    console.log('chatResponseData testing', chatResponseData);
+    if (chatResponseData == 'Error: 401') {
+      signOut(navigation)
+    }
   }, [chatResponseData]);
 
   /**

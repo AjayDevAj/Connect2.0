@@ -46,6 +46,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
 import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
+import { CommonActions } from '@react-navigation/native';
+import { deleteAll } from '../utility/StorageClass'
 
 
 /*
@@ -188,4 +190,14 @@ export const resetNavigation = (navigation) => {
     index: 0,
     routes: [{ name: navigationString.RouteTabBar }]
 })
+}
+
+export const signOut = (navigation) => {
+  console.log('response.status getChatList signOut',CommonActions)
+  navigation.navigate(navigationString.LOGIN)
+  navigation.reset({
+    index: 0,
+    routes: [{ name: navigationString.LOGIN }]
+})
+//  deleteAll()
 }
