@@ -54,6 +54,7 @@ import CheckInterNet from '../../utility/CheckInterNet';
 import Loader from '../../utility/Loader';
 
 const Login = ({navigation}) => {
+  const[loginrespoince,setloginresponce]=('')
   const dispatch = useDispatch();
   const loginResponce = useSelector(store => store.loginDataResponse);
 

@@ -46,6 +46,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
 import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
 import Message from '../containers/Message/Message'
+import Filter from '../containers/dashboard/Filter';
 /*
  **
  *
@@ -120,10 +121,10 @@ const Routes = () => {
       {statusKeyLoaded && (
         <NavigationContainer>
           {console.log('Get all keys :- before initialRouteName set',initialState )}
-          <Stack.Navigator initialRouteName={initialState}>
+          <Stack.Navigator initialRouteName={OnBoarding}>
             <Stack.Screen
               name={navigationString.OnBoarding}
-              component={OnBoarding}
+              component={Filter}
               options={{headerShown: false}}
             />
             <Stack.Screen
