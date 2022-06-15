@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {viewed_Onboarding} from '../utility/Constant'
 
 /**
  * * This function is for storing data in local storage(AsyncStorage)
@@ -39,6 +40,7 @@ export const getOtpResponse = async (Store_Key) => {
 export const deleteAll = () => {
     try {
         AsyncStorage.clear();
+        // AsyncStorage.setItem(viewed_Onboarding, 'true');
     } catch (error) {
     }
 }

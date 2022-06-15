@@ -63,16 +63,18 @@
 
 import React,{useEffect,useRef} from 'react';
 import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
 import Count_Badge from '../component/Count_Badge';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
+// import {useDispatch, useSelector} from 'react-redux';
+
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
 function HomeScreen() {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+  // const dispatch = useDispatch();
 
   const Incoming_Chat_Socket_Subscribe = () => {
     ws.onopen = () => {
@@ -85,6 +87,8 @@ function HomeScreen() {
   // }
   useEffect(() => {
     Incoming_Chat_Socket_Subscribe()
+    // dispatch(Unassigned_Chat());
+
   })
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -111,6 +115,7 @@ function ReviewsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+
 export default function RouteTabBar() {
   return (
       <Tab.Navigator>
@@ -121,6 +126,7 @@ export default function RouteTabBar() {
                 name="dashboard"
                 size={24}
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
+
               />
             );
           },

@@ -65,6 +65,7 @@ export default Storelocation = ({navigation}) => {
       <View
         style={{
           flex: 2,
+          backgroundColor:'rgba(247, 252, 255, 1)'
         }}>
           
           
@@ -160,6 +161,7 @@ export default Storelocation = ({navigation}) => {
       <View
         style={{
           flex: 0.8,
+          backgroundColor:'rgba(247, 252, 255, 1)'
           
         }}>
          
