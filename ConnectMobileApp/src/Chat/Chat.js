@@ -36,6 +36,7 @@ import Loader from '../utility/Loader';
 import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
+import Filter from '../containers/dashboard/Filter';
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -55,7 +56,8 @@ const Chat = ({navigation}) => {
   };
 
   const filterHandler = () => {
-    alert('Filter Handler');
+    //alert('Filter Handler');
+    navigation.navigate(navigationString.Filter)
   };
 
   const dispatch = useDispatch();
