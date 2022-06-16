@@ -6,15 +6,20 @@ import fontFamily from '../utility/Font-Declarations';
 // import CardIcon from '../Card/CardIcon';
 // import CardNameMessage from '../Card/CardNameMessage';
 // import CardLocationTime from '../Card/CardLocationTime';
-import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card'
+import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
 /**
  * Open action sheet
  */
-export const openSheet = (Incoming_Chat) => {
-  console.log('unassigned_Chat_Response:- openSheet',Incoming_Chat)
+export const openSheet = Incoming_Chat => {
+  console.log('unassigned_Chat_Response:- openSheet', Incoming_Chat);
+
+
+  DATA = Incoming_Chat;
+  SheetManager.show('helloworld_sheet');
 
   DATA = Incoming_Chat
   SheetManager.show('ConnectAppCommonBottomSheet');
+
 };
 
 /**
@@ -22,23 +27,32 @@ export const openSheet = (Incoming_Chat) => {
  * * Its visible when atleast incoming count is one.
  */
 
-var DATA = [
- 
-];
+var DATA = [];
 /**
- * 
- * @param {*} title for Incoming chat 
+ *
+ * @param {*} title for Incoming chat
  */
-const Item = ({title,location}) => (
- <Incoming_Chat_Card title={title} location={location} onclick={() => 
-  SheetManager.hideAll()
-}/>
+const Item = ({title, location, last_message}) => (
+  <Incoming_Chat_Card
+    title={title}
+    location={location}
+    onclick={() => 
+      SheetManager.hideAll()
+    }
+    last_message={last_message}
+  />
 );
 
 const Action_Sheet = () => {
   const actionSheetRef = useRef();
-
-  const renderItem = ({item}) => <Item title={item.display_name} location={item.location_name} />;
+  const renderItem = ({item}) => (
+    
+    <Item
+      title={item.display_name}
+      location={item.location_name}
+      last_message={item.message}
+    />
+  );
 
   return (
     <ActionSheet
@@ -46,8 +60,7 @@ const Action_Sheet = () => {
       gestureEnabled={true}
       initialOffsetFromBottom={0.4}
       headerAlwaysVisible={true}
-      extraScroll={DATA.length < 4 ? 250 :200}
-      >
+      extraScroll={DATA.length < 4 ? 250 : 200}>
       <View style={{maxHeight: '80%'}}>
         <Text style={styles.headerStyle}>Incoming Chats</Text>
         <FlatList

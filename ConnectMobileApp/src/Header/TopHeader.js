@@ -36,7 +36,7 @@ import headerStyles from './styles/headerStyleSheet';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler }) => {
+const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null }) => {
     return (
         <View style={ headerStyles.mainContainer }>
             <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
@@ -47,7 +47,10 @@ const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, search
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
-                    <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon } onPress={searchHandler} />
+                    <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
+                     onPress={searchHandler} 
+                     color={color == null ? '#FFFFFF': color}
+                     />
                     <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
                 </View>
 

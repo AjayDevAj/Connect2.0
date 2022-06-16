@@ -63,7 +63,7 @@ const headerStyles = StyleSheet.create({
         marginLeft: '8%',
     },
     headerSearchIcon: {
-        color: '#FFFFFF',
+        // color: '#FFFFFF',
         opacity: 1,
         alignSelf: 'flex-start',
         

@@ -272,6 +272,10 @@ PODS:
   - React-jsinspector (0.66.3)
   - React-logger (0.66.3):
     - glog
+  - react-native-document-picker (8.1.1):
+    - React-Core
+  - react-native-image-picker (4.8.4):
+    - React-Core
   - react-native-netinfo (9.0.0):
     - React-Core
   - react-native-pager-view (5.4.24):
@@ -435,6 +439,8 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -512,6 +518,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-pager-view:
@@ -592,6 +602,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 433a691aee158533a6a6ee9c86cb4a1684fa2853
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
+  react-native-document-picker: 3c074fa194fddbcd46867c3a1c44b9331bd9dcbc
+  react-native-image-picker: 9f9eb160a4f4fc0702f9d0a60fa453b413258ef8
   react-native-netinfo: 6c7f3c7812114e68ebe08e4fa6cbf8d163c66d9d
   react-native-pager-view: 7d13a6fd573f856cfef9a5cb24d6c605b6135983
   react-native-safe-area-context: a95ad1a0e18341f58c5d6f53b0e2d43efade1a67
@@ -618,6 +630,6 @@ SPEC CHECKSUMS:
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: f15bb88e0d449a2bb9e5a1d69093e1444238626e
+PODFILE CHECKSUM: 8e36612f5be5afa5373efbbf2a54c51ef31e8217
 
 COCOAPODS: 1.11.3

@@ -10,7 +10,7 @@ import CardLocation from '../Card/CardLocation';
  * * Its visible when atleast incoming count is one.
  */
 
-export const Incoming_Chat_Card = ({title,location,onclick}) => {
+export const Incoming_Chat_Card = ({title,location,onclick,last_message}) => {
   return (
     <View>
       <Card>
@@ -18,7 +18,7 @@ export const Incoming_Chat_Card = ({title,location,onclick}) => {
           <Text style={styles.titleStyle}>{title}</Text>
           <CardLocation location={location} />
         </View>
-        <Text style={styles.deception}>Do you have nike shoes at store?</Text>
+        <Text style={styles.deception}>{last_message}</Text>
         <TouchableOpacity onPress={() => onclick()}>
           <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <View

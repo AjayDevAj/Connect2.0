@@ -39,6 +39,8 @@ import Unassigned_Chat_Reducer from "./Unassigned_Chat_Reducer";
 import resendotpDataReducer from "./ResendOtpReducer";
 import allChat_Conversation_Reducer from "./AllChat_Conversation_Reducer";
 import isImportantDataReducer from "./IsImportantReducer";
+import AcceptRejectChatDataReducer from "./AcceptRejectChatReducer";
+import Send_Message_Reducer from "./Send_Message_Reducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -54,30 +56,9 @@ const loginDataReducer = (state = '', action) => {
     return state;
 }
 
-
-// const appReducer = combineReducers({
-//     /* your app’s top-level reducers */
-//     loginDataResponse: loginDataReducer,
-//     OtpResponceData: otpDataReducer,
-//     ChatResponseData: ChatReducer,
-//     StoreLocationDataResponse: storeLocationDataReducer,
-//     Unassigned_Chat_Data: Unassigned_Chat_Reducer,
-//     ResendOtpResonceData:resendotpDataReducer
-//   })
-
-//   const rootReducers = (state, action) => {
-//     // when a  action is dispatched it will reset redux state
-//     // if (action.type === CONSTANT.OTP_DATA_SUCCESS) {
-//     //   state = undefined;
-//     //   console.log('reset staTE FROM THE reducer ---------------->',state)
-//     // }
-  
-//     return appReducer(state, action);
-//   };
-
+/****************** All combine reducers *******************/
 
 const rootReducers = combineReducers({
-    
     loginDataResponse: loginDataReducer,
     OtpResponceData: otpDataReducer,
     ChatResponseData: ChatReducer,
@@ -86,9 +67,8 @@ const rootReducers = combineReducers({
     allChat_Conversation_Data:allChat_Conversation_Reducer,
     ResendOtpResonceData:resendotpDataReducer,
     isImportantResonceData: isImportantDataReducer,
-    
-    
-
+    AcceptRejectChatResponceData: AcceptRejectChatDataReducer,
+    Send_Message_ResponceData:Send_Message_Reducer,
 })
 
 export default rootReducers;

@@ -12,7 +12,7 @@ import {saveObject} from '../../utility/StorageClass';
 import {location_Data_Key} from '../../utility/Constant';
 import {useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import GetOtpScreen from '../Otp/GetOtpScreen';
+import {resetNavigation} from '../../navigation/Routes'
 
 export default Storelocation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -54,6 +54,7 @@ export default Storelocation = ({navigation}) => {
   const continueOnpress = () => {
     saveObject(SLResponce.data, location_Data_Key);
     navigation.navigate(NavigationString.RouteTabBar);
+    resetNavigation(navigation)
   };
 
   return (

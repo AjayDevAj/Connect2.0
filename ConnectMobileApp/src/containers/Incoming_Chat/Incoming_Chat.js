@@ -12,7 +12,6 @@ import Sms_black_24dp from '../../../assets/svg/sms_black_24dp.svg';
 import Action_Sheet, {openSheet} from '../../component/Action_Sheet';
 import {Unassigned_Chat} from '../../actions/Unassigned_Chat_Action';
 import {useSelector, useDispatch} from 'react-redux';
-import {getOtpResponse} from '../../utility/StorageClass';
 
 /**
  * This class is for imcoming chat icon.
@@ -25,18 +24,15 @@ const Incoming_Chat = () => {
     onPressCloseButton: () => closePanel(),
   });
   const dispatch = useDispatch();
-  const [username, SetuserName] = useState('Priyanka11');
-  const [isPanelActive, setIsPanelActive] = useState(true);
+  // const [username, SetuserName] = useState('Priyanka11');
+  // const [isPanelActive, setIsPanelActive] = useState(true);
+
   const unassigned_Chat_Response = useSelector(
     store => store.Unassigned_Chat_Data,
   );
 
-  
-
   useEffect(() => {
     if (unassigned_Chat_Response.data != null) {
-        // console.log('unassigned_Chat_Response:- ',unassigned_Chat_Response.data.result)
-
       openSheet(unassigned_Chat_Response.data.result);
     }
   }, [unassigned_Chat_Response]);
@@ -55,6 +51,7 @@ const Incoming_Chat = () => {
           // openSheet();
           unassigned_Chat_API_Call();
         }}>
+          {/* {(unassigned_Chat_Response.data != undefined && unassigned_Chat_Response.data.result > 0) && */}
         <View
           style={{
             width: 56,
@@ -65,8 +62,9 @@ const Incoming_Chat = () => {
             alignItems: 'center',
           }}>
           <Sms_black_24dp />
-          <Count_Badge topRight={-5} top={-5} />
+          <Count_Badge topRight={-5} top={-5} badge_Value={2}/>
         </View>
+        {/* } */}
       </Draggable>
     </>
   );
