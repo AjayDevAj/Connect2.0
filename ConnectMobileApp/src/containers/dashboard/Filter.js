@@ -187,10 +187,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 1)',
     shadowColor: 'rgba(0, 0, 0, 0.03)',
     shadowRadius: 2,
-    shadowOffset: {
-      width:1,
-      height:5
-    },
+    // shadowOffset: {
+    //   width:1,
+    //   height:5
+    // },
     shadowOpacity:0.1,
   },
   footer: {
@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     shadowColor: 'rgba(0, 0, 0, 0.03)',
-    shadowRadius: '',
-    shadowOffset: '',
-    shadowOpacity: '',
+    // shadowRadius: '',
+    // shadowOffset: '',
+    // shadowOpacity: '',
   },
 });
