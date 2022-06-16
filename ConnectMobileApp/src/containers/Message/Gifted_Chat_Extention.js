@@ -161,7 +161,7 @@ export const renderDays = props => {
         lineHeight: 16,
         marginBottom: 10,
       }}
-      dateFormat={'YY MMM YYYY'}
+      dateFormat={'DD MMM YYYY'}
     />
   );
 };

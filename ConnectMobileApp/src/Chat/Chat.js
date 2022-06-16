@@ -47,11 +47,11 @@ const Chat = ({navigation}) => {
   };
 
   const searchHandler = () => {
-    if (!clicked) {
-      setClicked(true);
-    } else {
-      setClicked(false);
-    }
+    // if (!clicked) {
+    //   setClicked(true);
+    // } else {
+    //   setClicked(false);
+    // }
   };
 
   const filterHandler = () => {
