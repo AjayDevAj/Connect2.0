@@ -29,10 +29,10 @@
  **
  */
 
-import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, {useState, useEffect} from 'react';
+import {Text, StyleSheet} from 'react-native';
+import {NavigationContainer, StackActions} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
@@ -44,13 +44,12 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
-import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
+import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
 import Message from '../containers/Message/Message';
+import Filter from '../containers/dashboard/Filter';
 
-import { CommonActions } from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
 import Drawer from './Drawer';
-
-
 
 /*
  **
@@ -90,8 +89,6 @@ const OtpScreen = () => {
 const Stack = createNativeStackNavigator();
 // const Drawer = createDrawerNavigator();
 
-
-
 /**
  * Routes matain the navigation stacks
  */
@@ -117,7 +114,6 @@ const Routes = () => {
       }
       setinitialState(className);
       setStatusKeyLoaded(true);
-
     } catch (error) {
       console.error(error);
     }
@@ -128,26 +124,20 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
-
-         {/* <Drawer.Navigator
-            screenOptions={{ headerShown: false}}/>
-            <Drawer.Screen component = {Posts} name={navigationString.Posts} />
-            <Drawer.Screen component = {Offers} name={navigationString.Offers} />
-
-
-         </Drawer.Navigator>  */}
-
-          {console.log('Get all keys :- before initialRouteName set', initialState)}
+          {console.log(
+            'Get all keys :- before initialRouteName set',
+            initialState,
+          )}
           <Stack.Navigator initialRouteName={initialState}>
             <Stack.Screen
               name={navigationString.OnBoarding}
               component={Drawer}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name={navigationString.LOGIN}
               component={Login}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name={navigationString.GetOtpScreen}
@@ -176,18 +166,25 @@ const Routes = () => {
             <Stack.Screen
               name={navigationString.RouteTabBar}
               component={RouteTabBar}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name={navigationString.AllChat}
               component={AllChat}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name={navigationString.Message}
               component={Message}
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
             />
+
+            <Stack.Screen
+              name={navigationString.Filter}
+              component={Filter}
+              options={{headerShown: false}}
+            />
+
           </Stack.Navigator>
           <Incoming_Chat />
         </NavigationContainer>
@@ -198,19 +195,19 @@ const Routes = () => {
 
 export default Routes;
 
-export const resetNavigation = (navigation) => {
+export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
-    routes: [{ name: navigationString.RouteTabBar }]
-})
-}
+    routes: [{name: navigationString.RouteTabBar}],
+  });
+};
 
-export const signOut = (navigation) => {
-  console.log('response.status getChatList signOut',CommonActions)
-  navigation.navigate(navigationString.LOGIN)
+export const signOut = navigation => {
+  console.log('response.status getChatList signOut', CommonActions);
+  navigation.navigate(navigationString.LOGIN);
   navigation.reset({
     index: 0,
-    routes: [{ name: navigationString.LOGIN }]
-})
-//  deleteAll()
-}
+    routes: [{name: navigationString.LOGIN}],
+  });
+  //  deleteAll()
+};
