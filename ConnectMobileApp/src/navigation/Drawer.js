@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { Text, Button, View, StyleSheet, ImageBackground, } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import RouteTabBar from './RouteTabBar';
+import CustomDrawer from '../component/CustomDrawer';
 
 
 
@@ -17,39 +18,18 @@ function Posts({ navigation }) {
   );
 }
 
-function Offers({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
 const Drawerbar = createDrawerNavigator();
 
 export default function Drawer(props) {
   return (
 
-    <Drawerbar.Navigator initialRouteName="Home">
-
-    {/* <DrawerContentScrollView {...props}>
-
-      <View style={styles.menuContainer}>
-        <View
-          style={{backgroundColor: 'red'}}>
-        </View>
-
-      </View>
-
-    </DrawerContentScrollView> */}
-
-
-
+    <Drawerbar.Navigator drawerContent={(props) => <CustomDrawer {...props}/>} initialRouteName="Home">
+      
       <Drawerbar.Screen name="Posts" component={RouteTabBar} options={{ headerShown: false }} />
-      <Drawerbar.Screen name="Offers" component={Offers} options={{ headerShown: false }} />
-      <Drawerbar.Screen name="Locations" component={Offers} options={{ headerShown: false }} />
-      <Drawerbar.Screen name="Manage Team" component={Offers} />
-      <Drawerbar.Screen name="Profile" component={Offers} />
+      {/* <Drawerbar.Screen name="Offers" component={Offers} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Locations" component={Locations} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Manage Team" component={ManageTeam} options={{ headerShown: false }} />
+      <Drawerbar.Screen name="Profile" component={Profile} options={{ headerShown: false }} /> */}
     </Drawerbar.Navigator>
 
   );

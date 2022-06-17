@@ -29,6 +29,7 @@ export default {
     RouteTabBar:"RouteTabBar",
     AllChat: "AllChat",
     Message:"Message",
+    Drawer:"Drawer",
     
 
 /*
@@ -55,6 +56,10 @@ Reviews: "Reviews",
 
 Posts: "Posts",
 Offers: "Offers",
+Locations: "Locations",
+ManageTeam: "Manage Team",
+Profile: "Profile",
+
 
 
 }

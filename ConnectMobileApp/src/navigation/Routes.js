@@ -129,16 +129,14 @@ const Routes = () => {
       {statusKeyLoaded && (
         <NavigationContainer>
 
-         {/* <Drawer.Navigator
+          {/* <Drawer.Navigator
             screenOptions={{ headerShown: false}}/>
             <Drawer.Screen component = {Posts} name={navigationString.Posts} />
             <Drawer.Screen component = {Offers} name={navigationString.Offers} />
-
-
          </Drawer.Navigator>  */}
 
           {console.log('Get all keys :- before initialRouteName set', initialState)}
-          <Stack.Navigator initialRouteName={initialState}>
+          <Stack.Navigator initialRouteName={Drawer}>
             <Stack.Screen
               name={navigationString.OnBoarding}
               component={Drawer}
@@ -188,6 +186,12 @@ const Routes = () => {
               component={Message}
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+              name={navigationString.Drawer}
+              component={Drawer}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
           <Incoming_Chat />
         </NavigationContainer>
@@ -202,15 +206,15 @@ export const resetNavigation = (navigation) => {
   navigation.reset({
     index: 0,
     routes: [{ name: navigationString.RouteTabBar }]
-})
+  })
 }
 
 export const signOut = (navigation) => {
-  console.log('response.status getChatList signOut',CommonActions)
+  console.log('response.status getChatList signOut', CommonActions)
   navigation.navigate(navigationString.LOGIN)
   navigation.reset({
     index: 0,
     routes: [{ name: navigationString.LOGIN }]
-})
-//  deleteAll()
+  })
+  //  deleteAll()
 }
