@@ -1,8 +1,11 @@
-import React from 'react';
-import { Button, FlatList, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, FlatList, Text, View, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import searchStyles from './styles/SearchStylesheet';
 
 const SearchBoxList = () => {
+
+  const [modalOpen, setModalOpen] = useState(false);
+  // const [reviews, setReviews] = useState(data);
 
     // const searchFilterFunction = (text) => {
     //     // Check if searched text is not blank
@@ -57,25 +60,29 @@ const SearchBoxList = () => {
     //   };
 
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'flex-start', zIndex: 1, height: '100%', }}>
-        <View>
-          <Text style={{ textAlign: 'left' }}>RECENT SEARCHES</Text>
-          <Button title="Clear all"  />
-        </View>
-        <View>
-          
-        </View>
-        <FlatList
-            data={[
-            {key: 'Sales Management'},
-            {key: 'Finance Management'},
-            {key: 'Live Stores Dashboard'},
-            ]}
-            renderItem={({item}) => <Text style={searchStyles.searchItemText}>{item.key}</Text>}
-            style={searchStyles.searchItemList}
-        />
+      <View style={searchStyles.searchListMainContainer}>
+        {/* <Modal visible={modalOpen} animationType='slide'> */}
+          <View style={searchStyles.searchItemListContainer}>
+            <View style={searchStyles.searchResearchClearContainer}>
+              <Text style={searchStyles.searchItemResearchText}>RECENT SEARCHES</Text>
+              <Text style={searchStyles.searchItemClearAllText}>Clear all</Text>
+            </View>
+
+            <FlatList
+              data={[
+                {key: 'Sales Management'},
+                {key: 'Finance Management'},
+                {key: 'Live Stores Dashboard'},
+              ]}
+              renderItem={({item}) => <View>
+              <Text style={searchStyles.searchItemText}>{item.key}</Text>
+              <Text style={searchStyles.searchItemText}>x</Text>
+              </View>}
+              style={searchStyles.searchItemList}
+            />   
+          </View>
+        {/* </Modal> */}
       </View>
-        
     );
 };
 
