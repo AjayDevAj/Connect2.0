@@ -7,7 +7,7 @@ import {
   Day,
   Time,
 } from 'react-native-gifted-chat';
-import {View, Dimensions, TouchableOpacity, Text,Image} from 'react-native';
+import {View, Dimensions, TouchableOpacity, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontFamily from '../../utility/Font-Declarations';
 import {decode} from 'html-entities';
@@ -29,9 +29,7 @@ export const renderInputToolbar = props => (
   />
 );
 
-export const render_Blank_InputToolbar = props => (
-  <></>
-);
+export const render_Blank_InputToolbar = props => <></>;
 
 export const renderComposer = props => (
   <Composer
@@ -47,57 +45,63 @@ export const renderComposer = props => (
   />
 );
 
-export  const renderSend = (props) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignContent: 'center',
-    }}>
-    <TouchableOpacity
-    //   hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
-    // onPress={() => onclick}
-    >
-      <View
-        style={{
-          width: 32,
-          height: 32,
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <Icon name={'photo-camera'} size={22} />
-      </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity
-    //   hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
-    // onPress={() => actionSheetRef.current?.setModalVisible()}
-    >
-      <View
-        style={{
-          width: 32,
-          height: 32,
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <Icon name={'attach-file'} size={22} />
-      </View>
-    </TouchableOpacity>
-    <Send
-      {...props}
-      alwaysShowSend={props.text > 0}
-      disabled={!props.text}
-      containerStyle={{
-        width: 32,
-        height: 32,
-        alignItems: 'center',
+export const renderSend = ({
+  selectFile,
+  selectImage,
+  ...props
+}) => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
         justifyContent: 'center',
-        marginRight: 10,
+        alignContent: 'center',
       }}>
-      <Icon name={'send'} size={22} />
-    </Send>
-  </View>
-);
+      <TouchableOpacity
+        // hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
+        onPress={() => selectImage()}
+      >
+        <View
+          style={{
+            width: 32,
+            height: 32,
+            justifyContent: 'center',
+            alignContent: 'center',
+          }}>
+          <Icon name={'photo-camera'} size={22} />
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        // hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
+      onPress={() => selectFile()}
+      >
+        <View
+          style={{
+            width: 32,
+            height: 32,
+            justifyContent: 'center',
+            alignContent: 'center',
+          }}>
+          <Icon name={'attach-file'} size={22} />
+        </View>
+      </TouchableOpacity>
+      <Send
+        {...props}
+        alwaysShowSend={props.text > 0}
+        disabled={!props.text}
+        containerStyle={{
+          width: 32,
+          height: 32,
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginRight: 10,
+        }}>
+        <Icon name={'send'} size={22} />
+      </Send>
+    </View>
+  );
+};
 
 export const renderBubble = props => {
   return (
@@ -214,14 +218,7 @@ export const renderTime = props => {
 };
 
 export const renderCustomView = ({currentMessage, ...props}) => {
-  return (
-    <>
-      {currentMessage.media_type == 'file' && (
-        <View>
-        </View>
-      )}
-    </>
-  );
+  return <>{currentMessage.media_type == 'file' && <View></View>}</>;
 };
 
 // renderMessageImage
@@ -229,29 +226,28 @@ export const renderMessageImage = ({currentMessage, ...props}) => {
   return (
     <>
       {/* {currentMessage.media_type == 'file' && ( */}
-         <View
-         style={{
-           width: 150,
-           height: 100,
-         }}>
-         {/* <ImageBackground
+      <View
+        style={{
+          width: 150,
+          height: 100,
+        }}>
+        {/* <ImageBackground
            source={require('../../assets/images/placholder_image.png')}
            resizeMode="contain"
            style={{flex: 1, justifyContent: 'center'}}> */}
-           {/* <SingleImage uri={currentMessage.image}> */}
-             <Image
-               key={new Date()}
-               source={{uri: currentMessage.image}}
-               style={{
-                 width: 150,
-                 height: 100,
-               }}
-               resizeMode="cover"
-             />
-           {/* </SingleImage> */}
-         {/* </ImageBackground> */}
-     
-       </View>
+        {/* <SingleImage uri={currentMessage.image}> */}
+        <Image
+          key={new Date()}
+          source={{uri: currentMessage.image}}
+          style={{
+            width: 150,
+            height: 100,
+          }}
+          resizeMode="cover"
+        />
+        {/* </SingleImage> */}
+        {/* </ImageBackground> */}
+      </View>
       {/* )} */}
     </>
   );

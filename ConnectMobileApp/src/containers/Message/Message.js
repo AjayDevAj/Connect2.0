@@ -25,6 +25,9 @@ import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 import DocumentPicker from 'react-native-document-picker';
 import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
+import {getIsImportantData} from '../../api/IsImportantApi';
+import {mark_Unread_Chat} from '../../api/UnreadChat';
+
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
@@ -41,18 +44,37 @@ const Message = ({navigation, route}) => {
     navigation.goBack();
   };
 
-  const markasImportant = () => {
-    dispatch(
-      loadIsImportantData(
-        getDataFromParam.selected_Item.conversation_id,
-        getDataFromParam.selected_Item.is_important == 1 ? 0 : 1,
-      ),
+  const markasImportant = async () => {
+    const data = await getIsImportantData(
+      getDataFromParam.selected_Item.conversation_id,
+      reloadTopView == 1 ? 0 : 1,
     );
+    setReloadTopView(data.data.is_important);
   };
 
-  const filterHandler = async () => {
-    //  const getVal = await OpenGalary()
-    //  console.log('getImages',getVal)
+  const mark_Unread_Api = async () => {
+    const data = await mark_Unread_Chat(
+      getDataFromParam.selected_Item.conversation_id,
+    );
+    navigation.goBack()
+  };
+
+  const openImage = async () => {
+    const messages = await OpenGalary();
+    setUnSendMessage({
+      image: messages.assets[0].uri,
+      createdAt: new Date(),
+      user: {
+        agent_name: messages.assets[0].fileName,
+        _id: messages.assets[0].fileSize,
+      },
+      _id: messages.assets[0].fileSize,
+      file_type: 'sendChat',
+    });
+
+    //  dispatch(send_Chat_Message_Data())
+  };
+  const openFile = async () => {
     //  dispatch(send_Chat_Message_Data())
     try {
       const res = await DocumentPicker.pick({
@@ -95,14 +117,22 @@ const Message = ({navigation, route}) => {
       console.log('uWebsocket incomming chat onerror', e);
     };
     ws.onmessage = e => {
+      // if (Object.keys(e.data).length == 0) {
       console.log('uWebsocket incomming chat onmessage', e.data);
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages, [e.data]),
+      );
+      // }
     };
   };
 
   useEffect(() => {
-    Incoming_Chat_Socket_Subscribe();
+    setReloadTopView(
+      getDataFromParam.selected_Item.is_important == 1 ? true : false,
+    );
 
     if (isFocused) {
+      Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }
@@ -120,13 +150,6 @@ const Message = ({navigation, route}) => {
       );
     }
   }, [allChat_Conversation_Data]);
-
-  useEffect(() => {
-    if (isImportantResonceData.data != undefined) {
-      console.log('isImportantResonceData.data', isImportantResonceData);
-      setReloadTopView(true);
-    }
-  }, [isImportantResonceData]);
 
   const callAPI = () => {
     console.log('getDataFromParam ', getDataFromParam.allChat);
@@ -153,16 +176,15 @@ const Message = ({navigation, route}) => {
   });
 
   const onSend = useCallback((messages = []) => {
-    console.log('onSend messages', messages);
-    setUnSendMessage({
-      message: messages[0].text,
-      createdAt: messages[0].createdAt,
-      user: {
-        agent_name: messages[0].user.agent_name,
-        _id: messages[0].user._id,
-      },
-      _id: messages[0]._id,
-    });
+    // setUnSendMessage({
+    //   message: messages[0].text,
+    //   createdAt: messages[0].createdAt,
+    //   user: {
+    //     agent_name: messages[0].user.agent_name,
+    //     _id: messages[0].user._id,
+    //   },
+    //   _id: messages[0]._id,
+    // });
   }, []);
 
   useEffect(() => {
@@ -208,21 +230,36 @@ const Message = ({navigation, route}) => {
 
   return (
     <View style={chatStyles.chatMainContainer}>
+      {console.log('reloadTopView reloadTopView ', reloadTopView)}
       <TopHeader
         firstIcon="arrow-back"
         secondIcon="star-border"
         thirdIcon="more-vert"
-        color={
-          reloadTopView | (getDataFromParam.selected_Item.is_important == 1)
-            ? '#FFAA00'
-            : null
-        }
+        color={reloadTopView ? '#FFAA00' : null}
         name={getDataFromParam.selected_Item.display_name}
         menuHandler={menuHandler}
         searchHandler={markasImportant}
         filterHandler={dotHandler}
       />
-      {dotClicked && <MaterialMenu itemData={materialMenuItemData} />}
+      {dotClicked && (
+        <MaterialMenu
+          itemData={materialMenuItemData}
+          onClick={index => {
+            switch (index) {
+              case 1:
+                break;
+              case 2:
+                mark_Unread_Api()
+                break;
+              case 3:
+                break;
+
+              default:
+                break;
+            }
+          }}
+        />
+      )}
       <View style={{flex: 1}}>
         {allChat_Conversation_Data.data && loginUserData != undefined && (
           <GiftedChat
@@ -246,9 +283,11 @@ const Message = ({navigation, route}) => {
                 ? render_Blank_InputToolbar
                 : renderInputToolbar
             }
+            selectFile={openFile}
+            selectImage={openImage}
             renderBubble={renderBubble}
             renderCustomView={renderCustomView}
-            // renderMessageImage={renderMessageImage}
+            renderMessageImage={renderMessageImage}
             user={{
               _id: 'a',
               agent_name: loginUserData.user.name,
