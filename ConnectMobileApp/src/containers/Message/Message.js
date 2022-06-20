@@ -176,15 +176,15 @@ const Message = ({navigation, route}) => {
   });
 
   const onSend = useCallback((messages = []) => {
-    setUnSendMessage({
-      message: messages[0].text,
-      createdAt: messages[0].createdAt,
-      user: {
-        agent_name: messages[0].user.agent_name,
-        _id: messages[0].user._id,
-      },
-      _id: messages[0]._id,
-    });
+    // setUnSendMessage({
+    //   message: messages[0].text,
+    //   createdAt: messages[0].createdAt,
+    //   user: {
+    //     agent_name: messages[0].user.agent_name,
+    //     _id: messages[0].user._id,
+    //   },
+    //   _id: messages[0]._id,
+    // });
   }, []);
 
   useEffect(() => {
