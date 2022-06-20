@@ -35,6 +35,8 @@ import navigationString from '../utility/NavigationString';
 import {AllChat_Open_Team} from './AllChat_Open_Team'
 import SearchBox from '../Search/SearchBox';
 
+import Icon  from 'react-native-vector-icons/MaterialIcons';
+
 const AllChat = ({navigation,route}) => {
   const menuHandler = () => {
     navigation.goBack();
@@ -51,6 +53,11 @@ const AllChat = ({navigation,route}) => {
       <AllChat_Open_Team/>
     )
   };
+
+  const arrowDownHandler = () => {
+    alert('Arrow Handler');
+  }
+
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
   const isFocused = useIsFocused();
@@ -97,6 +104,8 @@ const AllChat = ({navigation,route}) => {
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
+          arrowDownIcon='keyboard-arrow-down'
+          arrowDownHandler={arrowDownHandler}
         />
       ) : (
         <SearchBox
@@ -110,6 +119,8 @@ const AllChat = ({navigation,route}) => {
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
+          arrowDownIcon='keyboard-arrow-down'
+          arrowDownHandler={arrowDownHandler}
         />
       )}
       
