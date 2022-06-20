@@ -10,9 +10,9 @@ const CardIcon = ({ logo }) => {
     return (
         <View style={ cardStyles.cardIconContainer }>
             { logo === 'whatsapp' ? 
-                <WhatsappIcon />
+                <WhatsappIcon width="14" />
             : 
-                <GoogleIcon /> 
+                <GoogleIcon width="14" /> 
             }
         </View>
     )
