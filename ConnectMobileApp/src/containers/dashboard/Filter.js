@@ -15,16 +15,20 @@ import styles from '../dashboard/FilterStyle';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 import FilteRrightContainer from '../../component/FilteRrightContainer';
-import { getData } from './buttongropu_Filter';
-import { selid } from './buttongropu_Filter';
+
 
 export default Filter = () => {
 
+  
+  
   useEffect(()=>{
    // getData()
-    console.log(selid)
+    
+   
+    
   })
 
+  
 
   return (
     <SafeAreaView style={styles.container}>

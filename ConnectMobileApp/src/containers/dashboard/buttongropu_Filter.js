@@ -11,7 +11,7 @@ import fontfaimily from '../../utility/Font-Declarations';
 import FilteRrightContainer from '../../component/FilteRrightContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export var selid;
+
 
 const DATA = [
   {
@@ -68,7 +68,7 @@ const storeData = async (value) => {
 
 const getData = async () => {
   try {
-    const value = await AsyncStorage.getItem('@storage_Key')
+     value = await AsyncStorage.getItem('@storage_Key')
     if(value !== null) {
       // value previously stored
       console.log('storage value========>', value)
@@ -78,8 +78,9 @@ const getData = async () => {
   }
 }
 
+ 
 storeData();
-getData();
+//getData();
 
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? '#FFFFFF' : 'transparent';
