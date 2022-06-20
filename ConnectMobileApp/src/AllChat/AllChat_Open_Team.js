@@ -1,76 +1,115 @@
-import React, {useState,useEffect} from 'react';
-import {Alert, Modal, StyleSheet, TextInput,FlatList, View, Text,Pressable,TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import {SegmentComponent} from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
-import {getUserdata} from '../api/getUserdata'
+import {getUserdata} from '../api/getUserdata';
 import {useIsFocused} from '@react-navigation/native';
 
 export const AllChat_Open_Team = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const isFocused = useIsFocused();
-  const [DATA, setDATA] = useState(true);
+  const [DATA, setDATA] = useState(null);
+  const [cuttentTap, setCuttentTap] = useState('Admin');
 
   useEffect(() => {
     if (isFocused) {
-      call_getUserdata()
+      call_getUserdata();
     }
   }, [isFocused]);
 
-  const call_getUserdata = async() => {
-         let data = await getUserdata()
-         console.log('call_getUserdata' ,data )
-         setDATA(data)
-  }
+  const call_getUserdata = async () => {
+    let data = await getUserdata();
+    console.log('call_getUserdata', data);
+    setDATA(data);
+  };
 
-
-  const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.title}</Text>
+      <Text style={[styles.title, textColor]}>{item.name}</Text>
+      <Text style={[styles.title, textColor]}>{item.mobile_number}</Text>
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item }) => {
-    const backgroundColor =  "#6e3b6e" ;
-    const color = 'white'  ;
+  const renderItem = ({item}) => {
+    const backgroundColor = '#6e3b6e';
+    const color = 'white';
 
     return (
       <Item
         item={item}
         // onPress={() => setSelectedId(item.id)}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
+        backgroundColor={{backgroundColor}}
+        textColor={{color}}
       />
     );
   };
 
   return (
-      <>
-      { modalVisible &&
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
+    <>
+      {modalVisible && (
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TopHeader_ onClickObj={() => 
-            setModalVisible(!modalVisible)
-            }/>
-<FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        // extraData={selectedId}
-      />
-          </View>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <TopHeader_
+                  onClickObj={() => setModalVisible(!modalVisible)}
+                  onClickSegmentChanged={value => setCuttentTap(value)}
+                  onChange={(value) => 
+                    console.log('setCuttentTap',value)
+                      
+                  }
+                />
+                {DATA != null && (
+                  <SegmentComponent
+                    width={'65%'}
+                    for_allUser={true}
+                    onClickSegmentChanged={value => {
+                      // console.log('setCuttentTap',value)
+                      setCuttentTap(value)
+                    }}
+                  
+                    style={{position: 'relative'}}
+                    badgesValue={[
+                      DATA.data.admin.length,
+                      DATA.data.manager.length,
+                    ]}
+                    segment_Value={['Admin', 'Managers']}
+                  />
+                )}
+                {DATA != null && (
+                  <FlatList
+                    data={
+                      cuttentTap == 'Admin'
+                        ? DATA.data.admin
+                        : DATA.data.manager
+                    }
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    // extraData={selectedId}
+                  />
+                )}
+              </View>
+            </View>
+          </Modal>
         </View>
-      </Modal>
-    </View>
-}
+      )}
     </>
   );
 };
@@ -90,7 +129,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopHeader_ = ({onClickObj}) => {
+export const TopHeader_ = ({onClickObj,onChange}) => {
   return (
     <>
       <View
@@ -100,24 +139,28 @@ export const TopHeader_ = ({onClickObj}) => {
           backgroundColor: '#F7FCFF',
           alignItems: 'center',
           justifyContent: 'space-between',
-          marginLeft:16
+          marginLeft: 16,
         }}>
-        <Text style={{fontSize: 18, color: '#000000', fontFamily: fontFamily.Alte_DIN}}>
+        <Text
+          style={{
+            fontSize: 18,
+            color: '#000000',
+            fontFamily: fontFamily.Alte_DIN,
+          }}>
           Select team member
         </Text>
         <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => onClickObj()}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+          style={[styles.button, styles.buttonClose]}
+          onPress={() => onClickObj()}>
+          <Text style={styles.textStyle}>Hide Modal</Text>
+        </Pressable>
       </View>
       <TextInput
         clearButtonMode="always"
         placeholder="Search Here..."
-        //   onChange={(e) => {
-        //     setUserSearch(e.nativeEvent.text);
-        //   }}
+          onChange={(e) => {
+            onChange(e.nativeEvent.text);
+          }}
         style={{
           width: '100%',
           borderRadius: 10,
@@ -130,16 +173,6 @@ export const TopHeader_ = ({onClickObj}) => {
           height: 40,
         }}
         placeholderTextColor="rgba(0,0,0,.66)"
-      />
-      <SegmentComponent
-        width={'65%'}
-        onClickSegmentChanged={value => {
-          console.log('value');
-        }}
-        style={{position: 'relative'}}
-        //   badgesValue={[
-        //   ]}
-        segment_Value={['Admin', 'Managers']}
       />
     </>
   );

@@ -20,7 +20,26 @@ const cardStyles = StyleSheet.create({
     /*
     * * Card Row One (Logo, Name, Location)
     */
+    cardAgentNameContainer: {
+        flexDirection: 'row',
+       // justifyContent: 'space-around',
+        backgroundColor:'rgba(244, 251, 255, 1)',
+        marginLeft: 35,
+        alignContent: 'center',
+        height:24,
+        marginBottom: 12,
+        borderColor: 'rgba(224, 243, 255, 1)',
+        borderRadius:4,
+        borderWidth:1 ,
+        marginRight: 20    
+    },
+   
 
+    cardRowThree: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     cardRowOne: {
         flex: 1, 
         flexDirection: 'row', 
