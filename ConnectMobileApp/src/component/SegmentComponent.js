@@ -26,7 +26,7 @@ import {View, StyleSheet} from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import fontFamily from '../utility/Font-Declarations'
 
-export const SegmentComponent = ({onClickSegmentChanged,badgesValue=[2, 2, 0],selectedIndexTab=0,segment_Value=['OPEN', 'CLOSED', 'ASSIGNED'],width='85%'}) => {
+export const SegmentComponent = ({onClickSegmentChanged,badgesValue=[2, 2, 0],selectedIndexTab=0,segment_Value=['OPEN', 'CLOSED', 'ASSIGNED'],width='85%',for_allUser=false}) => {
   const [selectedIndex, setSelectedIndex] = useState(selectedIndexTab);
   
   return (
@@ -52,8 +52,15 @@ export const SegmentComponent = ({onClickSegmentChanged,badgesValue=[2, 2, 0],se
           allowFontScaling={true}
           values={segment_Value}
           onTabPress={index => {
-            setSelectedIndex(index)
-            onClickSegmentChanged(index == 0 ? 'open' : index == 1 ? 'closed':'assign_chat')
+            if (for_allUser){
+              setSelectedIndex(index)
+              onClickSegmentChanged(segment_Value[index])
+
+            }else{
+              setSelectedIndex(index)
+              onClickSegmentChanged(index == 0 ? 'open' : index == 1 ? 'closed':'assign_chat')
+            }
+         
           }}
         />
       </View>

@@ -18,7 +18,8 @@ import {useIsFocused} from '@react-navigation/native';
 export const AllChat_Open_Team = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const isFocused = useIsFocused();
-  const [DATA, setDATA] = useState(true);
+  const [DATA, setDATA] = useState(null);
+  const [cuttentTap, setCuttentTap] = useState('Admin');
 
   useEffect(() => {
     if (isFocused) {
@@ -34,7 +35,8 @@ export const AllChat_Open_Team = () => {
 
   const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.title}</Text>
+      <Text style={[styles.title, textColor]}>{item.name}</Text>
+      <Text style={[styles.title, textColor]}>{item.mobile_number}</Text>
     </TouchableOpacity>
   );
 
@@ -66,13 +68,38 @@ export const AllChat_Open_Team = () => {
             }}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <TopHeader_ onClickObj={() => setModalVisible(!modalVisible)}  />
-                <FlatList
-                  data={DATA.data.admin}
-                  renderItem={renderItem}
-                  keyExtractor={item => item.id}
-                  // extraData={selectedId}
+                <TopHeader_
+                  onClickObj={() => setModalVisible(!modalVisible)}
+                  onClickSegmentChanged={value => setCuttentTap(value)}
                 />
+                {DATA != null && (
+                  <SegmentComponent
+                    width={'65%'}
+                    for_allUser={true}
+                    onClickSegmentChanged={value => {
+                      // console.log('setCuttentTap',value)
+                      setCuttentTap(value)
+                    }}
+                    style={{position: 'relative'}}
+                    badgesValue={[
+                      DATA.data.admin.length,
+                      DATA.data.manager.length,
+                    ]}
+                    segment_Value={['Admin', 'Managers']}
+                  />
+                )}
+                {DATA != null && (
+                  <FlatList
+                    data={
+                      cuttentTap == 'Admin'
+                        ? DATA.data.admin
+                        : DATA.data.manager
+                    }
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    // extraData={selectedId}
+                  />
+                )}
               </View>
             </View>
           </Modal>
@@ -97,7 +124,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopHeader_ = ({onClickObj,onClickSegmentChanged}) => {
+export const TopHeader_ = ({onClickObj}) => {
   return (
     <>
       <View
@@ -141,16 +168,6 @@ export const TopHeader_ = ({onClickObj,onClickSegmentChanged}) => {
           height: 40,
         }}
         placeholderTextColor="rgba(0,0,0,.66)"
-      />
-      <SegmentComponent
-        width={'65%'}
-        onClickSegmentChanged={value => {
-          onClickSegmentChanged(value)
-        }}
-        style={{position: 'relative'}}
-        //   badgesValue={[
-        //   ]}
-        segment_Value={['Admin', 'Managers']}
       />
     </>
   );
