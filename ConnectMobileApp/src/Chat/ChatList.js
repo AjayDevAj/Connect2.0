@@ -40,8 +40,8 @@ const ChatList = ({data,onPress_Chat}) => {
                 renderItem={( { item }) => (
                     <TouchableOpacity onPress={() => onPress_Chat(item)}>
                         <Card>
-                        <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} />
-                        <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} />
+                            <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} />
+                            <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} />
                         </Card>
                     </TouchableOpacity>
                 )}
@@ -51,4 +51,3 @@ const ChatList = ({data,onPress_Chat}) => {
 }
 
 export default ChatList;
-
