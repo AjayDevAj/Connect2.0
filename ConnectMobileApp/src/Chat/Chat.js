@@ -36,6 +36,7 @@ import Loader from '../utility/Loader';
 import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
+import Filter from '../containers/dashboard/Filter';
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -47,15 +48,12 @@ const Chat = ({navigation}) => {
   };
 
   const searchHandler = () => {
-    // if (!clicked) {
-    //   setClicked(true);
-    // } else {
-    //   setClicked(false);
-    // }
+    !clicked ? setClicked(true) : setClicked(false);
   };
 
   const filterHandler = () => {
-    alert('Filter Handler');
+    //alert('Filter Handler');
+    navigation.navigate(navigationString.Filter)
   };
 
   const dispatch = useDispatch();
@@ -71,7 +69,6 @@ const Chat = ({navigation}) => {
   }, [isFocused]);
 
   useEffect(() => {
-    console.log('chatResponseData testing', chatResponseData);
     if (chatResponseData == 'Error: 401') {
       signOut(navigation)
     }
@@ -89,8 +86,12 @@ const Chat = ({navigation}) => {
    * @param {*} user_id Login user_id
    * @param {*} search_text 
    */
+
   const callAPI = (type = 'open', searchText = '') => {
-    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText));
+    searchText !== null ? 
+      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText))
+    :
+      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557))
   };
 
   const [searchText, setSearchText] = useState('');
@@ -103,12 +104,9 @@ const Chat = ({navigation}) => {
    */
   const chatSearchHandler = searchTextParam => {
     setSearchText(searchTextParam);
-    console.log(searchTextParam);
-    if (searchTextParam) {
-      callAPI('', searchTextParam);
-    }
+    searchTextParam ? callAPI(currentTabStatus, searchTextParam) : callAPI(currentTabStatus)
   };
-
+  
   return (
     <View style={chatStyles.chatMainContainer}>
       {!clicked ? (
@@ -126,6 +124,9 @@ const Chat = ({navigation}) => {
           clicked={clicked}
           searchText={searchText}
           chatSearchHandler={chatSearchHandler}
+          menuHandler={menuHandler}
+          searchHandler={searchHandler}
+          filterHandler={filterHandler}
         />
       )}
       {chatResponseData.data != null && (

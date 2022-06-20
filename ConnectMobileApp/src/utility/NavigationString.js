@@ -29,6 +29,7 @@ export default {
     RouteTabBar:"RouteTabBar",
     AllChat: "AllChat",
     Message:"Message",
+    Filter:'Filter',
     
 
 /*

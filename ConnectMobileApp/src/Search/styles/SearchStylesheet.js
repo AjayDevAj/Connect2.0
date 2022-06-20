@@ -35,13 +35,15 @@ import fontFamily from '../../utility/Font-Declarations';
 
 const searchStyles = StyleSheet.create({
     searchMainContainer: {
+        // backgroundColor: '#0E0071',
         backgroundColor: '#0E0071',
         height: '15%',
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        alignItems: "flex-start",
+        // alignItems: "flex-start",
         flexDirection: "row",
+        justifyContent: 'flex-start',
     },
     searchBarView__unclicked: {
         flex: 1,
@@ -61,7 +63,7 @@ const searchStyles = StyleSheet.create({
         position: 'absolute'
     },
     searchTextinputView: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         alignSelf: 'flex-start',
         backgroundColor: '#FFF',
@@ -73,7 +75,7 @@ const searchStyles = StyleSheet.create({
     searchTextinput: {
         fontSize: 18,
         fontFamily: fontFamily.Alte_DIN,
-        width: "90%",
+        width: "100%",
         // flex: 2,
         // backgroundColor: '#FFF',
         // borderRadius: 9,
@@ -82,13 +84,52 @@ const searchStyles = StyleSheet.create({
         height: '100%',
         paddingLeft: 45,
     },
-    searchItemList: {
+
+    searchListMainContainer: {
+        alignItems: 'flex-end', 
+        flex: 1,
+        zIndex: 1, 
+        height: '100%', 
+        width: '90%',
         backgroundColor: '#FFF',
-        width: '83%',
-        flexDirection: "row",
-        borderBottomEndRadius: 15,
-        zIndex: 2,
-        height: '50%'
+        marginTop: '22.2%',
+        margin: 15,
+        position: 'absolute',
+        // borderBottomLeftRadius: 15
+    },
+    searchItemListContainer: {
+        borderBottomRadius: 15,
+        width: '95%',
+        height: '100%',
+        // flexDirection: 'column',
+        padding: 10,
+        zIndex: 1,
+        position: 'absolute', 
+        flex: 1
+    },
+    searchResearchClearContainer: {
+        flexDirection: 'row',
+        zIndex: 1, 
+    },
+    searchItemResearchText: {
+        // alignSelf: 'flex-start', 
+        textAlign: 'left',
+        color: '#5F6368',
+        zIndex: 1, 
+    },
+    searchItemClearAllText: {
+        // alignSelf: 'flex-end',
+        textAlign: 'right', 
+        color: '#488EEE',
+        zIndex: 1, 
+    },
+    searchItemList: {
+        borderBottomRadius: 15,
+        width: '85%',
+        height: '100%',
+        // flexDirection: 'column',
+        padding: 10,
+        zIndex: 1, 
     },
     searchItemText: {
         fontSize: 14,
@@ -97,7 +138,8 @@ const searchStyles = StyleSheet.create({
         opacity: 1,
         textAlign: 'left',
         margin: 1,
-        paddingLeft: 10
+        paddingLeft: 10,
+        zIndex: 1, 
     }
     
 });

@@ -33,6 +33,7 @@ import ChatList from '../Chat/ChatList';
 import {useIsFocused} from '@react-navigation/native';
 import navigationString from '../utility/NavigationString';
 import {AllChat_Open_Team} from './AllChat_Open_Team'
+import SearchBox from '../Search/SearchBox';
 
 const AllChat = ({navigation,route}) => {
   const menuHandler = () => {
@@ -40,13 +41,13 @@ const AllChat = ({navigation,route}) => {
   };
 
   const searchHandler = () => {
-    alert('Search Handler');
+    !clicked ? setClicked(true) : setClicked(false);
   };
 
   const filterHandler = () => {
     // alert('Filter Handler');
     // navigation.pre
-    render (
+    return (
       <AllChat_Open_Team/>
     )
   };
@@ -54,6 +55,8 @@ const AllChat = ({navigation,route}) => {
   const chatResponseData = useSelector(store => store.ChatResponseData);
   const isFocused = useIsFocused();
   const [currentTabStatus, setCurrentTabStatus] = useState(route.params.openTab);
+  const [searchText, setSearchText] = useState('');
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (isFocused) {
@@ -63,21 +66,49 @@ const AllChat = ({navigation,route}) => {
   }, [isFocused]);
   useEffect(() => {}, [chatResponseData]);
 
-  const callAPI = (type ='open' ) => {
-    dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ""));
-  }
+  /**
+   * Search Api call
+   * @param {*} type
+   */
+  const callAPI = (type = 'open', searchText = '') => {
+    searchText !== null ? 
+      dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, "", searchText))
+    :
+      dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ""))
+  };
+
+  /**
+   * Search Api call
+   * @param {*} searchTextParam
+   */
+   const chatSearchHandler = searchTextParam => {
+    setSearchText(searchTextParam);
+    searchTextParam ? callAPI(currentTabStatus, searchTextParam) : callAPI(currentTabStatus)
+  };
 
   return (
     <View style={chatStyles.chatMainContainer}>
-      <TopHeader
-        firstIcon="arrow-back"
-        secondIcon="search"
-        thirdIcon="filter-list"
-        name="All Chats"
-        menuHandler={menuHandler}
-        searchHandler={searchHandler}
-        filterHandler={filterHandler}
-      />
+      {!clicked ? (
+        <TopHeader
+          firstIcon="arrow-back"
+          secondIcon="search"
+          thirdIcon="filter-list"
+          name="All Chats"
+          menuHandler={menuHandler}
+          searchHandler={searchHandler}
+          filterHandler={filterHandler}
+        />
+      ) : (
+        <SearchBox
+          clicked={clicked}
+          searchText={searchText}
+          chatSearchHandler={chatSearchHandler}
+          menuHandler={menuHandler}
+          searchHandler={searchHandler}
+          filterHandler={filterHandler}
+        />
+      )}
+      
       {chatResponseData.data != null && (
         <SegmentComponent
           onClickSegmentChanged={value => {
