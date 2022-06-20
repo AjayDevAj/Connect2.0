@@ -56,7 +56,7 @@ function* handleChatResponseData(action) {
             action.pagination, 
             action.other_chat, 
             action.user_id,
-            action.search,
+            action.search_text,
 
         );
         // console.log('Chat Data Response', data)

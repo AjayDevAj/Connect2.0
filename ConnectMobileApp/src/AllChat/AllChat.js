@@ -103,6 +103,10 @@ const AllChat = ({navigation,route}) => {
           clicked={clicked}
           searchText={searchText}
           chatSearchHandler={chatSearchHandler}
+          firstIcon="arrow-back"
+          secondIcon="search"
+          thirdIcon="filter-list"
+          topHeaderName="All Chats"
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
@@ -135,7 +139,6 @@ const AllChat = ({navigation,route}) => {
           chatResponseData.data.result
         }
         />
-        
       }
        <AllChat_Open_Team/>
     </View>
