@@ -107,21 +107,21 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     ** 
     */
 //    console.log('response.status',response.status)
-//     switch (response.status) {
-//         case response.status > 400 :
-//             throw new Error(data.errors)
+    switch (response.status) {
+        case response.status > 400 :
+            throw new Error(data.errors)
 
-//             break
-//         case 204 :
-//             throw new Error("NO Data")
-//             break
+            break
+        case 204 :
+            throw new Error("NO Data")
+            break
 
-//         default:break
-//     }
-    if (response.status > 400) {
-        // console.log('Chat Message Error : '+ data.errors);
-        throw new Error(data.errors)
+        default:break
     }
+    // if (response.status > 400) {
+    //     // console.log('Chat Message Error : '+ data.errors);
+    //     throw new Error(data.errors)
+    // }
 
     return data;
 }

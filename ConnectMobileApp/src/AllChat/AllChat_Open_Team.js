@@ -1,10 +1,48 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, TextInput, View, Text,Pressable} from 'react-native';
+import React, {useState,useEffect} from 'react';
+import {Alert, Modal, StyleSheet, TextInput,FlatList, View, Text,Pressable,TouchableOpacity} from 'react-native';
 import {SegmentComponent} from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
+import {getUserdata} from '../api/getUserdata'
+import {useIsFocused} from '@react-navigation/native';
 
 export const AllChat_Open_Team = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
+  const isFocused = useIsFocused();
+  const [DATA, setDATA] = useState(true);
+
+  useEffect(() => {
+    if (isFocused) {
+      call_getUserdata()
+    }
+  }, [isFocused]);
+
+  const call_getUserdata = async() => {
+         let data = await getUserdata()
+         console.log('call_getUserdata' ,data )
+         setDATA(data)
+  }
+
+
+  const Item = ({ item, onPress, backgroundColor, textColor }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+      <Text style={[styles.title, textColor]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderItem = ({ item }) => {
+    const backgroundColor =  "#6e3b6e" ;
+    const color = 'white'  ;
+
+    return (
+      <Item
+        item={item}
+        // onPress={() => setSelectedId(item.id)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+  };
+
   return (
       <>
       { modalVisible &&
@@ -22,6 +60,12 @@ export const AllChat_Open_Team = () => {
             <TopHeader_ onClickObj={() => 
             setModalVisible(!modalVisible)
             }/>
+<FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        // extraData={selectedId}
+      />
           </View>
         </View>
       </Modal>
@@ -88,6 +132,7 @@ export const TopHeader_ = ({onClickObj}) => {
         placeholderTextColor="rgba(0,0,0,.66)"
       />
       <SegmentComponent
+        width={'65%'}
         onClickSegmentChanged={value => {
           console.log('value');
         }}

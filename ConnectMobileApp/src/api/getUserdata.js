@@ -5,18 +5,12 @@ import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
 
-const getIsImportantData = async (conversation_id, is_important) => {
+const getUserdata = async (conversation_id, is_important) => {
 
     /****** get token from store asy class... */
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
-    const bodyRawData = {
-        "conversation_id": conversation_id, //d77fde6b41494837f42b8e26
-        "is_important": is_important, //1
-    };
-
-    console.log('Message importent mark ',bodyRawData)
-    var api_url = API_URL_STAGING + '/message/mark-as-important';
+    var api_url = API_URL_STAGING + '/user/auth/get-user-with-role';
     var headers = {
         Authorization:
         `Bearer ${token_Value.token}`,
@@ -24,9 +18,8 @@ const getIsImportantData = async (conversation_id, is_important) => {
       }
 
     const response = await fetch(api_url, {
-        method: 'POST',
+        method: 'GET',
         headers: headers,
-        body: JSON.stringify(bodyRawData),
     })
 
     const data = response.json()
@@ -38,5 +31,5 @@ const getIsImportantData = async (conversation_id, is_important) => {
     return data;
 }
 
-export { getIsImportantData }
+export { getUserdata }
 

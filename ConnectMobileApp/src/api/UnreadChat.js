@@ -1,22 +1,21 @@
 
 
 import { API_URL_STAGING } from '../utility/Config_File'
-import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
 
-const getIsImportantData = async (conversation_id, is_important) => {
+const mark_Unread_Chat = async (conversation_id) => {
 
     /****** get token from store asy class... */
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     const bodyRawData = {
         "conversation_id": conversation_id, //d77fde6b41494837f42b8e26
-        "is_important": is_important, //1
+        "is_seen": 0, //1
     };
 
     console.log('Message importent mark ',bodyRawData)
-    var api_url = API_URL_STAGING + '/message/mark-as-important';
+    var api_url = API_URL_STAGING + '/message/read-unread-message';
     var headers = {
         Authorization:
         `Bearer ${token_Value.token}`,
@@ -32,11 +31,20 @@ const getIsImportantData = async (conversation_id, is_important) => {
     const data = response.json()
     console.log('isImportant API data : ',data)
    
-    if (response.status > 400) {
-        throw new Error(data.errors)
+    switch (response.status) {
+        case response.status > 400 :
+            throw new Error(data.errors)
+
+            break
+        case 204 :
+            throw new Error("NO Data")
+            break
+
+        default:break
     }
+
     return data;
 }
 
-export { getIsImportantData }
+export { mark_Unread_Chat }
 

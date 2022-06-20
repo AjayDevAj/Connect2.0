@@ -22,9 +22,12 @@ import {otpResponse_Storage_Key} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 // import FileViewer from "react-native-file-viewer";
-import DocumentPicker from "react-native-document-picker";
-import {OpenGalary,OpenCam} from './OpenMedia';
+import DocumentPicker from 'react-native-document-picker';
+import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
+import {getIsImportantData} from '../../api/IsImportantApi';
+import {mark_Unread_Chat} from '../../api/UnreadChat';
+
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
@@ -41,33 +44,51 @@ const Message = ({navigation, route}) => {
     navigation.goBack();
   };
 
-  const markasImportant = () => {
-    dispatch(
-      loadIsImportantData(
-        getDataFromParam.selected_Item.conversation_id,
-        getDataFromParam.selected_Item.is_important == 1 ? 0 : 1,
-      ),
+  const markasImportant = async () => {
+    const data = await getIsImportantData(
+      getDataFromParam.selected_Item.conversation_id,
+      reloadTopView == 1 ? 0 : 1,
     );
+    setReloadTopView(data.data.is_important);
   };
 
-  const filterHandler = async () => {
-  //  const getVal = await OpenGalary()
-  //  console.log('getImages',getVal)
-  //  dispatch(send_Chat_Message_Data())
-  try {
-    const res = await DocumentPicker.pick({
-      type: [DocumentPicker.types.allFiles],
+  const mark_Unread_Api = async () => {
+    const data = await mark_Unread_Chat(
+      getDataFromParam.selected_Item.conversation_id,
+    );
+    navigation.goBack()
+  };
+
+  const openImage = async () => {
+    const messages = await OpenGalary();
+    setUnSendMessage({
+      image: messages.assets[0].uri,
+      createdAt: new Date(),
+      user: {
+        agent_name: messages.assets[0].fileName,
+        _id: messages.assets[0].fileSize,
+      },
+      _id: messages.assets[0].fileSize,
+      file_type: 'sendChat',
     });
-    // await FileViewer.open(res.uri);
-  } catch (e) {
-    // error
-  }
-  
+
+    //  dispatch(send_Chat_Message_Data())
+  };
+  const openFile = async () => {
+    //  dispatch(send_Chat_Message_Data())
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      // await FileViewer.open(res.uri);
+    } catch (e) {
+      // error
+    }
   };
 
   const dotHandler = async () => {
     !dotClicked ? setDotClicked(true) : setDotClicked(false);
-  }
+  };
 
   const dispatch = useDispatch();
   const allChat_Conversation_Data = useSelector(
@@ -83,36 +104,35 @@ const Message = ({navigation, route}) => {
   const [messages, setMessages] = useState([]);
 
   const Incoming_Chat_Socket_Subscribe = () => {
-    console.log("uWebsocket Connected to the server")
+    console.log('uWebsocket Connected to the server');
 
     ws.onopen = () => {
-        console.log("uWebsocket Connected to the server")
-        ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 52}));
-
-      };
-      ws.onclose = (e) => {
-        console.log("uWebsocket Disconnected. Check internet or server.")
-      };
-      ws.onerror = (e) => {
-        console.log('uWebsocket incomming chat onerror',e)
-      };
-      ws.onmessage = (e) => {
-        console.log('uWebsocket incomming chat onmessage',e.data)
-        
-        // if (xtype.type(e.data) === 'object') {
-          console.log('uWebsocket incomming chat')
-
-        setMessages(previousMessages =>
-          GiftedChat.append(previousMessages, e.data),
-        );
-        // }
-      };
-}
+      console.log('uWebsocket Connected to the server');
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+    };
+    ws.onclose = e => {
+      console.log('uWebsocket Disconnected. Check internet or server.');
+    };
+    ws.onerror = e => {
+      console.log('uWebsocket incomming chat onerror', e);
+    };
+    ws.onmessage = e => {
+      // if (Object.keys(e.data).length == 0) {
+      console.log('uWebsocket incomming chat onmessage', e.data);
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages, [e.data]),
+      );
+      // }
+    };
+  };
 
   useEffect(() => {
-    Incoming_Chat_Socket_Subscribe()
+    setReloadTopView(
+      getDataFromParam.selected_Item.is_important == 1 ? true : false,
+    );
 
     if (isFocused) {
+      Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }
@@ -130,13 +150,6 @@ const Message = ({navigation, route}) => {
       );
     }
   }, [allChat_Conversation_Data]);
-
-  useEffect(() => {
-    if (isImportantResonceData.data != undefined) {
-      console.log('isImportantResonceData.data',isImportantResonceData)
-      setReloadTopView(true);
-    }
-  }, [isImportantResonceData]);
 
   const callAPI = () => {
     console.log('getDataFromParam ', getDataFromParam.allChat);
@@ -163,7 +176,6 @@ const Message = ({navigation, route}) => {
   });
 
   const onSend = useCallback((messages = []) => {
-    console.log('onSend messages', messages);
     setUnSendMessage({
       message: messages[0].text,
       createdAt: messages[0].createdAt,
@@ -205,10 +217,12 @@ const Message = ({navigation, route}) => {
     {
       id: 1,
       value: 'Close chat',
-    }, {
+    },
+    {
       id: 2,
       value: 'Mark as unread',
-    }, {
+    },
+    {
       id: 3,
       value: 'Assign to other',
     },
@@ -216,24 +230,46 @@ const Message = ({navigation, route}) => {
 
   return (
     <View style={chatStyles.chatMainContainer}>
+      {console.log('reloadTopView reloadTopView ', reloadTopView)}
       <TopHeader
         firstIcon="arrow-back"
         secondIcon="star-border"
         thirdIcon="more-vert"
-        color={
-          reloadTopView | (getDataFromParam.selected_Item.is_important == 1)
-            ? '#FFAA00'
-            : null
-        }
+        color={reloadTopView ? '#FFAA00' : null}
         name={getDataFromParam.selected_Item.display_name}
         menuHandler={menuHandler}
         searchHandler={markasImportant}
         filterHandler={dotHandler}
       />
-      {dotClicked && <MaterialMenu itemData={materialMenuItemData} /> }
+      {dotClicked && (
+        <MaterialMenu
+          itemData={materialMenuItemData}
+          onClick={index => {
+            switch (index) {
+              case 1:
+                break;
+              case 2:
+                mark_Unread_Api()
+                break;
+              case 3:
+                break;
+
+              default:
+                break;
+            }
+          }}
+        />
+      )}
       <View style={{flex: 1}}>
         {allChat_Conversation_Data.data && loginUserData != undefined && (
           <GiftedChat
+            listViewProps={{
+              contentContainerStyle: {
+                flexGrow: 0.02,
+                paddingTop: 20,
+              },
+              onEndReachedThreshold: 0.2,
+            }}
             infiniteScroll={true}
             alignTop={true}
             messages={messages}
@@ -241,14 +277,17 @@ const Message = ({navigation, route}) => {
             renderComposer={renderComposer}
             renderSend={renderSend}
             renderInputToolbar={
-              getDataFromParam.allChat == true ? render_Blank_InputToolbar : 
-              getDataFromParam.selected_Item.chat_status == 'closed'
-              ? render_Blank_InputToolbar
-              : renderInputToolbar
+              getDataFromParam.allChat == true
+                ? render_Blank_InputToolbar
+                : getDataFromParam.selected_Item.chat_status == 'closed'
+                ? render_Blank_InputToolbar
+                : renderInputToolbar
             }
+            selectFile={openFile}
+            selectImage={openImage}
             renderBubble={renderBubble}
             renderCustomView={renderCustomView}
-            // renderMessageImage={renderMessageImage}
+            renderMessageImage={renderMessageImage}
             user={{
               _id: 'a',
               agent_name: loginUserData.user.name,

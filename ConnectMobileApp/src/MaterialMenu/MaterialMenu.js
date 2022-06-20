@@ -28,7 +28,7 @@
 
  import materialStyles from './styles/MaterialMenuStylesheet';
 
-const MaterialMenu = ({ itemData }) => {
+const MaterialMenu = ({ itemData,onClick }) => {
   const [visible, setVisible] = useState(true);
 
   const hideMenu = () => setVisible(false);
@@ -51,7 +51,7 @@ const MaterialMenu = ({ itemData }) => {
         {itemData.length > 0 && itemData.map((item) => {
             return (
                 <View key={item.id}>
-                    <MenuItem onPress={() => menuItemPressHandler(item.value)}> <Text style={ materialStyles.materialMenuItemText }>{item.value}</Text></MenuItem>
+                    <MenuItem onPress={() => onClick(item.id)}> <Text style={ materialStyles.materialMenuItemText }>{item.value}</Text></MenuItem>
                 </View>
             );
         })}
