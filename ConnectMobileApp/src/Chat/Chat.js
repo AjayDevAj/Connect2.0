@@ -37,13 +37,16 @@ import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {searchedListData} from '../utility/Constant';
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
   const menuHandler = () => {
     // console.log('Menu Handler');
     // alert('Menu Handler');
-    // Drawer.openDrawer()
+    navigation.openDrawer()
+    
    
   };
 
@@ -102,13 +105,26 @@ const Chat = ({navigation}) => {
    * Search Api call
    * @param {*} searchTextParam
    */
-  const chatSearchHandler = searchTextParam => {
+  const chatSearchHandler = async (searchTextParam) => {
     setSearchText(searchTextParam);
     searchTextParam ? callAPI(currentTabStatus, searchTextParam) : callAPI(currentTabStatus)
+
+    const keys = await AsyncStorage.getAllKeys();
+    if (keys.includes(searchedListData)) {
+      try {
+        await AsyncStorage.setItem(searchedListData, JSON.stringify([{value: searchTextParam}]));
+      } catch (error) {
+        console.log('Save searched item in list exception ', error);
+      }
+    }
+    
   };
+
+  
   
   return (
     <View style={chatStyles.chatMainContainer}>
+     
       {!clicked ? (
         <TopHeader
           firstIcon="menu"
@@ -118,12 +134,17 @@ const Chat = ({navigation}) => {
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
+          navigation={navigation}
         />
       ) : (
         <SearchBox
           clicked={clicked}
           searchText={searchText}
           chatSearchHandler={chatSearchHandler}
+          firstIcon="menu"
+          secondIcon="search"
+          thirdIcon="filter-list"
+          topHeaderName="My Chats"
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
@@ -135,7 +156,7 @@ const Chat = ({navigation}) => {
             setCurrentTabStatus(value);
             callAPI(value);
           }}
-          style={{position: 'relative'}}
+          style={{position: 'relative' }}
           badgesValue={[
             chatResponseData.data.openMessageCount,
             chatResponseData.data.closedMessageCount,

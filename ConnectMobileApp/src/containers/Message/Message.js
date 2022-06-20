@@ -24,14 +24,15 @@ import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 import {OpenGalary,OpenCam} from './OpenMedia'
 // import FileViewer from "react-native-file-viewer";
 import DocumentPicker from "react-native-document-picker";
-
-
+import {OpenGalary,OpenCam} from './OpenMedia';
+import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
 
   const [loginUserData, setLoginUserData] = useState();
   const [reloadTopView, setReloadTopView] = useState(false);
+  const [dotClicked, setDotClicked] = useState(false);
 
   const getUserData = async () => {
     var test = await getOtpResponse(otpResponse_Storage_Key);
@@ -64,6 +65,11 @@ const Message = ({navigation, route}) => {
   }
   
   };
+
+  const dotHandler = async () => {
+    !dotClicked ? setDotClicked(true) : setDotClicked(false);
+  }
+
   const dispatch = useDispatch();
   const allChat_Conversation_Data = useSelector(
     store => store.allChat_Conversation_Data,
@@ -196,6 +202,19 @@ const Message = ({navigation, route}) => {
     );
   }, [Send_Message_ResponceData]);
 
+  const materialMenuItemData = [
+    {
+      id: 1,
+      value: 'Close chat',
+    }, {
+      id: 2,
+      value: 'Mark as unread',
+    }, {
+      id: 3,
+      value: 'Assign to other',
+    },
+  ];
+
   return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader
@@ -210,8 +229,9 @@ const Message = ({navigation, route}) => {
         name={getDataFromParam.selected_Item.display_name}
         menuHandler={menuHandler}
         searchHandler={markasImportant}
-        filterHandler={filterHandler}
+        filterHandler={dotHandler}
       />
+      {dotClicked && <MaterialMenu itemData={materialMenuItemData} /> }
       <View style={{flex: 1}}>
         {allChat_Conversation_Data.data && loginUserData != undefined && (
           <GiftedChat

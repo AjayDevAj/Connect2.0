@@ -124,14 +124,26 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
+<<<<<<< HEAD
           {console.log(
             'Get all keys :- before initialRouteName set',
             initialState,
           )}
-          <Stack.Navigator initialRouteName={initialState}>
+          <Stack.Navigator initialRouteName={OnBoarding}>
+=======
+
+          {/* <Drawer.Navigator
+            screenOptions={{ headerShown: false}}/>
+            <Drawer.Screen component = {Posts} name={navigationString.Posts} />
+            <Drawer.Screen component = {Offers} name={navigationString.Offers} />
+         </Drawer.Navigator>  */}
+
+          {console.log('Get all keys :- before initialRouteName set', initialState)}
+          <Stack.Navigator initialRouteName={Drawer}>
+>>>>>>> 62368742c2f1f97b9728509aaf60c45acdd64913
             <Stack.Screen
               name={navigationString.OnBoarding}
-              component={Drawer}
+              component={OnBoarding}
               options={{headerShown: false}}
             />
             <Stack.Screen
@@ -180,11 +192,18 @@ const Routes = () => {
             />
 
             <Stack.Screen
+<<<<<<< HEAD
               name={navigationString.Filter}
               component={Filter}
               options={{headerShown: false}}
             />
 
+=======
+              name={navigationString.Drawer}
+              component={Drawer}
+              options={{ headerShown: false }}
+            />
+>>>>>>> 62368742c2f1f97b9728509aaf60c45acdd64913
           </Stack.Navigator>
           <Incoming_Chat />
         </NavigationContainer>
@@ -198,6 +217,7 @@ export default Routes;
 export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
+<<<<<<< HEAD
     routes: [{name: navigationString.RouteTabBar}],
   });
 };
@@ -211,3 +231,18 @@ export const signOut = navigation => {
   });
   //  deleteAll()
 };
+=======
+    routes: [{ name: navigationString.RouteTabBar }]
+  })
+}
+
+export const signOut = (navigation) => {
+  console.log('response.status getChatList signOut', CommonActions)
+  navigation.navigate(navigationString.LOGIN)
+  navigation.reset({
+    index: 0,
+    routes: [{ name: navigationString.LOGIN }]
+  })
+  //  deleteAll()
+}
+>>>>>>> 62368742c2f1f97b9728509aaf60c45acdd64913
