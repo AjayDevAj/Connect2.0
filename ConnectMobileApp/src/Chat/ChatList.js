@@ -41,15 +41,10 @@ const ChatList = ({data,onPress_Chat}) => {
                 renderItem={( { item }) => (
                     <TouchableOpacity onPress={() => onPress_Chat(item)}>
                         <Card>
-                        <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} 
-                        isImportant={item.is_important}/>
-                        <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} 
-                        unread={item.unread} status={item.chat_status}
-                        />
+                            <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} isImportant={item.is_important} />
+                            <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} unread={item.unread} status={item.chat_status} />
 
-                        <CardRowThree name={item.agent_name} />
-                        
-
+                            <CardRowThree name={item.agent_name} />
                         </Card>
                     </TouchableOpacity>
                 )}
