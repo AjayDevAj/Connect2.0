@@ -128,10 +128,10 @@ const Routes = () => {
             'Get all keys :- before initialRouteName set',
             initialState,
           )}
-          <Stack.Navigator initialRouteName={initialState}>
+          <Stack.Navigator initialRouteName={OnBoarding}>
             <Stack.Screen
               name={navigationString.OnBoarding}
-              component={Drawer}
+              component={OnBoarding}
               options={{headerShown: false}}
             />
             <Stack.Screen

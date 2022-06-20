@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
 	<key>UIAppFonts</key>
@@ -96,6 +96,14 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>DINBlackAlternate.ttf</string>
+		<string>DINBold.ttf</string>
+		<string>DINLight.ttf</string>
+		<string>DINLightAlternate.ttf</string>
+		<string>DINMedium.ttf</string>
+		<string>DINMediumAlternate.ttf</string>
+		<string>DINRegular.ttf</string>
+		<string>DINRegularAlternate.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

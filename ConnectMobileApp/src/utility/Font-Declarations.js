@@ -26,4 +26,5 @@ export default {
     Alte_DIN:"Barlow-Medium",
     PoppinsSemiBoald: "Poppins-SemiBold",
     PoppinsBoald: "Poppins-Bold",
+    DINRegular:"DINRegular",
 }
