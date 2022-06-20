@@ -5,8 +5,8 @@
  **
  ** AppName: Connect2.0
  ** Version: X.0.0
- ** FileName: Chat.js
- ** UsedFor: Chat at connect 2.0 app
+ ** FileName: SegmentComponent.js
+ ** UsedFor: Segment Component at connect 2.0 app
  ** Author:
  **
  ** ========================================================
@@ -15,7 +15,7 @@
  **
  *
  ** ==========================================================
- **                  Chat component
+ **                  Segment component
  ** ==========================================================
  *
  **
@@ -32,7 +32,7 @@ export const SegmentComponent = ({onClickSegmentChanged,badgesValue=[2, 2, 0],se
   return (
       <View
         style={{
-          height: Platform.OS == 'ios' ? '6.5%' : '10%',
+          height: '6.5%',
           backgroundColor: '#F7FCFF',
           width: '85%',
           justifyContent: 'flex-end',

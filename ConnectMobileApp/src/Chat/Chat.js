@@ -37,6 +37,8 @@ import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {searchedListData} from '../utility/Constant';
 
 const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -48,11 +50,7 @@ const Chat = ({navigation}) => {
   };
 
   const searchHandler = () => {
-    // if (!clicked) {
-    //   setClicked(true);
-    // } else {
-    //   setClicked(false);
-    // }
+    !clicked ? setClicked(true) : setClicked(false);
   };
 
   const filterHandler = () => {
@@ -73,7 +71,6 @@ const Chat = ({navigation}) => {
   }, [isFocused]);
 
   useEffect(() => {
-    console.log('chatResponseData testing', chatResponseData);
     if (chatResponseData == 'Error: 401') {
       signOut(navigation)
     }
@@ -91,8 +88,12 @@ const Chat = ({navigation}) => {
    * @param {*} user_id Login user_id
    * @param {*} search_text 
    */
+
   const callAPI = (type = 'open', searchText = '') => {
-    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText));
+    searchText !== null ? 
+      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText))
+    :
+      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557))
   };
 
   const [searchText, setSearchText] = useState('');
@@ -103,14 +104,23 @@ const Chat = ({navigation}) => {
    * Search Api call
    * @param {*} searchTextParam
    */
-  const chatSearchHandler = searchTextParam => {
+  const chatSearchHandler = async (searchTextParam) => {
     setSearchText(searchTextParam);
-    console.log(searchTextParam);
-    if (searchTextParam) {
-      callAPI('', searchTextParam);
+    searchTextParam ? callAPI(currentTabStatus, searchTextParam) : callAPI(currentTabStatus)
+
+    const keys = await AsyncStorage.getAllKeys();
+    if (keys.includes(searchedListData)) {
+      try {
+        await AsyncStorage.setItem(searchedListData, JSON.stringify([{value: searchTextParam}]));
+      } catch (error) {
+        console.log('Save searched item in list exception ', error);
+      }
     }
+    
   };
 
+  
+  
   return (
     <View style={chatStyles.chatMainContainer}>
       {!clicked ? (
@@ -128,6 +138,13 @@ const Chat = ({navigation}) => {
           clicked={clicked}
           searchText={searchText}
           chatSearchHandler={chatSearchHandler}
+          firstIcon="menu"
+          secondIcon="search"
+          thirdIcon="filter-list"
+          topHeaderName="My Chats"
+          menuHandler={menuHandler}
+          searchHandler={searchHandler}
+          filterHandler={filterHandler}
         />
       )}
       {chatResponseData.data != null && (
@@ -136,7 +153,7 @@ const Chat = ({navigation}) => {
             setCurrentTabStatus(value);
             callAPI(value);
           }}
-          style={{position: 'relative'}}
+          style={{position: 'relative' }}
           badgesValue={[
             chatResponseData.data.openMessageCount,
             chatResponseData.data.closedMessageCount,
