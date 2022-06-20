@@ -45,7 +45,8 @@ const Chat = ({navigation}) => {
   const menuHandler = () => {
     // console.log('Menu Handler');
     // alert('Menu Handler');
-    // Drawer.openDrawer()
+    navigation.openDrawer()
+    
    
   };
 
@@ -123,6 +124,7 @@ const Chat = ({navigation}) => {
   
   return (
     <View style={chatStyles.chatMainContainer}>
+     
       {!clicked ? (
         <TopHeader
           firstIcon="menu"
@@ -132,6 +134,7 @@ const Chat = ({navigation}) => {
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
+          navigation={navigation}
         />
       ) : (
         <SearchBox

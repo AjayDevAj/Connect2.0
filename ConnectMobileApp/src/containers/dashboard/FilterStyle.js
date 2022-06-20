@@ -59,13 +59,14 @@ export default StyleSheet.create({
     shadowOpacity: 0.1,
   },
   footer: {
-    paddingBottom: 0,
+    //paddingBottom: 0,
     backgroundColor: 'rgba(255, 255, 255, 1)',
     height: 48,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    padding:5,
 
     shadowColor: 'rgba(0, 0, 0, 0.03)',
     // shadowRadius: '',
@@ -110,6 +111,9 @@ export default StyleSheet.create({
     width: 360,
     backgroundColor: 'rgba(255, 255, 255, 1)',
     opacity: 40,
+    alignItems:'flex-start',
+    flexDirection:'row',
+    padding:15
   },
   leftContainer: {
     height: 592,

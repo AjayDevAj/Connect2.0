@@ -30,6 +30,7 @@ export default {
     AllChat: "AllChat",
     Message:"Message",
     Filter:'Filter',
+    Drawer:"Drawer",
     
 
 /*
@@ -56,6 +57,10 @@ Reviews: "Reviews",
 
 Posts: "Posts",
 Offers: "Offers",
+Locations: "Locations",
+ManageTeam: "Manage Team",
+Profile: "Profile",
+
 
 
 }

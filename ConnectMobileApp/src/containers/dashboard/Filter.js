@@ -6,15 +6,26 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import fontfaimily from '../../utility/Font-Declarations';
+import fontfaimly from '../../utility/Font-Declarations';
 import Buttongroup from './buttongropu_Filter';
 import styles from '../dashboard/FilterStyle';
+
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
+import FilteRrightContainer from '../../component/FilteRrightContainer';
+import { getData } from './buttongropu_Filter';
+import { selid } from './buttongropu_Filter';
 
 export default Filter = () => {
+
+  useEffect(()=>{
+   // getData()
+    console.log(selid)
+  })
+
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Top header buttons */}
@@ -25,7 +36,7 @@ export default Filter = () => {
           size={30}
           backgroundColor="transparent"
           color={'#000000'}>
-          <Text style={{fontSize: 18, fontFamily: fontfaimily.Alte_DIN}}>
+          <Text style={{fontSize: 18, fontFamily: fontfaimly.Alte_DIN}}>
             Filters
           </Text>
         </Icon.Button>
@@ -38,12 +49,12 @@ export default Filter = () => {
           size={30}
           backgroundColor="transparent"
           onPress={() => {
-            SheetManager.show('sortingsheet')
+            SheetManager.show('sortingsheet');
           }}>
           <Text
             style={{
               fontSize: 18,
-              fontFamily: fontfaimily.Alte_DIN,
+              fontFamily: fontfaimly.Alte_DIN,
               color: 'rgba(101, 113, 128, 1)',
             }}>
             {' '}
@@ -57,10 +68,14 @@ export default Filter = () => {
         {/* Left Conatiner holds the Filters buttons   to   filter out the required data */}
 
         <View style={styles.leftContainer}>
-          <Buttongroup />
+          <Buttongroup/>
         </View>
         {/* Right Conatiner  */}
-        <View style={styles.rightContainer}></View>
+        <View style={styles.rightContainer}>
+          {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
+          <FilteRrightContainer/>
+         
+        </View>
       </View>
 
       {/* Bottom container for footer */}
