@@ -5,7 +5,7 @@ import { CONSTANT } from '../utility/Constant';
 import {otpResponse_Storage_Key} from '../utility/Constant'
 import {getOtpResponse} from '../utility/StorageClass'
 
-const getAcceptRejectChatData = async (conversation_id, is_important) => {
+const getAcceptRejectChatData = async (conversation_id, is_accept) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     /****** constant defined to get accept reject chat from an api ****/
@@ -13,7 +13,7 @@ const getAcceptRejectChatData = async (conversation_id, is_important) => {
     /*************  Send Parameter  **************/
     const bodyRawData = {
         "conversation_id": conversation_id, //d77fde6b41494837f42b8e26
-        "is_important": is_important,  //1
+        "is_accept": is_accept,  //1
     };
 
     var api_url = API_URL_STAGING + '/accept-reject-chat';

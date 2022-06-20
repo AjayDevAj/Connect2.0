@@ -9,9 +9,7 @@ target 'ConnectMobileApp' do
     :hermes_enabled => false
   )
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
-
   target 'ConnectMobileAppTests' do
     inherit! :complete
     # Pods for testing

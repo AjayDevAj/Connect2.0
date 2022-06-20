@@ -132,7 +132,7 @@ const Routes = () => {
            <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name={navigationString.LOGIN}

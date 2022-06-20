@@ -30,6 +30,7 @@ import chatStyles from './styles/ChatStylesheet';
 import Card from '../Card/Card';
 import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
+import CardRowThree from '../Card/CardRowThree';
     
 const ChatList = ({data,onPress_Chat}) => {
     return (
@@ -42,6 +43,7 @@ const ChatList = ({data,onPress_Chat}) => {
                         <Card>
                         <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} />
                         <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} />
+                        {/* <CardRowThree logo={item.logo} /> */}
                         </Card>
                     </TouchableOpacity>
                 )}
@@ -51,4 +53,3 @@ const ChatList = ({data,onPress_Chat}) => {
 }
 
 export default ChatList;
-

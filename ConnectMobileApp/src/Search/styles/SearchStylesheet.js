@@ -40,10 +40,11 @@ const searchStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        position: 'relative',
+        // position: 'absolute',
+        // marginTop: '12%',
         // alignItems: "flex-start",
-        // flexDirection: "row",
-        // justifyContent: 'flex-start',
+        flexDirection: "column",
+        justifyContent: 'flex-start',
         
     },
     searchBarView__clicked: {
@@ -91,7 +92,8 @@ const searchStyles = StyleSheet.create({
         borderBottomRightRadius: 9,
         opacity: 1,
         shadowColor: '#00000029',
-        shadowRadius: 3
+        shadowRadius: 3,
+        // backgroundColor: '#FFF'
     },
     searchItemListContainer: {
         borderBottomRadius: 15,
