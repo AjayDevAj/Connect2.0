@@ -9,7 +9,6 @@ import CardIcon from './CardIcon';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const CardRowOne = ({ logo, name, location, is_important }) => {
-    is_important =1
     return (
         <View style={ cardStyles.cardRowOne }>
             <View style={ cardStyles.cardLogoNameContainer}>
