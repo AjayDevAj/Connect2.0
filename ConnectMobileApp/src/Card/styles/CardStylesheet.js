@@ -26,19 +26,11 @@ const cardStyles = StyleSheet.create({
         backgroundColor:'rgba(244, 251, 255, 1)',
         marginLeft: 35,
         alignContent: 'center',
-        width: 109,
         height:24,
         marginBottom: 12,
         borderColor: 'rgba(224, 243, 255, 1)',
         borderRadius:4,
-        borderWidth:1
-
-        
-
-        
-        
-        
-        
+        borderWidth:1     
     },
    
 
@@ -86,7 +78,8 @@ const cardStyles = StyleSheet.create({
         fontSize: 15,
         fontFamily: fontFamily.Poppins,
         textAlign: 'left',
-        marginLeft: 10
+        marginLeft: 10,
+        marginRight: 10
     },
     cardLocationContainer: {
         flexDirection: 'row',

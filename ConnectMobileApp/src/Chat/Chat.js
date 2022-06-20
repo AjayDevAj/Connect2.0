@@ -98,6 +98,7 @@ const Chat = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [clicked, setClicked] = useState(false);
   const [currentTabStatus, setCurrentTabStatus] = useState('open');
+  //const [agentName, setAgentName] = useState(false)
 
   /**
    * Search Api call

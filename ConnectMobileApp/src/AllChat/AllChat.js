@@ -103,8 +103,7 @@ const AllChat = ({navigation,route}) => {
         } data={
           chatResponseData.data.result
         }
-        />
-        
+        />     
       }
        <AllChat_Open_Team/>
     </View>

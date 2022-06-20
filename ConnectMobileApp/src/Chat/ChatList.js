@@ -43,7 +43,9 @@ const ChatList = ({data,onPress_Chat}) => {
                         <Card>
                         <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} />
                         <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} />
+
                         <CardRowThree name={item.agent_name} />
+                        
                         </Card>
                     </TouchableOpacity>
                 )}
