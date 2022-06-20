@@ -76,14 +76,19 @@ const cardStyles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'space-between'
     },
+    assignedToContainer: {
+        width: '66%',
+        height: 20,
+        flexDirection: 'row',
+        justifyContent: 'flex-start'
+    },
     chatAssignedTo: {
         color: '#666666',
-        width: 149,
-        height: 20,
         opacity: 0.87,
         letterSpacing: 0,
         fontSize: 14,
-        fontFamily: fontFamily.Poppins
+        fontFamily: fontFamily.Poppins,
+        marginLeft: 5
     },
     chatMessage: {
         color: '#000000',
@@ -94,6 +99,7 @@ const cardStyles = StyleSheet.create({
         letterSpacing: 0,
         fontFamily: fontFamily.Poppins,
         fontSize: 14,
+        
     },
     cardTimeContainer: {
         flexDirection:'row',

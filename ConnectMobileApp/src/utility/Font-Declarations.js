@@ -23,7 +23,8 @@
 
 export default {
     Poppins: "Poppins",
-    Alte_DIN:"Barlow-Medium",
+    Alte_DIN:"AlteDIN1451Mittelschriftgepraegt",
     PoppinsSemiBoald: "Poppins-SemiBold",
     PoppinsBoald: "Poppins-Bold",
+    DINRegular:"DINRegular",
 }

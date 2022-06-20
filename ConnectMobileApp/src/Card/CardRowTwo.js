@@ -10,13 +10,14 @@ import CardTime from './CardTime';
 const CardRowTwo = ({ assigned, message, time }) => {
     return (
         <View style={ cardStyles.cardRowTwo }>
-            <View style={{ alignSelf: 'flex-start'}}></View>
+            <View style={{ alignSelf: 'flex-start' }}></View>
             { message != '' ? 
                 <Text style={ cardStyles.chatMessage }>{ message }</Text>
             : 
                 <View style={ cardStyles.assignedToContainer }>
                     <Icon name="done-all" size={18} color="#0070FC" />
                     <Text style={ cardStyles.chatAssignedTo }>{ assigned }</Text> 
+                    {/* { assigned } */}
                 </View>
             }
             <CardTime time={time} />

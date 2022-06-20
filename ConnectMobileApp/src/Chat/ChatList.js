@@ -53,4 +53,3 @@ const ChatList = ({data,onPress_Chat}) => {
 }
 
 export default ChatList;
-
