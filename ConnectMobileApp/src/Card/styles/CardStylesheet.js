@@ -109,12 +109,9 @@ const cardStyles = StyleSheet.create({
         borderRadius:8,
         overflow: 'hidden',
         fontSize:12,
-        // fontFamily:fontFamily.Poppins,
         height:16,
         minWidth:21,
-        textAlign:'center',
-        // alignSelf: 'center',
-        
+        textAlign:'center', 
     },
     unreadCountDesignLessThan31: {
         backgroundColor: '#00C158',
@@ -171,7 +168,7 @@ const cardStyles = StyleSheet.create({
     cardAgentNameContainer: {
         flexDirection: 'row',
         backgroundColor:'rgba(244, 251, 255, 1)',
-        marginLeft: 30,
+        marginLeft: 25,
         alignItems: 'center',
         marginBottom: 12,
         borderColor: 'rgba(224, 243, 255, 1)',

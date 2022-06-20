@@ -149,6 +149,7 @@ const AllChat = ({navigation,route}) => {
         } data={
           chatResponseData.data.result
         }
+        isShowRowThree={true}
         />
       }
        <AllChat_Open_Team/>

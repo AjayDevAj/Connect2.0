@@ -7,7 +7,7 @@ import cardStyles from './styles/CardStylesheet';
 import CardLocation from './CardLocation';
 import CardIcon from './CardIcon';
 
-const CardRowThree = ({ name }) => {
+const CardRowThree = ({ name}) => {
     return (
         <View style={ cardStyles.cardRowThree }>
             <View style={ cardStyles.cardAgentNameContainer}>
