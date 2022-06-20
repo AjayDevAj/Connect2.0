@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert,
   Modal,
@@ -10,10 +10,14 @@ import {
   Pressable,
   TouchableOpacity,
 } from 'react-native';
-import {SegmentComponent} from '../component/SegmentComponent';
+import { SegmentComponent } from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
-import {getUserdata} from '../api/getUserdata';
-import {useIsFocused} from '@react-navigation/native';
+import { getUserdata } from '../api/getUserdata';
+import { useIsFocused } from '@react-navigation/native';
+import { RadioButton } from 'react-native-paper';
+
+
+
 
 export const AllChat_Open_Team = () => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -33,14 +37,24 @@ export const AllChat_Open_Team = () => {
     setDATA(data);
   };
 
-  const Item = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.name}</Text>
-      <Text style={[styles.title, textColor]}>{item.mobile_number}</Text>
+
+
+  const Item = ({ item, onPress, backgroundColor, textColor }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item]}>
+      {/* <Text style={[styles.title, textColor]}>{item.name}</Text>
+      <Text style={[styles.title, textColor]}>{item.mobile_number}</Text> */}
+
+      <Text style={{ fontSize: 16, marginLeft: 50, marginTop: 15, fontFamily: fontFamily.Alte_DIN }}>{item.name}</Text>
+      <Text style={{ fontSize: 14, marginLeft: 60, color: 'gray', marginTop: 5, fontFamily: fontFamily.Poppins }}>{item.mobile_number}</Text>
+      <View style={{ marginTop: 10, flex: 1, borderWidth: 0.8, borderColor: 'rgba(0, 0, 0, 0.06)', margin: 15 }}> 
+      </View>
+
+      
+
     </TouchableOpacity>
   );
 
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     const backgroundColor = '#6e3b6e';
     const color = 'white';
 
@@ -48,8 +62,8 @@ export const AllChat_Open_Team = () => {
       <Item
         item={item}
         // onPress={() => setSelectedId(item.id)}
-        backgroundColor={{backgroundColor}}
-        textColor={{color}}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
       />
     );
   };
@@ -71,9 +85,9 @@ export const AllChat_Open_Team = () => {
                 <TopHeader_
                   onClickObj={() => setModalVisible(!modalVisible)}
                   onClickSegmentChanged={value => setCuttentTap(value)}
-                  onChange={(value) => 
-                    console.log('setCuttentTap',value)
-                      
+                  onChange={(value) =>
+                    console.log('setCuttentTap', value)
+
                   }
                 />
                 {DATA != null && (
@@ -84,8 +98,8 @@ export const AllChat_Open_Team = () => {
                       // console.log('setCuttentTap',value)
                       setCuttentTap(value)
                     }}
-                  
-                    style={{position: 'relative'}}
+
+                    style={{ position: 'relative' }}
                     badgesValue={[
                       DATA.data.admin.length,
                       DATA.data.manager.length,
@@ -102,7 +116,7 @@ export const AllChat_Open_Team = () => {
                     }
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
-                    // extraData={selectedId}
+                  // extraData={selectedId}
                   />
                 )}
               </View>
@@ -129,7 +143,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopHeader_ = ({onClickObj,onChange}) => {
+export const TopHeader_ = ({ onClickObj, onChange }) => {
   return (
     <>
       <View
@@ -158,9 +172,9 @@ export const TopHeader_ = ({onClickObj,onChange}) => {
       <TextInput
         clearButtonMode="always"
         placeholder="Search Here..."
-          onChange={(e) => {
-            onChange(e.nativeEvent.text);
-          }}
+        onChange={(e) => {
+          onChange(e.nativeEvent.text);
+        }}
         style={{
           width: '100%',
           borderRadius: 10,
