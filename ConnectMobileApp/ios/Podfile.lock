@@ -357,6 +357,8 @@ PODS:
     - React
   - RNDeviceInfo (8.7.1):
     - React-Core
+  - RNFileViewer (2.1.5):
+    - React-Core
   - RNGestureHandler (2.4.2):
     - React-Core
   - RNReanimated (2.3.1):
@@ -459,6 +461,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNFileViewer (from `../node_modules/react-native-file-viewer`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -558,6 +561,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNFileViewer:
+    :path: "../node_modules/react-native-file-viewer"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -622,6 +627,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 86050d31a1cdc564876f68d8e342688b29f9b186
   RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
   RNDeviceInfo: af47a7d1a09d64c8cbb8b0c883db9bca422a9813
+  RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNReanimated: da3860204e5660c0dd66739936732197d359d753
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
@@ -630,6 +636,6 @@ SPEC CHECKSUMS:
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 8e36612f5be5afa5373efbbf2a54c51ef31e8217
+PODFILE CHECKSUM: c8bae8bb29f3dde7a81cfff76c747d156fe08b03
 
 COCOAPODS: 1.11.3
