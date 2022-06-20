@@ -41,8 +41,9 @@ const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
   const menuHandler = () => {
     // console.log('Menu Handler');
-    // alert('Menu Handler');
-    navigation.openDrawer()
+     alert('Menu Handler');
+
+//navigation.openDrawer()
     
    
   };
