@@ -23,6 +23,10 @@
     "@react-navigation/stack": "^6.2.1",
     "axios": "^0.27.2",
     "html-entities": "^2.3.3",
+<<<<<<< HEAD
+=======
+    "lodash": "^4.17.21",
+>>>>>>> Sub_Branch
     "lodash.filter": "^4.6.0",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",

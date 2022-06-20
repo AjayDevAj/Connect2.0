@@ -13,18 +13,34 @@ import CheckBox from '@react-native-community/checkbox';
 import FontDeclarations from '../utility/Font-Declarations';
 //import { ListItem, SearchBar} from 'react-native-elements';
 import filter from 'lodash.filter';
-import {color} from 'react-native-reanimated';
+import {color, set} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useEffect} from 'react';
 
-export default function FilteRrightContainer() {
+export default function FilterRightContainer() {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
+  // ** Fetch Location data from  the saga Store
   const SLResponce = useSelector(store => store.StoreLocationDataResponse);
-  const [data, setData] = useState(SLResponce.data.locations);
 
-  const arrayholder = SLResponce.data.locations;
+  const [data, setData] = useState('');
+  const [arrayholder, setarrayholder] = useState('');
+
+  useEffect(() => {
+    if (
+      SLResponce != null &&
+      SLResponce != undefined &&
+      SLResponce.data != undefined
+    ) {
+      // ** Master Data
+      setData(SLResponce.data.locations);
+
+      //** */ Filtered Data
+      setarrayholder(SLResponce.data.locations);
+    }
+  }, [SLResponce]);
 
   //const SlresponseData = SLResponce.data.locations;
 
@@ -52,10 +68,10 @@ export default function FilteRrightContainer() {
   return (
     <SafeAreaView style={styles.container}>
       <CheckBox
-    disabled={false}
-    value={toggleCheckBox}
-    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-  />
+        disabled={false}
+        value={toggleCheckBox}
+        onValueChange={newValue => setToggleCheckBox(newValue)}
+      />
 
       <View style={styles.searchbarView}>
         <TextInput
