@@ -47,6 +47,16 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  for (NSString* family in [[UIFont familyNames] sortedArrayUsingSelector:@selector(compare:)])
+    {
+//        NSLog(@"custom font before for loop %@", family);
+
+        for (NSString* name in [[UIFont fontNamesForFamilyName:family] sortedArrayUsingSelector:@selector(compare:)])
+        {
+            NSLog(@"custom font check  %@", name);
+        }
+    }
   return YES;
 }
 

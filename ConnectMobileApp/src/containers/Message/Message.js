@@ -21,10 +21,14 @@ import {getOtpResponse} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
-import {OpenGalary,OpenCam} from './OpenMedia';
+// import FileViewer from "react-native-file-viewer";
+import DocumentPicker from 'react-native-document-picker';
+import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 
 const Message = ({navigation, route}) => {
+  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+
   const [loginUserData, setLoginUserData] = useState();
   const [reloadTopView, setReloadTopView] = useState(false);
   const [dotClicked, setDotClicked] = useState(false);
@@ -47,14 +51,22 @@ const Message = ({navigation, route}) => {
   };
 
   const filterHandler = async () => {
-   const getVal = await OpenGalary()
-   console.log('getImages',getVal)
-   dispatch(send_Chat_Message_Data())
+    //  const getVal = await OpenGalary()
+    //  console.log('getImages',getVal)
+    //  dispatch(send_Chat_Message_Data())
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      // await FileViewer.open(res.uri);
+    } catch (e) {
+      // error
+    }
   };
 
   const dotHandler = async () => {
     !dotClicked ? setDotClicked(true) : setDotClicked(false);
-  }
+  };
 
   const dispatch = useDispatch();
   const allChat_Conversation_Data = useSelector(
@@ -69,7 +81,27 @@ const Message = ({navigation, route}) => {
   const getDataFromParam = route.params;
   const [messages, setMessages] = useState([]);
 
+  const Incoming_Chat_Socket_Subscribe = () => {
+    console.log('uWebsocket Connected to the server');
+
+    ws.onopen = () => {
+      console.log('uWebsocket Connected to the server');
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 52}));
+    };
+    ws.onclose = e => {
+      console.log('uWebsocket Disconnected. Check internet or server.');
+    };
+    ws.onerror = e => {
+      console.log('uWebsocket incomming chat onerror', e);
+    };
+    ws.onmessage = e => {
+      console.log('uWebsocket incomming chat onmessage', e.data);
+    };
+  };
+
   useEffect(() => {
+    Incoming_Chat_Socket_Subscribe();
+
     if (isFocused) {
       callAPI();
       getUserData();
@@ -91,7 +123,7 @@ const Message = ({navigation, route}) => {
 
   useEffect(() => {
     if (isImportantResonceData.data != undefined) {
-      console.log('isImportantResonceData.data',isImportantResonceData)
+      console.log('isImportantResonceData.data', isImportantResonceData);
       setReloadTopView(true);
     }
   }, [isImportantResonceData]);
@@ -163,10 +195,12 @@ const Message = ({navigation, route}) => {
     {
       id: 1,
       value: 'Close chat',
-    }, {
+    },
+    {
       id: 2,
       value: 'Mark as unread',
-    }, {
+    },
+    {
       id: 3,
       value: 'Assign to other',
     },
@@ -188,10 +222,17 @@ const Message = ({navigation, route}) => {
         searchHandler={markasImportant}
         filterHandler={dotHandler}
       />
-      {dotClicked && <MaterialMenu itemData={materialMenuItemData} /> }
+      {dotClicked && <MaterialMenu itemData={materialMenuItemData} />}
       <View style={{flex: 1}}>
         {allChat_Conversation_Data.data && loginUserData != undefined && (
           <GiftedChat
+            listViewProps={{
+              contentContainerStyle: {
+                flexGrow: 0.02,
+                paddingTop: 20,
+              },
+              onEndReachedThreshold: 0.2,
+            }}
             infiniteScroll={true}
             alignTop={true}
             messages={messages}
@@ -199,10 +240,11 @@ const Message = ({navigation, route}) => {
             renderComposer={renderComposer}
             renderSend={renderSend}
             renderInputToolbar={
-              getDataFromParam.allChat == true ? render_Blank_InputToolbar : 
-              getDataFromParam.selected_Item.chat_status == 'closed'
-              ? render_Blank_InputToolbar
-              : renderInputToolbar
+              getDataFromParam.allChat == true
+                ? render_Blank_InputToolbar
+                : getDataFromParam.selected_Item.chat_status == 'closed'
+                ? render_Blank_InputToolbar
+                : renderInputToolbar
             }
             renderBubble={renderBubble}
             renderCustomView={renderCustomView}

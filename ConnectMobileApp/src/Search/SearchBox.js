@@ -11,6 +11,7 @@ import searchStyles from './styles/SearchStylesheet';
 const SearchBox = ({ clicked, searchText, chatSearchHandler, firstIcon, secondIcon, thirdIcon, topHeaderName, menuHandler, searchHandler, filterHandler }) => {
     const [searchBackBtnClicked, setBackBtnClicked] = useState(false);
     const [searchBtnClicked, setSearchBtnClicked] = useState(false);
+    const [searchTextInputIsFoucsedClicked, setSearchTextInputIsFoucsedClicked] = useState(false);
 
     const searchBackHandler = () => {
         !searchBackBtnClicked ? setBackBtnClicked(true) : setBackBtnClicked(false)
@@ -20,35 +21,36 @@ const SearchBox = ({ clicked, searchText, chatSearchHandler, firstIcon, secondIc
         !searchBtnClicked ? setSearchBtnClicked(true) : setSearchBtnClicked(false)
     };
 
+    const onFocusChangeHandler = () => {
+        // alert(searchTextInputIsFoucsedClicked)
+        !searchTextInputIsFoucsedClicked ? setSearchTextInputIsFoucsedClicked(true) : setSearchTextInputIsFoucsedClicked(false)
+    }
+
+    const keyboardDismissHandler = () => {
+        Keyboard.dismiss;
+        setSearchTextInputIsFoucsedClicked(false);
+    }
+
     return (
     <>
         {!searchBackBtnClicked ? (
-        <View>
-            {/* <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "bottom"}
-                
-            > */}
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={searchStyles.searchMainContainer}>
-                        <View style={searchStyles.searchBarView__clicked}>
-                            {/* Back Icon */}
-                            <View style={{ position: "absolute", zIndex: 1, marginLeft: '6.5%', paddingTop: 40 }}>
-                                <SearchBoxIcon rightIconName="arrow-back" searchIconSize={26} searchTextColor="#657180" style={{ opacity: 1, }} searchHandler={searchBackHandler} />                             
-                            </View>
+            <TouchableWithoutFeedback onPress={keyboardDismissHandler}>
+                <View style={searchTextInputIsFoucsedClicked == true ? [searchStyles.searchMainContainer, {height: '25%', marginBottom: '2%'}] : [searchStyles.searchMainContainer]}>
+                    <View style={searchStyles.searchBarView__clicked}>
+                        <View style={{ position: "absolute", zIndex: 1, marginLeft: '6.5%', paddingTop: 40 }}>
+                            <SearchBoxIcon rightIconName="arrow-back" searchIconSize={26} searchTextColor="#657180" style={{ opacity: 1, }} searchHandler={searchBackHandler} />                             
+                        </View>
 
-                            {/* Input field */}
-                            <SearchTextInputBox searchText={searchText} chatSearchHandler={chatSearchHandler} />
-                            
-                            {/* cross Icon, depending on whether the search bar is clicked or not */}
-                            <View style={{ position: "absolute", zIndex: 1, right: 15, paddingTop: 35 }}>
-                                {clicked && (<SearchBoxIcon rightIconName="search" searchIconSize={26} searchTextColor="#657180" searchHandler={searchIconHandler}  />)}
-                            </View>
+                        <SearchTextInputBox searchText={searchText} chatSearchHandler={chatSearchHandler} onFocusChangeHandler={onFocusChangeHandler} />
+                                
+                        <View style={{ position: "absolute", zIndex: 1, right: 15, paddingTop: 35 }}>
+                            {clicked && (<SearchBoxIcon rightIconName="search" searchIconSize={26} searchTextColor="#657180" searchHandler={searchIconHandler}  />)}
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
-            {/* </KeyboardAvoidingView> */}
-            {searchBtnClicked && (<SearchBoxList /> )}
-        </View>
+
+                    {/* {searchBtnClicked && (<SearchBoxList searchTextInputIsFoucsedClicked={searchTextInputIsFoucsedClicked} /> )} */}
+                </View>
+            </TouchableWithoutFeedback>
         ) : (
             <TopHeader
                 firstIcon={firstIcon}

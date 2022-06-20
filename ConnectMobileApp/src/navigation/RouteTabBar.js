@@ -68,25 +68,17 @@ import navigationString from '../utility/NavigationString';
 import Count_Badge from '../component/Count_Badge';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
+import uWebSockets from '../component/uWebSockets'
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
 function HomeScreen() {
-  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
-  // const dispatch = useDispatch();
-
-  const Incoming_Chat_Socket_Subscribe = () => {
-    ws.onopen = () => {
-        console.log("uWebsocket Connected to the server")
-        ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 52}));
-      };
-}
   // const testSocket = () => {
     
   // }
   useEffect(() => {
-    Incoming_Chat_Socket_Subscribe()
+    // Incoming_Chat_Socket_Subscribe()
     // dispatch(Unassigned_Chat());
 
   })

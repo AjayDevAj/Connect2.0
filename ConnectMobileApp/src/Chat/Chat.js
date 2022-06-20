@@ -44,8 +44,9 @@ const Chat = ({navigation}) => {
   const isFocused = useIsFocused();
   const menuHandler = () => {
     // console.log('Menu Handler');
-    // alert('Menu Handler');
-    navigation.openDrawer()
+     alert('Menu Handler');
+
+//navigation.openDrawer()
     
    
   };
@@ -112,19 +113,24 @@ const Chat = ({navigation}) => {
     const keys = await AsyncStorage.getAllKeys();
     if (keys.includes(searchedListData)) {
       try {
-        await AsyncStorage.setItem(searchedListData, JSON.stringify([{value: searchTextParam}]));
+        const searchItemListData = [];
+        const searchItemListArrayData = await AsyncStorage.getItem(searchedListData);
+        searchItemListData = JSON.parse(searchItemListArrayData);
+        //console.log('Search List Item array Data - ', searchItemListArrayData);
+        
+        searchItemListData.push({
+          value:searchTextParam
+        });
+        console.log('Search List Data - ', JSON.stringify(searchItemListData));
+        await AsyncStorage.setItem(searchedListData, JSON.stringify(searchItemListData));
       } catch (error) {
         console.log('Save searched item in list exception ', error);
       }
     }
-    
   };
 
-  
-  
   return (
     <View style={chatStyles.chatMainContainer}>
-     
       {!clicked ? (
         <TopHeader
           firstIcon="menu"
