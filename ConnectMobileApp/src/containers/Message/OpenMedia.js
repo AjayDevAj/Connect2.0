@@ -5,8 +5,8 @@ import {DocumentPicker} from 'react-native-document-picker';
 
 
 export const  OpenGalary = async () => {
-  const result = await launchImageLibrary({selectionLimit:5});
-  console.log('galary selected item',result)
+  const result = await launchImageLibrary({selectionLimit:1});
+  // console.log('galary selected item',result)
   return result
   // sendVal(result)
 }
