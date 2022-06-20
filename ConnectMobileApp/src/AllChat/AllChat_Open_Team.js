@@ -1,8 +1,18 @@
-import React, {useState,useEffect} from 'react';
-import {Alert, Modal, StyleSheet, TextInput,FlatList, View, Text,Pressable,TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import {SegmentComponent} from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
-import {getUserdata} from '../api/getUserdata'
+import {getUserdata} from '../api/getUserdata';
 import {useIsFocused} from '@react-navigation/native';
 
 export const AllChat_Open_Team = () => {
@@ -12,65 +22,62 @@ export const AllChat_Open_Team = () => {
 
   useEffect(() => {
     if (isFocused) {
-      call_getUserdata()
+      call_getUserdata();
     }
   }, [isFocused]);
 
-  const call_getUserdata = async() => {
-         let data = await getUserdata()
-         console.log('call_getUserdata' ,data )
-         setDATA(data)
-  }
+  const call_getUserdata = async () => {
+    let data = await getUserdata();
+    console.log('call_getUserdata', data);
+    setDATA(data);
+  };
 
-
-  const Item = ({ item, onPress, backgroundColor, textColor }) => (
+  const Item = ({item, onPress, backgroundColor, textColor}) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
       <Text style={[styles.title, textColor]}>{item.title}</Text>
     </TouchableOpacity>
   );
 
-  const renderItem = ({ item }) => {
-    const backgroundColor =  "#6e3b6e" ;
-    const color = 'white'  ;
+  const renderItem = ({item}) => {
+    const backgroundColor = '#6e3b6e';
+    const color = 'white';
 
     return (
       <Item
         item={item}
         // onPress={() => setSelectedId(item.id)}
-        backgroundColor={{ backgroundColor }}
-        textColor={{ color }}
+        backgroundColor={{backgroundColor}}
+        textColor={{color}}
       />
     );
   };
 
   return (
-      <>
-      { modalVisible &&
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
+    <>
+      {modalVisible && (
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TopHeader_ onClickObj={() => 
-            setModalVisible(!modalVisible)
-            }/>
-<FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        // extraData={selectedId}
-      />
-          </View>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <TopHeader_ onClickObj={() => setModalVisible(!modalVisible)}  />
+                <FlatList
+                  data={DATA.data.admin}
+                  renderItem={renderItem}
+                  keyExtractor={item => item.id}
+                  // extraData={selectedId}
+                />
+              </View>
+            </View>
+          </Modal>
         </View>
-      </Modal>
-    </View>
-}
+      )}
     </>
   );
 };
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopHeader_ = ({onClickObj}) => {
+export const TopHeader_ = ({onClickObj,onClickSegmentChanged}) => {
   return (
     <>
       <View
@@ -100,17 +107,21 @@ export const TopHeader_ = ({onClickObj}) => {
           backgroundColor: '#F7FCFF',
           alignItems: 'center',
           justifyContent: 'space-between',
-          marginLeft:16
+          marginLeft: 16,
         }}>
-        <Text style={{fontSize: 18, color: '#000000', fontFamily: fontFamily.Alte_DIN}}>
+        <Text
+          style={{
+            fontSize: 18,
+            color: '#000000',
+            fontFamily: fontFamily.Alte_DIN,
+          }}>
           Select team member
         </Text>
         <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => onClickObj()}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+          style={[styles.button, styles.buttonClose]}
+          onPress={() => onClickObj()}>
+          <Text style={styles.textStyle}>Hide Modal</Text>
+        </Pressable>
       </View>
       <TextInput
         clearButtonMode="always"
@@ -134,7 +145,7 @@ export const TopHeader_ = ({onClickObj}) => {
       <SegmentComponent
         width={'65%'}
         onClickSegmentChanged={value => {
-          console.log('value');
+          onClickSegmentChanged(value)
         }}
         style={{position: 'relative'}}
         //   badgesValue={[
