@@ -36,7 +36,7 @@ import headerStyles from './styles/headerStyleSheet';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null }) => {
+const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null , }) => {
     return (
         <View style={ headerStyles.mainContainer }>
             <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>

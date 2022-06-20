@@ -40,8 +40,10 @@ import Filter from '../containers/dashboard/Filter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 
-const Chat = ({navigation}) => {
+
+const Chat = ({navigation }) => {
   const isFocused = useIsFocused();
+  
   const menuHandler = () => {
     // console.log('Menu Handler');
      alert('Menu Handler');
