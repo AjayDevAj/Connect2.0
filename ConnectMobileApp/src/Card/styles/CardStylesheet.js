@@ -20,26 +20,7 @@ const cardStyles = StyleSheet.create({
     /*
     * * Card Row One (Logo, Name, Location)
     */
-    cardAgentNameContainer: {
-        flexDirection: 'row',
-       // justifyContent: 'space-around',
-        backgroundColor:'rgba(244, 251, 255, 1)',
-        marginLeft: 35,
-        alignContent: 'center',
-        height:24,
-        marginBottom: 12,
-        borderColor: 'rgba(224, 243, 255, 1)',
-        borderRadius:4,
-        borderWidth:1 ,
-        marginRight: 20    
-    },
-   
 
-    cardRowThree: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
     cardRowOne: {
         flex: 1, 
         flexDirection: 'row', 
@@ -122,29 +103,31 @@ const cardStyles = StyleSheet.create({
         fontFamily: fontFamily.Poppins,
         fontSize: 14,
         fontWeight: 'bold',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
+    //auth context.js
     unreadCountDesign: {
         backgroundColor: '#00C158',
-        width: 21,
-        height: 16,
-        borderRadius: 9,
+        width: '10%',
+        height: 18,
+        borderRadius: 21/2,
         opacity: 1,
         textAlign: 'center',
-        justifyContent: 'flex-end',
         marginVertical: '3%',
-        marginHorizontal: '3%'
+        marginHorizontal: '3%',
+        paddingRight: 3,
     },
     unreadCountDesignLessThan31: {
         backgroundColor: '#00C158',
-        width: 21,
-        height: 16,
-        borderRadius: 9,
+        width: '10%',
+        height: 18,
+        borderRadius: 21/2,
         opacity: 1,
         textAlign: 'center',
-        // justifyContent: 'flex-start',
-        marginVertical: '5%',
-        // marginHorizontal: '3%'
+        alignSelf: 'center',
+        marginVertical: '3%',
+        marginHorizontal: '3%',
+        paddingRight: 3,
     },
     chatMessage: {
         color: '#000000',
@@ -175,6 +158,37 @@ const cardStyles = StyleSheet.create({
         fontSize: 11,
         opacity: 1,
         letterSpacing: 0,
+        fontFamily: fontFamily.Poppins,
+    },
+
+    /*
+    * * Card Row Three (AgentName, Icon)
+    */
+    cardRowThree: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    cardAgentNameContainer: {
+        flexDirection: 'row',
+       // justifyContent: 'space-around',
+        backgroundColor:'rgba(244, 251, 255, 1)',
+        marginLeft: 30,
+        alignContent: 'center',
+        height:24,
+        marginBottom: 12,
+        borderColor: 'rgba(224, 243, 255, 1)',
+        borderRadius:4,
+        borderWidth:1 ,
+        marginRight: 20    
+    },
+    cardAgentName: {
+        color: '#4C5969',
+        letterSpacing: 0,
+        fontSize: 14,
+        opacity: 1,
+        paddingVertical: 2,
+        paddingHorizontal: 7,
         fontFamily: fontFamily.Poppins,
     },
 });
