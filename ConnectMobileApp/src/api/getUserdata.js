@@ -5,7 +5,7 @@ import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
 
-const getUserdata = async (conversation_id, is_important) => {
+const getUserdata = async () => {
 
     /****** get token from store asy class... */
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
