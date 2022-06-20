@@ -21,7 +21,6 @@ import {getOtpResponse} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
-import {OpenGalary,OpenCam} from './OpenMedia'
 // import FileViewer from "react-native-file-viewer";
 import DocumentPicker from "react-native-document-picker";
 import {OpenGalary,OpenCam} from './OpenMedia';
