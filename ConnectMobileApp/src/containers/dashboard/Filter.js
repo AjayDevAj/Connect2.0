@@ -11,8 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimily from '../../utility/Font-Declarations';
 import Buttongroup from './buttongropu_Filter';
 import styles from '../dashboard/FilterStyle';
-import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
+// import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
+// import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 
 export default Filter = () => {
   return (

@@ -91,12 +91,16 @@ const Message = ({navigation, route}) => {
       ws.onerror = (e) => {
         console.log('uWebsocket incomming chat onerror',e)
       };
-      // ws.onmessage('message/message-count/' + '52')= (e) => {
-      //   console.log('uWebsocket incomming chat onmessage',e)
-      // };
       ws.onmessage = (e) => {
         console.log('uWebsocket incomming chat onmessage',e.data)
+        
+        // if (xtype.type(e.data) === 'object') {
+          console.log('uWebsocket incomming chat')
 
+        setMessages(previousMessages =>
+          GiftedChat.append(previousMessages, e.data),
+        );
+        // }
       };
 }
 
