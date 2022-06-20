@@ -34,9 +34,9 @@ const cardStyles = StyleSheet.create({
         alignSelf: 'flex-start',
         alignItems: 'center',
         opacity: 1,
-        width: 22,
+        width: 14,
         height: 22,
-        borderRadius: 22/2,
+        borderRadius: 18/2,
         elevation: 5,
         backgroundColor: '#fff',
         shadowOffset: {width: 1, height: 1},
@@ -90,6 +90,29 @@ const cardStyles = StyleSheet.create({
         fontFamily: fontFamily.Poppins,
         marginLeft: 5
     },
+    unreadChatMessage: {
+        color: '#000000',
+        marginVertical: 8,
+        width: '69%',
+        height: 20,
+        opacity: 1,
+        letterSpacing: 0,
+        fontFamily: fontFamily.Poppins,
+        fontSize: 14,
+        fontWeight: 'bold',
+        justifyContent: 'flex-start'
+    },
+    unreadCountDesign: {
+        backgroundColor: '#00C158',
+        width: 21,
+        height: 16,
+        borderRadius: 9,
+        opacity: 1,
+        textAlign: 'center',
+        justifyContent: 'flex-end',
+        marginVertical: '3%',
+        marginHorizontal: '3%'
+    },
     chatMessage: {
         color: '#000000',
         marginVertical: 8,
@@ -99,7 +122,6 @@ const cardStyles = StyleSheet.create({
         letterSpacing: 0,
         fontFamily: fontFamily.Poppins,
         fontSize: 14,
-        
     },
     cardTimeContainer: {
         flexDirection:'row',

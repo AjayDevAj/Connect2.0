@@ -162,7 +162,7 @@ const Chat = ({navigation}) => {
             setCurrentTabStatus(value);
             callAPI(value);
           }}
-          style={{position: 'relative' }}
+          style={{position: 'relative', marginTop: '2%' }}
           badgesValue={[
             chatResponseData.data.openMessageCount,
             chatResponseData.data.closedMessageCount,

@@ -40,12 +40,9 @@ const searchStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        // position: 'absolute',
-        // marginTop: '12%',
-        // alignItems: "flex-start",
+        minHeight: '15%',
         flexDirection: "column",
-        justifyContent: 'flex-start',
-        
+        justifyContent: 'flex-start'
     },
     searchBarView__clicked: {
         flex: 1,
@@ -56,6 +53,8 @@ const searchStyles = StyleSheet.create({
         // justifyContent: "space-evenly",
         // marginTop: '8%',
         position: 'absolute',
+       
+        
     },
     searchTextinputView: {
         // flex: 1,
