@@ -64,6 +64,38 @@ const Message = ({navigation, route}) => {
     }
   };
 
+  const openImage = async () => {
+     const getVal = await OpenGalary()
+     console.log('getImages',getVal)
+
+     setUnSendMessage({
+      message: messages[0].text,
+      createdAt: messages[0].createdAt,
+      user: {
+        agent_name: messages[0].user.agent_name,
+        _id: messages[0].user._id,
+      },
+      _id: messages[0]._id,
+    });
+
+    //  dispatch(send_Chat_Message_Data())
+  };
+  const openFile = async () => {
+    //  dispatch(send_Chat_Message_Data())
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      // await FileViewer.open(res.uri);
+    } catch (e) {
+      // error
+    }
+  };
+
+  const createImage_FileData = () => {
+
+  }
+
   const dotHandler = async () => {
     !dotClicked ? setDotClicked(true) : setDotClicked(false);
   };
@@ -246,9 +278,11 @@ const Message = ({navigation, route}) => {
                 ? render_Blank_InputToolbar
                 : renderInputToolbar
             }
+            selectFile={openFile}
+            selectImage={openImage}
             renderBubble={renderBubble}
             renderCustomView={renderCustomView}
-            // renderMessageImage={renderMessageImage}
+            renderMessageImage={renderMessageImage}
             user={{
               _id: 'a',
               agent_name: loginUserData.user.name,
