@@ -8,7 +8,7 @@ import cardStyles from './styles/CardStylesheet';
 import CardTime from './CardTime';
 
 const CardRowTwo = ({ assigned, message, time, unread, status }) => {
-    unread = 1
+    // unread = 1
     return (
         <View style={ cardStyles.cardRowTwo }>
             <View style={{ alignSelf: 'flex-start' }}></View>

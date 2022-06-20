@@ -43,9 +43,15 @@ const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, search
 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start', }}>
                     <Icon name={firstIcon} size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
-                    <Text style={ headerStyles.headerText }>{name}</Text>
-                    {arrowDownIcon != '' && 
-                        <Icon name={arrowDownIcon} size={24} color="#FFF" onPress={arrowDownHandler} style={{ marginTop: '1%', marginLeft: '1%' }} />
+                    {arrowDownIcon != '' ? 
+                        (
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={ headerStyles.headerText } onPress={arrowDownHandler}>{name}</Text>
+                                <Icon name={arrowDownIcon} size={24} color="#FFF" onPress={arrowDownHandler} style={{ marginTop: '1%', marginLeft: '1%' }} />
+                            </View>
+                        ) 
+                    : 
+                        <Text style={ headerStyles.headerText }>{name}</Text>
                     }
                 </View>
                 
