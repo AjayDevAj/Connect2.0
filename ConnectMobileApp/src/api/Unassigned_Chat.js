@@ -35,7 +35,7 @@ export const Unassigned_Chat_Fetch_Call = async () => {
      */
 
     const data = response.json();
-    // console.log('Unassigned Chat Body Data data: ',data);
+    console.log('Unassigned Chat Body Data data: ',response.status);
 
     /*
      **
@@ -45,9 +45,13 @@ export const Unassigned_Chat_Fetch_Call = async () => {
      **
      */
 
-    if (response.status > 400) {
-      throw new Error(data.errors);
-    }
+    switch (response.status) {
+      case response.status > 400 :
+          throw new Error(data.errors)
+      case 204 :
+          throw new Error("NO Data")
+      default:break
+  }
     return data;
 
   // } catch (error) {

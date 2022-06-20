@@ -102,9 +102,9 @@ const Message = ({navigation, route}) => {
         // if (xtype.type(e.data) === 'object') {
           console.log('uWebsocket incomming chat')
 
-        setMessages(previousMessages =>
-          GiftedChat.append(previousMessages, e.data),
-        );
+        // setMessages(previousMessages =>
+        //   GiftedChat.append(previousMessages, e.data),
+        // );
         // }
       };
 }

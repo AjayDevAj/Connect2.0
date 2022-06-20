@@ -2,17 +2,14 @@ import React, {useRef} from 'react';
 import {View, FlatList, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import fontFamily from '../utility/Font-Declarations';
-// import Card from '../Card/Card';
-// import CardIcon from '../Card/CardIcon';
-// import CardNameMessage from '../Card/CardNameMessage';
-// import CardLocationTime from '../Card/CardLocationTime';
 import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
+import {useSelector, useDispatch} from 'react-redux';
+import {loadAccept_RejectChat_Data} from '../actions/AcceptRejectChatAction';
+
 /**
  * Open action sheet
  */
 export const openSheet = Incoming_Chat => {
-  console.log('unassigned_Chat_Response:- openSheet', Incoming_Chat);
-
 
   DATA = Incoming_Chat;
   SheetManager.show('helloworld_sheet');
@@ -21,6 +18,7 @@ export const openSheet = Incoming_Chat => {
   SheetManager.show('ConnectAppCommonBottomSheet');
 
 };
+
 
 /**
  * This class is for imcoming chat icon.
@@ -44,6 +42,8 @@ const Item = ({title, location, last_message}) => (
 );
 
 const Action_Sheet = () => {
+  const dispatch = useDispatch();
+
   const actionSheetRef = useRef();
   const renderItem = ({item}) => (
     
@@ -53,6 +53,10 @@ const Action_Sheet = () => {
       last_message={item.message}
     />
   );
+
+  const acpect_Reject_API_Call = () => {
+    dispatch(loadAccept_RejectChat_Data());
+  };
 
   return (
     <ActionSheet

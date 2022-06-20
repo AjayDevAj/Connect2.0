@@ -18,40 +18,60 @@ import {useSelector, useDispatch} from 'react-redux';
  * * Its visible when atleast incoming count is one.
  */
 const Incoming_Chat = () => {
+const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+const [isVisible,setIsVisible] = useState(true)
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     onClose: () => closePanel(),
     onPressCloseButton: () => closePanel(),
   });
   const dispatch = useDispatch();
-  // const [username, SetuserName] = useState('Priyanka11');
-  // const [isPanelActive, setIsPanelActive] = useState(true);
-
   const unassigned_Chat_Response = useSelector(
     store => store.Unassigned_Chat_Data,
   );
 
   useEffect(() => {
+    console.log('unassigned_Chat_Response status',unassigned_Chat_Response)
     if (unassigned_Chat_Response.data != null) {
       openSheet(unassigned_Chat_Response.data.result);
     }
   }, [unassigned_Chat_Response]);
 
+  useEffect(() => {
+    Incoming_Chat_Socket_Subscribe()
+  });
+
   const unassigned_Chat_API_Call = () => {
     dispatch(Unassigned_Chat());
   };
 
+  const Incoming_Chat_Socket_Subscribe = () => {
+    ws.onopen = () => {
+        console.log("uWebsocket Connected to the server Incoming_Chat_Socket_Subscribe")
+        ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 52}));
+      };
+      ws.onclose = (e) => {
+        console.log("uWebsocket Disconnected. Check internet or server.")
+      };
+      ws.onerror = (e) => {
+        console.log('uWebsocket incomming chat onerror',e)
+      };
+      ws.onmessage = (e) => {
+        console.log('uWebsocket incomming chat onmessage',e.data)
+      };
+}
+
   return (
     <>
+    {isVisible &&
+     <>
       <Action_Sheet />
       <Draggable
         x={Dimensions.get('window').width - 100}
         y={Dimensions.get('window').height - 170}
         onShortPressRelease={() => {
-          // openSheet();
           unassigned_Chat_API_Call();
         }}>
-          {/* {(unassigned_Chat_Response.data != undefined && unassigned_Chat_Response.data.result > 0) && */}
         <View
           style={{
             width: 56,
@@ -64,8 +84,9 @@ const Incoming_Chat = () => {
           <Sms_black_24dp />
           <Count_Badge topRight={-5} top={-5} badge_Value={2}/>
         </View>
-        {/* } */}
       </Draggable>
+      </>
+}
     </>
   );
 };
