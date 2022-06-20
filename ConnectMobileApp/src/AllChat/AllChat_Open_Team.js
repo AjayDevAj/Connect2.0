@@ -71,6 +71,10 @@ export const AllChat_Open_Team = () => {
                 <TopHeader_
                   onClickObj={() => setModalVisible(!modalVisible)}
                   onClickSegmentChanged={value => setCuttentTap(value)}
+                  onChange={(value) => 
+                    console.log('setCuttentTap',value)
+                      
+                  }
                 />
                 {DATA != null && (
                   <SegmentComponent
@@ -80,6 +84,7 @@ export const AllChat_Open_Team = () => {
                       // console.log('setCuttentTap',value)
                       setCuttentTap(value)
                     }}
+                  
                     style={{position: 'relative'}}
                     badgesValue={[
                       DATA.data.admin.length,
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TopHeader_ = ({onClickObj}) => {
+export const TopHeader_ = ({onClickObj,onChange}) => {
   return (
     <>
       <View
@@ -153,9 +158,9 @@ export const TopHeader_ = ({onClickObj}) => {
       <TextInput
         clearButtonMode="always"
         placeholder="Search Here..."
-        //   onChange={(e) => {
-        //     setUserSearch(e.nativeEvent.text);
-        //   }}
+          onChange={(e) => {
+            onChange(e.nativeEvent.text);
+          }}
         style={{
           width: '100%',
           borderRadius: 10,
