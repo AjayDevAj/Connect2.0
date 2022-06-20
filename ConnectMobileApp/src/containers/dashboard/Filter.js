@@ -14,17 +14,22 @@ import styles from '../dashboard/FilterStyle';
 
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
-import FilteRrightContainer from '../../component/FilteRrightContainer';
+
+import FilterRightContainer from '../../component/FilterRightContainer';
 
 
-export default Filter = () => {
+
+
+
+export default Filter = ({navigation}) => {
 
   
   
   useEffect(()=>{
    // getData()
     
-   
+   //navigation.goBack()
+  
     
   })
 
@@ -51,9 +56,10 @@ export default Filter = () => {
           name="sort"
           color={'#657180'}
           size={30}
-          backgroundColor="transparent"
+          backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
-            SheetManager.show('sortingsheet');
+            //navigation.navigate('RouteTabBar')
+            //navigation.goBack();
           }}>
           <Text
             style={{
@@ -61,7 +67,6 @@ export default Filter = () => {
               fontFamily: fontfaimly.Alte_DIN,
               color: 'rgba(101, 113, 128, 1)',
             }}>
-            {' '}
             Sorting
           </Text>
         </Icon.Button>
@@ -77,7 +82,7 @@ export default Filter = () => {
         {/* Right Conatiner  */}
         <View style={styles.rightContainer}>
           {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
-          <FilteRrightContainer/>
+          <FilterRightContainer/>
          
         </View>
       </View>
