@@ -29,7 +29,11 @@ export default {
     RouteTabBar:"RouteTabBar",
     AllChat: "AllChat",
     Message:"Message",
+<<<<<<< HEAD
     Filter:'Filter',
+=======
+    Drawer:"Drawer",
+>>>>>>> 62368742c2f1f97b9728509aaf60c45acdd64913
     
 
 /*
@@ -56,6 +60,10 @@ Reviews: "Reviews",
 
 Posts: "Posts",
 Offers: "Offers",
+Locations: "Locations",
+ManageTeam: "Manage Team",
+Profile: "Profile",
+
 
 
 }
