@@ -14,8 +14,9 @@ import { SegmentComponent } from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
 import { getUserdata } from '../api/getUserdata';
 import { useIsFocused } from '@react-navigation/native';
-import { RadioButton } from 'react-native-paper';
-
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+// import { Icon } from 'react-native-vector-icons/Icon';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 
@@ -24,6 +25,9 @@ export const AllChat_Open_Team = () => {
   const isFocused = useIsFocused();
   const [DATA, setDATA] = useState(null);
   const [cuttentTap, setCuttentTap] = useState('Admin');
+  const [radioValue, setRadioValue] = useState('false')
+  const [value, setvalue] = React.useState('first')
+
 
   useEffect(() => {
     if (isFocused) {
@@ -37,6 +41,10 @@ export const AllChat_Open_Team = () => {
     setDATA(data);
   };
 
+  var radio_props = [
+    { value: 0 },
+    
+  ];
 
 
   const Item = ({ item, onPress, backgroundColor, textColor }) => (
@@ -44,8 +52,24 @@ export const AllChat_Open_Team = () => {
       {/* <Text style={[styles.title, textColor]}>{item.name}</Text>
       <Text style={[styles.title, textColor]}>{item.mobile_number}</Text> */}
 
+      <View style={{ position:'absolute',left: 10, height: 25, width: 25,backgroundColor: 'red', top: 20, borderRadius: 25/2 }}>
+        <Text style={{fontSize: 15, alignSelf: 'center', marginTop: 3}}>
+          {item.name.charAt(0)}
+        </Text>
+      </View>
+
       <Text style={{ fontSize: 16, marginLeft: 50, marginTop: 15, fontFamily: fontFamily.Alte_DIN }}>{item.name}</Text>
-      <Text style={{ fontSize: 14, marginLeft: 60, color: 'gray', marginTop: 5, fontFamily: fontFamily.Poppins }}>{item.mobile_number}</Text>
+      <View style={{ position:'absolute', right: 15, top: 25}}>
+        <RadioForm
+          radio_props={radio_props}
+          initial={1}
+          buttonColor={'rgba(95, 99, 104, 1)'}
+          buttonSize={10}
+          onPress={(value) => {Alert.alert("Click Me")}}
+        />
+      </View>
+      
+      <Text style={{ fontSize: 14, marginLeft: 55, color: 'gray', marginTop: 5, fontFamily: fontFamily.Poppins }}>{item.mobile_number}</Text>
       <View style={{ marginTop: 10, flex: 1, borderWidth: 0.8, borderColor: 'rgba(0, 0, 0, 0.06)', margin: 15 }}> 
       </View>
 
@@ -154,6 +178,8 @@ export const TopHeader_ = ({ onClickObj, onChange }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           marginLeft: 16,
+          width: '95%',
+          marginTop: 5
         }}>
         <Text
           style={{
@@ -163,15 +189,17 @@ export const TopHeader_ = ({ onClickObj, onChange }) => {
           }}>
           Select team member
         </Text>
-        <Pressable
-          style={[styles.button, styles.buttonClose]}
+        <Pressable 
+         // style={[styles.button, styles.buttonClose]}
           onPress={() => onClickObj()}>
-          <Text style={styles.textStyle}>Hide Modal</Text>
+          {/* <Text style={styles.textStyle}>Hide Modal</Text> */}
+          <Icon name='close' size={20} color={'rgba(95, 99, 104, 1)'} style={{ right:15 }} />
         </Pressable>
       </View>
-      <TextInput
+
+        <TextInput
         clearButtonMode="always"
-        placeholder="Search Here..."
+        placeholder="Search here..."
         onChange={(e) => {
           onChange(e.nativeEvent.text);
         }}
@@ -186,7 +214,7 @@ export const TopHeader_ = ({ onClickObj, onChange }) => {
           backgroundColor: '#FFFFFF',
           height: 40,
         }}
-        placeholderTextColor="rgba(0,0,0,.66)"
+        placeholderTextColor="rgba(0,0,0,.66)"      
       />
     </>
   );
