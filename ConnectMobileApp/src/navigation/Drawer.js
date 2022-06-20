@@ -26,6 +26,7 @@ export default function Drawer(props) {
     <Drawerbar.Navigator drawerContent={(props) => <CustomDrawer {...props}/>} initialRouteName="Home">
       
       <Drawerbar.Screen name="Posts" component={RouteTabBar} options={{ headerShown: false }} />
+      
       {/* <Drawerbar.Screen name="Offers" component={Offers} options={{ headerShown: false }} />
       <Drawerbar.Screen name="Locations" component={Locations} options={{ headerShown: false }} />
       <Drawerbar.Screen name="Manage Team" component={ManageTeam} options={{ headerShown: false }} />
