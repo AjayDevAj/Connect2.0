@@ -128,7 +128,7 @@ const Routes = () => {
             'Get all keys :- before initialRouteName set',
             initialState,
           )}
-          <Stack.Navigator initialRouteName={OnBoarding}>
+          <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
