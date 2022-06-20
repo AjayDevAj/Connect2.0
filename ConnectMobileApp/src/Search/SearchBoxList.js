@@ -5,37 +5,35 @@ import {searchedListData} from '../utility/Constant';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SearchBoxList = () => {
+const SearchBoxList = ({ searchTextInputIsFoucsedClicked }) => {
 
   useEffect(() => {
     getItemList();
-  }, []);
-
+  });
+  // const searchItemListData = [];
   const searchItemListData = [
     {
-      id: 1,
-      value: 'Sales Management',
+      'value': 'Sales Management',
     }, {
-      id: 2,
-      value: 'Finance Management',
+      'value': 'Finance Management',
     }, {
-      id: 3,
-      value: 'Live Stores Dashboard',
+      'value': 'Live Stores Dashboard',
     },
   ];
-
+  
   const getItemList = async () => {
     try {
-      const searchItemListArrayData = await AsyncStorage.getItem(searchedListData);
+      const searchItemListData = await AsyncStorage.getItem(searchedListData);
+      console.log('AsyncStorage searchedListData data - ', searchItemListData);
 
-      if (searchItemListArrayData !== null) {
-        const searchItemListData = JSON.parse(searchItemListArrayData);
-      }
+      // if (searchItemListArrayData.length != 0) {
+        // const searchItemListData = JSON.parse(searchItemListArrayData);
+      // }
     } catch (error) {
       console.log('Save searched item in list exception ', error);
     }
     
-    console.log('Save searched item list ', searchItemListData);
+    // console.log('Save searched item list ', searchItemListData);
   }
 
   
@@ -45,7 +43,7 @@ const SearchBoxList = () => {
       try {
         const searchItemListArrayData = await AsyncStorage.setItem(searchedListData, JSON.stringify([{value: searchedText}]));
 
-        if (searchItemListArrayData !== null) {
+        if (searchItemListArrayData.length != 0) {
           const searchItemListData = JSON.parse(searchItemListArrayData);
         }
       } catch (error) {
@@ -128,7 +126,7 @@ const SearchBoxList = () => {
     }
   }
     return (
-      <View style={searchStyles.searchListMainContainer}>
+      <View style={searchTextInputIsFoucsedClicked ? [searchStyles.searchListMainContainer, {backgroundColor: 'red', height: '25%', marginBottom: '2%'}] : [searchStyles.searchListMainContainer, {backgroundColor: 'yellow', height: '15%', marginBottom: '0%'}]}>
         {/* <Modal visible={modalOpen} animationType='slide'> */}
           <View style={searchStyles.searchItemListContainer}>
             <View style={searchStyles.searchResearchClearContainer}>

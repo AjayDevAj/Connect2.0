@@ -11,11 +11,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimly from '../../utility/Font-Declarations';
 import Buttongroup from './buttongropu_Filter';
 import styles from '../dashboard/FilterStyle';
+
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 import FilteRrightContainer from '../../component/FilteRrightContainer';
-
-
 
 
 export default Filter = () => {
