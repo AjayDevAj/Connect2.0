@@ -21,9 +21,9 @@ import FilterRightContainer from '../../component/FilterRightContainer';
 
 
 
-export default Filter = ({navigation}) => {
+export default Filter = ({navigation, route }) => {
 
-  
+  const isselc =true
   
   useEffect(()=>{
    // getData()
@@ -59,7 +59,7 @@ export default Filter = ({navigation}) => {
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
             //navigation.navigate('RouteTabBar')
-            //navigation.goBack();
+            navigation.goBack(()=> Alert.alert('hi'));
           }}>
           <Text
             style={{
