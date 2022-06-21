@@ -41,9 +41,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 
 
-const Chat = ({navigation }) => {
+const Chat = ({navigation ,Route}) => {
+  
   const isFocused = useIsFocused();
   const [isSearch, setIsSeatch] = useState(false)
+
 
   const menuHandler = () => {
     // console.log('Menu Handler');
@@ -129,6 +131,10 @@ const Chat = ({navigation }) => {
     }
   };
 
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <View style={chatStyles.chatMainContainer}>
       {!clicked ? (
@@ -181,7 +187,7 @@ const Chat = ({navigation }) => {
             left="people"
             message={`${
               chatResponseData.data.otherMessageCount
-            } ${currentTabStatus.toUpperCase()} chats with team`}
+            } ${Capitalize(currentTabStatus)} chats with team`}
             right="chevron-right"
             openAllChat={() => navigation.navigate(navigationString.AllChat,{
               openTab:currentTabStatus

@@ -34,7 +34,8 @@ import {Text, View} from 'react-native';
 import SearchBar from 'react-native-dynamic-search-bar';
 import headerStyles from './styles/headerStyleSheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import WhatsappIcon from '../Card/Icons/whatsapp.svg';
+import GoogleIcon from '../Card/Icons/Google.svg';
 const TopHeader = ({
   firstIcon,
   name,
@@ -46,7 +47,8 @@ const TopHeader = ({
   color = null,
   arrowDownIcon = '',
   arrowDownHandler = '',
-  isSearchEnable=false
+  isSearchEnable=false,
+  logo ='' 
 }) => {
   return (
     <View style={headerStyles.mainContainer}>
@@ -73,6 +75,7 @@ const TopHeader = ({
       />
       ):(
       <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
+
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start', }}>
                     <Icon name={firstIcon} size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
                     {arrowDownIcon != '' ? 
@@ -82,9 +85,21 @@ const TopHeader = ({
                                 <Icon name={arrowDownIcon} size={24} color="#FFF" onPress={arrowDownHandler} style={{ marginTop: '1%', marginLeft: '1%' }} />
                             </View>
                         ) 
-                    : 
+                    :   (
+                        <>
+                        {logo != '' && (
+                            <View style={ headerStyles.headerIconContainer }>
+                                { logo === 'whatsapp' ? 
+                                    <WhatsappIcon />
+                                : 
+                                    <GoogleIcon /> 
+                                }
+                            </View>
+                        ) }
                         <Text style={ headerStyles.headerText }>{name}</Text>
-                    }
+                        
+                        </>
+                       )}
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
