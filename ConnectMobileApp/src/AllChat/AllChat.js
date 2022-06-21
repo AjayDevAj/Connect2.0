@@ -40,12 +40,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import RouteTabBar from '../navigation/RouteTabBar';
 
 const AllChat = ({navigation, route}) => {
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchText, setSearchText] = useState('');
+
   const menuHandler = () => {
     navigation.goBack();
   };
 
   const searchHandler = () => {
-    !clicked ? setClicked(true) : setClicked(false);
+    setIsSearch(!isSearch)
   };
 
   const filterHandler = () => {};
@@ -60,8 +63,6 @@ const AllChat = ({navigation, route}) => {
   const [currentTabStatus, setCurrentTabStatus] = useState(
     route.params.openTab,
   );
-  const [searchText, setSearchText] = useState('');
-  const [clicked, setClicked] = useState(false);
   const [showAllUser, setShowAllUser] = useState(false);
   const [headerName, setHeaderName] = useState({
     id: null,
@@ -103,35 +104,20 @@ const AllChat = ({navigation, route}) => {
 
   return (
     <View style={chatStyles.chatMainContainer}>
-      {!clicked ? (
-        <TopHeader
-          firstIcon="arrow-back"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          name={headerName.name}
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-          arrowDownIcon="keyboard-arrow-down"
-          arrowDownHandler={arrowDownHandler}
-        />
-      ) : (
-        <SearchBox
-          clicked={clicked}
-          searchText={searchText}
-          chatSearchHandler={chatSearchHandler}
-          firstIcon="arrow-back"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          topHeaderName="All Chats"
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-          arrowDownIcon="keyboard-arrow-down"
-          arrowDownHandler={arrowDownHandler}
-        />
-      )}
-
+      <TopHeader
+        firstIcon="arrow-back"
+        secondIcon="search"
+        thirdIcon="filter-list"
+        name={headerName.name}
+        menuHandler={menuHandler}
+        searchHandler={searchHandler}
+        filterHandler={filterHandler}
+        arrowDownIcon="keyboard-arrow-down"
+        arrowDownHandler={arrowDownHandler}
+        chatSearchHandler={chatSearchHandler}
+        isSearchEnable={isSearch}
+      />
+      
       {chatResponseData.data != null && (
         <SegmentComponent
           onClickSegmentChanged={value => {

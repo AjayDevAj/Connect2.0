@@ -44,23 +44,24 @@ import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 const Chat = ({navigation ,Route}) => {
   
   const isFocused = useIsFocused();
-  const [isSearch, setIsSeatch] = useState(false)
-
+  const [isSearch, setIsSearch] = useState(false);
+  const [isFilterApplied, setIsFilterApplied] = useState(true);
+  const [searchText, setSearchText] = useState('');
+  const [currentTabStatus, setCurrentTabStatus] = useState('open');
 
   const menuHandler = () => {
     // console.log('Menu Handler');
      alert('Menu Handler');
 
-//navigation.openDrawer()
-    
-   
+    //navigation.openDrawer()
   };
 
   const searchHandler = () => {
-    setIsSeatch(!isSearch)
+    setIsSearch(!isSearch)
   };
 
   const filterHandler = () => {
+    setIsFilterApplied(!isFilterApplied);
     //alert('Filter Handler');
     navigation.navigate(navigationString.Chat_Filter)
   };
@@ -100,9 +101,7 @@ const Chat = ({navigation ,Route}) => {
     dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0,null, searchText !== null ? searchText:null))
   };
 
-  const [searchText, setSearchText] = useState('');
-  const [clicked, setClicked] = useState(false);
-  const [currentTabStatus, setCurrentTabStatus] = useState('open');
+  
 
   /**
    * Search Api call
@@ -137,35 +136,20 @@ const Chat = ({navigation ,Route}) => {
 
   return (
     <View style={chatStyles.chatMainContainer}>
-      {!clicked ? (
-        <TopHeader
-          firstIcon="menu"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          name="My Chats"
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-          navigation={navigation}
-          clicked={clicked}
-          searchText={searchText}
-          chatSearchHandler={chatSearchHandler}
-          isSearchEnable={isSearch}
-        />
-      ) : (
-        <SearchBox
-          clicked={clicked}
-          searchText={searchText}
-          chatSearchHandler={chatSearchHandler}
-          firstIcon="menu"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          topHeaderName="My Chats"
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-        />
-      )}
+      <TopHeader
+        firstIcon="menu"
+        secondIcon="search"
+        thirdIcon="filter-list"
+        name="My Chats"
+        menuHandler={menuHandler}
+        searchHandler={searchHandler}
+        filterHandler={filterHandler}
+        navigation={navigation}
+        chatSearchHandler={chatSearchHandler}
+        isSearchEnable={isSearch}
+        isFilterApplied={isFilterApplied}
+      />
+     
       {chatResponseData.data != null && (
         <SegmentComponent
           onClickSegmentChanged={value => {

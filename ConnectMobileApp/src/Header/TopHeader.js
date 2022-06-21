@@ -36,6 +36,8 @@ import headerStyles from './styles/headerStyleSheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import WhatsappIcon from '../Card/Icons/whatsapp.svg';
 import GoogleIcon from '../Card/Icons/Google.svg';
+import Count_Badge from '../component/Count_Badge';
+
 const TopHeader = ({
   firstIcon,
   name,
@@ -48,33 +50,37 @@ const TopHeader = ({
   arrowDownIcon = '',
   arrowDownHandler = '',
   isSearchEnable=false,
-  logo ='' 
+  logo ='',
+  chatSearchHandler,
+  isFilterApplied
 }) => {
   return (
     <View style={headerStyles.mainContainer}>
-      {isSearchEnable ? (  
-      <SearchBar
-        style={{bottom: 0, marginTop: '15%'}}
-        fontColor="#c6c6c6"
-        iconColor="#c6c6c6"
-        shadowColor="#282828"
-        cancelIconColor="#c6c6c6"
-        placeholder="Search here..."
-        onChangeText={text => console.log('Search Icon is pressed', text)}
-        onSearchPress={() => console.log('Search Icon is pressed')}
-        onClearPress={() => console.log('Search Icon onClearPress')}
-        onPress={() => alert('onPress')}
-        searchIconComponent={
-          <Icon
-            name={'arrow-back'}
-            size={28}
-            onPress={searchHandler}
-            color={color == null ? '#000' : color}
-          />
-        }
-      />
-      ):(
-      <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
+      {isSearchEnable ? 
+        (
+            <SearchBar
+                style={{bottom: 0, marginTop: '12%', height: '45%'}}
+                fontColor="#5F6368"
+                iconColor="#657180"
+                shadowColor="#C3C7D988"
+                cancelIconColor="#657180"
+                placeholder="Search here..."
+                placeholderTextColor="#5F6368"
+                onChangeText={text => chatSearchHandler(text)}
+                // onSearchPress={chatSearchHandler}
+                onClearPress={() => chatSearchHandler('')}
+                // onPress={() => alert('Cross button onPress')}
+                searchIconComponent={
+                    <Icon
+                        name={'arrow-back'}
+                        size={28}
+                        onPress={searchHandler}
+                        color={color == null ? '#000' : color}
+                    />
+                }
+            />
+        ) : (
+            <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start', }}>
                     <Icon name={firstIcon} size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
@@ -107,11 +113,32 @@ const TopHeader = ({
                     onPress={searchHandler} 
                     color={color == null ? '#FFFFFF': color}
                     />
-                    <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                    {isFilterApplied ? (
+                        <>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                        <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                        {/* <View style={{ 
+                            width: 10,
+                            height: 10,
+                            opacity: 1,
+                            backgroundColor: 'red',
+                            borderRadius: 5,
+                            alignSelf: 'flex-start',
+                            // marginRight: 5,
+                            position: 'absolute',
+                            marginLeft: 20
+                            }}></View> */}
+                            <Count_Badge topRight={10} top={-6} width={20} height={20} badge_Value={2} />
+                        </View>
+                        
+                        </>
+                    ) : (
+                        <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                    )}
                 </View>
                 
             </View>
-         )}
+        )}
     </View>
      
   );

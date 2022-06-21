@@ -84,7 +84,6 @@ const headerStyles = StyleSheet.create({
         width: 25,
         height: 25,
         borderRadius: 25/2,
-        elevation: 5,
         backgroundColor: '#fff',
         shadowOffset: {width: 1, height: 1},
         elevation: 6,
