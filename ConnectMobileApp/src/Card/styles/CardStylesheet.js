@@ -96,26 +96,22 @@ const cardStyles = StyleSheet.create({
     unreadChatMessage: {
         color: '#000000',
         marginVertical: 8,
-        width: '69%',
-        height: 20,
-        opacity: 1,
-        letterSpacing: 0,
         fontFamily: fontFamily.Poppins,
         fontSize: 14,
         fontWeight: 'bold',
         justifyContent: 'flex-start',
+        // backgroundColor:'red'
     },
     //auth context.js
     unreadCountDesign: {
         backgroundColor: '#00C158',
-        width: '10%',
-        height: 18,
-        borderRadius: 21/2,
-        opacity: 1,
-        textAlign: 'center',
-        marginVertical: '3%',
-        marginHorizontal: '3%',
-        paddingRight: 3,
+        marginLeft:5,
+        borderRadius:8,
+        overflow: 'hidden',
+        fontSize:12,
+        height:16,
+        minWidth:21,
+        textAlign:'center', 
     },
     unreadCountDesignLessThan31: {
         backgroundColor: '#00C158',
@@ -171,16 +167,13 @@ const cardStyles = StyleSheet.create({
     },
     cardAgentNameContainer: {
         flexDirection: 'row',
-       // justifyContent: 'space-around',
         backgroundColor:'rgba(244, 251, 255, 1)',
-        marginLeft: 30,
-        alignContent: 'center',
-        height:24,
+        marginLeft: 25,
+        alignItems: 'center',
         marginBottom: 12,
         borderColor: 'rgba(224, 243, 255, 1)',
         borderRadius:4,
         borderWidth:1 ,
-        marginRight: 20    
     },
     cardAgentName: {
         color: '#4C5969',

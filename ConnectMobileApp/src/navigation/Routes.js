@@ -124,10 +124,6 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
         <NavigationContainer>
-          {console.log(
-            'Get all keys :- before initialRouteName set',
-            initialState,
-          )}
           <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
               name={navigationString.OnBoarding}
@@ -191,7 +187,6 @@ const Routes = () => {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
-          
           <Incoming_Chat />
         </NavigationContainer>
       )}

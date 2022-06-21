@@ -14,15 +14,26 @@ import {SegmentComponent} from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
 import {getUserdata} from '../api/getUserdata';
 import {useIsFocused} from '@react-navigation/native';
+import RadioButtonRN from 'radio-buttons-react-native';
+import RadioButton from 'react-native-radio-button';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const AllChat_Open_Team = () => {
+export const AllChat_Open_Team = ({closeButtonCall,alreadySelectedData}) => {
   const [modalVisible, setModalVisible] = useState(true);
   const isFocused = useIsFocused();
   const [DATA, setDATA] = useState(null);
   const [cuttentTap, setCuttentTap] = useState('Admin');
+  const [radioButton, setRadioButton] = useState({
+    id: null,
+    name: null,
+  });
 
   useEffect(() => {
     if (isFocused) {
+      if (alreadySelectedData != null)
+      {
+        setRadioButton(alreadySelectedData)
+      }
       call_getUserdata();
     }
   }, [isFocused]);
@@ -33,10 +44,72 @@ export const AllChat_Open_Team = () => {
     setDATA(data);
   };
 
-  const Item = ({item, onPress, backgroundColor, textColor}) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.name}</Text>
-      <Text style={[styles.title, textColor]}>{item.mobile_number}</Text>
+  const Item = ({item, onPress}) => (
+    <TouchableOpacity
+      onPress={()=> {
+        // onPress()
+        setRadioButton({
+          id: item.id,
+          name: item.name,
+        })
+        closeButtonCall({
+          id: item.id,
+          name: item.name,
+        })
+      }}
+      style={{
+        paddingLeft: 30,
+        justifyContent: 'center',
+        minHeight: 54,
+        marginTop: 15,
+      }}>
+      <Text
+        style={{
+          fontSize: 14,
+          fontFamily: fontFamily.Alte_DIN,
+        }}>
+        {item.name}
+      </Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginRight: 20,
+        }}>
+        <Text
+          style={{
+            fontSize: 12,
+            color: 'gray',
+            marginTop: 5,
+            fontFamily: fontFamily.Poppins,
+          }}>
+          {item.mobile_number}
+        </Text>
+        <RadioButton
+          animation={'bounceIn'}
+          size={10}
+          isSelected={
+            radioButton.id == null
+              ? false
+              : radioButton.id == item.id
+              ? true
+              : false
+          }
+          onPress={() =>
+            setRadioButton({
+              id: item.id,
+              name: item.name,
+            })
+          }
+        />
+      </View>
+      <View
+        style={{
+          flex: 1,
+          borderBottomWidth: 0.8,
+          borderBottomColor: 'rgba(0, 0, 0, 0.06)',
+        }}
+      />
     </TouchableOpacity>
   );
 
@@ -47,7 +120,7 @@ export const AllChat_Open_Team = () => {
     return (
       <Item
         item={item}
-        // onPress={() => setSelectedId(item.id)}
+        onPress={() => console.log("sasasasas")}
         backgroundColor={{backgroundColor}}
         textColor={{color}}
       />
@@ -69,22 +142,22 @@ export const AllChat_Open_Team = () => {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <TopHeader_
-                  onClickObj={() => setModalVisible(!modalVisible)}
-                  onClickSegmentChanged={value => setCuttentTap(value)}
-                  onChange={(value) => 
-                    console.log('setCuttentTap',value)
-                      
+                  onClickObj={() => {
+                    closeButtonCall()
+                    setModalVisible(!modalVisible)
                   }
+                  }
+                  
+                  onClickSegmentChanged={value => setCuttentTap(value)}
+                  onChange={value => console.log('setCuttentTap', value)}
                 />
                 {DATA != null && (
                   <SegmentComponent
                     width={'65%'}
                     for_allUser={true}
                     onClickSegmentChanged={value => {
-                      // console.log('setCuttentTap',value)
-                      setCuttentTap(value)
+                      setCuttentTap(value);
                     }}
-                  
                     style={{position: 'relative'}}
                     badgesValue={[
                       DATA.data.admin.length,
@@ -126,10 +199,11 @@ const styles = StyleSheet.create({
     height: '80%',
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
+    overflow: 'hidden',
   },
 });
 
-export const TopHeader_ = ({onClickObj,onChange}) => {
+export const TopHeader_ = ({onClickObj, onChange}) => {
   return (
     <>
       <View
@@ -150,17 +224,17 @@ export const TopHeader_ = ({onClickObj,onChange}) => {
           Select team member
         </Text>
         <Pressable
-          style={[styles.button, styles.buttonClose]}
+          style={{marginRight:10}}
           onPress={() => onClickObj()}>
-          <Text style={styles.textStyle}>Hide Modal</Text>
+          <Icon name="close" size={18} color='#000' />
         </Pressable>
       </View>
       <TextInput
         clearButtonMode="always"
         placeholder="Search Here..."
-          onChange={(e) => {
-            onChange(e.nativeEvent.text);
-          }}
+        onChange={e => {
+          onChange(e.nativeEvent.text);
+        }}
         style={{
           width: '100%',
           borderRadius: 10,

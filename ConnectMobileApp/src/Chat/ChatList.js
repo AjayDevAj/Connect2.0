@@ -32,7 +32,7 @@ import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
 import CardRowThree from '../Card/CardRowThree';
     
-const ChatList = ({data,onPress_Chat}) => {
+const ChatList = ({data,onPress_Chat,isShowRowThree=false }) => {
     return (
         <View style={ chatStyles.chatListMainContainer }>
             <FlatList 
@@ -43,8 +43,9 @@ const ChatList = ({data,onPress_Chat}) => {
                         <Card>
                             <CardRowOne logo={item.logo} name={item.display_name} location={item.location_name} isImportant={item.is_important} />
                             <CardRowTwo assigned={item.assignedTo} message={item.message} time={item.time} unread={item.unread} status={item.chat_status} />
-
+{isShowRowThree &&
                             <CardRowThree name={item.agent_name} />
+}
                         </Card>
                     </TouchableOpacity>
                 )}

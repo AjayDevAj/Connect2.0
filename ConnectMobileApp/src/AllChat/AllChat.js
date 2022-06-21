@@ -32,12 +32,12 @@ import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import {useIsFocused} from '@react-navigation/native';
 import navigationString from '../utility/NavigationString';
-import {AllChat_Open_Team} from './AllChat_Open_Team'
+import {AllChat_Open_Team} from './AllChat_Open_Team';
 import SearchBox from '../Search/SearchBox';
 
-import Icon  from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const AllChat = ({navigation,route}) => {
+const AllChat = ({navigation, route}) => {
   const menuHandler = () => {
     navigation.goBack();
   };
@@ -46,28 +46,30 @@ const AllChat = ({navigation,route}) => {
     !clicked ? setClicked(true) : setClicked(false);
   };
 
-  const filterHandler = () => {
-    // alert('Filter Handler');
-    // navigation.pre
-    return (
-      <AllChat_Open_Team/>
-    )
-  };
+  const filterHandler = () => {};
 
   const arrowDownHandler = () => {
-    alert('Arrow Handler');
-  }
+    setShowAllUser(true);
+  };
 
   const dispatch = useDispatch();
   const chatResponseData = useSelector(store => store.ChatResponseData);
   const isFocused = useIsFocused();
-  const [currentTabStatus, setCurrentTabStatus] = useState(route.params.openTab);
+  const [currentTabStatus, setCurrentTabStatus] = useState(
+    route.params.openTab,
+  );
   const [searchText, setSearchText] = useState('');
   const [clicked, setClicked] = useState(false);
+  const [showAllUser, setShowAllUser] = useState(false);
+  const [headerName, setHeaderName] = useState({
+    id: null,
+    name: 'All Chats',
+  });
 
   useEffect(() => {
     if (isFocused) {
-      console.log('all_chat ',route.params)
+      console.log('all_chat ', route.params);
+      setShowAllUser(false);
       callAPI(currentTabStatus);
     }
   }, [isFocused]);
@@ -78,19 +80,20 @@ const AllChat = ({navigation,route}) => {
    * @param {*} type
    */
   const callAPI = (type = 'open', searchText = '') => {
-    searchText !== null ? 
-      dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, "", searchText))
-    :
-      dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ""))
+    searchText !== null
+      ? dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, "", searchText))
+      : dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ''));
   };
 
   /**
    * Search Api call
    * @param {*} searchTextParam
    */
-   const chatSearchHandler = searchTextParam => {
+  const chatSearchHandler = searchTextParam => {
     setSearchText(searchTextParam);
-    searchTextParam ? callAPI(currentTabStatus, searchTextParam) : callAPI(currentTabStatus)
+    searchTextParam
+      ? callAPI(currentTabStatus, searchTextParam)
+      : callAPI(currentTabStatus);
   };
 
   return (
@@ -100,11 +103,11 @@ const AllChat = ({navigation,route}) => {
           firstIcon="arrow-back"
           secondIcon="search"
           thirdIcon="filter-list"
-          name="All Chats"
+          name={headerName.name}
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
-          arrowDownIcon='keyboard-arrow-down'
+          arrowDownIcon="keyboard-arrow-down"
           arrowDownHandler={arrowDownHandler}
         />
       ) : (
@@ -119,11 +122,11 @@ const AllChat = ({navigation,route}) => {
           menuHandler={menuHandler}
           searchHandler={searchHandler}
           filterHandler={filterHandler}
-          arrowDownIcon='keyboard-arrow-down'
+          arrowDownIcon="keyboard-arrow-down"
           arrowDownHandler={arrowDownHandler}
         />
       )}
-      
+
       {chatResponseData.data != null && (
         <SegmentComponent
           onClickSegmentChanged={value => {
@@ -136,22 +139,43 @@ const AllChat = ({navigation,route}) => {
             chatResponseData.data.closedMessageCount,
             chatResponseData.data.assignedMessageCount,
           ]}
-          selectedIndexTab={route.params.openTab == "closed" ? 1 : 
-          route.params.openTab == 'assign_chat' ? 2 : 0}
+          selectedIndexTab={
+            route.params.openTab == 'closed'
+              ? 1
+              : route.params.openTab == 'assign_chat'
+              ? 2
+              : 0
+          }
         />
       )}
 
-    
-      {(chatResponseData.data != null )&&
-        <ChatList onPress_Chat={(selected_Item) => 
-          navigation.navigate(navigationString.Message,{selected_Item,allChat:true})
-
-        } data={
-          chatResponseData.data.result
-        }
+      {chatResponseData.data != null && (
+        <ChatList
+          onPress_Chat={selected_Item =>
+            navigation.navigate(navigationString.Message, {
+              selected_Item,
+              allChat: true,
+            })
+          }
+          data={chatResponseData.data.result}
+          isShowRowThree={true}
         />
-      }
-       <AllChat_Open_Team/>
+      )}
+      {showAllUser && (
+        <AllChat_Open_Team
+          closeButtonCall={value => {
+            console.log('closeButtonCall',value)
+            if (value != undefined) {
+              setHeaderName({
+                id: value.id,
+                name: value.name,
+              });
+            }
+            setShowAllUser(false);
+          }}
+          alreadySelectedData={headerName.id != null ? headerName : null}
+        />
+      )}
     </View>
   );
 };
