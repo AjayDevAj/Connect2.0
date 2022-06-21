@@ -69,6 +69,8 @@ import Count_Badge from '../component/Count_Badge';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
 import uWebSockets from '../component/uWebSockets'
+import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
@@ -110,6 +112,7 @@ const Tab = createBottomTabNavigator();
 
 export default function RouteTabBar() {
   return (
+    <>
       <Tab.Navigator>
         <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
           tabBarIcon: (tabInfo) => {
@@ -158,5 +161,7 @@ export default function RouteTabBar() {
           },
         }} />
       </Tab.Navigator>
+      <Incoming_Chat />
+      </>
   );
 }

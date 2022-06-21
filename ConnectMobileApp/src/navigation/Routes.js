@@ -40,7 +40,6 @@ import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
 import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
@@ -187,7 +186,6 @@ const Routes = () => {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
-          <Incoming_Chat />
         </NavigationContainer>
       )}
     </>
