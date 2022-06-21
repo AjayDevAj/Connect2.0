@@ -147,6 +147,7 @@ export const AllChat_Open_Team = ({closeButtonCall,alreadySelectedData}) => {
                     setModalVisible(!modalVisible)
                   }
                   }
+                  
                   onClickSegmentChanged={value => setCuttentTap(value)}
                   onChange={value => console.log('setCuttentTap', value)}
                 />
