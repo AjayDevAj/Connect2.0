@@ -39,7 +39,7 @@ import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
-
+import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 
 const Chat = ({navigation ,Route}) => {
   
@@ -62,7 +62,7 @@ const Chat = ({navigation ,Route}) => {
 
   const filterHandler = () => {
     //alert('Filter Handler');
-    navigation.navigate(navigationString.Filter)
+    navigation.navigate(navigationString.Chat_Filter)
   };
 
   const dispatch = useDispatch();

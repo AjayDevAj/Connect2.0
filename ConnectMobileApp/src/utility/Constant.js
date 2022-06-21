@@ -73,6 +73,56 @@ const CONSTANT = {
 
 export { CONSTANT }
 
+export const Filter_DATA = [
+    {
+      id: 1,
+      name: 'Locations',
+    },
+    {
+      id: 2,
+      name: 'Date',
+    },
+    {
+      id: 3,
+      name: 'Chat Status',
+    },
+  ];
+
+  export const Chat_Filter_Data = [
+    {
+      id: 1,
+      name: 'Open',
+    },
+    {
+      id: 2,
+      name: 'Close',
+    },
+  ];
+
+  export const Date_Filter_Data = [
+    {
+      id: 1,
+      name: 'Last 7 days',
+    },
+    {
+      id: 2,
+      name: 'Last Month',
+    },
+    {
+      id: 3,
+      name: 'Last 2 Month',
+    },
+    {
+      id: 4,
+      name: 'Last 3 Month',
+    },
+    {
+      id: 5,
+      name: 'Custom Range',
+    },
+  ];
+
+
 export const otpResponse_Storage_Key = "otp_response_Key";
 export const location_Data_Key = "location_Data_Key";
 export const viewed_Onboarding = "viewed_Onboarding";

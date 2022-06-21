@@ -46,7 +46,7 @@ import AllChat from '../AllChat/AllChat';
 import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
 import Message from '../containers/Message/Message';
 import Filter from '../containers/dashboard/Filter';
-
+import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import {CommonActions} from '@react-navigation/native';
 import Drawer from './Drawer';
 
@@ -185,6 +185,14 @@ const Routes = () => {
               component={Drawer}
               options={{ headerShown: false }}
             />
+
+<Stack.Screen
+              name={navigationString.Chat_Filter}
+              component={Chat_Filter}
+              options={{ headerShown: false }}
+            />
+
+
           </Stack.Navigator>
         </NavigationContainer>
       )}
