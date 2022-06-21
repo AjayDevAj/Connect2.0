@@ -141,6 +141,9 @@ const Chat = ({navigation }) => {
           searchHandler={searchHandler}
           filterHandler={filterHandler}
           navigation={navigation}
+          clicked={clicked}
+          searchText={searchText}
+          chatSearchHandler={chatSearchHandler}
         />
       ) : (
         <SearchBox
