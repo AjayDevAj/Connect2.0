@@ -132,6 +132,10 @@ const Chat = ({navigation }) => {
     }
   };
 
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <View style={chatStyles.chatMainContainer}>
       {!clicked ? (
@@ -183,7 +187,7 @@ const Chat = ({navigation }) => {
             left="people"
             message={`${
               chatResponseData.data.otherMessageCount
-            } ${currentTabStatus.toUpperCase()} chats with team`}
+            } ${Capitalize(currentTabStatus)} chats with team`}
             right="chevron-right"
             openAllChat={() => navigation.navigate(navigationString.AllChat,{
               openTab:currentTabStatus

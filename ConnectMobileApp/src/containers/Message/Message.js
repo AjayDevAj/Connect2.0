@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View, Dimensions} from 'react-native';
+import {View, ImageBackground } from 'react-native';
 import TopHeader from '../../Header/TopHeader';
 import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
@@ -229,75 +229,82 @@ const Message = ({navigation, route}) => {
   ];
 
   return (
-    <View style={chatStyles.chatMainContainer}>
-      {console.log('reloadTopView reloadTopView ', reloadTopView)}
-      <TopHeader
-        firstIcon="arrow-back"
-        secondIcon="star-border"
-        thirdIcon="more-vert"
-        color={reloadTopView ? '#FFAA00' : null}
-        name={getDataFromParam.selected_Item.display_name}
-        menuHandler={menuHandler}
-        searchHandler={markasImportant}
-        filterHandler={dotHandler}
-      />
-      {dotClicked && (
-        <MaterialMenu
-          itemData={materialMenuItemData}
-          onClick={index => {
-            switch (index) {
-              case 1:
-                break;
-              case 2:
-                mark_Unread_Api()
-                break;
-              case 3:
-                break;
-
-              default:
-                break;
-            }
-          }}
+    
+      <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF' }]}>
+        {console.log('reloadTopView reloadTopView ', reloadTopView)}
+        <TopHeader
+          firstIcon="arrow-back"
+          secondIcon="star-border"
+          thirdIcon="more-vert"
+          color={reloadTopView ? '#FFAA00' : null}
+          name={getDataFromParam.selected_Item.display_name}
+          menuHandler={menuHandler}
+          searchHandler={markasImportant}
+          filterHandler={dotHandler}
+          logo={getDataFromParam.selected_Item.publisher_type}
         />
-      )}
-      <View style={{flex: 1}}>
-        {allChat_Conversation_Data.data && loginUserData != undefined && (
-          <GiftedChat
-            listViewProps={{
-              contentContainerStyle: {
-                flexGrow: 0.02,
-                paddingTop: 20,
-              },
-              onEndReachedThreshold: 0.2,
+        {dotClicked && (
+          <MaterialMenu
+            itemData={materialMenuItemData}
+            onClick={index => {
+              switch (index) {
+                case 1:
+                  break;
+                case 2:
+                  mark_Unread_Api()
+                  break;
+                case 3:
+                  break;
+
+                default:
+                  break;
+              }
             }}
-            infiniteScroll={true}
-            alignTop={true}
-            messages={messages}
-            onSend={messages => onSend(messages)}
-            renderComposer={renderComposer}
-            renderSend={renderSend}
-            renderInputToolbar={
-              getDataFromParam.allChat == true
-                ? render_Blank_InputToolbar
-                : getDataFromParam.selected_Item.chat_status == 'closed'
-                ? render_Blank_InputToolbar
-                : renderInputToolbar
-            }
-            selectFile={openFile}
-            selectImage={openImage}
-            renderBubble={renderBubble}
-            renderCustomView={renderCustomView}
-            renderMessageImage={renderMessageImage}
-            user={{
-              _id: 'a',
-              agent_name: loginUserData.user.name,
-            }}
-            renderDay={renderDays}
-            renderTime={renderTime}
           />
         )}
+        <View style={{flex: 1}}>
+          {allChat_Conversation_Data.data && loginUserData != undefined && (
+            // <ImageBackground source={require('./img/MaskGroup17.svg')} >
+              <GiftedChat
+              listViewProps={{
+                contentContainerStyle: {
+                  flexGrow: 0.02,
+                  paddingTop: 20,
+                },
+                onEndReachedThreshold: 0.2,
+              }}
+              infiniteScroll={true}
+              alignTop={true}
+              messages={messages}
+              onSend={messages => onSend(messages)}
+              renderComposer={renderComposer}
+              renderSend={renderSend}
+              renderInputToolbar={
+                getDataFromParam.allChat == true
+                  ? render_Blank_InputToolbar
+                  : getDataFromParam.selected_Item.chat_status == 'closed'
+                  ? render_Blank_InputToolbar
+                  : renderInputToolbar
+              }
+              selectFile={openFile}
+              selectImage={openImage}
+              renderBubble={renderBubble}
+              renderCustomView={renderCustomView}
+              renderMessageImage={renderMessageImage}
+              user={{
+                _id: 'a',
+                agent_name: loginUserData.user.name,
+              }}
+              renderDay={renderDays}
+              renderTime={renderTime}
+            />
+            // {/* </ImageBackground> */}
+            
+          )}
+        </View>
       </View>
-    </View>
+    
+    
   );
 };
 

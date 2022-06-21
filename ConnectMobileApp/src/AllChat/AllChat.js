@@ -37,6 +37,8 @@ import SearchBox from '../Search/SearchBox';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import RouteTabBar from '../navigation/RouteTabBar';
+
 const AllChat = ({navigation, route}) => {
   const menuHandler = () => {
     navigation.goBack();
@@ -176,6 +178,7 @@ const AllChat = ({navigation, route}) => {
           alreadySelectedData={headerName.id != null ? headerName : null}
         />
       )}
+      {/* <RouteTabBar /> */}
     </View>
   );
 };

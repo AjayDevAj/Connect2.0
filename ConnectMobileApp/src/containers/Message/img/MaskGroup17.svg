@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="640" viewBox="0 0 360 640">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_717" data-name="Rectangle 717" width="360" height="640" transform="translate(310 -5028)" fill="#f3ae3d"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_17" data-name="Mask Group 17" transform="translate(-310 5028)" opacity="0.297" clip-path="url(#clip-path)">
+    <g id="Group_2494" data-name="Group 2494" transform="translate(216 -1295)">
+      <rect id="Rectangle_716" data-name="Rectangle 716" width="360" height="640" transform="translate(94 -3733)" fill="#fffaf0"/>
+      <g id="Group_2514" data-name="Group 2514" opacity="0.2">
+        <g id="Group_2492" data-name="Group 2492" transform="translate(-88 -3802)">
+          <path id="Path_7782" data-name="Path 7782" d="M769,229l268,31.9M927,880,731,737,520,660,309,538,40,599,295,764,126.5,879.5,40,599-197,493,102,382-31,229,126.5,79.5-69-63" fill="none" stroke="#f3ae3d" stroke-width="1"/>
+          <path id="Path_7783" data-name="Path 7783" d="M-31,229l268,32L390,382,603,493,308.5,537.5l-207-156M370,905,295,764" fill="none" stroke="#f3ae3d" stroke-width="1"/>
+          <path id="Path_7784" data-name="Path 7784" d="M520,660l58,182L731,737,840,599,603,493,520,660,295,764l14-226,81-156L539,269l230-40L577.5,41.5,370,105,295-36,126.5,79.5,237,261,102,382,40,599-69,737,127,880" fill="none" stroke="#f3ae3d" stroke-width="1"/>
+          <path id="Path_7785" data-name="Path 7785" d="M520-140,578.5,42.5,731-63M603,493,539,269l-302-8L370,105M902,382,539,269M390,382H102" fill="none" stroke="#f3ae3d" stroke-width="1"/>
+          <path id="Path_7786" data-name="Path 7786" d="M-222,42,126.5,79.5,370,105,539,269,577.5,41.5,927,80,769,229,902,382,603,493,731,737M295-36,577.5,41.5M578,842,295,764M40-201,127,80M102,382-261,269" fill="none" stroke="#f3ae3d" stroke-width="1"/>
+        </g>
+        <g id="Group_2493" data-name="Group 2493" transform="translate(-88 -3802)">
+          <circle id="Ellipse_3654" data-name="Ellipse 3654" cx="5" cy="5" r="5" transform="translate(764 224)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3655" data-name="Ellipse 3655" cx="5" cy="5" r="5" transform="translate(534 264)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3656" data-name="Ellipse 3656" cx="5" cy="5" r="5" transform="translate(598 488)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3657" data-name="Ellipse 3657" cx="5" cy="5" r="5" transform="translate(726 732)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3658" data-name="Ellipse 3658" cx="5" cy="5" r="5" transform="translate(515 655)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3659" data-name="Ellipse 3659" cx="5" cy="5" r="5" transform="translate(304 533)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3660" data-name="Ellipse 3660" cx="5" cy="5" r="5" transform="translate(290 759)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3661" data-name="Ellipse 3661" cx="5" cy="5" r="5" transform="translate(35 594)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3662" data-name="Ellipse 3662" cx="5" cy="5" r="5" transform="translate(97 377)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3663" data-name="Ellipse 3663" cx="5" cy="5" r="5" transform="translate(122 75)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3664" data-name="Ellipse 3664" cx="5" cy="5" r="5" transform="translate(365 100)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3665" data-name="Ellipse 3665" cx="5" cy="5" r="5" transform="translate(573 37)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3666" data-name="Ellipse 3666" cx="5" cy="5" r="5" transform="translate(232 256)" fill="#f3ae3d"/>
+          <circle id="Ellipse_3667" data-name="Ellipse 3667" cx="5" cy="5" r="5" transform="translate(385 377)" fill="#f3ae3d"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

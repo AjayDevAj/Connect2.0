@@ -75,6 +75,27 @@ const headerStyles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: '8%',
     },
+
+    headerIconContainer: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: 1,
+        width: 25,
+        height: 25,
+        borderRadius: 25/2,
+        elevation: 5,
+        backgroundColor: '#fff',
+        shadowOffset: {width: 1, height: 1},
+        elevation: 6,
+        // shadowColor: '#00000029',
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        borderColor: '#FFFFFF',
+        opacity: 0.9,
+        marginLeft: 15,
+    },
 });
 
 export default headerStyles;

@@ -68,7 +68,7 @@ export const renderSend = ({
             justifyContent: 'center',
             alignContent: 'center',
           }}>
-          <Icon name={'photo-camera'} size={22} />
+          <Icon name={'photo-camera'} size={22} color="#657180" />
         </View>
       </TouchableOpacity>
 
@@ -83,7 +83,7 @@ export const renderSend = ({
             justifyContent: 'center',
             alignContent: 'center',
           }}>
-          <Icon name={'attach-file'} size={22} />
+          <Icon name={'attach-file'} size={22} color="#657180" />
         </View>
       </TouchableOpacity>
       <Send

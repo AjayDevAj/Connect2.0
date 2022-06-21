@@ -35,7 +35,10 @@ import { Text, View } from 'react-native';
 import headerStyles from './styles/headerStyleSheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null, arrowDownIcon='', arrowDownHandler='' }) => {
+import WhatsappIcon from '../Card/Icons/whatsapp.svg';
+import GoogleIcon from '../Card/Icons/Google.svg';
+
+const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null, arrowDownIcon='', arrowDownHandler='', logo ='' }) => {
     return (
         <View style={ headerStyles.mainContainer }>
             <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
@@ -49,9 +52,21 @@ const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, search
                                 <Icon name={arrowDownIcon} size={24} color="#FFF" onPress={arrowDownHandler} style={{ marginTop: '1%', marginLeft: '1%' }} />
                             </View>
                         ) 
-                    : 
+                    :   (
+                        <>
+                        {logo != '' && (
+                            <View style={ headerStyles.headerIconContainer }>
+                                { logo === 'whatsapp' ? 
+                                    <WhatsappIcon />
+                                : 
+                                    <GoogleIcon /> 
+                                }
+                            </View>
+                        ) }
                         <Text style={ headerStyles.headerText }>{name}</Text>
-                    }
+                        
+                        </>
+                       )}
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
