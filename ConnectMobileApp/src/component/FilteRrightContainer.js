@@ -15,7 +15,9 @@ import FontDeclarations from '../utility/Font-Declarations';
 import filter from 'lodash.filter';
 import {color, set} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {getOtpResponse} from '../utility/StorageClass';
+import {location_Data_Key} from '../utility/Constant';
+
 import {useEffect} from 'react';
 
 export default function FilterRightContainer() {
@@ -23,29 +25,63 @@ export default function FilterRightContainer() {
   const [searchValue, setSearchValue] = useState('');
 
   // ** Fetch Location data from  the saga Store
-  const SLResponce = useSelector(store => store.StoreLocationDataResponse);
+  //const SLResponce = useSelector(store => store.StoreLocationDataResponse);
 
   const [data, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
 
+  // useEffect(() => {
+  //   if (
+  //     SLResponce != null &&
+  //     SLResponce != undefined &&
+  //     SLResponce.data != undefined
+  //   ) {
+  //     // ** Master Data
+  //     setData(SLResponce.data.locations);
+
+  //     //** */ Filtered Data
+  //     setarrayholder(SLResponce.data.locations);
+  //   }
+  // }, [SLResponce]);
+
   useEffect(() => {
+    getdetas();
+  },[]);
+
+  const getdetas = async () => {
+    const SlresponseData = await getOtpResponse(location_Data_Key);
+    console.log(
+      'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
+      SlresponseData,
+    );
+
     if (
-      SLResponce != null &&
-      SLResponce != undefined &&
-      SLResponce.data != undefined
+      SlresponseData != null &&
+      SlresponseData != undefined &&
+      SlresponseData.locations != undefined
     ) {
+
+      
       // ** Master Data
-      setData(SLResponce.data.locations);
+      setData(SlresponseData.locations);
+
+      console.log( 'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>', SlresponseData.locations ,)
 
       //** */ Filtered Data
-      setarrayholder(SLResponce.data.locations);
+      setarrayholder(SlresponseData.locations);
     }
-  }, [SLResponce]);
-
-  //const SlresponseData = SLResponce.data.locations;
+  };
 
   const Item = ({Locality}) => (
     <View style={styles.item}>
+      <CheckBox
+        disabled={false}
+        value={toggleCheckBox}
+        onValueChange={newValue => setToggleCheckBox(newValue)}
+        lineWidth={0.4}
+        boxType={'square'}
+        onTintColor={'rgba(90, 163, 247, 1)'}
+      />
       <Text style={styles.title}>{Locality}</Text>
     </View>
   );
@@ -67,12 +103,6 @@ export default function FilterRightContainer() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <CheckBox
-        disabled={false}
-        value={toggleCheckBox}
-        onValueChange={newValue => setToggleCheckBox(newValue)}
-      />
-
       <View style={styles.searchbarView}>
         <TextInput
           style={styles.item}
@@ -103,6 +133,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginVertical: 8,
     marginHorizontal: 16,
+
+    flexDirection: 'row',
   },
   title: {
     fontSize: 14,

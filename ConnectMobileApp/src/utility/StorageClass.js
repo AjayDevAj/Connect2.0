@@ -8,7 +8,7 @@ import {viewed_Onboarding} from '../utility/Constant'
  * @param {*} Store_Key 
  */
 export const saveObject = async (storeObject,Store_Key) => {
-    console.log("Before storage",JSON.stringify(storeObject));
+    console.log("Before storage-------",JSON.stringify(storeObject));
 
     AsyncStorage.setItem(Store_Key, JSON.stringify(storeObject), (err)=> {
         if(err){
