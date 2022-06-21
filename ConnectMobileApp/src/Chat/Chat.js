@@ -41,8 +41,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 
 
-const Chat = ({navigation }) => {
+const Chat = ({navigation ,Route}) => {
+  
   const isFocused = useIsFocused();
+ console.log()
   
   const menuHandler = () => {
     // console.log('Menu Handler');

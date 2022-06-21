@@ -6,6 +6,7 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 const getStoreLocations = async () => {
    
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+    
     const response = await fetch(API_URL_STAGING + '/user/auth/get-locations', {
         method: 'GET',
         headers: {
