@@ -8,7 +8,9 @@ const CardTime = ({ time }) => {
     return (
         <View style={ cardStyles.cardTimeContainer }>
             <View style={ cardStyles.cardTimeIcon }></View>
-            <Text style={ cardStyles.cardTime }>{moment(time).format('HH:ss A')}</Text>
+            <Text style={ cardStyles.cardTime }>{moment(time, "HH:mm:ss").format("hh:mm A")}</Text>
+            {/* <Text style={ cardStyles.cardTime }>{moment().format(time, 'LT')}</Text> */}
+
         </View>
     )
 }
