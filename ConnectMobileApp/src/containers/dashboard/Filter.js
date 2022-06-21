@@ -17,29 +17,23 @@ import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 
 import FilterRightContainer from '../../component/FilterRightContainer';
 
+export default Filter = ({navigation, route}) => {
+  const isselc = true;
 
-
-
-
-export default Filter = ({navigation, route }) => {
-
-  const isselc =true
-  
-  useEffect(()=>{
-   // getData()
-    
-   //navigation.goBack()
-  
-    
-  })
-
-  
+  useEffect(() => {
+    // getData()
+    //navigation.goBack()
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Top header buttons */}
 
       <View style={styles.header}>
+        <TouchableOpacity style={{justifyContent:'center'}} onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back" size={30} color={'#5F6368'} />
+        </TouchableOpacity>
+
         <Icon.Button
           name="filter-alt"
           size={30}
@@ -59,7 +53,7 @@ export default Filter = ({navigation, route }) => {
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
             //navigation.navigate('RouteTabBar')
-            navigation.goBack(()=> Alert.alert('hi'));
+            navigation.goBack(() => Alert.alert('hi'));
           }}>
           <Text
             style={{
@@ -77,13 +71,12 @@ export default Filter = ({navigation, route }) => {
         {/* Left Conatiner holds the Filters buttons   to   filter out the required data */}
 
         <View style={styles.leftContainer}>
-          <Buttongroup/>
+          <Buttongroup />
         </View>
         {/* Right Conatiner  */}
         <View style={styles.rightContainer}>
           {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
-          <FilterRightContainer/>
-         
+          <FilterRightContainer />
         </View>
       </View>
 
