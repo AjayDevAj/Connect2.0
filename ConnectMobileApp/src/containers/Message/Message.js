@@ -27,7 +27,8 @@ import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
-import moment from 'moment';
+import PurchaseLeadSection from './PurchaseLeadSection';
+import PurchaseLeadForm from './PurchaseLeadForm';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
@@ -228,11 +229,34 @@ const Message = ({navigation, route}) => {
     },
   ];
 
+  const [showPurchaseForm, setShowPurchaseForm] = useState(false);
+
+  const purchaseHandler = () => {
+    alert(showPurchaseForm);
+    setShowPurchaseForm(!showPurchaseForm)
+  }
+
   return (
     
       <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF' }]}>
-        {console.log('reloadTopView reloadTopView ', reloadTopView)}
-        <TopHeader
+
+        {showPurchaseForm ? 
+        ( 
+          <>
+          <TopHeader
+          firstIcon="arrow-back"
+          secondIcon=""
+          thirdIcon=""
+          color={reloadTopView ? '#FFAA00' : null}
+          name={getDataFromParam.selected_Item.display_name}
+          menuHandler={menuHandler}
+          logo={getDataFromParam.selected_Item.publisher_type}
+        />
+          <PurchaseLeadForm /> 
+          </>
+        ) : (
+          <>
+          <TopHeader
           firstIcon="arrow-back"
           secondIcon="star-border"
           thirdIcon="more-vert"
@@ -243,6 +267,9 @@ const Message = ({navigation, route}) => {
           filterHandler={dotHandler}
           logo={getDataFromParam.selected_Item.publisher_type}
         />
+
+        <PurchaseLeadSection purchaseHandler={purchaseHandler} />
+        
         {dotClicked && (
           <MaterialMenu
             itemData={materialMenuItemData}
@@ -264,44 +291,48 @@ const Message = ({navigation, route}) => {
         )}
         <View style={{flex: 1}}>
           {allChat_Conversation_Data.data && loginUserData != undefined && (
-            // <ImageBackground source={require('./img/MaskGroup17.svg')} >
-              <GiftedChat
-              listViewProps={{
-                contentContainerStyle: {
-                  flexGrow: 0.02,
-                  paddingTop: 20,
-                },
-                onEndReachedThreshold: 0.2,
-              }}
-              infiniteScroll={true}
-              alignTop={true}
-              messages={messages}
-              onSend={messages => onSend(messages)}
-              renderComposer={renderComposer}
-              renderSend={renderSend}
-              renderInputToolbar={
-                getDataFromParam.allChat == true
-                  ? render_Blank_InputToolbar
-                  : getDataFromParam.selected_Item.chat_status == 'closed'
-                  ? render_Blank_InputToolbar
-                  : renderInputToolbar
-              }
-              selectFile={openFile}
-              selectImage={openImage}
-              renderBubble={renderBubble}
-              renderCustomView={renderCustomView}
-              renderMessageImage={renderMessageImage}
-              user={{
-                _id: 'a',
-                agent_name: loginUserData.user.name,
-              }}
-              renderDay={renderDays}
-              renderTime={renderTime}
-            />
-            // {/* </ImageBackground> */}
-            
+          // <ImageBackground source={require('./img/MaskGroup17.svg')} >
+            <GiftedChat
+            listViewProps={{
+              contentContainerStyle: {
+                flexGrow: 0.02,
+                paddingTop: 20,
+              },
+              onEndReachedThreshold: 0.2,
+            }}
+            infiniteScroll={true}
+            alignTop={true}
+            messages={messages}
+            onSend={messages => onSend(messages)}
+            renderComposer={renderComposer}
+            renderSend={renderSend}
+            renderInputToolbar={
+              getDataFromParam.allChat == true
+                ? render_Blank_InputToolbar
+                : getDataFromParam.selected_Item.chat_status == 'closed'
+                ? render_Blank_InputToolbar
+                : renderInputToolbar
+            }
+            selectFile={openFile}
+            selectImage={openImage}
+            renderBubble={renderBubble}
+            renderCustomView={renderCustomView}
+            renderMessageImage={renderMessageImage}
+            user={{
+              _id: 'a',
+              agent_name: loginUserData.user.name,
+            }}
+            renderDay={renderDays}
+            renderTime={renderTime}
+          />
+              // {/* </ImageBackground> */}
+              
           )}
         </View>
+        </>
+        )}
+        
+        
       </View>
     
     
