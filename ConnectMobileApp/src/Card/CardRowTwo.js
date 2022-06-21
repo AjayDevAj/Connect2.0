@@ -9,7 +9,7 @@ import CardTime from './CardTime';
 
 const CardRowTwo = ({ assigned, message, time, unread, status }) => {
     // unread = 1
-    const msgLength = message.length;
+    // const msgLength = message.length;
     return (
         <View style={ cardStyles.cardRowTwo }>
             <View style={{ alignSelf: 'flex-start' }}></View>

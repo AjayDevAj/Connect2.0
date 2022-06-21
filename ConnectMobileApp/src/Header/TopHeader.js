@@ -33,7 +33,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import headerStyles from './styles/headerStyleSheet';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null, arrowDownIcon='', arrowDownHandler='' }) => {
@@ -57,12 +56,12 @@ const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, search
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
                     <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
-                     onPress={searchHandler} 
-                     color={color == null ? '#FFFFFF': color}
-                     />
+                    onPress={searchHandler} 
+                    color={color == null ? '#FFFFFF': color}
+                    />
                     <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
                 </View>
-
+                
             </View>
         </View>
     );
