@@ -94,10 +94,7 @@ const Chat = ({navigation }) => {
    */
 
   const callAPI = (type = 'open', searchText = '') => {
-    searchText !== null ? 
-      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText))
-    :
-      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557))
+    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0,null, searchText !== null ? searchText:null))
   };
 
   const [searchText, setSearchText] = useState('');

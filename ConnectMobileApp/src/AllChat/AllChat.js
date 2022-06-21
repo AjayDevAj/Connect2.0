@@ -73,6 +73,11 @@ const AllChat = ({navigation, route}) => {
       callAPI(currentTabStatus);
     }
   }, [isFocused]);
+
+  useEffect(()=> {
+    callAPI(currentTabStatus);
+  },[headerName])
+
   useEffect(() => {}, [chatResponseData]);
 
   /**
@@ -80,9 +85,7 @@ const AllChat = ({navigation, route}) => {
    * @param {*} type
    */
   const callAPI = (type = 'open', searchText = '') => {
-    searchText !== null
-      ? dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, "", searchText))
-      : dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1, ''));
+    dispatch(loadChatData(0, null, 0, 'DESC', type, '1', 1,headerName.id == null ? "":headerName.id, searchText !== null ? searchText:null))
   };
 
   /**
@@ -170,6 +173,7 @@ const AllChat = ({navigation, route}) => {
                 id: value.id,
                 name: value.name,
               });
+
             }
             setShowAllUser(false);
           }}
