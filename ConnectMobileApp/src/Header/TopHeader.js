@@ -1,45 +1,78 @@
 /*
-**
-*
-** ========================================================
-**
-** AppName: Connect2.0
-** Version: X.0.0
-** FileName: header.js
-** UsedFor: Header component at connect 2.0 app
-** Author:
-**
-** ========================================================
-*
-**
-**
-*
-** ==========================================================
-**              Header component
-** ==========================================================
-*
-**
-*/
+ **
+ *
+ ** ========================================================
+ **
+ ** AppName: Connect2.0
+ ** Version: X.0.0
+ ** FileName: header.js
+ ** UsedFor: Header component at connect 2.0 app
+ ** Author:
+ **
+ ** ========================================================
+ *
+ **
+ **
+ *
+ ** ==========================================================
+ **              Header component
+ ** ==========================================================
+ *
+ **
+ */
 
 /*
-**
-*
-** Common react packages import
-*
-** 
-*/
+ **
+ *
+ ** Common react packages import
+ *
+ **
+ */
 
 import React from 'react';
-import { Text, View } from 'react-native';
-
+import {Text, View} from 'react-native';
+import SearchBar from 'react-native-dynamic-search-bar';
 import headerStyles from './styles/headerStyleSheet';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, searchHandler, filterHandler, color=null, arrowDownIcon='', arrowDownHandler='' }) => {
-    return (
-        <View style={ headerStyles.mainContainer }>
-            <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
-
+const TopHeader = ({
+  firstIcon,
+  name,
+  secondIcon,
+  thirdIcon,
+  menuHandler,
+  searchHandler,
+  filterHandler,
+  color = null,
+  arrowDownIcon = '',
+  arrowDownHandler = '',
+  isSearchEnable=false
+}) => {
+  return (
+    <View style={headerStyles.mainContainer}>
+      {isSearchEnable ? (  
+      <SearchBar
+        style={{bottom: 0, marginTop: '15%'}}
+        fontColor="#c6c6c6"
+        iconColor="#c6c6c6"
+        shadowColor="#282828"
+        cancelIconColor="#c6c6c6"
+        placeholder="Search here..."
+        onChangeText={text => console.log('Search Icon is pressed', text)}
+        onSearchPress={() => console.log('Search Icon is pressed')}
+        onClearPress={() => console.log('Search Icon onClearPress')}
+        onPress={() => alert('onPress')}
+        searchIconComponent={
+          <Icon
+            name={'arrow-back'}
+            size={28}
+            onPress={searchHandler}
+            color={color == null ? '#000' : color}
+          />
+        }
+      />
+      ):(
+      <View style={{ flexDirection: 'row', marginTop: '15%', justifyContent: 'space-between', }}>
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start', }}>
                     <Icon name={firstIcon} size={28} style={ headerStyles.headerMenuIcon } onPress={menuHandler} />
                     {arrowDownIcon != '' ? 
@@ -63,8 +96,10 @@ const TopHeader = ({ firstIcon, name, secondIcon, thirdIcon, menuHandler, search
                 </View>
                 
             </View>
-        </View>
-    );
-}
+         )}
+    </View>
+     
+  );
+};
 
 export default TopHeader;

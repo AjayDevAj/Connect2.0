@@ -43,7 +43,8 @@ import {searchedListData} from '../utility/Constant';
 
 const Chat = ({navigation }) => {
   const isFocused = useIsFocused();
-  
+  const [isSearch, setIsSeatch] = useState(false)
+
   const menuHandler = () => {
     // console.log('Menu Handler');
      alert('Menu Handler');
@@ -54,7 +55,7 @@ const Chat = ({navigation }) => {
   };
 
   const searchHandler = () => {
-    !clicked ? setClicked(true) : setClicked(false);
+    setIsSeatch(!isSearch)
   };
 
   const filterHandler = () => {
@@ -100,7 +101,6 @@ const Chat = ({navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [clicked, setClicked] = useState(false);
   const [currentTabStatus, setCurrentTabStatus] = useState('open');
-  //const [agentName, setAgentName] = useState(false)
 
   /**
    * Search Api call
@@ -144,6 +144,7 @@ const Chat = ({navigation }) => {
           clicked={clicked}
           searchText={searchText}
           chatSearchHandler={chatSearchHandler}
+          isSearchEnable={isSearch}
         />
       ) : (
         <SearchBox

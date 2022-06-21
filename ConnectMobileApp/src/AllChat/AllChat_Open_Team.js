@@ -14,7 +14,6 @@ import {SegmentComponent} from '../component/SegmentComponent';
 import fontFamily from '../utility/Font-Declarations';
 import {getUserdata} from '../api/getUserdata';
 import {useIsFocused} from '@react-navigation/native';
-import RadioButtonRN from 'radio-buttons-react-native';
 import RadioButton from 'react-native-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 

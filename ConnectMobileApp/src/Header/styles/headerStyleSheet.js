@@ -48,7 +48,7 @@ const headerStyles = StyleSheet.create({
         width: '100%',
         opacity: 1,
         borderBottomRightRadius: 28,
-        position: 'relative'
+        position: 'relative',
     },
     headerMenuIcon: {
         color: '#fff',
