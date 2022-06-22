@@ -61,12 +61,12 @@ const headerStyles = StyleSheet.create({
         fontFamily: fontFamily.Alte_DIN,
         fontSize: 20,
         marginLeft: '8%',
+        
     },
     headerSearchIcon: {
         // color: '#FFFFFF',
         opacity: 1,
         alignSelf: 'flex-start',
-        
         marginLeft: '45%',
     },
     headerFilterIcon: {
