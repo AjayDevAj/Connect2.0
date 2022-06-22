@@ -50,6 +50,7 @@ import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import {CommonActions} from '@react-navigation/native';
 import Drawer from './Drawer';
 
+
 /*
  **
  *
@@ -186,7 +187,7 @@ const Routes = () => {
               options={{ headerShown: false }}
             />
 
-<Stack.Screen
+            <Stack.Screen
               name={navigationString.Chat_Filter}
               component={Chat_Filter}
               options={{ headerShown: false }}

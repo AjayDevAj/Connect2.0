@@ -41,6 +41,8 @@ import AllChat_ConversationDataWatcherSaga from './AllChat_Conversation_Saga';
 import isImportantDataWatcherSaga from './IsImportantSaga';
 import AcceptRejectChatDataWatcherSaga from './AcceptRejectChatSaga';
 import Send_message_WatcherSaga from './Send_Message_Saga';
+import OverAllWatcherSaga from './OverAllSaga';
+import ReviewListWatcherSaga from './GetReviewListSaga';
 
 
 /***************** Root saga method ********************/
@@ -56,6 +58,8 @@ export default function* rootSaga() {
         isImportantDataWatcherSaga(),
         AllChat_ConversationDataWatcherSaga(),
         AcceptRejectChatDataWatcherSaga(),
-        Send_message_WatcherSaga()
+        Send_message_WatcherSaga(),
+        OverAllWatcherSaga(),
+        ReviewListWatcherSaga(),
     ]);
 }

@@ -43,7 +43,7 @@ const [isVisible,setIsVisible] = useState(true)
   });
 
   const unassigned_Chat_API_Call = () => {
-    dispatch(Unassigned_Chat());
+    // dispatch(Unassigned_Chat());
   };
 
   const Incoming_Chat_Socket_Subscribe = () => {

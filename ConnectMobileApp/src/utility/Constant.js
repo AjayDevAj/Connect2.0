@@ -68,6 +68,14 @@ const CONSTANT = {
     Send_message_ERROR: 'Send_message_ERROR',
     Send_message_SUCCESS: 'Send_message_SUCCESS',
 
+    OverAllRatingData: 'OverAllRatingData',
+    OverAllRatingERROR: 'OverAllRatingERROR',
+    OverAllRatingSUCCESS: 'OverAllRatingSUCCESS',
+
+    Get_Review_List_Data: 'Get_Review_List_Data',
+    Get_Review_List_Error: 'Get_Review_List_Error',
+    Get_Review_List_SUCCESS: 'Get_Review_List_SUCCESS',
+
 
 }
 

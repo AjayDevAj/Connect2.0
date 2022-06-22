@@ -13,9 +13,9 @@ import Buttongroup from './buttongropu_Filter';
 import styles from '../dashboard/FilterStyle';
 
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
+// import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 
-import FilterRightContainer from '../../component/FilterRightContainer';
+import FilterRightContainer from '../../component/FilteRrightContainer';
 
 export default Filter = ({navigation, route}) => {
   const isselc = true;

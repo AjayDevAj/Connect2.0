@@ -64,7 +64,7 @@ const Action_Sheet = () => {
       gestureEnabled={true}
       initialOffsetFromBottom={0.4}
       headerAlwaysVisible={true}
-      extraScroll={DATA.length <= 4 ? 250 : 200}>
+      extraScroll={DATA != undefined && DATA.length <= 4 ? 250 : 200}>
       <View style={{maxHeight: '80%'}}>
         <Text style={styles.headerStyle}>Incoming Chats</Text>
         <FlatList

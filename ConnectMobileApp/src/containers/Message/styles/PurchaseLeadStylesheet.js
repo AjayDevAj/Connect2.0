@@ -78,7 +78,7 @@ const purchaseLeadStyles = StyleSheet.create({
     purchaseLeadText: {
         color: '#657180',
         letterSpacing: 0.14,
-        fontFamily: fontFamily.DINRegular,
+        fontFamily: fontFamily.Alte_DIN,
         fontSize: 14,
     },
     purchaseLeadRightIcon: {
