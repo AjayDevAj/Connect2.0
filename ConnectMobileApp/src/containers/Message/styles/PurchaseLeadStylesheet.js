@@ -107,7 +107,67 @@ const purchaseLeadStyles = StyleSheet.create({
         borderRadius: 6,
         borderColor: '#C3C7D9',
         opacity: 1,
-        borderWidth: 1
+        borderWidth: 1,
+        color: '#5F6368',
+        padding: 15,
+    },
+    intentButton: {
+        borderWidth: 1,
+        borderRadius: 4,
+        width: 'auto',
+        height: 'auto',
+        justifyContent: 'center',
+        padding: 5,
+        margin: 5,
+        // borderColor: '#2F6EF3',
+        borderColor: '#5F6368',
+        opacity: 0.5,
+        color: '#FFF', 
+        // backgroundColor: '#FAFDFF',
+        backgroundColor: '#FCFCFC'
+    },
+    intentText: {
+        color: '#5F6368',
+        // color: '#2F6EF3',
+        fontSize: 12,
+        textAlign: 'center',
+        fontFamily: fontFamily.Poppins,
+        opacity: 1,
+    },
+    updateButtonStyle: {
+        backgroundColor: '#0E0071',
+        borderRadius: 8,
+        width: '43%',
+        alignSelf: 'flex-end',
+        marginTop: -48,
+        marginRight: 10
+    },
+    updateButtonTextStyle: {
+        textTransform: 'uppercase',
+        fontSize: 16,
+        color: '#FFF',
+        opacity: 1,
+        fontFamily: fontFamily.Alte_DIN,
+    },
+    cancelButton: {
+        borderWidth: 1,
+        borderColor: '#C3C7D9',
+        borderRadius: 8,
+        width: '45%',
+        // height: '20%',
+        alignSelf: 'flex-start',
+        padding: 10,
+        marginLeft: 10,
+        
+    },
+    cancelButtonText: {
+        textTransform: 'uppercase',
+        fontSize: 16,
+        color: '#838CB2',
+        opacity: 1,
+        fontFamily: fontFamily.Alte_DIN,
+        textAlign: 'center',
+        padding: 2
     }
     
 });

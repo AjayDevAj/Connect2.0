@@ -15,14 +15,14 @@ const PurchaseLeadSection = ({ purchaseHandler }) => {
                 </View>
             </TouchableOpacity>
             
-            <TouchableOpacity onPress={() => alert('Hot lead is clicked')}>
+            <TouchableOpacity onPress={purchaseHandler}>
                 <View style={ purchaseLeadStyles.purchaseLeadMidSection }>
                     <View style={ [purchaseLeadStyles.purchaseLeadDotIcon, { backgroundColor: '#BA0101' }] }></View>
                     <Text style={ purchaseLeadStyles.purchaseLeadText }>Hot Lead</Text>
                 </View>
             </TouchableOpacity>
           
-            <TouchableOpacity onPress={() => alert('Right Icon is clicked')}>
+            <TouchableOpacity onPress={purchaseHandler}>
                 <View style={ purchaseLeadStyles.purchaseLeadtRightSection }>
                     <Icon name="chevron-right" size={22} style={ purchaseLeadStyles.purchaseLeadRightIcon } />
                 </View>

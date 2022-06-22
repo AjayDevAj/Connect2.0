@@ -29,6 +29,7 @@ import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
 import PurchaseLeadSection from './PurchaseLeadSection';
 import PurchaseLeadForm from './PurchaseLeadForm';
+import CloseChatModal from './CloseChatModal';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
@@ -87,8 +88,8 @@ const Message = ({navigation, route}) => {
     }
   };
 
-  const dotHandler = async () => {
-    !dotClicked ? setDotClicked(true) : setDotClicked(false);
+  const dotHandler = () => {
+    setDotClicked(!dotClicked);
   };
 
   const dispatch = useDispatch();
@@ -230,9 +231,10 @@ const Message = ({navigation, route}) => {
   ];
 
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
+  const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
   const purchaseHandler = () => {
-    alert(showPurchaseForm);
+    // alert(showPurchaseForm);
     setShowPurchaseForm(!showPurchaseForm)
   }
 
@@ -252,7 +254,10 @@ const Message = ({navigation, route}) => {
           menuHandler={menuHandler}
           logo={getDataFromParam.selected_Item.publisher_type}
         />
-          <PurchaseLeadForm /> 
+          <PurchaseLeadForm 
+            formData={getDataFromParam.selected_Item} 
+            navigation={navigation}
+            /> 
           </>
         ) : (
           <>
@@ -276,6 +281,8 @@ const Message = ({navigation, route}) => {
             onClick={index => {
               switch (index) {
                 case 1:
+                  setIsClosedChatClicked(!isClosedChatClicked);
+                  setDotClicked(!dotClicked);
                   break;
                 case 2:
                   mark_Unread_Api()
@@ -289,7 +296,10 @@ const Message = ({navigation, route}) => {
             }}
           />
         )}
+
+        
         <View style={{flex: 1}}>
+          {isClosedChatClicked && <CloseChatModal />}
           {allChat_Conversation_Data.data && loginUserData != undefined && (
           // <ImageBackground source={require('./img/MaskGroup17.svg')} >
             <GiftedChat

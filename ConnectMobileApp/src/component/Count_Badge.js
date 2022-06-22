@@ -2,7 +2,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import React from 'react';
 import fontFamily from '../utility/Font-Declarations';
 
-const Count_Badge = ({topRight,top,badge_Value, width=30, height=20}) => {
+const Count_Badge = ({topRight,top,badge_Value, width=30, height=20, fontSize=11}) => {
 
   return (
     <Text
@@ -19,6 +19,7 @@ const Count_Badge = ({topRight,top,badge_Value, width=30, height=20}) => {
         textAlign: 'center',
         zIndex: 11,
         overflow: 'hidden',
+        fontSize: fontSize
       }}>
       {badge_Value}
     </Text>

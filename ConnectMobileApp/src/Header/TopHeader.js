@@ -94,7 +94,7 @@ const TopHeader = ({
                     :   (
                         <>
                         {logo != '' && (
-                            <View style={ headerStyles.headerIconContainer }>
+                            <View style={ [headerStyles.headerIconContainer, { }] }>
                                 { logo === 'whatsapp' ? 
                                     <WhatsappIcon />
                                 : 
@@ -102,7 +102,7 @@ const TopHeader = ({
                                 }
                             </View>
                         ) }
-                        <Text style={ headerStyles.headerText }>{name}</Text>
+                        <Text style={ [headerStyles.headerText, { marginTop: 3, marginLeft: '5%'}] }>{name}</Text>
                         
                         </>
                        )}
@@ -116,21 +116,9 @@ const TopHeader = ({
                     {isFilterApplied ? (
                         <>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                        <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
-                        {/* <View style={{ 
-                            width: 10,
-                            height: 10,
-                            opacity: 1,
-                            backgroundColor: 'red',
-                            borderRadius: 5,
-                            alignSelf: 'flex-start',
-                            // marginRight: 5,
-                            position: 'absolute',
-                            marginLeft: 20
-                            }}></View> */}
-                            <Count_Badge topRight={10} top={-6} width={20} height={20} badge_Value={2} />
+                            <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                            <Count_Badge topRight={16} top={1} width={16} height={16} badge_Value={2} fontSize={11} />
                         </View>
-                        
                         </>
                     ) : (
                         <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
