@@ -6,10 +6,11 @@ import {
   StatusBar,
   SafeAreaView,
   TextInput,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import CheckBox from '@react-native-community/checkbox';
+//import CheckBox from '@react-native-community/checkbox';
 import FontDeclarations from '../utility/Font-Declarations';
 //import { ListItem, SearchBar} from 'react-native-elements';
 import filter from 'lodash.filter';
@@ -17,6 +18,7 @@ import {color, set} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getOtpResponse} from '../utility/StorageClass';
 import {location_Data_Key} from '../utility/Constant';
+import {HStack, Checkbox, Center, NativeBaseProvider} from 'native-base';
 
 import {useEffect} from 'react';
 
@@ -29,6 +31,22 @@ export default function FilterRightContainer() {
 
   const [data, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
+
+
+  const [checkboxdata, setcheckboxdata] = useState(data);
+
+  const handleChange = (Locality) => {
+    let temp = checkboxdata.map((cheklist) => {
+      if (Locality === cheklist.locality) {
+       
+       console.log(cheklist.locality)
+      }
+      return checkboxdata;
+    });
+    setcheckboxdata(temp);
+  };
+
+  //let selected = checkboxdata.filter((cheklist) => cheklist.locality);
 
   // useEffect(() => {
   //   if (
@@ -46,7 +64,7 @@ export default function FilterRightContainer() {
 
   useEffect(() => {
     getdetas();
-  },[]);
+  }, []);
 
   const getdetas = async () => {
     const SlresponseData = await getOtpResponse(location_Data_Key);
@@ -60,12 +78,13 @@ export default function FilterRightContainer() {
       SlresponseData != undefined &&
       SlresponseData.locations != undefined
     ) {
-
-      
       // ** Master Data
       setData(SlresponseData.locations);
 
-      console.log( 'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>', SlresponseData.locations ,)
+      console.log(
+        'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
+        SlresponseData.locations,
+      );
 
       //** */ Filtered Data
       setarrayholder(SlresponseData.locations);
@@ -74,15 +93,27 @@ export default function FilterRightContainer() {
 
   const Item = ({Locality}) => (
     <View style={styles.item}>
-      <CheckBox
+      {/* <CheckBox
         disabled={false}
         value={toggleCheckBox}
         onValueChange={newValue => setToggleCheckBox(newValue)}
         lineWidth={0.4}
         boxType={'square'}
         onTintColor={'rgba(90, 163, 247, 1)'}
-      />
-      <Text style={styles.title}>{Locality}</Text>
+      /> */}
+      <NativeBaseProvider style={styles.item}>
+        <HStack space={4}>
+          <Checkbox
+            value={Locality}
+            colorScheme={'info'}
+            onChange={() => {
+              handleChange(Locality);
+              console.log('change handler------------->',value)
+            }}
+          />
+          <Text style={styles.title}>{Locality}</Text>
+        </HStack>
+      </NativeBaseProvider>
     </View>
   );
 

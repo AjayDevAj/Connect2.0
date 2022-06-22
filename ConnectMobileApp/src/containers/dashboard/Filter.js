@@ -11,19 +11,51 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimly from '../../utility/Font-Declarations';
 import Buttongroup from './buttongropu_Filter';
 import styles from '../dashboard/FilterStyle';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import EntryPointFilter from '../../component/EntryPointFilter';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
-
+import DateFilter from '../../component/DateFilter';
 import FilterRightContainer from '../../component/FilterRightContainer';
+import { selectedbtnid } from '../../utility/Constant';
 
 export default Filter = ({navigation, route}) => {
-  const isselc = true;
+  
+  const [btnId ,setBtnID] =useState(null)
 
   useEffect(() => {
-    // getData()
+    getData()
     //navigation.goBack()
-  });
+    removeValue()
+  },[]);
+
+  const getData = async () => {
+    try {
+       const value = await AsyncStorage.getItem(selectedbtnid)
+      if(value !== null) {
+        // value previously stored
+        setBtnID(value)
+        console.log('storage value from constant========>', value)
+        console.log('storage value from State========>',btnId)
+      }
+    } catch(e) {
+      // error reading value
+      console.log('error--------',e)
+    }
+  }
+
+  removeValue = async () => {
+    try {
+      await AsyncStorage.removeItem(selectedbtnid)
+    } catch(e) {
+      // remove error
+
+      console.log('Remove Errror ++++++++++++++++++++',e)
+    }
+  
+    console.log('Done.')
+  }
+ 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,12 +103,21 @@ export default Filter = ({navigation, route}) => {
         {/* Left Conatiner holds the Filters buttons   to   filter out the required data */}
 
         <View style={styles.leftContainer}>
-          <Buttongroup />
+          <Buttongroup idstate={btnId}/>
         </View>
         {/* Right Conatiner  */}
         <View style={styles.rightContainer}>
+<>
+{
+  btnId  === 6 && btnId !='' ?  <FilterRightContainer /> : <DateFilter/>
+
+}
+</>
+
           {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
           <FilterRightContainer />
+          {/* <EntryPointFilter/> */}
+          {/* <DateFilter/> */}
         </View>
       </View>
 
@@ -88,6 +129,8 @@ export default Filter = ({navigation, route}) => {
             }
           }}>
           <Text style={styles.clearAllBtnText}>CLEAR ALL</Text>
+
+          
         </TouchableOpacity>
 
         {/* Footer Pipe Symbol */}

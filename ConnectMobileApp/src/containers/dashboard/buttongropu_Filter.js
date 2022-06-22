@@ -10,6 +10,7 @@ import {
 import fontfaimily from '../../utility/Font-Declarations';
 import FilteRrightContainer from '../../component/FilterRightContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { selectedbtnid } from '../../utility/Constant';
 
 
 
@@ -53,30 +54,20 @@ const Item = ({item, onPress, backgroundColor, textColor,}) => (
   </TouchableOpacity>
 );
 
- const Buttongroup = (idselector) => {
+ const Buttongroup = (idstate) => {
 const [selectedId, setSelectedId] = useState(null);
 
 
 const storeData = async (value) => {
   try {
-    await AsyncStorage.setItem('@storage_Key', selectedId)
+    await AsyncStorage.setItem(selectedbtnid, selectedId)
   } catch (e) {
-    // saving error
+    console.log('Setting Async Data Error',e)
   }
 }
 
 
-const getData = async () => {
-  try {
-     value = await AsyncStorage.getItem('@storage_Key')
-    if(value !== null) {
-      // value previously stored
-      console.log('storage value========>', value)
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
+console.log('---------------------------.......',idstate)
 
  
 storeData();
