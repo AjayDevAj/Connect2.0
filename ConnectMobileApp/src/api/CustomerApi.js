@@ -4,8 +4,8 @@
 ** ================================================================
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: ChatApi.js
-** UsedFor: Chat API Calls at connect 2.0 app
+** FileName: CustomerApi.js
+** UsedFor: Customer API Calls at connect 2.0 app
 ** Author:
 ** ================================================================
 *
@@ -13,7 +13,7 @@
 **
 *
 ** ====================================================================
-**                  Chat API Calls
+**                  Customer API Calls
 ** ====================================================================
 *
 **
@@ -37,7 +37,7 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 /*
 **
 *
-** getChatList func is used for getting message list.
+** getCustomerList func is used for getting message list.
 *
 **
 *
@@ -46,9 +46,28 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 ** 
 */
 
-const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id=null, search_text = '') => {
+const getCustomerList = async (
+    intent_id = '',
+    entry_point=0,
+    channel='',
+    date_range=0,
+    location_id='',
+    chat_status='',
+    contact_details='',
+    assigned_to=0,
+    page=0,
+    user_page=0,
+    interest_page=0,
+    searchLocation='',
+    searchUser='',
+    interest='',
+    from_date='',
+    to_date='',
+    search='',
+    order_by=''
+    ) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-
+    
     /*
     **
     *
@@ -56,22 +75,9 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-console.log('user_iduser_id',user_id)
-    // const bodyData = new FormData(); 
-    const bodyRawData = {
-        "chat_status": chat_status,
-        "is_important": is_important,
-        "location_id": location_id,
-        "order_by": order_by,
-        "other_chat": other_chat,
-        "pagination": pagination,
-        "unread": unread,
-        "user_id": user_id == null ? token_Value.user.id : user_id,
-    };
     
-    console.log('Search Text - ', search_text)
-    var api_url = API_URL_STAGING + '/message/message-list';
-    search_text !== null ? api_url = api_url + '?search='+search_text : api_url = api_url
+    var api_url = API_URL_STAGING + '/crm/customer-list?order_by='+order_by;
+    search !== null ? api_url = api_url + '&search='+search : api_url = api_url
    
     console.log('API url', api_url);
     var headers = {
@@ -81,11 +87,11 @@ console.log('user_iduser_id',user_id)
     }
 
     const response = await fetch(api_url, {
-        method: 'POST',
+        method: 'GET',
         headers: headers,
-        body: JSON.stringify(bodyRawData),
+        // body: JSON.stringify(bodyRawData),
     });
-    
+
     /*
     **
     *
@@ -95,10 +101,6 @@ console.log('user_iduser_id',user_id)
     */
 
     const data = response.json();
-    // console.log('Chat Message List Response : Api Call response',data);
-
-    // console.log('Chat Message List Response Abhishek: ',JSON.stringify(data));
-
     /*
     **
     *
@@ -106,7 +108,7 @@ console.log('user_iduser_id',user_id)
     *
     ** 
     */
-//    console.log('response.status',response.status)
+
     switch (response.status) {
         case response.status > 400 :
             throw new Error(data.errors)
@@ -118,10 +120,6 @@ console.log('user_iduser_id',user_id)
 
         default:break
     }
-    // if (response.status > 400) {
-    //     // console.log('Chat Message Error : '+ data.errors);
-    //     throw new Error(data.errors)
-    // }
 
     return data;
 }
@@ -137,7 +135,7 @@ console.log('user_iduser_id',user_id)
 ** 
 */
 
-export {getChatList}
+export {getCustomerList}
    
 
      

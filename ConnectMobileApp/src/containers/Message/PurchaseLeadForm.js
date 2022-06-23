@@ -4,9 +4,19 @@ import { Form, FormItem, Label } from 'react-native-form-component';
 
 import purchaseLeadStyles from './styles/PurchaseLeadStylesheet';
 
-const PurchaseLeadForm = ({ formData, navigation }) => {
+const PurchaseLeadForm = ({ formData, navigation, type='', dataComponent='' }) => {
     const [isEnabled, setIsEnabled] = useState(true);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+    var intent_val = '';
+    {dataComponent == 'customer' ? (
+       <>
+        {(typeof formData.customer_intent !== 'undefined' && formData.customer_intent != '') ? 
+        formData.customer_intent.map((item) => {
+            intent_val = item.intent
+        }) : ''}
+        </>
+    ) : ''}
 
     const intentData = [
         {
@@ -25,7 +35,7 @@ const PurchaseLeadForm = ({ formData, navigation }) => {
 
     return (
         <ScrollView style={ purchaseLeadStyles.purchaseLeadFormContainer }>
-            <Form buttonText='Update' 
+            <Form buttonText={type == 'add' ? 'Add Customer' : 'Update' }
                 buttonTextStyle={ purchaseLeadStyles.updateButtonTextStyle } 
                 buttonStyle={purchaseLeadStyles.updateButtonStyle}
                 onButtonPress={() => alert('Update button pressed')}
@@ -41,16 +51,16 @@ const PurchaseLeadForm = ({ formData, navigation }) => {
                     <Label text="Intent" style={purchaseLeadStyles.purchaseLeadFormLabel} />
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10, marginRight: '30%'}}>
-                        <TouchableOpacity style={[purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}]}  onPress={() => {}}>
-                            <Text style={[purchaseLeadStyles.intentText, { color: '#2F6EF3', }]}>Purchase</Text>
+                        <TouchableOpacity style={intent_val == 'Purchase' ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {}}>
+                            <Text style={intent_val == 'Purchase' ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Purchase</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={purchaseLeadStyles.intentButton}  onPress={() => {}}>
-                            <Text style={purchaseLeadStyles.intentText}>Engagement</Text>
+                        <TouchableOpacity style={intent_val == 'Engagement' ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {}}>
+                            <Text style={intent_val == 'Engagement' ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Engagement</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={purchaseLeadStyles.intentButton}  onPress={() => {}}>
-                            <Text style={purchaseLeadStyles.intentText}>Support</Text>
+                        <TouchableOpacity style={intent_val == 'Support' ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {}}>
+                            <Text style={intent_val == 'Support' ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Support</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -83,14 +93,14 @@ const PurchaseLeadForm = ({ formData, navigation }) => {
                 <FormItem
                     label="Mobile Number"
                     labelStyle={purchaseLeadStyles.purchaseLeadFormLabel}
-                    value={formData.phone}
+                    value={(typeof formData.lead_has.mobile_number !== 'undefined' && formData.lead_has.mobile_number) ? formData.lead_has.mobile_number : ''}
                     textInputStyle={purchaseLeadStyles.purchaseLeadFormTextInput}
                 />
 
                 <FormItem
                     label="Email ID"
                     labelStyle={purchaseLeadStyles.purchaseLeadFormLabel}
-                    value=""
+                    value={(typeof formData.lead_has.email !== "undefined" && formData.lead_has.email != '') ? formData.lead_has.email : ''}
                     textInputStyle={purchaseLeadStyles.purchaseLeadFormTextInput}
                 />
 

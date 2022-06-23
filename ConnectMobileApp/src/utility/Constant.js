@@ -68,6 +68,10 @@ const CONSTANT = {
     Send_message_ERROR: 'Send_message_ERROR',
     Send_message_SUCCESS: 'Send_message_SUCCESS',
 
+    CUSTOMER_DATA: 'CUSTOMER_DATA',
+    CUSTOMER_DATA_ERROR: 'CUSTOMER_DATA_ERROR',
+    CUSTOMER_DATA_SUCCESS: 'CUSTOMER_DATA_SUCCESS',
+
 
 }
 

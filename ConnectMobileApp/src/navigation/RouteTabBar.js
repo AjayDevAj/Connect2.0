@@ -68,6 +68,7 @@ import navigationString from '../utility/NavigationString';
 import Count_Badge from '../component/Count_Badge';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
+import Customer from '../Customer/Customer';
 import uWebSockets from '../component/uWebSockets'
 // import {useDispatch, useSelector} from 'react-redux';
 
@@ -135,7 +136,7 @@ export default function RouteTabBar() {
                 </Icon>
             );
           }}} />
-        <Tab.Screen name={navigationString.Customers} component={CustomersScreen} options={{
+        <Tab.Screen name={navigationString.Customers} component={Customer} options={{headerShown: false, 
           tabBarIcon: (tabInfo) => {
             return (
               <Icon

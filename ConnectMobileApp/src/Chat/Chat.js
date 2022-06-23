@@ -33,7 +33,6 @@ import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../utility/Loader';
-import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
