@@ -41,6 +41,7 @@ import allChat_Conversation_Reducer from "./AllChat_Conversation_Reducer";
 import isImportantDataReducer from "./IsImportantReducer";
 import AcceptRejectChatDataReducer from "./AcceptRejectChatReducer";
 import Send_Message_Reducer from "./Send_Message_Reducer";
+import FilterDataReducer from "./FilterDataReducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -69,6 +70,7 @@ const rootReducers = combineReducers({
     isImportantResonceData: isImportantDataReducer,
     AcceptRejectChatResponceData: AcceptRejectChatDataReducer,
     Send_Message_ResponceData:Send_Message_Reducer,
+    FilterDataReducer_Responce:FilterDataReducer,
 })
 
 export default rootReducers;

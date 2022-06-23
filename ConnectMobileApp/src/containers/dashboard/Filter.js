@@ -16,45 +16,57 @@ import EntryPointFilter from '../../component/EntryPointFilter';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 import DateFilter from '../../component/DateFilter';
-import FilterRightContainer from '../../component/FilterRightContainer';
 import { selectedbtnid } from '../../utility/Constant';
+import { useSelector } from 'react-redux';
+import FilterLocationData from '../../component/FilterLocationData';
+
 
 export default Filter = ({navigation, route}) => {
+
+  const [applyfilter ,setApplyFilter]=useState(false)
+  const ButtonidselctorResponce = useSelector(store => store.FilterDataReducer_Responce);
+  console.log('selctorrrrrrrrr-------->',ButtonidselctorResponce)
+  
   
   const [btnId ,setBtnID] =useState(null)
+   
+
+
 
   useEffect(() => {
-    getData()
+    //getData()
     //navigation.goBack()
-    removeValue()
+    //removeValue()
+
+    setBtnID(ButtonidselctorResponce)
   },[]);
 
-  const getData = async () => {
-    try {
-       const value = await AsyncStorage.getItem(selectedbtnid)
-      if(value !== null) {
-        // value previously stored
-        setBtnID(value)
-        console.log('storage value from constant========>', value)
-        console.log('storage value from State========>',btnId)
-      }
-    } catch(e) {
-      // error reading value
-      console.log('error--------',e)
-    }
-  }
+  // const getData = async () => {
+  //   try {
+  //      const value = await AsyncStorage.getItem(selectedbtnid)
+  //     if(value !== null) {
+  //       // value previously stored
+        
+  //       console.log('storage value from constant========>', value)
+  //       console.log('storage value from State========>',btnId)
+  //     }
+  //   } catch(e) {
+  //     // error reading value
+  //     console.log('error--------',e)
+  //   }
+  // }
 
-  removeValue = async () => {
-    try {
-      await AsyncStorage.removeItem(selectedbtnid)
-    } catch(e) {
-      // remove error
+  // removeValue = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem(selectedbtnid)
+  //   } catch(e) {
+  //     // remove error
 
-      console.log('Remove Errror ++++++++++++++++++++',e)
-    }
+  //     console.log('Remove Errror ++++++++++++++++++++',e)
+  //   }
   
-    console.log('Done.')
-  }
+  //   console.log('Done.')
+  // }
  
 
   return (
@@ -109,15 +121,16 @@ export default Filter = ({navigation, route}) => {
         <View style={styles.rightContainer}>
 <>
 {
-  btnId  === 6 && btnId !='' ?  <FilterRightContainer /> : <DateFilter/>
+  // btnId  === 1 && btnId !='' ?  <FilterRightContainer /> : <DateFilter/>
 
 }
 </>
 
           {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
-          <FilterRightContainer />
+         
           {/* <EntryPointFilter/> */}
-          {/* <DateFilter/> */}
+          <DateFilter/>
+          {/* <FilterLocationData appyFilter={applyfilter}/> */}
         </View>
       </View>
 
@@ -140,6 +153,7 @@ export default Filter = ({navigation, route}) => {
           style={styles.applyFilterBTN}
           onPress={() => {
             {
+              setApplyFilter(true)
             }
           }}>
           <Text style={styles.applyFilterBtnText}>APPLY FILTERS</Text>

@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+
 //import CheckBox from '@react-native-community/checkbox';
 import FontDeclarations from '../utility/Font-Declarations';
 //import { ListItem, SearchBar} from 'react-native-elements';
@@ -19,48 +19,58 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getOtpResponse} from '../utility/StorageClass';
 import {location_Data_Key} from '../utility/Constant';
 import {HStack, Checkbox, Center, NativeBaseProvider} from 'native-base';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadfilterdata} from '../actions/FilterAction';
+
 
 import {useEffect} from 'react';
 
-export default function FilterRightContainer() {
+export default function FilterLocationData(appyFilter, applyfilter) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const dispatch = useDispatch();
 
+
+  
   // ** Fetch Location data from  the saga Store
   //const SLResponce = useSelector(store => store.StoreLocationDataResponse);
 
   const [data, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
 
+  const [checkboxdata, setcheckboxdata] = useState('');
+  const [ischeckboxChecked ,setisChecked]=useState(false)
 
-  const [checkboxdata, setcheckboxdata] = useState(data);
+  console.log('checkboxDataaaa-------------------hook call', checkboxdata);
 
-  const handleChange = (Locality) => {
-    let temp = checkboxdata.map((cheklist) => {
-      if (Locality === cheklist.locality) {
+  const handleChange = Locality => {
+    console.log(
+      'handler locality before if contion in handlechae()---------------->',
+      Locality,
+    );
+    // mapping the state data to object checklist
+    let temp = data.map(cheklist => {
+      // Locality == item.locality
+
+      // checking item.locality == checklist.locality
+      if (Locality == cheklist.locality) {
+        console.log(
+          'Location name from the in if condition---------------handeleChange()',
+          cheklist.locality,
+        );
+        //return {cheklist};
        
-       console.log(cheklist.locality)
+        return cheklist.locality;
+        
       }
-      return checkboxdata;
+      
     });
+    setisChecked(true)
     setcheckboxdata(temp);
+    console.log('chekbox data----------111111111111!!!!!!!!!!!!!!>',checkboxdata)
   };
 
-  //let selected = checkboxdata.filter((cheklist) => cheklist.locality);
-
-  // useEffect(() => {
-  //   if (
-  //     SLResponce != null &&
-  //     SLResponce != undefined &&
-  //     SLResponce.data != undefined
-  //   ) {
-  //     // ** Master Data
-  //     setData(SLResponce.data.locations);
-
-  //     //** */ Filtered Data
-  //     setarrayholder(SLResponce.data.locations);
-  //   }
-  // }, [SLResponce]);
+  //let selected = checkboxdata.filter(cheklist => cheklist.locality);
 
   useEffect(() => {
     getdetas();
@@ -91,24 +101,19 @@ export default function FilterRightContainer() {
     }
   };
 
-  const Item = ({Locality}) => (
+  // Item function holds the components of flatlist item
+
+  const Item = ({item, index, Locality}) => (
     <View style={styles.item}>
-      {/* <CheckBox
-        disabled={false}
-        value={toggleCheckBox}
-        onValueChange={newValue => setToggleCheckBox(newValue)}
-        lineWidth={0.4}
-        boxType={'square'}
-        onTintColor={'rgba(90, 163, 247, 1)'}
-      /> */}
       <NativeBaseProvider style={styles.item}>
         <HStack space={4}>
           <Checkbox
-            value={Locality}
+            value={ischeckboxChecked} // Locality == item.locality from object data
             colorScheme={'info'}
             onChange={() => {
               handleChange(Locality);
-              console.log('change handler------------->',value)
+             
+              console.log('change handler---------inonChange()---->', Locality);
             }}
           />
           <Text style={styles.title}>{Locality}</Text>
@@ -131,6 +136,24 @@ export default function FilterRightContainer() {
     setData(updatedData);
     setSearchValue(text);
   };
+
+  console.log('FILTERAPPLY--------------', appyFilter);
+
+  //Dispach an action to redux store 
+
+  do {
+    dispatch(loadfilterdata(checkboxdata));
+    console.log('--------------Location filtered data dispached-----------');
+  } while (appyFilter === true);
+
+  //   const checkboxstoreFunction = () => {
+  //     const updatedData = checkboxdata.filter(item => {
+  //       //return item
+  //       console.log('Filter item---------------------------------->', item);
+  //     });
+
+  //     console.log('outside the if statement-----------.', item);
+  //   };
 
   return (
     <SafeAreaView style={styles.container}>

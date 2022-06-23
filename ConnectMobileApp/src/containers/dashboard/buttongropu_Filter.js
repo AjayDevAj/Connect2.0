@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import fontfaimily from '../../utility/Font-Declarations';
-import FilteRrightContainer from '../../component/FilterRightContainer';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { selectedbtnid } from '../../utility/Constant';
-
-
+import {selectedbtnid} from '../../utility/Constant';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadfilterdata} from '../../actions/FilterAction';
+import {useEffect} from 'react';
 
 const DATA = [
   {
@@ -45,33 +46,34 @@ const DATA = [
   },
 ];
 
-
-
-
-const Item = ({item, onPress, backgroundColor, textColor,}) => (
+const Item = ({item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <Text style={[styles.title, textColor]}>{item.title}</Text>
   </TouchableOpacity>
 );
 
- const Buttongroup = (idstate) => {
-const [selectedId, setSelectedId] = useState(null);
+const Buttongroup = idstate => {
+  const [selectedId, setSelectedId] = useState(null);
 
+  // Dispaching selcted btn id to saga store
+  const dispatch = useDispatch();
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem(selectedbtnid, selectedId)
-  } catch (e) {
-    console.log('Setting Async Data Error',e)
-  }
-}
+  useEffect(() => {
+    dispatch(loadfilterdata(selectedId));
+  }, []);
 
+  const storeData = async value => {
+    try {
+      await AsyncStorage.setItem(selectedbtnid, selectedId);
+    } catch (e) {
+      console.log('Setting Async Data Error', e);
+    }
+  };
 
-console.log('---------------------------.......',idstate)
+  console.log('---------------------------.......', idstate);
 
- 
-storeData();
-//getData();
+  storeData();
+  //getData();
 
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? '#FFFFFF' : 'transparent';
@@ -83,7 +85,6 @@ storeData();
         onPress={() => setSelectedId(item.id)}
         backgroundColor={{backgroundColor}}
         textColor={{color}}
-       
       />
     );
   };
@@ -96,7 +97,7 @@ storeData();
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
-      {console.log('item id ====' ,selectedId)}
+      {console.log('item id ====', selectedId)}
     </SafeAreaView>
   );
 };

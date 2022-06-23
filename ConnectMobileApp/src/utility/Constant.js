@@ -68,6 +68,12 @@ const CONSTANT = {
     Send_message_ERROR: 'Send_message_ERROR',
     Send_message_SUCCESS: 'Send_message_SUCCESS',
 
+    FILTER_DATA: 'FILTER_DATA',
+    FILTER_ERROR: 'FILTER_ERROR',
+    FILTER_SUCCESS: 'FILTER_SUCCESS',
+
+    
+
 
 }
 

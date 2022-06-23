@@ -32,7 +32,9 @@ import {
     const [data, setData] = useState('');
     const [arrayholder, setarrayholder] = useState('');
   
-    
+    const changehandler =()=>{
+      const checkeddata = arrayholder.map( boxdata =>console.log(boxdata.name))
+    }
   
     useEffect(() => {
       getdetas();
@@ -71,7 +73,7 @@ import {
             <Checkbox
               value="test"
               colorScheme={'info'}
-              onChange={()=>Alert.alert('check box selected')}
+              onChange={()=> changehandler() }
             />
             <Text style={styles.title}>{EntryPoints}</Text>
           </HStack>
