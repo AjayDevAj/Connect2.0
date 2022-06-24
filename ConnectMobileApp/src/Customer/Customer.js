@@ -45,8 +45,9 @@
    const [searchText, setSearchText] = useState('');
  
    const menuHandler = () => {
-     navigation.navigate(navigationString.Customers);
-     setShowPurchaseForm(!showPurchaseForm);
+    //  navigation.navigate(navigationString.Customer);
+    //  navigation.goBack();
+    setShowPurchaseForm(false);
    };
  
    const searchHandler = () => {
@@ -121,61 +122,56 @@
    };
 
    const [showPurchaseForm, setShowPurchaseForm] = useState(false);
-   const [showPurchaseFormData, setShowPurchaseFormData] = useState(false);
    const [selectedCustomerData, setSelectedCustomerData] = useState('');
 
    const purchaseHandler = () => {
     setShowPurchaseForm(!showPurchaseForm);
    }
 
-   
    const onPressCustomerHandler = (id) => {
-    console.log(id)
     customerResponseData.data.customers.map((item) => {
       item.id==id ? setSelectedCustomerData(item) : ''
     });
     purchaseHandler()
-    setShowPurchaseFormData(true)
    }
- console.log(selectedCustomerData);
+
    return (
      <View style={customerStyles.customerMainContainer}>
       {showPurchaseForm ? 
         ( 
           <>
-          
-        {showPurchaseFormData ? (
-          <>
-          <TopHeader
-            firstIcon="arrow-back"
-            secondIcon=""
-            thirdIcon=""
-            name={selectedCustomerData.display_name}
-            logo={selectedCustomerData.publisher_type}
-            menuHandler={menuHandler}
-          />
-          <PurchaseLeadForm 
-            formData={selectedCustomerData}
-            navigation={navigation}
-            dataComponent="customer"
-          /> 
+          {selectedCustomerData != '' ? (
+            <>
+            <TopHeader
+              firstIcon="arrow-back"
+              secondIcon=""
+              thirdIcon=""
+              name={selectedCustomerData.display_name}
+              logo={selectedCustomerData.publisher_type}
+              menuHandler={menuHandler}
+            />
+            <PurchaseLeadForm 
+              formData={selectedCustomerData}
+              navigation={navigation}
+              dataComponent="customer"
+            /> 
+            </>
+          ) : (
+            <>
+            <TopHeader
+              firstIcon="arrow-back"
+              secondIcon=""
+              thirdIcon=""
+              name="Add New Customer"
+              menuHandler={menuHandler}
+            />
+            <PurchaseLeadForm 
+              formData=""
+              navigation={navigation}
+              type="add"
+            /> 
           </>
-        ) : (
-          <>
-          <TopHeader
-            firstIcon="arrow-back"
-            secondIcon=""
-            thirdIcon=""
-            name="Add New Customer"
-            menuHandler={menuHandler}
-          />
-          <PurchaseLeadForm 
-            formData=""
-            navigation={navigation}
-            type="add"
-          /> 
-          </>
-        )}
+          )}
           </>
           
         ) : (
@@ -195,13 +191,15 @@
           />
         
           {/* Add New customer component */}
-          <AddNewCustomer purchaseHandler={purchaseHandler} />
+          <AddNewCustomer purchaseHandler={() => {
+            purchaseHandler()
+            setSelectedCustomerData('');
+            }} />
   
           {customerResponseData.data != null && (
             <CustomerList
               onPress_Customer={(val) => { 
                 onPressCustomerHandler(val)
-                
               }}
               data={customerResponseData.data.customers}
             />

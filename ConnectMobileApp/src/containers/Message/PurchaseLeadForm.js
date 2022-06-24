@@ -8,13 +8,19 @@ const PurchaseLeadForm = ({ formData, navigation, type='', dataComponent='' }) =
     const [isEnabled, setIsEnabled] = useState(true);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-    var intent_val = '';
+    var intent_val = mobile_number = email = '';
     {dataComponent == 'customer' ? (
        <>
         {(typeof formData.customer_intent !== 'undefined' && formData.customer_intent != '') ? 
         formData.customer_intent.map((item) => {
             intent_val = item.intent
         }) : ''}
+
+        {(typeof formData.lead_has !== 'undefined' && typeof formData.lead_has.mobile_number !== 'undefined' && formData.lead_has.mobile_number != '') ? 
+        (mobile_number = formData.lead_has.mobile_number) : ''}
+
+        {(typeof formData.lead_has !== 'undefined' && typeof formData.lead_has.email !== 'undefined' && formData.lead_has.email != '') ? 
+        email = formData.lead_has.email : ''}
         </>
     ) : ''}
 
@@ -93,14 +99,14 @@ const PurchaseLeadForm = ({ formData, navigation, type='', dataComponent='' }) =
                 <FormItem
                     label="Mobile Number"
                     labelStyle={purchaseLeadStyles.purchaseLeadFormLabel}
-                    value={(typeof formData.lead_has.mobile_number !== 'undefined' && formData.lead_has.mobile_number) ? formData.lead_has.mobile_number : ''}
+                    value={mobile_number}
                     textInputStyle={purchaseLeadStyles.purchaseLeadFormTextInput}
                 />
 
                 <FormItem
                     label="Email ID"
                     labelStyle={purchaseLeadStyles.purchaseLeadFormLabel}
-                    value={(typeof formData.lead_has.email !== "undefined" && formData.lead_has.email != '') ? formData.lead_has.email : ''}
+                    value={email}
                     textInputStyle={purchaseLeadStyles.purchaseLeadFormTextInput}
                 />
 

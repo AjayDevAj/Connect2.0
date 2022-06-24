@@ -132,7 +132,7 @@ const Chat = ({navigation ,Route}) => {
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-
+  
   return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader
@@ -165,7 +165,8 @@ const Chat = ({navigation ,Route}) => {
       )}
 
       {chatResponseData.data != undefined &&
-        chatResponseData.data.otherMessageCount != undefined && (
+        chatResponseData.data.otherMessageCount != undefined && 
+          chatResponseData.data.otherMessageCount > 0 && (
           <HeaderNotification
             left="people"
             message={`${
@@ -184,6 +185,10 @@ const Chat = ({navigation ,Route}) => {
             navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
           }
           data={chatResponseData.data.result}
+          msgCount={currentTabStatus == 'open' ? chatResponseData.data.openMessageCount 
+          : currentTabStatus == 'closed' ? chatResponseData.data.closedMessageCount 
+          : chatResponseData.data.assignedMessageCount}
+          tabName={currentTabStatus}
         />
       )}
     </View>
