@@ -43,7 +43,7 @@ import AcceptRejectChatDataWatcherSaga from './AcceptRejectChatSaga';
 import Send_message_WatcherSaga from './Send_Message_Saga';
 import OverAllWatcherSaga from './OverAllSaga';
 import ReviewListWatcherSaga from './GetReviewListSaga';
-
+import CustomerDataWatcherSaga from './CustomerSaga';
 
 /***************** Root saga method ********************/
 
@@ -61,5 +61,6 @@ export default function* rootSaga() {
         Send_message_WatcherSaga(),
         OverAllWatcherSaga(),
         ReviewListWatcherSaga(),
+        CustomerDataWatcherSaga(),
     ]);
 }
