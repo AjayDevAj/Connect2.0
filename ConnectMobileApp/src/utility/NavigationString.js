@@ -31,8 +31,10 @@ export default {
     Message:"Message",
     Filter:'Filter',
     Drawer:"Drawer",
-    
+    Chat_Filter:"Chat_Filter",
+    // Review:"Review",
 
+    
 /*
 **
 *

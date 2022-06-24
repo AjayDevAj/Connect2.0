@@ -8,6 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import fontfaimily from '../../utility/Font-Declarations';
+<<<<<<< HEAD
+=======
+// import FilteRrightContainer from '../../component/FilterRightContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+>>>>>>> Swipeable-Panel
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {selectedbtnid} from '../../utility/Constant';

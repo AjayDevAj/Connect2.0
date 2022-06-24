@@ -68,16 +68,80 @@ const CONSTANT = {
     Send_message_ERROR: 'Send_message_ERROR',
     Send_message_SUCCESS: 'Send_message_SUCCESS',
 
+<<<<<<< HEAD
     FILTER_DATA: 'FILTER_DATA',
     FILTER_ERROR: 'FILTER_ERROR',
     FILTER_SUCCESS: 'FILTER_SUCCESS',
 
     
+=======
+    OverAllRatingData: 'OverAllRatingData',
+    OverAllRatingERROR: 'OverAllRatingERROR',
+    OverAllRatingSUCCESS: 'OverAllRatingSUCCESS',
+
+    Get_Review_List_Data: 'Get_Review_List_Data',
+    Get_Review_List_Error: 'Get_Review_List_Error',
+    Get_Review_List_SUCCESS: 'Get_Review_List_SUCCESS',
+
+    CUSTOMER_DATA: 'CUSTOMER_DATA',
+    CUSTOMER_DATA_ERROR: 'CUSTOMER_DATA_ERROR',
+    CUSTOMER_DATA_SUCCESS: 'CUSTOMER_DATA_SUCCESS',
+>>>>>>> Swipeable-Panel
 
 
 }
 
 export { CONSTANT }
+
+export const Filter_DATA = [
+    {
+      id: 1,
+      name: 'Locations',
+    },
+    {
+      id: 2,
+      name: 'Date',
+    },
+    {
+      id: 3,
+      name: 'Chat Status',
+    },
+  ];
+
+  export const Chat_Filter_Data = [
+    {
+      id: 1,
+      name: 'Open',
+    },
+    {
+      id: 2,
+      name: 'Close',
+    },
+  ];
+
+  export const Date_Filter_Data = [
+    {
+      id: 1,
+      name: 'Last 7 days',
+    },
+    {
+      id: 2,
+      name: 'Last Month',
+    },
+    {
+      id: 3,
+      name: 'Last 2 Month',
+    },
+    {
+      id: 4,
+      name: 'Last 3 Month',
+    },
+    {
+      id: 5,
+      name: 'Custom Range',
+    },
+  ];
+
 
 export const otpResponse_Storage_Key = "otp_response_Key";
 export const location_Data_Key = "location_Data_Key";

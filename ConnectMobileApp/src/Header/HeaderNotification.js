@@ -40,7 +40,7 @@ const HeaderNotification = ({ left, message, right, openAllChat }) => {
         <TouchableOpacity style={notificationStyles.notificationMainContainer } onPress={openAllChat}>
             <View>
                 <Icon name={left} size={20} style={ notificationStyles.notificationLeftIcon } />
-                <Text style={ notificationStyles.notificationText }>{message}</Text>
+                <Text style={ notificationStyles.notificationText }>{ message }</Text>
                 <Icon name={right} size={18} style={ notificationStyles.notificationRightIcon } />
             </View>
         </TouchableOpacity>

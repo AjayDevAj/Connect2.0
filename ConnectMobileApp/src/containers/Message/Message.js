@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View, Dimensions} from 'react-native';
+import {View, ImageBackground } from 'react-native';
 import TopHeader from '../../Header/TopHeader';
 import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
@@ -27,7 +27,9 @@ import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
-
+import PurchaseLeadSection from './PurchaseLeadSection';
+import PurchaseLeadForm from './PurchaseLeadForm';
+import CloseChatModal from './CloseChatModal';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
@@ -86,8 +88,8 @@ const Message = ({navigation, route}) => {
     }
   };
 
-  const dotHandler = async () => {
-    !dotClicked ? setDotClicked(true) : setDotClicked(false);
+  const dotHandler = () => {
+    setDotClicked(!dotClicked);
   };
 
   const dispatch = useDispatch();
@@ -228,10 +230,36 @@ const Message = ({navigation, route}) => {
     },
   ];
 
+  const [showPurchaseForm, setShowPurchaseForm] = useState(false);
+  const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
+
+  const purchaseHandler = () => {
+    setShowPurchaseForm(!showPurchaseForm)
+  }
+
   return (
-    <View style={chatStyles.chatMainContainer}>
-      {console.log('reloadTopView reloadTopView ', reloadTopView)}
-      <TopHeader
+    <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF' }]}>
+
+      {showPurchaseForm ? 
+      ( 
+        <>
+        <TopHeader
+        firstIcon="arrow-back"
+        secondIcon=""
+        thirdIcon=""
+        color={reloadTopView ? '#FFAA00' : null}
+        name={getDataFromParam.selected_Item.display_name}
+        menuHandler={menuHandler}
+        logo={getDataFromParam.selected_Item.publisher_type}
+      />
+        <PurchaseLeadForm 
+          formData={getDataFromParam.selected_Item} 
+          navigation={navigation}
+          /> 
+        </>
+      ) : (
+        <>
+        <TopHeader
         firstIcon="arrow-back"
         secondIcon="star-border"
         thirdIcon="more-vert"
@@ -240,13 +268,19 @@ const Message = ({navigation, route}) => {
         menuHandler={menuHandler}
         searchHandler={markasImportant}
         filterHandler={dotHandler}
+        logo={getDataFromParam.selected_Item.publisher_type}
       />
+
+      <PurchaseLeadSection purchaseHandler={purchaseHandler} />
+      
       {dotClicked && (
         <MaterialMenu
           itemData={materialMenuItemData}
           onClick={index => {
             switch (index) {
               case 1:
+                setIsClosedChatClicked(!isClosedChatClicked);
+                setDotClicked(!dotClicked);
                 break;
               case 2:
                 mark_Unread_Api()
@@ -260,43 +294,53 @@ const Message = ({navigation, route}) => {
           }}
         />
       )}
+
+      
       <View style={{flex: 1}}>
+        {isClosedChatClicked && <CloseChatModal />}
         {allChat_Conversation_Data.data && loginUserData != undefined && (
+        // <ImageBackground source={require('./img/MaskGroup17.svg')} >
           <GiftedChat
-            listViewProps={{
-              contentContainerStyle: {
-                flexGrow: 0.02,
-                paddingTop: 20,
-              },
-              onEndReachedThreshold: 0.2,
-            }}
-            infiniteScroll={true}
-            alignTop={true}
-            messages={messages}
-            onSend={messages => onSend(messages)}
-            renderComposer={renderComposer}
-            renderSend={renderSend}
-            renderInputToolbar={
-              getDataFromParam.allChat == true
-                ? render_Blank_InputToolbar
-                : getDataFromParam.selected_Item.chat_status == 'closed'
-                ? render_Blank_InputToolbar
-                : renderInputToolbar
-            }
-            selectFile={openFile}
-            selectImage={openImage}
-            renderBubble={renderBubble}
-            renderCustomView={renderCustomView}
-            renderMessageImage={renderMessageImage}
-            user={{
-              _id: 'a',
-              agent_name: loginUserData.user.name,
-            }}
-            renderDay={renderDays}
-            renderTime={renderTime}
-          />
+          listViewProps={{
+            contentContainerStyle: {
+              flexGrow: 0.02,
+              paddingTop: 20,
+            },
+            onEndReachedThreshold: 0.2,
+          }}
+          infiniteScroll={true}
+          alignTop={true}
+          messages={messages}
+          onSend={messages => onSend(messages)}
+          renderComposer={renderComposer}
+          renderSend={renderSend}
+          renderInputToolbar={
+            getDataFromParam.allChat == true
+              ? render_Blank_InputToolbar
+              : getDataFromParam.selected_Item.chat_status == 'closed'
+              ? render_Blank_InputToolbar
+              : renderInputToolbar
+          }
+          selectFile={openFile}
+          selectImage={openImage}
+          renderBubble={renderBubble}
+          renderCustomView={renderCustomView}
+          renderMessageImage={renderMessageImage}
+          user={{
+            _id: 'a',
+            agent_name: loginUserData.user.name,
+          }}
+          renderDay={renderDays}
+          renderTime={renderTime}
+        />
+            // {/* </ImageBackground> */}
+            
         )}
       </View>
+      </>
+      )}
+      
+      
     </View>
   );
 };

@@ -19,13 +19,26 @@ export const renderInputToolbar = props => (
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: 64,
+      
     }}
     primaryStyle={{
       alignItems: 'center',
-      backgroundColor: '#F2F2F2',
-      borderRadius: 8,
+      borderRadius: 22,
       margin: 12,
+      backgroundColor: '#FFF',
+      color: '#657180',
+      fontFamily: fontFamily.Alte_DIN,
+      opacity: 0.8,
+      fontSize: 16,
+      shadowOffset: {width: 1, height: 1},
+      elevation: 6,
+      // shadowColor: '#00000029',
+      shadowColor: '#333',
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      borderColor: '#FFFFFF',
     }}
+    
   />
 );
 
@@ -68,7 +81,7 @@ export const renderSend = ({
             justifyContent: 'center',
             alignContent: 'center',
           }}>
-          <Icon name={'photo-camera'} size={22} />
+          <Icon name={'photo-camera'} size={22} color="#657180" />
         </View>
       </TouchableOpacity>
 
@@ -83,7 +96,7 @@ export const renderSend = ({
             justifyContent: 'center',
             alignContent: 'center',
           }}>
-          <Icon name={'attach-file'} size={22} />
+          <Icon name={'attach-file'} size={22} color="#657180" />
         </View>
       </TouchableOpacity>
       <Send
@@ -97,7 +110,7 @@ export const renderSend = ({
           justifyContent: 'center',
           marginRight: 10,
         }}>
-        <Icon name={'send'} size={22} />
+        <Icon name={'send'} size={22} color="#657180" />
       </Send>
     </View>
   );
@@ -115,6 +128,7 @@ export const renderBubble = props => {
               color: '#5F6368',
               fontFamily: fontFamily.Poppins,
               fontSize: 12,
+              opacity: 1,
             }}>
             {decode(props.currentMessage.message)}
           </Text>
@@ -211,7 +225,7 @@ export const renderTime = props => {
             marginLeft: 5,
           },
         }}
-        // dateFormat={'YY MMM YYYY'}
+        timeFormat={'HH:ss'}
       />
     </View>
   );

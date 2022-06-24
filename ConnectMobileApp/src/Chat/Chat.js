@@ -33,35 +33,36 @@ import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../utility/Loader';
-import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
-
+import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 
 const Chat = ({navigation ,Route}) => {
   
   const isFocused = useIsFocused();
- console.log()
-  
+  const [isSearch, setIsSearch] = useState(false);
+  const [isFilterApplied, setIsFilterApplied] = useState(true);
+  const [searchText, setSearchText] = useState('');
+  const [currentTabStatus, setCurrentTabStatus] = useState('open');
+
   const menuHandler = () => {
     // console.log('Menu Handler');
-     alert('Menu Handler');
+    //  alert('Menu Handler');
 
-//navigation.openDrawer()
-    
-   
+    // navigation.openDrawer()
   };
 
   const searchHandler = () => {
-    !clicked ? setClicked(true) : setClicked(false);
+    setIsSearch(!isSearch)
   };
 
   const filterHandler = () => {
+    setIsFilterApplied(!isFilterApplied);
     //alert('Filter Handler');
-    navigation.navigate(navigationString.Filter)
+    navigation.navigate(navigationString.Chat_Filter)
   };
 
   const dispatch = useDispatch();
@@ -96,16 +97,10 @@ const Chat = ({navigation ,Route}) => {
    */
 
   const callAPI = (type = 'open', searchText = '') => {
-    searchText !== null ? 
-      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557, searchText))
-    :
-      dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0, 557))
+    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0,null, searchText !== null ? searchText:null))
   };
 
-  const [searchText, setSearchText] = useState('');
-  const [clicked, setClicked] = useState(false);
-  const [currentTabStatus, setCurrentTabStatus] = useState('open');
-  //const [agentName, setAgentName] = useState(false)
+  
 
   /**
    * Search Api call
@@ -134,36 +129,26 @@ const Chat = ({navigation ,Route}) => {
     }
   };
 
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   return (
     <View style={chatStyles.chatMainContainer}>
-      {!clicked ? (
-        <TopHeader
-          firstIcon="menu"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          name="My Chats"
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-          navigation={navigation}
-          clicked={clicked}
-          searchText={searchText}
-          chatSearchHandler={chatSearchHandler}
-        />
-      ) : (
-        <SearchBox
-          clicked={clicked}
-          searchText={searchText}
-          chatSearchHandler={chatSearchHandler}
-          firstIcon="menu"
-          secondIcon="search"
-          thirdIcon="filter-list"
-          topHeaderName="My Chats"
-          menuHandler={menuHandler}
-          searchHandler={searchHandler}
-          filterHandler={filterHandler}
-        />
-      )}
+      <TopHeader
+        firstIcon="menu"
+        secondIcon="search"
+        thirdIcon="filter-list"
+        name="My Chats"
+        menuHandler={menuHandler}
+        searchHandler={searchHandler}
+        filterHandler={filterHandler}
+        navigation={navigation}
+        chatSearchHandler={chatSearchHandler}
+        isSearchEnable={isSearch}
+        isFilterApplied={isFilterApplied}
+      />
+     
       {chatResponseData.data != null && (
         <SegmentComponent
           onClickSegmentChanged={value => {
@@ -185,7 +170,7 @@ const Chat = ({navigation ,Route}) => {
             left="people"
             message={`${
               chatResponseData.data.otherMessageCount
-            } ${currentTabStatus.toUpperCase()} chats with team`}
+            } ${Capitalize(currentTabStatus)} chats with team`}
             right="chevron-right"
             openAllChat={() => navigation.navigate(navigationString.AllChat,{
               openTab:currentTabStatus

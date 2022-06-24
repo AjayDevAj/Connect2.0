@@ -14,12 +14,18 @@ import styles from '../dashboard/FilterStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import EntryPointFilter from '../../component/EntryPointFilter';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
+<<<<<<< HEAD
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 import DateFilter from '../../component/DateFilter';
 import { selectedbtnid } from '../../utility/Constant';
 import { useSelector } from 'react-redux';
 import FilterLocationData from '../../component/FilterLocationData';
 
+=======
+// import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
+
+import FilterRightContainer from '../../component/FilteRrightContainer';
+>>>>>>> Swipeable-Panel
 
 export default Filter = ({navigation, route}) => {
 

@@ -4,11 +4,11 @@ import moment from 'moment';
 
 import cardStyles from './styles/CardStylesheet';
 
-const CardTime = ({ time }) => {
+const CardTime = ({ time, createdAt }) => {
     return (
         <View style={ cardStyles.cardTimeContainer }>
             <View style={ cardStyles.cardTimeIcon }></View>
-            <Text style={ cardStyles.cardTime }>{moment(time).format('HH:ss A')}</Text>
+            <Text style={ cardStyles.cardTime }>{createdAt ? moment(createdAt).format('dddd') : moment(time).format("hh:mm A")}</Text>
         </View>
     )
 }
