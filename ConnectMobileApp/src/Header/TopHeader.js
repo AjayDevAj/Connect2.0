@@ -102,7 +102,7 @@ const TopHeader = ({
                                 }
                             </View>
                         ) }
-                        <Text style={ [headerStyles.headerText, { marginTop: 3, marginLeft: '5%'}] }>{name}</Text>
+                        <Text style={ headerStyles.headerText }>{name}</Text>
                         
                         </>
                        )}

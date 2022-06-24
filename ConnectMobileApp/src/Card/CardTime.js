@@ -4,13 +4,17 @@ import moment from 'moment';
 
 import cardStyles from './styles/CardStylesheet';
 
-const CardTime = ({ time }) => {
+const CardTime = ({ time='', createdAt='' }) => {
     return (
         <View style={ cardStyles.cardTimeContainer }>
             <View style={ cardStyles.cardTimeIcon }></View>
-            <Text style={ cardStyles.cardTime }>{moment(time, "HH:mm:ss").format("hh:mm A")}</Text>
-            {/* <Text style={ cardStyles.cardTime }>{moment().format(time, 'LT')}</Text> */}
-
+            <Text style={ cardStyles.cardTime }>
+            {(createdAt != '' && (moment().diff(createdAt, 'days')) > 7) 
+            ? moment(createdAt).format('DD/MM/YYYY')
+            : (createdAt != '' && moment(createdAt).format('dddd'))
+            }
+            {time !='' && moment(time).format("hh:mm A")}
+            </Text>
         </View>
     )
 }

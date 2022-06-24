@@ -31,6 +31,7 @@
 */
 
 import { StyleSheet } from 'react-native';
+import fontFamily from '../../utility/Font-Declarations';
 
 const chatStyles = StyleSheet.create({
     chatMainContainer: {
@@ -43,6 +44,39 @@ const chatStyles = StyleSheet.create({
         width: '100%',
         flex:1,
     },
+
+    noChatAssignedMainContainer: {
+        flexDirection: 'column', 
+        justifyContent: 'space-between',
+        
+    },
+    noChatAssignedSvgView: {
+        marginTop: '20%',
+        alignItems: 'center'
+    },
+    noChatAssignedTextView: {
+        alignItems: 'center',
+        marginTop: '7%'
+    },
+    noChatAssignedText: {
+        color: '#000',
+        opacity: 1,
+        letterSpacing: 0.18,
+        fontSize: 18,
+        fontFamily: fontFamily.Alte_DIN,
+        fontWeight: 'bold',
+    },
+    noChatAssignedDesc: {
+        color: '#000',
+        opacity: 0.5,
+        letterSpacing: 0.12,
+        fontSize: 12,
+        fontFamily: fontFamily.Poppins,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        width: '70%',
+        marginTop: '2%'
+    }
 });
 
 export default chatStyles;

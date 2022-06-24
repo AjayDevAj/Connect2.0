@@ -150,6 +150,10 @@ const AllChat = ({navigation, route}) => {
           }
           data={chatResponseData.data.result}
           isShowRowThree={true}
+          msgCount={currentTabStatus == 'open' ? chatResponseData.data.openMessageCount 
+          : currentTabStatus == 'closed' ? chatResponseData.data.closedMessageCount 
+          : chatResponseData.data.assignedMessageCount}
+          tabName={currentTabStatus}
         />
       )}
       {showAllUser && (

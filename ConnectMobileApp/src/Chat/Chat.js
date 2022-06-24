@@ -33,7 +33,6 @@ import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
 import Loader from '../utility/Loader';
-import SearchBox from '../Search/SearchBox';
 import {signOut} from '../navigation/Routes'
 import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
@@ -133,7 +132,7 @@ const Chat = ({navigation ,Route}) => {
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-
+  
   return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader
@@ -166,7 +165,8 @@ const Chat = ({navigation ,Route}) => {
       )}
 
       {chatResponseData.data != undefined &&
-        chatResponseData.data.otherMessageCount != undefined && (
+        chatResponseData.data.otherMessageCount != undefined && 
+          chatResponseData.data.otherMessageCount > 0 && (
           <HeaderNotification
             left="people"
             message={`${
@@ -185,6 +185,10 @@ const Chat = ({navigation ,Route}) => {
             navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
           }
           data={chatResponseData.data.result}
+          msgCount={currentTabStatus == 'open' ? chatResponseData.data.openMessageCount 
+          : currentTabStatus == 'closed' ? chatResponseData.data.closedMessageCount 
+          : chatResponseData.data.assignedMessageCount}
+          tabName={currentTabStatus}
         />
       )}
     </View>

@@ -92,7 +92,7 @@ const cardStyles = StyleSheet.create({
         fontFamily: fontFamily.Poppins,
         marginLeft: 5
     },
-    unreadChatMessage: {
+    unreadCardMessage: {
         color: '#000000',
         marginVertical: 8,
         fontFamily: fontFamily.Poppins,
@@ -124,7 +124,7 @@ const cardStyles = StyleSheet.create({
         marginHorizontal: '3%',
         paddingRight: 3,
     },
-    chatMessage: {
+    cardMessage: {
         color: '#000000',
         marginVertical: 8,
         width: '66%',
@@ -133,6 +133,7 @@ const cardStyles = StyleSheet.create({
         letterSpacing: 0,
         fontFamily: fontFamily.Poppins,
         fontSize: 14,
+        marginLeft: 5,
     },
     cardTimeContainer: {
         flexDirection:'row',

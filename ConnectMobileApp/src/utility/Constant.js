@@ -76,6 +76,10 @@ const CONSTANT = {
     Get_Review_List_Error: 'Get_Review_List_Error',
     Get_Review_List_SUCCESS: 'Get_Review_List_SUCCESS',
 
+    CUSTOMER_DATA: 'CUSTOMER_DATA',
+    CUSTOMER_DATA_ERROR: 'CUSTOMER_DATA_ERROR',
+    CUSTOMER_DATA_SUCCESS: 'CUSTOMER_DATA_SUCCESS',
+
 
 }
 

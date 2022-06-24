@@ -43,7 +43,7 @@ import AcceptRejectChatDataReducer from "./AcceptRejectChatReducer";
 import Send_Message_Reducer from "./Send_Message_Reducer";
 import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
-
+import CustomerReducer from "./CustomerReducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -74,6 +74,7 @@ const rootReducers = combineReducers({
     Send_Message_ResponceData:Send_Message_Reducer,
     OverAllReducer_ResponceData:OverAllReducer,
     GetReviewListData:GetReviewListReducer,
+    CustomerResponseData: CustomerReducer,
 })
 
 export default rootReducers;
