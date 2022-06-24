@@ -38,7 +38,7 @@ import Drawer from '../navigation/Drawer';
 import Filter from '../containers/dashboard/Filter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
-
+import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 
 const Chat = ({navigation ,Route}) => {
   
@@ -50,9 +50,9 @@ const Chat = ({navigation ,Route}) => {
 
   const menuHandler = () => {
     // console.log('Menu Handler');
-     alert('Menu Handler');
+    //  alert('Menu Handler');
 
-    //navigation.openDrawer()
+    // navigation.openDrawer()
   };
 
   const searchHandler = () => {
@@ -62,7 +62,7 @@ const Chat = ({navigation ,Route}) => {
   const filterHandler = () => {
     setIsFilterApplied(!isFilterApplied);
     //alert('Filter Handler');
-    navigation.navigate(navigationString.Filter)
+    navigation.navigate(navigationString.Chat_Filter)
   };
 
   const dispatch = useDispatch();

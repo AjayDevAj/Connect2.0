@@ -70,6 +70,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
 import Customer from '../Customer/Customer';
 import uWebSockets from '../component/uWebSockets'
+import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+import Review from '../containers/Review/Review'
+
 // import {useDispatch, useSelector} from 'react-redux';
 
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
@@ -111,6 +114,7 @@ const Tab = createBottomTabNavigator();
 
 export default function RouteTabBar() {
   return (
+    <>
       <Tab.Navigator>
         <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
           tabBarIcon: (tabInfo) => {
@@ -147,7 +151,8 @@ export default function RouteTabBar() {
             );
           },
         }} />
-        <Tab.Screen name={navigationString.Reviews} component={ReviewsScreen} options={{
+        <Tab.Screen name={navigationString.Reviews} component={Review} options={{
+          headerShown: false,
           tabBarIcon: (tabInfo) => {
             return (
               <Icon
@@ -159,5 +164,7 @@ export default function RouteTabBar() {
           },
         }} />
       </Tab.Navigator>
+      <Incoming_Chat />
+      </>
   );
 }

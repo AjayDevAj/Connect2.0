@@ -40,16 +40,16 @@ import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
 import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
 import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
 import Message from '../containers/Message/Message';
 import Filter from '../containers/dashboard/Filter';
-
+import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import {CommonActions} from '@react-navigation/native';
 import Drawer from './Drawer';
+
 
 /*
  **
@@ -186,8 +186,15 @@ const Routes = () => {
               component={Drawer}
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+              name={navigationString.Chat_Filter}
+              component={Chat_Filter}
+              options={{ headerShown: false }}
+            />
+
+
           </Stack.Navigator>
-          <Incoming_Chat />
         </NavigationContainer>
       )}
     </>
