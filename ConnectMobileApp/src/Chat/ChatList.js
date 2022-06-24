@@ -31,6 +31,8 @@ import Card from '../Card/Card';
 import CardRowOne from '../Card/CardRowOne';
 import CardRowTwo from '../Card/CardRowTwo';
 import CardRowThree from '../Card/CardRowThree';
+import {dateToFromNowDaily} from '../utility/CommonFunc'
+
     
 const ChatList = ({data,onPress_Chat,isShowRowThree=false }) => {
     return (
