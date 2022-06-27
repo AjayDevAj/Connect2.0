@@ -1,0 +1,9 @@
+
+const CONSTANT = {
+    LOGIN_DATA: 'LOGIN_DATA',
+    DATA_ERROR: 'DATA_ERROR',
+    DATA_SUCCESS: 'DATA_SUCCESS',
+
+}
+
+export { CONSTANT }

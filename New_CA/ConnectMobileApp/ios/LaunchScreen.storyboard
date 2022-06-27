@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController storyboardIdentifier="myVCID" id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashCenter" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSd-s4-88b">
+                                <rect key="frame" x="171.66666666666666" y="259" width="71" height="32"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="Splashlink" translatesAutoresizingMaskIntoConstraints="NO" id="Y9j-JC-oUi">
+                                <rect key="frame" x="2" y="379" width="449" height="521"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SingleInterface" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2b0-9f-bHM">
+                                <rect key="frame" x="72" y="301" width="270" height="28"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Union" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPR-dc-iZR">
+                                <rect key="frame" x="72" y="343" width="270" height="28"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EPR-dc-iZR" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="72" id="0Qb-oA-IYu"/>
+                            <constraint firstItem="2b0-9f-bHM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="G6H-HB-evC"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="PSd-s4-88b" secondAttribute="trailing" constant="171.5" id="Gwg-P8-rpi"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="EPR-dc-iZR" secondAttribute="trailing" constant="72" id="NsG-a0-tDl"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="2b0-9f-bHM" secondAttribute="trailing" constant="72" id="T01-fF-hCT"/>
+                            <constraint firstItem="Y9j-JC-oUi" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="2" id="V7G-5K-SlX"/>
+                            <constraint firstItem="2b0-9f-bHM" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="72" id="VIl-Hv-efV"/>
+                            <constraint firstItem="PSd-s4-88b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="W0L-OZ-qiZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Y9j-JC-oUi" secondAttribute="trailing" constant="-37" id="XTA-1k-ylc"/>
+                            <constraint firstItem="EPR-dc-iZR" firstAttribute="top" secondItem="2b0-9f-bHM" secondAttribute="bottom" constant="14" id="dUR-zT-jy2"/>
+                            <constraint firstItem="Y9j-JC-oUi" firstAttribute="top" secondItem="EPR-dc-iZR" secondAttribute="bottom" constant="8" id="gPe-AU-tXW"/>
+                            <constraint firstItem="PSd-s4-88b" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="171.5" id="mfA-Zv-sCE"/>
+                            <constraint firstItem="EPR-dc-iZR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nNo-CV-zxH"/>
+                            <constraint firstItem="2b0-9f-bHM" firstAttribute="top" secondItem="PSd-s4-88b" secondAttribute="bottom" constant="10" id="o2L-23-ugD"/>
+                            <constraint firstAttribute="bottom" secondItem="Y9j-JC-oUi" secondAttribute="bottom" constant="-4" id="pWm-BN-tos"/>
+                            <constraint firstItem="PSd-s4-88b" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="215" id="r9f-4Z-rCH"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50.724637681159422" y="374.18478260869568"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SingleInterface" width="170.66667175292969" height="27.333333969116211"/>
+        <image name="SplashCenter" width="32" height="32"/>
+        <image name="Splashlink" width="322" height="322"/>
+        <image name="Union" width="172" height="27.333333969116211"/>
+    </resources>
+</document>
