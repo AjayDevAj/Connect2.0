@@ -71,6 +71,8 @@ import Customer from '../Customer/Customer';
 import uWebSockets from '../component/uWebSockets'
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
+// import ChatSack from './ChatStack'
+import ChatStack from '../navigation/ChatStack';
 
 // import {useDispatch, useSelector} from 'react-redux';
 
@@ -111,7 +113,7 @@ export default function RouteTabBar() {
             );
           },
         }} />
-        <Tab.Screen name={navigationString.Chat} component={Chat} options={{
+        <Tab.Screen name={navigationString.Chat} component={ChatStack} options={{
           headerShown: false, 
           tabBarBadge: 5,
           tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},

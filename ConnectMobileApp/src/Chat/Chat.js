@@ -50,9 +50,9 @@ const Chat = ({navigation ,Route}) => {
 
   const menuHandler = () => {
     // console.log('Menu Handler');
-    //  alert('Menu Handler');
+     // alert('Menu Handler');
 
-    // navigation.openDrawer()
+     navigation.openDrawer()
   };
 
   const searchHandler = () => {

@@ -38,7 +38,7 @@ import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
-import RouteTabBar from '../navigation/RouteTabBar';
+// import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -48,7 +48,13 @@ import Message from '../containers/Message/Message';
 import Filter from '../containers/dashboard/Filter';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import {CommonActions} from '@react-navigation/native';
-import Drawer from './Drawer';
+// import Drawer from './Drawer';
+import CustomDrawer from '../component/CustomDrawer';
+// import RouteTabBar from './RouteTabBar';
+import RouteTabBar from "../navigation/RouteTabBar";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+
 
 
 /*
@@ -87,7 +93,7 @@ const OtpScreen = () => {
 };
 
 const Stack = createNativeStackNavigator();
-// const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 
 /**
  * Routes matain the navigation stacks
@@ -97,7 +103,7 @@ const Routes = () => {
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-    getUserState();
+    // getUserState();
   });
 
   const getUserState = async () => {
@@ -113,7 +119,7 @@ const Routes = () => {
         className = navigationString.RouteTabBar;
       }
       setinitialState(className);
-      setStatusKeyLoaded(true);
+      // setStatusKeyLoaded(true);
     } catch (error) {
       console.error(error);
     }
@@ -122,9 +128,20 @@ const Routes = () => {
 
   return (
     <>
-      {statusKeyLoaded && (
+      {/* {statusKeyLoaded && ( */}
+
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={initialState}>
+
+        <Drawer.Navigator 
+          drawerContent={(props) => <CustomDrawer {...props} />}
+          screenOptions={{ headerShown: false }}>
+          <Drawer.Screen component={RouteTabBar} name={navigationString.Chat} />
+          <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+        </Drawer.Navigator>
+
+
+
+          {/* <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
@@ -192,11 +209,10 @@ const Routes = () => {
               component={Chat_Filter}
               options={{ headerShown: false }}
             />
+          </Stack.Navigator> */}
 
-
-          </Stack.Navigator>
         </NavigationContainer>
-      )}
+      {/* )} */}
     </>
   );
 };
