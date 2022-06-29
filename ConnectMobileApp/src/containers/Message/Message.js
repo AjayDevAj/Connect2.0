@@ -334,13 +334,10 @@ const Message = ({navigation, route}) => {
           renderTime={renderTime}
         />
             // {/* </ImageBackground> */}
-            
         )}
       </View>
       </>
       )}
-      
-      
     </View>
   );
 };
