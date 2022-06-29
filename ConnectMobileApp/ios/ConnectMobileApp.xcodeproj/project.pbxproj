@@ -17,7 +17,6 @@
 		18368CB483D743A2BFACBD5A /* Barlow-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD4F467FE1674E70930EFF62 /* Barlow-ExtraLightItalic.ttf */; };
 		1939E0436E2B4C13B0A88380 /* Barlow-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3578EA9F31CC4F339DE5719D /* Barlow-ExtraBold.ttf */; };
 		1E177C482AB9479A8E9A912D /* Barlow-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 557953C3810E4BE5BEBAA0D2 /* Barlow-Light.ttf */; };
-		237FC4D32702648CA64D2555 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 683601009A88138302D72CDF /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */; };
 		25A4E82B12364A0F8423D627 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5992747250FB449AB5B23E39 /* Barlow-Regular.ttf */; };
 		2AF9C8A36FE2433FA628BC7D /* Barlow-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DC912894DEE43A29A367CF8 /* Barlow-BoldItalic.ttf */; };
 		2B55E1BDB1AC41FFAF4E0AC0 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 918357CD54B34FB182E9034F /* Poppins-LightItalic.ttf */; };
@@ -30,6 +29,7 @@
 		47D8CDAD051D4C6C8EC21754 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6275E436B8324D949B1163A1 /* Poppins-Thin.ttf */; };
 		4E583D79032E42409F3B2EF1 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C93D91D23A249D5B944959E /* Poppins-Italic.ttf */; };
 		5CD27569D99B4A938EE73D58 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A30C8E118DE4AB8AC00E0CB /* Poppins-Regular.ttf */; };
+		63AECF46969E656BB40A142A /* libPods-ConnectMobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB4EB6DED5AB56DE89B4776 /* libPods-ConnectMobileApp.a */; };
 		674A278B05B5474C9009AA20 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92CB2F78A8454557998B8F45 /* Barlow-SemiBold.ttf */; };
 		7E090805456D4E4BB43DC2D5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C60162DF207475BBB0AF2AA /* Poppins-SemiBold.ttf */; };
 		800780652B7B4B05B09B2FB2 /* Barlow-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F70B798A82B4F7B94AD131C /* Barlow-Black.ttf */; };
@@ -42,12 +42,12 @@
 		BE39784C77FD44F99BB0EB75 /* Barlow-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFA0A48788488A96EB2076 /* Barlow-Thin.ttf */; };
 		C4CDBED4610F4CE996A19315 /* Barlow-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40E37DA76C254631A63E4D88 /* Barlow-SemiBoldItalic.ttf */; };
 		C5E27E3C2C6749599EC5371A /* Barlow-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A1AD9490419430B99760C50 /* Barlow-ExtraBoldItalic.ttf */; };
-		D53799A06BDCAD419701F629 /* libPods-ConnectMobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DBD609C488249935DD2BFE /* libPods-ConnectMobileApp.a */; };
 		D944DB0AE9DB4A36A224ACA5 /* Barlow-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BE4A63D80E542149C6C7B78 /* Barlow-MediumItalic.ttf */; };
 		E0B0BBB6BF9E4679966A4CCD /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D725FC895E774DD68F6CDE7D /* Poppins-MediumItalic.ttf */; };
 		E48FA00D83F6496F910BF7D4 /* Barlow-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D9AA430BEC46E69DD1A4B2 /* Barlow-ThinItalic.ttf */; };
 		E7F71CFC7A4248F28C650CBA /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 871A5E1604D24309AFB76501 /* Poppins-BoldItalic.ttf */; };
 		EA3465D24C2F4EF5A9169216 /* Barlow-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48DB686202C54950B53BF884 /* Barlow-Bold.ttf */; };
+		EEBC12DE909380BE9D05F1E0 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 373F08A08C0F21BADE02FE69 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */; };
 		F0271B32B2FC46609D9ACBB6 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB66BBC1C5BE41858291E7C3 /* Poppins-Bold.ttf */; };
 		F790256367A543B0809E36A3 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9278BD3DFD8645DB928673F0 /* Poppins-ThinItalic.ttf */; };
 		FE06E547BA3742F18D73B0AF /* Barlow-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25F35F0301E84D78B9CFE3E6 /* Barlow-BlackItalic.ttf */; };
@@ -71,7 +71,6 @@
 		06B50A112BFD4DF7A4DC8362 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		0C7243DA102C46D29516DD17 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		0DD0EFFEBE0A420A9BB3FDA5 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
-		0F0BF49084E97A3F9399FAEE /* Pods-ConnectMobileApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp.release.xcconfig"; sourceTree = "<group>"; };
 		120E998C2859F19D00F791DD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1298667E2858DDF800A03171 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ConnectMobileApp/Info.plist; sourceTree = "<group>"; };
 		132EEA622A754A49829F333C /* DINPro-Medium_13936.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Medium_13936.ttf"; path = "../assets/fonts/DINPro-Medium_13936.ttf"; sourceTree = "<group>"; };
@@ -80,21 +79,20 @@
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ConnectMobileApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ConnectMobileApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ConnectMobileApp/main.m; sourceTree = "<group>"; };
+		1AB4EB6DED5AB56DE89B4776 /* libPods-ConnectMobileApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConnectMobileApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4C1DDB7AB54351852281DA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		244927731D43D0CEC72665BF /* Pods-ConnectMobileAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ConnectMobileAppTests/Pods-ConnectMobileAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		25F35F0301E84D78B9CFE3E6 /* Barlow-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-BlackItalic.ttf"; path = "../assets/fonts/Barlow-BlackItalic.ttf"; sourceTree = "<group>"; };
 		270FC4A025F540ACA61BC81A /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		2BE4A63D80E542149C6C7B78 /* Barlow-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-MediumItalic.ttf"; path = "../assets/fonts/Barlow-MediumItalic.ttf"; sourceTree = "<group>"; };
 		3000B575C097459DA5669BA0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3578EA9F31CC4F339DE5719D /* Barlow-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-ExtraBold.ttf"; path = "../assets/fonts/Barlow-ExtraBold.ttf"; sourceTree = "<group>"; };
+		373F08A08C0F21BADE02FE69 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConnectMobileApp-ConnectMobileAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDFA90CC88D417C9659C8F1 /* Barlow-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Italic.ttf"; path = "../assets/fonts/Barlow-Italic.ttf"; sourceTree = "<group>"; };
 		3E1D959A6CAB470DBC2A0F46 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		40E37DA76C254631A63E4D88 /* Barlow-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-SemiBoldItalic.ttf"; path = "../assets/fonts/Barlow-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		426A5D403CE3C833E31F13BC /* Pods-ConnectMobileAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileAppTests.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileAppTests/Pods-ConnectMobileAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		48DB686202C54950B53BF884 /* Barlow-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Bold.ttf"; path = "../assets/fonts/Barlow-Bold.ttf"; sourceTree = "<group>"; };
 		4E925C609DD54D628014580D /* Barlow-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Medium.ttf"; path = "../assets/fonts/Barlow-Medium.ttf"; sourceTree = "<group>"; };
 		557953C3810E4BE5BEBAA0D2 /* Barlow-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Light.ttf"; path = "../assets/fonts/Barlow-Light.ttf"; sourceTree = "<group>"; };
-		56BB9E852A6E56D8027E2154 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		583E817CFBDE4337B42A7263 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5992747250FB449AB5B23E39 /* Barlow-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Regular.ttf"; path = "../assets/fonts/Barlow-Regular.ttf"; sourceTree = "<group>"; };
 		5C93D91D23A249D5B944959E /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 		6275E436B8324D949B1163A1 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		66D4FD94A07F4AFF8AC91213 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		66E2C681D69F45D28BFF3E32 /* DINRegularAlternate.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = DINRegularAlternate.ttf; path = ../assets/fonts/DINRegularAlternate.ttf; sourceTree = "<group>"; };
-		683601009A88138302D72CDF /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConnectMobileApp-ConnectMobileAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A30C8E118DE4AB8AC00E0CB /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		6C54C589B84A4CC686BE6A26 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		6DC912894DEE43A29A367CF8 /* Barlow-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-BoldItalic.ttf"; path = "../assets/fonts/Barlow-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -122,8 +119,8 @@
 		9278BD3DFD8645DB928673F0 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		92CB2F78A8454557998B8F45 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-SemiBold.ttf"; path = "../assets/fonts/Barlow-SemiBold.ttf"; sourceTree = "<group>"; };
 		94174946594A400F9DFEE31B /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		98DC74952F27D3F95AF258E1 /* Pods-ConnectMobileApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp.debug.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp.debug.xcconfig"; sourceTree = "<group>"; };
 		993595F2C0454EBAABA6E460 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		9A83F8CCDDD57D5619183699 /* Pods-ConnectMobileApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp.debug.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9A862FBB1ED742119A70F537 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		9BFFA0A48788488A96EB2076 /* Barlow-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-Thin.ttf"; path = "../assets/fonts/Barlow-Thin.ttf"; sourceTree = "<group>"; };
 		9F4905E9484845D38B83353D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -141,11 +138,12 @@
 		CD4F467FE1674E70930EFF62 /* Barlow-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Barlow-ExtraLightItalic.ttf"; path = "../assets/fonts/Barlow-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		D5677C948542422885FD4601 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		D725FC895E774DD68F6CDE7D /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../assets/fonts/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
-		E3D6D86F8951FF10FF2D20DE /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		E6DBD609C488249935DD2BFE /* libPods-ConnectMobileApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConnectMobileApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3F366722BE5E24035B4CA85 /* Pods-ConnectMobileApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED33D51A223E49609BFB067A /* DINMedium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = DINMedium.ttf; path = ../assets/fonts/DINMedium.ttf; sourceTree = "<group>"; };
+		F0CDF888D1B3C2B93FEAC592 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F1749AC081B74EA09778177F /* DINBlackAlternate.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = DINBlackAlternate.ttf; path = ../assets/fonts/DINBlackAlternate.ttf; sourceTree = "<group>"; };
+		F7ED73FFE4F60EDAFEE6B4C4 /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; path = "Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		F831E0FE9FB74BF4B3A8F82F /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				237FC4D32702648CA64D2555 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a in Frameworks */,
+				EEBC12DE909380BE9D05F1E0 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D53799A06BDCAD419701F629 /* libPods-ConnectMobileApp.a in Frameworks */,
+				63AECF46969E656BB40A142A /* libPods-ConnectMobileApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,12 +200,10 @@
 		1F7FE8DD631210E080F18A04 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				98DC74952F27D3F95AF258E1 /* Pods-ConnectMobileApp.debug.xcconfig */,
-				0F0BF49084E97A3F9399FAEE /* Pods-ConnectMobileApp.release.xcconfig */,
-				244927731D43D0CEC72665BF /* Pods-ConnectMobileAppTests.debug.xcconfig */,
-				426A5D403CE3C833E31F13BC /* Pods-ConnectMobileAppTests.release.xcconfig */,
-				56BB9E852A6E56D8027E2154 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */,
-				E3D6D86F8951FF10FF2D20DE /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */,
+				9A83F8CCDDD57D5619183699 /* Pods-ConnectMobileApp.debug.xcconfig */,
+				E3F366722BE5E24035B4CA85 /* Pods-ConnectMobileApp.release.xcconfig */,
+				F0CDF888D1B3C2B93FEAC592 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */,
+				F7ED73FFE4F60EDAFEE6B4C4 /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -216,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E6DBD609C488249935DD2BFE /* libPods-ConnectMobileApp.a */,
-				683601009A88138302D72CDF /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */,
+				1AB4EB6DED5AB56DE89B4776 /* libPods-ConnectMobileApp.a */,
+				373F08A08C0F21BADE02FE69 /* libPods-ConnectMobileApp-ConnectMobileAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -331,12 +327,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ConnectMobileAppTests" */;
 			buildPhases = (
-				227684F167BDBC90A1FDD16A /* [CP] Check Pods Manifest.lock */,
+				96B3BD1329D915696FD53FD2 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				DA8BD768C5D770FDC071ED0C /* [CP] Embed Pods Frameworks */,
-				9F0C7A9244F1AD1E6EEE5664 /* [CP] Copy Pods Resources */,
+				584ED9858A2D6EC011F26B9B /* [CP] Embed Pods Frameworks */,
+				8AC0D3A509DBAE0E2539E7D6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,14 +348,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ConnectMobileApp" */;
 			buildPhases = (
-				9698FB14EDD3F1467B9B0AB4 /* [CP] Check Pods Manifest.lock */,
+				75EA49EC00C18E78B1248C09 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				D099F164C7F55D255D7851C3 /* [CP] Embed Pods Frameworks */,
-				4540C073A7E9EB7F538C4174 /* [CP] Copy Pods Resources */,
+				FA0FC1838795FD949DF7B27E /* [CP] Embed Pods Frameworks */,
+				D748E22C7B59B0329382DBCF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -478,46 +474,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		227684F167BDBC90A1FDD16A /* [CP] Check Pods Manifest.lock */ = {
+		584ED9858A2D6EC011F26B9B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ConnectMobileApp-ConnectMobileAppTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4540C073A7E9EB7F538C4174 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9698FB14EDD3F1467B9B0AB4 /* [CP] Check Pods Manifest.lock */ = {
+		75EA49EC00C18E78B1248C09 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -539,7 +513,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9F0C7A9244F1AD1E6EEE5664 /* [CP] Copy Pods Resources */ = {
+		8AC0D3A509DBAE0E2539E7D6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -556,7 +530,46 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D099F164C7F55D255D7851C3 /* [CP] Embed Pods Frameworks */ = {
+		96B3BD1329D915696FD53FD2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ConnectMobileApp-ConnectMobileAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D748E22C7B59B0329382DBCF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA0FC1838795FD949DF7B27E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -571,23 +584,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp/Pods-ConnectMobileApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA8BD768C5D770FDC071ED0C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ConnectMobileApp-ConnectMobileAppTests/Pods-ConnectMobileApp-ConnectMobileAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -642,7 +638,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56BB9E852A6E56D8027E2154 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */;
+			baseConfigurationReference = F0CDF888D1B3C2B93FEAC592 /* Pods-ConnectMobileApp-ConnectMobileAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -669,7 +665,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3D6D86F8951FF10FF2D20DE /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */;
+			baseConfigurationReference = F7ED73FFE4F60EDAFEE6B4C4 /* Pods-ConnectMobileApp-ConnectMobileAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -693,7 +689,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98DC74952F27D3F95AF258E1 /* Pods-ConnectMobileApp.debug.xcconfig */;
+			baseConfigurationReference = 9A83F8CCDDD57D5619183699 /* Pods-ConnectMobileApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -723,7 +719,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F0BF49084E97A3F9399FAEE /* Pods-ConnectMobileApp.release.xcconfig */;
+			baseConfigurationReference = E3F366722BE5E24035B4CA85 /* Pods-ConnectMobileApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -737,6 +733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
