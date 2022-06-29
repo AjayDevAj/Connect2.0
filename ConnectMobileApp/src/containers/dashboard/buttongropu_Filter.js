@@ -8,18 +8,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import fontfaimily from '../../utility/Font-Declarations';
-<<<<<<< HEAD
-=======
-// import FilteRrightContainer from '../../component/FilterRightContainer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
->>>>>>> Swipeable-Panel
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {selectedbtnid} from '../../utility/Constant';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadfilterdata} from '../../actions/FilterAction';
+import {loadfilterbtnid} from '../../actions/FilterAction';
 import {useEffect} from 'react';
+import SyncStorage from 'sync-storage';
 
 const DATA = [
   {
@@ -34,22 +29,12 @@ const DATA = [
     id: '3',
     title: 'Date',
   },
+  
   {
     id: '4',
-    title: 'Customer Intent',
-  },
-  {
-    id: '5',
     title: 'Chat Status',
   },
-  {
-    id: '6',
-    title: 'Contact Details',
-  },
-  {
-    id: '7',
-    title: 'Interested In',
-  },
+  
 ];
 
 const Item = ({item, onPress, backgroundColor, textColor}) => (
@@ -59,18 +44,26 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
 );
 
 const Buttongroup = idstate => {
-  const [selectedId, setSelectedId] = useState(null);
+  const [updatesyncdata,setsyncdata]=useState(0)
+  const [selectedId, setSelectedId] = useState('');
 
   // Dispaching selcted btn id to saga store
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadfilterdata(selectedId));
+    dispatch(loadfilterbtnid(selectedId));
   }, []);
+
+
+  //SyncStorage ------ - ->
+   SyncStorage.set(selectedbtnid, selectedId);
+  
 
   const storeData = async value => {
     try {
       await AsyncStorage.setItem(selectedbtnid, selectedId);
+
+
     } catch (e) {
       console.log('Setting Async Data Error', e);
     }
@@ -78,7 +71,7 @@ const Buttongroup = idstate => {
 
   console.log('---------------------------.......', idstate);
 
-  storeData();
+  //storeData();
   //getData();
 
   const renderItem = ({item}) => {
@@ -103,7 +96,7 @@ const Buttongroup = idstate => {
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
-      {console.log('item id ====', selectedId)}
+      {console.log('selected btn id in Buttongroup flat list ====', selectedId)}
     </SafeAreaView>
   );
 };

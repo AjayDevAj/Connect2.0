@@ -62,7 +62,8 @@ const Chat = ({navigation ,Route}) => {
   const filterHandler = () => {
     setIsFilterApplied(!isFilterApplied);
     //alert('Filter Handler');
-    navigation.navigate(navigationString.Chat_Filter)
+    //navigation.navigate(navigationString.Chat_Filter)
+    navigation.navigate(navigationString.Filter)
   };
 
   const dispatch = useDispatch();

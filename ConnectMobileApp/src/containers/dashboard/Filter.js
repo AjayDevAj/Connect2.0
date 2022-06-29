@@ -14,73 +14,74 @@ import styles from '../dashboard/FilterStyle';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import EntryPointFilter from '../../component/EntryPointFilter';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
-<<<<<<< HEAD
 import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
 import DateFilter from '../../component/DateFilter';
-import { selectedbtnid } from '../../utility/Constant';
-import { useSelector } from 'react-redux';
+import {selectedbtnid} from '../../utility/Constant';
+import {useSelector} from 'react-redux';
 import FilterLocationData from '../../component/FilterLocationData';
-
-=======
-// import Filter_Action_Sheet from '../../component/Filter_Action_Sheet';
-
-import FilterRightContainer from '../../component/FilteRrightContainer';
->>>>>>> Swipeable-Panel
+import SyncStorage from 'sync-storage';
+import { result } from 'lodash';
 
 export default Filter = ({navigation, route}) => {
+  const [applyfilter, setApplyFilter] = useState(false);
+  const ButtonidselctorResponce = useSelector(
+    store => store.FilterDataReducer_Responce,
+  );
+  console.log('selctorrrrrrrrr-------->', ButtonidselctorResponce);
 
-  const [applyfilter ,setApplyFilter]=useState(false)
-  const ButtonidselctorResponce = useSelector(store => store.FilterDataReducer_Responce);
-  console.log('selctorrrrrrrrr-------->',ButtonidselctorResponce)
-  
-  
-  const [btnId ,setBtnID] =useState(null)
-   
-
-
+  const [btnId, setBtnID] = useState(0);
 
   useEffect(() => {
-    //getData()
+   // getData();
     //navigation.goBack()
     //removeValue()
 
-    setBtnID(ButtonidselctorResponce)
-  },[]);
+    //setBtnID(ButtonidselctorResponce)
+    
+    const result = SyncStorage.get(selectedbtnid);
+    setBtnID(btnId + result)
+  console.log('Sync storage result-------------------------------------',result);
+  }, []);
 
-  // const getData = async () => {
-  //   try {
-  //      const value = await AsyncStorage.getItem(selectedbtnid)
-  //     if(value !== null) {
-  //       // value previously stored
-        
-  //       console.log('storage value from constant========>', value)
-  //       console.log('storage value from State========>',btnId)
-  //     }
-  //   } catch(e) {
-  //     // error reading value
-  //     console.log('error--------',e)
-  //   }
-  // }
-
-  // removeValue = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem(selectedbtnid)
-  //   } catch(e) {
-  //     // remove error
-
-  //     console.log('Remove Errror ++++++++++++++++++++',e)
-  //   }
   
-  //   console.log('Done.')
-  // }
- 
+
+  const getData = async () => {
+    // try {
+    //   const value = await AsyncStorage.getItem(selectedbtnid);
+    //   if (value !== null) {
+    //     // value previously stored
+    //     setBtnID(value);
+    //     console.log('storage value from constant========>', value);
+    //     console.log('storage value from State========>', btnId);
+    //   }
+    // } catch (e) {
+    //   // error reading value
+    //   console.log('error--------', e);
+    // }
+
+
+  };
+
+  removeValue = async () => {
+    try {
+      await AsyncStorage.removeItem(selectedbtnid)
+    } catch(e) {
+      // remove error
+
+      console.log('Remove Errror ++++++++++++++++++++',e)
+    }
+
+    console.log('Done.')
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       {/* Top header buttons */}
 
       <View style={styles.header}>
-        <TouchableOpacity style={{justifyContent:'center'}} onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={{justifyContent: 'center'}}
+          onPress={() => navigation.goBack()}>
           <Icon name="arrow-back" size={30} color={'#5F6368'} />
         </TouchableOpacity>
 
@@ -121,19 +122,27 @@ export default Filter = ({navigation, route}) => {
         {/* Left Conatiner holds the Filters buttons   to   filter out the required data */}
 
         <View style={styles.leftContainer}>
-          <Buttongroup idstate={btnId}/>
+          <Buttongroup idstate={result} />
         </View>
         {/* Right Conatiner  */}
         <View style={styles.rightContainer}>
-<>
-{
-  // btnId  === 1 && btnId !='' ?  <FilterRightContainer /> : <DateFilter/>
+          <>
+            {/* {
+              btnId > 0 && btnId == 1 ? (
+                <FilterLocationData appyFilter={applyfilter} />
+              ) : (
+                <EntryPointFilter />
+              )
 
-}
-</>
+              // if ()
+              // {
+              //   <FilterLocationData appyFilter={applyfilter}/>
+              // }
+            } */}
+          </>
 
           {/* <Text style={{fontFamily:'Poppins'}}>{}</Text> */}
-         
+
           {/* <EntryPointFilter/> */}
           <DateFilter/>
           {/* <FilterLocationData appyFilter={applyfilter}/> */}
@@ -148,8 +157,6 @@ export default Filter = ({navigation, route}) => {
             }
           }}>
           <Text style={styles.clearAllBtnText}>CLEAR ALL</Text>
-
-          
         </TouchableOpacity>
 
         {/* Footer Pipe Symbol */}
@@ -159,7 +166,7 @@ export default Filter = ({navigation, route}) => {
           style={styles.applyFilterBTN}
           onPress={() => {
             {
-              setApplyFilter(true)
+              setApplyFilter(true);
             }
           }}>
           <Text style={styles.applyFilterBtnText}>APPLY FILTERS</Text>

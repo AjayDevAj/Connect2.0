@@ -22,7 +22,7 @@
 */
 
 export default {
-    Poppins: "Poppins",
+    Poppins: 'Poppins',
     Alte_DIN:"AlteDIN1451Mittelschriftgepraegt",
     PoppinsSemiBoald: "Poppins-SemiBold",
     PoppinsBoald: "Poppins-Bold",

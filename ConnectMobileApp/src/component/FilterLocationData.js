@@ -112,7 +112,7 @@ export default function FilterLocationData(appyFilter, applyfilter) {
             colorScheme={'info'}
             onChange={() => {
               handleChange(Locality);
-             
+              setisChecked(true)
               console.log('change handler---------inonChange()---->', Locality);
             }}
           />

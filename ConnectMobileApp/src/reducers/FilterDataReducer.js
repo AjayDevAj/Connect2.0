@@ -9,6 +9,10 @@ const FilterDataReducer = (state = '', action) => {
         return action.payload;
     }
 
+    if(action.type == CONSTANT.FILTER_DATA_BTN_ID_SUCCESS) {
+       
+        return action.payload;
+    }
     if (action.type == CONSTANT.FILTER_ERROR) {
         return action.payload;
     }
@@ -16,3 +20,5 @@ const FilterDataReducer = (state = '', action) => {
 
 }
 export default FilterDataReducer;
+
+

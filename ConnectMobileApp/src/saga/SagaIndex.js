@@ -1,36 +1,35 @@
 /*
-**
-*
-** ========================================================
-**
-** AppName: Connect2.0
-** Version: X.0.0
-** FileName: SagaIndex.js
-** UsedFor: Saga Index at connect 2.0 app
-** Author:
-**
-** ========================================================
-*
-**
-**
-*
-** ==========================================================
-** Saga Index component
-** ==========================================================
-*
-**
-*/
-
+ **
+ *
+ ** ========================================================
+ **
+ ** AppName: Connect2.0
+ ** Version: X.0.0
+ ** FileName: SagaIndex.js
+ ** UsedFor: Saga Index at connect 2.0 app
+ ** Author:
+ **
+ ** ========================================================
+ *
+ **
+ **
+ *
+ ** ==========================================================
+ ** Saga Index component
+ ** ==========================================================
+ *
+ **
+ */
 
 /*
-**
-*
-** Common react packages import
-*
-** 
-*/
+ **
+ *
+ ** Common react packages import
+ *
+ **
+ */
 
-import { all } from 'redux-saga/effects';
+import {all} from 'redux-saga/effects';
 import LoginDataWatcherSaga from './LoginSaga';
 import OtpDataWatcherSaga from './OtpScreenSaga';
 import ResendOtpDataWatcherSaga from './ResendOTP';
@@ -41,35 +40,32 @@ import AllChat_ConversationDataWatcherSaga from './AllChat_Conversation_Saga';
 import isImportantDataWatcherSaga from './IsImportantSaga';
 import AcceptRejectChatDataWatcherSaga from './AcceptRejectChatSaga';
 import Send_message_WatcherSaga from './Send_Message_Saga';
-<<<<<<< HEAD
+
 import FilterDataWatcherSaga from './FilterDataSaga';
 
-=======
 import OverAllWatcherSaga from './OverAllSaga';
 import ReviewListWatcherSaga from './GetReviewListSaga';
 import CustomerDataWatcherSaga from './CustomerSaga';
->>>>>>> Swipeable-Panel
 
 /***************** Root saga method ********************/
 
 export default function* rootSaga() {
-    yield all([
-        LoginDataWatcherSaga(),
-        OtpDataWatcherSaga(),
-        ResendOtpDataWatcherSaga(),
-        ChatDataWatcherSaga(),
-        StoreLocationDataWatcherSaga(),
-        Unassigned_Chat_Data_Saga(),
-        isImportantDataWatcherSaga(),
-        AllChat_ConversationDataWatcherSaga(),
-        AcceptRejectChatDataWatcherSaga(),
-        Send_message_WatcherSaga(),
-<<<<<<< HEAD
-        FilterDataWatcherSaga()
-=======
-        OverAllWatcherSaga(),
-        ReviewListWatcherSaga(),
-        CustomerDataWatcherSaga(),
->>>>>>> Swipeable-Panel
-    ]);
+  yield all([
+    LoginDataWatcherSaga(),
+    OtpDataWatcherSaga(),
+    ResendOtpDataWatcherSaga(),
+    ChatDataWatcherSaga(),
+    StoreLocationDataWatcherSaga(),
+    Unassigned_Chat_Data_Saga(),
+    isImportantDataWatcherSaga(),
+    AllChat_ConversationDataWatcherSaga(),
+    AcceptRejectChatDataWatcherSaga(),
+    Send_message_WatcherSaga(),
+
+    FilterDataWatcherSaga(),
+
+    OverAllWatcherSaga(),
+    ReviewListWatcherSaga(),
+    CustomerDataWatcherSaga(),
+  ]);
 }

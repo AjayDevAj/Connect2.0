@@ -17,7 +17,20 @@ function* handleFilterDataResponse(action) {
 }
 
 
+function* handleFilterBtnIdDataResponse(action) {
+    try {
+        const data = yield call(action.selectedId)
+        yield put(getResponse(data))
+    }
+    catch(errors) {
+        yield put(getError(errors.toString()))
+    }
+}
+
 export default function* FilterDataWatcherSaga() {
     yield takeEvery(CONSTANT.FILTER_DATA, handleFilterDataResponse)
+
+    yield takeEvery(CONSTANT.FILTER_DATA_BTN_ID, handleFilterBtnIdDataResponse)
+
     console.log('Filter watcher',getResponse)
 }

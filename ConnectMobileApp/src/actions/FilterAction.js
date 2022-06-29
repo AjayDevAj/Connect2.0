@@ -1,11 +1,17 @@
 
-import { CONSTANT } from "../utility/Constant";
+import { CONSTANT,  } from "../utility/Constant";
 
 const loadfilterdata = (checkboxdata) => ({
     
     type: CONSTANT.FILTER_DATA,checkboxdata
    
    
+})
+
+const loadfilterbtnid =(selectedId)=> ({
+   
+    type:CONSTANT.FILTER_DATA_BTN_ID,selectedId
+    
 })
 
 const getError = payload => ({
@@ -22,4 +28,5 @@ export {
     loadfilterdata,
     getError,
     getResponse,
+    loadfilterbtnid
 }
