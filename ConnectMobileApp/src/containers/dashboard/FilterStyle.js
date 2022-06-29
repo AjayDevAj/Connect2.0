@@ -111,8 +111,8 @@ export default StyleSheet.create({
     width: 360,
     backgroundColor: 'rgba(255, 255, 255, 1)',
     opacity: 40,
-    alignItems:'flex-start',
-    flexDirection:'row',
+    //alignItems:'flex-start',
+    //flexDirection:'row',
     padding:15
   },
   leftContainer: {

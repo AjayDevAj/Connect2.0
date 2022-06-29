@@ -8,10 +8,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import fontfaimily from '../../utility/Font-Declarations';
-// import FilteRrightContainer from '../../component/FilterRightContainer';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import {selectedbtnid} from '../../utility/Constant';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadfilterbtnid} from '../../actions/FilterAction';
+import {useEffect} from 'react';
+import SyncStorage from 'sync-storage';
 
 const DATA = [
   {
@@ -26,61 +29,50 @@ const DATA = [
     id: '3',
     title: 'Date',
   },
+  
   {
     id: '4',
-    title: 'Customer Intent',
-  },
-  {
-    id: '5',
     title: 'Chat Status',
   },
-  {
-    id: '6',
-    title: 'Contact Details',
-  },
-  {
-    id: '7',
-    title: 'Interested In',
-  },
+  
 ];
 
-
-
-
-const Item = ({item, onPress, backgroundColor, textColor,}) => (
+const Item = ({item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <Text style={[styles.title, textColor]}>{item.title}</Text>
   </TouchableOpacity>
 );
 
- const Buttongroup = (idselector) => {
-const [selectedId, setSelectedId] = useState(null);
+const Buttongroup = idstate => {
+  const [updatesyncdata,setsyncdata]=useState(0)
+  const [selectedId, setSelectedId] = useState('');
+
+  // Dispaching selcted btn id to saga store
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadfilterbtnid(selectedId));
+  }, []);
 
 
-const storeData = async (value) => {
-  try {
-    await AsyncStorage.setItem('@storage_Key', selectedId)
-  } catch (e) {
-    // saving error
-  }
-}
+  //SyncStorage ------ - ->
+   SyncStorage.set(selectedbtnid, selectedId);
+  
+
+  const storeData = async value => {
+    try {
+      await AsyncStorage.setItem(selectedbtnid, selectedId);
 
 
-const getData = async () => {
-  try {
-     value = await AsyncStorage.getItem('@storage_Key')
-    if(value !== null) {
-      // value previously stored
-      console.log('storage value========>', value)
+    } catch (e) {
+      console.log('Setting Async Data Error', e);
     }
-  } catch(e) {
-    // error reading value
-  }
-}
+  };
 
- 
-storeData();
-//getData();
+  console.log('---------------------------.......', idstate);
+
+  //storeData();
+  //getData();
 
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? '#FFFFFF' : 'transparent';
@@ -92,7 +84,6 @@ storeData();
         onPress={() => setSelectedId(item.id)}
         backgroundColor={{backgroundColor}}
         textColor={{color}}
-       
       />
     );
   };
@@ -105,7 +96,7 @@ storeData();
         keyExtractor={item => item.id}
         extraData={selectedId}
       />
-      {console.log('item id ====' ,selectedId)}
+      {console.log('selected btn id in Buttongroup flat list ====', selectedId)}
     </SafeAreaView>
   );
 };
