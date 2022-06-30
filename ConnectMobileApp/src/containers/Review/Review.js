@@ -57,13 +57,14 @@ const Review = ({navigation ,Route}) => {
   },[isFocused]);
 
   useEffect(() => {
-      if (OverAllReducer_ResponceData.data != undefined){
-            setReload(true)
-      }
+     
   },[OverAllReducer_ResponceData]);
 
   useEffect(() => {
-   console.log('dispatch(loadReviewListData(77404,10004)',GetReviewListData)
+  //  console.log('dispatch(loadReviewListData(77404,10004)',GetReviewListData)
+  if (GetReviewListData.data != undefined){
+    setReload(true)
+}
 },[GetReviewListData]);
 
   return (
