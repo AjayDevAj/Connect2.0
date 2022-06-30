@@ -50,8 +50,8 @@ import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import {CommonActions} from '@react-navigation/native';
 // import Drawer from './Drawer';
 import CustomDrawer from '../component/CustomDrawer';
-// import RouteTabBar from './RouteTabBar';
-import RouteTabBar from "../navigation/RouteTabBar";
+import RouteTabBar from './RouteTabBar';
+// import RouteTabBar from "../navigation/RouteTabBar";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 
