@@ -31,9 +31,14 @@
 */
 
 import { API_URL_STAGING } from '../utility/Config_File'
+import NavigationString from '../utility/NavigationString';
+import {useNavigation} from '@react-navigation/native';
+
+
 const getLogin = async (mobileNumber) => {
 
     /****** constant defined to get login from an api ****/
+    const navigation = useNavigation();
 
     const bodyData = new FormData();
     bodyData.append('phonenumber', mobileNumber)
@@ -48,6 +53,12 @@ const getLogin = async (mobileNumber) => {
         if (response.status > 400) {
             throw new Error(data.errors)
         }
+
+        if (response.status == 401) { 
+            navigation.navigate(NavigationString.LOGIN)
+            
+        }
+
         return data;
 
     } catch (err) {

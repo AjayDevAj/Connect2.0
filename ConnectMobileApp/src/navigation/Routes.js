@@ -133,7 +133,7 @@ const Routes = () => {
 
         <NavigationContainer>
 
-        <Drawer.Navigator 
+        <Drawer.Navigator initialRouteName={initialState}
           drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{ headerShown: false }}>
           <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />

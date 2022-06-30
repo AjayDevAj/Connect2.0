@@ -2,10 +2,13 @@
 import { API_URL_STAGING } from '../utility/Config_File'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import NavigationString from '../utility/NavigationString';
+import {useNavigation} from '@react-navigation/native';
 
 const GetReviewListApi = async (master_outlet_id,enterprise_client_store_id) => {
 
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+    const navigation = useNavigation();
 
     var query = `?master_outlet_id=${master_outlet_id}&enterprise_client_store_id=${enterprise_client_store_id}`
 
@@ -30,6 +33,10 @@ const GetReviewListApi = async (master_outlet_id,enterprise_client_store_id) => 
    
     if (response.status > 400) {
         throw new Error(data.errors)
+    }
+    if (response.status == 401) { 
+        navigation.navigate(NavigationString.LOGIN)
+        
     }
     return data;
 }

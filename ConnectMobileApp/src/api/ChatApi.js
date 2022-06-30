@@ -32,6 +32,8 @@
 import {API_URL_STAGING } from '../utility/Config_File'
 import {getOtpResponse} from '../utility/StorageClass'
 import {otpResponse_Storage_Key} from '../utility/Constant'
+import NavigationString from '../utility/NavigationString';
+import {useNavigation} from '@react-navigation/native';
 
 
 /*
@@ -48,6 +50,7 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 
 const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id=null, search_text = '') => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+    const navigation = useNavigation();
 
     /*
     **
@@ -115,6 +118,8 @@ console.log('user_iduser_id',user_id)
         case 204 :
             throw new Error("NO Data")
             break
+        case 401 :
+            navigation.navigate(NavigationString.LOGIN)
 
         default:break
     }
@@ -122,6 +127,7 @@ console.log('user_iduser_id',user_id)
     //     // console.log('Chat Message Error : '+ data.errors);
     //     throw new Error(data.errors)
     // }
+
 
     return data;
 }
