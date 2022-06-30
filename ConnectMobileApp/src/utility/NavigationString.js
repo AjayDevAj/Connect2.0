@@ -48,6 +48,7 @@ Chat: "Chat",
 Customers: "Customers",
 Reviews: "Reviews",
 
+TABS: "Tabs",
 
 /*
 **
