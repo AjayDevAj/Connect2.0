@@ -1,29 +1,25 @@
-import React,{useRef,Ref} from 'react'
+import React,{useRef} from 'react'
 
-// const uWebSockets = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+export const uWebSockets = () => {
+    const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
 
-// uWebSockets.onopen = () => {
-//   console.log("uWebsocket Connected to the server")
-// };
+    console.log('uWebsocket Connected to the server');
 
-// export default uWebSockets;
-
-// const Incoming_Chat_Socket_Subscribe = () => {
-//     const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
-//     ws.onopen = () => {
-//         console.log("uWebsocket Connected to the server")
-//         ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 52}));
-//       };
-// }
-
-// const socket = socketIO(API_URL);
-// socket.on('connect', function () {
-//   // console.log('connected!');
-
-//   // socket.on('disconnect', function () {
-//   //   console.log('disconnect!');
-//   // });
-
-// });
+    ws.onopen = () => {
+      console.log('uWebsocket Connected to the server');
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+    };
+    ws.onclose = e => {
+      console.log('uWebsocket Disconnected. Check internet or server.');
+    };
+    ws.onerror = e => {
+      console.log('uWebsocket incomming chat onerror', e);
+    };
+    ws.onmessage = e => {
+      // if (Object.keys(e.data).length == 0) {
+      console.log('uWebsocket incomming chat onmessage', e.data);
+      // }
+    };
+  };
 
 // export default socket;
