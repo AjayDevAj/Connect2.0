@@ -32,8 +32,7 @@
 import {API_URL_STAGING } from '../utility/Config_File'
 import {getOtpResponse} from '../utility/StorageClass'
 import {otpResponse_Storage_Key} from '../utility/Constant'
-import NavigationString from '../utility/NavigationString';
-import {useNavigation} from '@react-navigation/native';
+
 
 
 /*
@@ -69,7 +68,6 @@ const getCustomerList = async (
     order_by=''
     ) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-    const navigation = useNavigation();
 
     /*
     **
@@ -120,9 +118,7 @@ const getCustomerList = async (
         case 204 :
             throw new Error("NO Data")
             break
-        case 401 :
-            navigation.navigate(NavigationString.LOGIN)
-
+       
         default:break
     }
 
