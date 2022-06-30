@@ -1,8 +1,7 @@
 import {API_URL_STAGING} from '../utility/Config_File';
 import {getOtpResponse} from '../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../utility/Constant';
-import NavigationString from '../utility/NavigationString';
-import {useNavigation} from '@react-navigation/native';
+
 
 
 /**
@@ -24,7 +23,6 @@ const getAll_Conversation = async (
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
   console.log('allChat_Conversation_Data apicall getAll_Conversation',token_Value,)
 
-  const navigation = useNavigation();
 
   const response = await fetch(
     API_URL_STAGING +
@@ -54,10 +52,7 @@ const getAll_Conversation = async (
   if (response.status > 400) {
     throw new Error(data.errors);
   }
-  if (response.status == 401) { 
-    navigation.navigate(NavigationString.LOGIN)
-    
-  }
+ 
   return data;
 };
 
