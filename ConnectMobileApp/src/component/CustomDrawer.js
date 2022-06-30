@@ -2,12 +2,24 @@ import React from 'react';
 import {
     DrawerContentScrollView, DrawerItemList, DrawerItem
 } from '@react-navigation/drawer';
-import { Image, View, Text, Alert, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
 import NavigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './CustomDrawerStyleSheet';
+import { deleteAll, StorageClass} from '../utility/StorageClass'
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
+
 
 function CustomDrawer(props) {
+
+    const navigation1 = useNavigation();
+
+    const logout = () => {
+        deleteAll()
+        console.log("Logout User")
+        navigation1.navigate(NavigationString.LOGIN);    
+    }
+
     const { navigation } = props
     return (
         <View style={{ flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)' }}>
@@ -42,7 +54,7 @@ function CustomDrawer(props) {
                 <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10 }}>
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        onPress={() => navigation.navigate(NavigationString.Posts)}>
+                        onPress={() => navigation.navigate(NavigationString.Dashboard)}>
                         <View style={styles.listView}>
                             <Icon name='post-add' size={30} style={styles.iconList} />
                             <Text style={styles.listText}>Posts</Text>
@@ -53,7 +65,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        // onPress={() => navigation.navigate(NavigationString.Offers)}
+                        onPress={() => navigation.navigate(NavigationString.Chat)}
                         >
                         <View style={styles.listView}>
                             <Icon name='local-offer' size={30} style={styles.iconList} />
@@ -103,7 +115,7 @@ function CustomDrawer(props) {
 
             <View style={styles.logoutStyle}>
                 <Icon.Button name='logout' size={30} color={'rgba(95, 99, 104, 1)'} backgroundColor={'rgba(255, 255, 255, 1)'}
-                    onPress={() => { Alert.alert('Logout function is comming soon') }}>
+                    onPress={() => logout()}>
                     <Text style={styles.logoutText}>Logout</Text>
                 </Icon.Button>
             </View>

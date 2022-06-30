@@ -4,9 +4,13 @@ import {API_URL_STAGING} from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 import {otpResponse_Storage_Key} from '../utility/Constant'
 import {getOtpResponse} from '../utility/StorageClass'
+import NavigationString from '../utility/NavigationString';
+import {useNavigation} from '@react-navigation/native';
 
 const getAcceptRejectChatData = async (conversation_id, is_accept) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+    const navigation = useNavigation();
+
 
     /****** constant defined to get accept reject chat from an api ****/
 
@@ -34,6 +38,10 @@ const getAcceptRejectChatData = async (conversation_id, is_accept) => {
    
     if (response.status > 400) {
         throw new Error(data.errors)
+    }
+    if (response.status == 401) { 
+        navigation.navigate(NavigationString.LOGIN)
+        
     }
     return data;
 }
