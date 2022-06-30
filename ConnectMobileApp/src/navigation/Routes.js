@@ -53,6 +53,7 @@ import CustomDrawer from '../component/CustomDrawer';
 // import RouteTabBar from './RouteTabBar';
 import RouteTabBar from "../navigation/RouteTabBar";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import NavigationString from '../utility/NavigationString';
 
 
 
@@ -65,9 +66,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
  **
  */
 
-const StoreLocation = () => {
-  return <Text style={locationStyle.locationText}>Store Location</Text>;
-};
+// const StoreLocation = () => {
+//   return <Text style={locationStyle.locationText}>Store Location</Text>;
+// };
 
 const locationStyle = StyleSheet.create({
   locationText: {
@@ -103,7 +104,7 @@ const Routes = () => {
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-    // getUserState();
+     getUserState();
   });
 
   const getUserState = async () => {
@@ -119,7 +120,7 @@ const Routes = () => {
         className = navigationString.RouteTabBar;
       }
       setinitialState(className);
-      // setStatusKeyLoaded(true);
+       setStatusKeyLoaded(true);
     } catch (error) {
       console.error(error);
     }
@@ -128,18 +129,22 @@ const Routes = () => {
 
   return (
     <>
-      {/* {statusKeyLoaded && ( */}
+      {statusKeyLoaded && (
 
         <NavigationContainer>
 
         <Drawer.Navigator 
           drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{ headerShown: false }}>
-          <Drawer.Screen component={RouteTabBar} name={navigationString.Chat} />
+          <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
           <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+          <Drawer.Screen component={Login} name={navigationString.LOGIN} />
+          <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+          <Drawer.Screen component={Storelocation} name={navigationString.Location} />
+          {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
+
         </Drawer.Navigator>
-
-
+        
 
           {/* <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
@@ -212,7 +217,7 @@ const Routes = () => {
           </Stack.Navigator> */}
 
         </NavigationContainer>
-      {/* )} */}
+      )}
     </>
   );
 };

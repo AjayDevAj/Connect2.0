@@ -71,11 +71,9 @@ import Customer from '../Customer/Customer';
 import uWebSockets from '../component/uWebSockets'
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
-// import ChatSack from './ChatStack'
 import ChatStack from '../navigation/ChatStack';
 
 // import {useDispatch, useSelector} from 'react-redux';
-
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
 function HomeScreen() {

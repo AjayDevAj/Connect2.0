@@ -13,6 +13,7 @@ export default function ChatStack() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={NavigationString.Chat} component={Chat} />
         <Stack.Screen name={NavigationString.AllChat} component={AllChat} />
+
       </Stack.Navigator>
     );
   }

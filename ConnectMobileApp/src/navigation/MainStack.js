@@ -11,7 +11,7 @@ export default function (Stack) {
             <Stack.Screen
                 name={NavigationString.TABS}
                 component={RouteTabBar}
-            />          
+            />         
         </>
     )
 }
