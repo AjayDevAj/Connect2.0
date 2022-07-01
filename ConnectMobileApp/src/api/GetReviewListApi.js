@@ -4,7 +4,7 @@ import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
 
 
-const GetReviewListApi = async (master_outlet_id,enterprise_client_store_id) => {
+const GetReviewListApi = async (master_outlet_id, enterprise_client_store_id) => {
 
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
@@ -12,14 +12,14 @@ const GetReviewListApi = async (master_outlet_id,enterprise_client_store_id) => 
 
     /****** get token from store asy class... */
 
-    var api_url = API_URL_STAGING + '/review/review-list'+query;
-    console.log('OverAllRatingApi API data : ',api_url)
+    var api_url = API_URL_STAGING + '/review/review-list' + query;
+    console.log('OverAllRatingApi API data : ', api_url)
 
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
-      }
+    }
 
     const response = await fetch(api_url, {
         method: 'GET',
@@ -27,12 +27,17 @@ const GetReviewListApi = async (master_outlet_id,enterprise_client_store_id) => 
     })
 
     const data = response.json()
-    console.log('OverAllRatingApi API data : ',data)
-   
+    console.log('OverAllRatingApi API data : ', data)
+
     if (response.status > 400) {
-        throw new Error(data.errors)
+        // if (response.status == 401) {
+        //     navigation.navigate(NavigationString.LOGIN)
+        // }
+        // else {
+        //     throw new Error(data.errors);
+        // }
+        throw new Error(data.errors);
     }
-    
     return data;
 }
 
