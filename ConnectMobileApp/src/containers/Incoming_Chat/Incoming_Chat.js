@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Dimensions,
@@ -14,6 +14,7 @@ import {Unassigned_Chat} from '../../actions/Unassigned_Chat_Action';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 
+
 /**
  * This class is for imcoming chat icon.
  * * Its visible when atleast incoming count is one.
@@ -22,6 +23,7 @@ const Incoming_Chat = () => {
   const isFocused = useIsFocused();
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
   const [isVisible, setIsVisible] = useState(true);
+
   // const [panelProps, setPanelProps] = useState({
   //   fullWidth: true,
   //   onClose: () => closePanel(),
@@ -33,7 +35,6 @@ const Incoming_Chat = () => {
   );
 
   useEffect(() => {
-    console.log('unassigned_Chat_Response status', unassigned_Chat_Response);
     if (unassigned_Chat_Response.data != null) {
       openSheet(unassigned_Chat_Response.data.result);
     }
@@ -45,6 +46,7 @@ const Incoming_Chat = () => {
       unassigned_Chat_API_Call();
     }
   }, [isFocused]);
+
 
   const unassigned_Chat_API_Call = () => {
     dispatch(Unassigned_Chat());
@@ -75,6 +77,7 @@ const Incoming_Chat = () => {
   return (
     <>
       {isVisible && (
+
         <>
           <Action_Sheet />
           <Draggable
@@ -100,6 +103,7 @@ const Incoming_Chat = () => {
           </Draggable>
         </>
       )}
+
     </>
   );
 };

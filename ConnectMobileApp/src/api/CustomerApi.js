@@ -29,9 +29,10 @@
 ** 
 */
 
-import {API_URL_STAGING } from '../utility/Config_File'
-import {getOtpResponse} from '../utility/StorageClass'
-import {otpResponse_Storage_Key} from '../utility/Constant'
+import { API_URL_STAGING } from '../utility/Config_File'
+import { getOtpResponse } from '../utility/StorageClass'
+import { otpResponse_Storage_Key } from '../utility/Constant'
+import { Alert } from 'react-native'
 
 
 
@@ -49,24 +50,24 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 
 const getCustomerList = async (
     intent_id = '',
-    entry_point=0,
-    channel='',
-    date_range=0,
-    location_id='',
-    chat_status='',
-    contact_details='',
-    assigned_to=0,
-    page=0,
-    user_page=0,
-    interest_page=0,
-    searchLocation='',
-    searchUser='',
-    interest='',
-    from_date='',
-    to_date='',
-    search='',
-    order_by=''
-    ) => {
+    entry_point = 0,
+    channel = '',
+    date_range = 0,
+    location_id = '',
+    chat_status = '',
+    contact_details = '',
+    assigned_to = 0,
+    page = 0,
+    user_page = 0,
+    interest_page = 0,
+    searchLocation = '',
+    searchUser = '',
+    interest = '',
+    from_date = '',
+    to_date = '',
+    search = '',
+    order_by = ''
+) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     /*
@@ -76,14 +77,14 @@ const getCustomerList = async (
     *
     ** 
     */
-    
-    var api_url = API_URL_STAGING + '/crm/customer-list?order_by='+order_by;
-    search !== null ? api_url = api_url + '&search='+search : api_url = api_url
-   
+
+    var api_url = API_URL_STAGING + '/crm/customer-list?order_by=' + order_by;
+    search !== null ? api_url = api_url + '&search=' + search : api_url = api_url
+
     console.log('API url', api_url);
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
     }
 
@@ -109,20 +110,22 @@ const getCustomerList = async (
     *
     ** 
     */
-
+    console.log("Responce ====== ", response)
     switch (response.status) {
-        case response.status > 400 :
-            throw new Error(data.errors)
-
+        case response.status > 400:
+            throw new Error(data.errors);
+            // if (response.status == 401) {
+            //     navigation.navigate(NavigationString.LOGIN)
+            // }
+            // else {
+            //     throw new Error(data.errors);
+            // }
             break
-        case 204 :
+        case 204:
             throw new Error("NO Data")
             break
-       
-        default:break
+        default: break
     }
-
-
     return data;
 }
 
@@ -137,7 +140,6 @@ const getCustomerList = async (
 ** 
 */
 
-export {getCustomerList}
-   
+export { getCustomerList }
 
-     
+

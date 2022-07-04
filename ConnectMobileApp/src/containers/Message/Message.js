@@ -170,7 +170,6 @@ const Message = ({navigation, route}) => {
       // }
     };
   };
-
   useEffect(() => {
     setReloadTopView(
       getDataFromParam.selected_Item.is_important == 1 ? true : false,
@@ -179,7 +178,7 @@ const Message = ({navigation, route}) => {
     console.log('uWebsocket print ws', isFocused);
 
     if (isFocused) {
-      Incoming_Chat_Socket_Subscribe();
+      // Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }
