@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     DrawerContentScrollView, DrawerItemList, DrawerItem
 } from '@react-navigation/drawer';
@@ -6,21 +6,53 @@ import { Image, View, Text, TouchableOpacity } from 'react-native';
 import NavigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './CustomDrawerStyleSheet';
-import { deleteAll, StorageClass} from '../utility/StorageClass'
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import { deleteAll, StorageClass } from '../utility/StorageClass'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Singleinterfaceicon from '../../assets/svg/singleinterfaceicon.svg'
 import fontFamily from '../utility/Font-Declarations'
+
+import { API_URL_STAGING } from '../utility/Config_File'
+import { getOtpResponse } from '../utility/StorageClass'
+import { otpResponse_Storage_Key } from '../utility/Constant'
+
 
 
 function CustomDrawer(props) {
 
     const navigation1 = useNavigation();
+  
+    //Logout api calling..
+    const logout = async () => {
 
-    const logout = () => {
+        const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+        console.log("Token Value :::: =",token_Value.token)
+
+         var myHeaders = new Headers();
+         myHeaders.append("Authorization", `Bearer ${token_Value.token}`);
+         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+         var urlencoded = new URLSearchParams();
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        fetch("https://test-chat.starify.co/user/auth/logout", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log("JSON Result :::: ", result))
+            .catch(error => console.log('Error Result :::: ', error));
         deleteAll()
         console.log("Logout User")
-        navigation1.navigate(NavigationString.LOGIN);    
+        navigation1.navigate(NavigationString.LOGIN);
+
+        if (response.status > 400) {
+            throw new Error(data.errors)
+        }
     }
+
 
     const { navigation } = props
     return (
@@ -31,9 +63,9 @@ function CustomDrawer(props) {
                     flexDirection: "column",
                     height: '90%',
                     marginTop: 10,
-                 }}>
-                    <Singleinterfaceicon height={52} width={52} marginLeft={15}/>
-                    
+                }}>
+                    <Singleinterfaceicon height={52} width={52} marginLeft={15} />
+
                     <Text style={{
                         color: 'rgba(255, 255, 255, 1)',
                         marginTop: 10,
@@ -63,7 +95,7 @@ function CustomDrawer(props) {
                     <TouchableOpacity
                         style={styles.btnStyle}
                         onPress={() => navigation.navigate(NavigationString.Chat)}
-                        >
+                    >
                         <View style={styles.listView}>
                             <Icon name='local-offer' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Offers</Text>
@@ -74,8 +106,8 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        // onPress={() => navigation.navigate(NavigationString.Locations)}
-                        >
+                    // onPress={() => navigation.navigate(NavigationString.Locations)}
+                    >
                         <View style={styles.listView}>
                             <Icon name='location-on' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Locations</Text>
@@ -86,8 +118,8 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        // onPress={() => navigation.navigate(NavigationString.Offers)}
-                        >
+                    // onPress={() => navigation.navigate(NavigationString.Offers)}
+                    >
                         <View style={styles.listView}>
                             <Icon name='group' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Manage Team</Text>
@@ -98,8 +130,8 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        // onPress={() => navigation.navigate(NavigationString.Offers)}
-                        >
+                    // onPress={() => navigation.navigate(NavigationString.Offers)}
+                    >
                         <View style={styles.listView}>
                             <Icon name='person-outline' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Profile</Text>
@@ -111,11 +143,11 @@ function CustomDrawer(props) {
             </DrawerContentScrollView>
 
             <View style={styles.logoutStyle}>
-                <Icon.Button name='logout' size={25} color={'rgba(95, 99, 104, 1)'} backgroundColor={'rgba(255, 255, 255, 1)'} marginLeft= {15}
+                <Icon.Button name='logout' size={25} color={'rgba(95, 99, 104, 1)'} backgroundColor={'rgba(255, 255, 255, 1)'} marginLeft={15}
                     onPress={() => logout()}>
                     <Text style={styles.logoutText}>Logout</Text>
                 </Icon.Button>
-                <Icon name='close' size={20} color ='rgba(95, 99, 104, 1)' style={styles.closeImg} />
+                <Icon name='close' size={20} color='rgba(95, 99, 104, 1)' style={styles.closeImg} />
             </View>
         </View>
     );

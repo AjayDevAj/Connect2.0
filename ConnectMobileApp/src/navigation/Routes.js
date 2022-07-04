@@ -108,7 +108,7 @@ const Routes = () => {
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-    // getUserState();
+     getUserState();
   });
 
   const getUserState = async () => {
@@ -124,7 +124,7 @@ const Routes = () => {
         className = navigationString.RouteTabBar;
       }
       setinitialState(className);
-      //setStatusKeyLoaded(true);
+      setStatusKeyLoaded(true);
     } catch (error) {
       console.error(error);
     }
@@ -133,11 +133,11 @@ const Routes = () => {
 
   return (
     <>
-      {/* {statusKeyLoaded && ( */}
+      {statusKeyLoaded && (
 
       <NavigationContainer>
 
-        <Drawer.Navigator
+        <Drawer.Navigator initialRouteName={initialState}
           drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{ headerShown: false }}>
 
@@ -229,7 +229,7 @@ const Routes = () => {
           </Stack.Navigator> */}
         <Incoming_Chat />
       </NavigationContainer>
-      {/* )}  */}
+      )}  
     </>
   );
 };
