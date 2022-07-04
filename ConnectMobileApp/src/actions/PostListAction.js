@@ -1,5 +1,7 @@
 import {CONSTANT} from '../utility/Constant';
 
+
+
 const loadpostlistdata = (
   location_id,
  
@@ -10,7 +12,7 @@ const loadpostlistdata = (
 });
 
 const getError = payload => ({
-  type: CONSTANT.POST_DATA_ERROR,
+  type: CONSTANT.POST_LIST_DATA_ERROR,
   payload,
 });
 
@@ -19,4 +21,4 @@ const getResponse = payload => ({
   payload,
 });
 
-export {loadpostdata, getError, getResponse};
+export {loadpostlistdata, getError, getResponse};

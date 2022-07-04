@@ -42,7 +42,7 @@ import AcceptRejectChatDataWatcherSaga from './AcceptRejectChatSaga';
 import Send_message_WatcherSaga from './Send_Message_Saga';
 import PostDataWatcherSaga from './PostSaga';
 import FilterDataWatcherSaga from './FilterDataSaga';
-
+import PostListDataWatcherSaga from './PostListSaga';
 import OverAllWatcherSaga from './OverAllSaga';
 import ReviewListWatcherSaga from './GetReviewListSaga';
 import CustomerDataWatcherSaga from './CustomerSaga';
@@ -67,6 +67,7 @@ export default function* rootSaga() {
     ReviewListWatcherSaga(),
     CustomerDataWatcherSaga(),
     PostDataWatcherSaga(),
-    OfferListDataWatcherSaga()
+    OfferListDataWatcherSaga(),
+    PostListDataWatcherSaga()
   ]);
 }

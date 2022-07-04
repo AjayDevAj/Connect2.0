@@ -51,7 +51,8 @@ function CustomDrawer(props) {
                 <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10 }}>
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        onPress={() => navigation.navigate(NavigationString.Dashboard)}>
+                         onPress={() => navigation.navigate(NavigationString.MyPostHome)}
+                        >
                         <View style={styles.listView}>
                             <Icon name='post-add' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Posts</Text>
@@ -62,7 +63,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        onPress={() => navigation.navigate(NavigationString.Chat)}
+                        onPress={() => navigation.navigate(NavigationString.My_Offers_home)}
                         >
                         <View style={styles.listView}>
                             <Icon name='local-offer' size={25} style={styles.iconList} />

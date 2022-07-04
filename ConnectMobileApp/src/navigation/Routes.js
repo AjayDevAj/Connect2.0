@@ -56,6 +56,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+import New_Post from '../containers/Post/New_Post';
+import My_Offers_Home from '../containers/Offers/My_Offers_Home';
+import MyPostHome from '../containers/Post/MyPostHome'
+import Add_new_offer from '../containers/Offers/Add_new_offers'
 
 
 
@@ -153,6 +157,11 @@ const Routes = () => {
           <Drawer.Screen component={Message} name={navigationString.Message} />
           <Drawer.Screen component={Filter} name={navigationString.Filter} />
           <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+          <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
+          <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
+          <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+
+         
           {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
 
         </Drawer.Navigator>

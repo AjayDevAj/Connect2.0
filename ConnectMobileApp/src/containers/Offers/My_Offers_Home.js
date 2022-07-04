@@ -6,15 +6,45 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Pressable,
-  Alert
+  Alert,
 } from 'react-native';
-import React from 'react';
+import React ,{useEffect,useState} from 'react';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
 import fontfaimly from '../../utility/Font-Declarations';
 import TopHeader from '../../Header/TopHeader';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-const My_Offers_Home = () => {
+import {loadofferlistdata} from '../../actions/OfferListAction';
+import {useDispatch, useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
+import NavigationString from '../../utility/NavigationString';
+
+const My_Offers_Home = (navigation) => {
+
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const [offerlistdata, setofferlistdata] = useState('');
+
+  const Offer_List_Data = useSelector(store => store.OfferListResponceData);
+  console.log('Offer List data->>>>>>>>>>>>>>>',Offer_List_Data.data)
+
+  //setofferlistdata()
+
+  /**
+   * Api call when page load
+   * 
+   * master_outlet_id:78104
+   * store_code:10007
+  
+   */
+
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(loadofferlistdata(78104,10007));
+    }
+  }, [isFocused]);
+
+  
   return (
     <View style={{flex: 1, backgroundColor: '#F7FCFF'}}>
       <TopHeader
@@ -147,12 +177,21 @@ const My_Offers_Home = () => {
           {/* <Card.Actions>
        <Icon name='edit'/>
       </Card.Actions> */}
-      
+
           <Card.Cover
             style={{borderTopEndRadius: 9}}
             source={{uri: 'https://picsum.photos/700'}}
           />
-           <Text style={{color:'#000000',fontSize:18,opacity:100,fontFamily:fontfaimly.Alte_DIN,paddingTop:10}}>Need A Car ?</Text>
+          <Text
+            style={{
+              color: '#000000',
+              fontSize: 18,
+              opacity: 100,
+              fontFamily: fontfaimly.Alte_DIN,
+              paddingTop: 10,
+            }}>
+            Need A Car ?
+          </Text>
           <View
             style={{
               position: 'absolute',
@@ -163,22 +202,26 @@ const My_Offers_Home = () => {
             <TouchableOpacity onPress={() => chooseFile()}>
               <PencilIcon height={50} width={50} />
             </TouchableOpacity>
-            <Pressable onPress={()=>Alert.alert('hello')}>
+            <Pressable onPress={() => navigation.navigate(NavigationString.Add_new_offer) }>
               <View
                 style={{
                   minWidth: 80,
                   minHeight: 80,
                   backgroundColor: '#0070FC',
                   top: 240,
-                 right:-9,
+                  right: -9,
                   borderRadius: 100 / 2,
-                alignItems:'center',
-                justifyContent:'center',
-                position:'absolute'
-                  
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'absolute',
                 }}>
-                    <Icon name='local-offer' color={'#FFFFFF'} borderColor={'#fff0'} size={30}/>
-                </View>
+                <Icon
+                  name="local-offer"
+                  color={'#FFFFFF'}
+                  borderColor={'#fff0'}
+                  size={30}
+                />
+              </View>
             </Pressable>
           </View>
           <Card.Content>

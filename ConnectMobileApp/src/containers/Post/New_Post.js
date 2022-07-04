@@ -191,7 +191,7 @@ const New_Post = () => {
         </View>
 
         <View style={{backgroundColor: 'white', flex: 4, padding: 20}}>
-          <DropdownComponent listvalue={Post_type} title={'Post Type'} />
+          {/* <DropdownComponent listvalue={Post_type} title={'Post Type'} /> */}
 
           <View style={{paddingBottom: 15}}>
             <Text style={PostStyleSheet.addPostMessageLabelText}>
@@ -208,7 +208,7 @@ const New_Post = () => {
 
           <DropdownComponent title={'Offer CTA'} listvalue={Offer_CTA} />
 
-          <View style={{paddingBottom: 15}}>
+          {/* <View style={{paddingBottom: 15}}>
             <Text style={PostStyleSheet.CouponCodeLabelText}>Coupon Code</Text>
             <TextInput
               style={PostStyleSheet.CouponCodeInputText}
@@ -285,17 +285,17 @@ const New_Post = () => {
             numberOfLines={4}
             onChangeText={text => setofferdisclimer(text)}
             value={offerdis}
-          />
-        </View>
+                /> */}
+        </View> 
       </ScrollView>
 
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => openPanel()}>
           <CommonButton buttonname={'SEE PREVIEW'} />
         </TouchableOpacity>
-      </View>
+      </View> 
 
-      <DatePicker
+      {/*<DatePicker
         modal
         open={open}
         date={date}
@@ -309,7 +309,7 @@ const New_Post = () => {
         onCancel={() => {
           setOpen(false);
         }}
-      />
+      /> */}
       {/* // Post data PREVIEW */}
       <SwipeablePanel
         {...panelProps}

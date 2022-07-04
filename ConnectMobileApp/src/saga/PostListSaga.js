@@ -71,7 +71,7 @@
   */
  
  export default function* PostListDataWatcherSaga() {
-   // console.log('Post Data Saga Watcher')
+    console.log('Post  List Data Saga Watcher')
    yield takeEvery(CONSTANT.POST_LIST_DATA, handlePostListResponseData);
  }
  

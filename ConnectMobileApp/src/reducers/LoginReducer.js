@@ -47,6 +47,7 @@ import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
 import CustomerReducer from "./CustomerReducer";
 import PostListReducer from "./PostListReducer";
+import OfferListReducer from "./OfferListReducer"
 
 
 const loginDataReducer = (state = '', action) => {
@@ -83,6 +84,7 @@ const rootReducers = combineReducers({
     CustomerResponseData: CustomerReducer,
     PostResponceData:PostReducer,
     PostListResponceData:PostListReducer,
+    OfferListResponceData:OfferListReducer
 
 })
 

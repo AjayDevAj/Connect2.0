@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore  from './src/store/Store';
 import Routes from './src/navigation/Routes';
 import New_Post from './src/containers/Post/New_Post';
+import My_Offers_Home from './src/containers/Offers/My_Offers_Home';
 
 const store = configureStore();
 

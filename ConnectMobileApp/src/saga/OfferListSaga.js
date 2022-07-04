@@ -52,7 +52,8 @@
      const data = yield call(
         getofferlist,
  
-       action.location_id,
+       action.master_outlet_id, 
+       action.store_code
        
      );
      // console.log('Post Data Response', data)
@@ -72,6 +73,6 @@
  
  export default function* OfferListDataWatcherSaga() {
    // console.log('Offer list Data Saga Watcher')
-   yield takeEvery(CONSTANT.POST_LIST_DATA, handleOfferListResponseData);
+   yield takeEvery(CONSTANT.OFFER_LIST_DATA, handleOfferListResponseData);
  }
  
