@@ -21,7 +21,20 @@ const getAll_Conversation = async (
   chat_status_type="open"
 ) => {
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
-  console.log('allChat_Conversation_Data apicall getAll_Conversation',token_Value,)
+  console.log('allChat_Conversation_Data apicall getAll_Conversation',API_URL_STAGING +
+  '/message/' +
+  conversation_id +
+  '?page=' +
+  page +
+  '&sub_conversation_id=' +
+  sub_conversation_id +
+  '&other=' +
+  view_Own_Chat +
+  '&is_closed=' +
+  chat_status +
+  '&chat_status=' +
+  chat_status_type +
+  '&pagination=1',)
 
 
   const response = await fetch(

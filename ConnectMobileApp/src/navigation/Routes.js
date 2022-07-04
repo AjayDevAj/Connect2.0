@@ -137,6 +137,7 @@ const Routes = () => {
           drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{ headerShown: false }}>
           <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+          <Drawer.Screen component={Message} name={navigationString.Message} />
           <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
           <Drawer.Screen component={Login} name={navigationString.LOGIN} />
           <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />

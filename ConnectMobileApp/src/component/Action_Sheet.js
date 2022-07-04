@@ -5,6 +5,7 @@ import fontFamily from '../utility/Font-Declarations';
 import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadAccept_RejectChat_Data} from '../actions/AcceptRejectChatAction';
+import {getAcceptRejectChatData} from '../api/AcceptRejectChatApi';
 
 /**
  * Open action sheet
@@ -30,12 +31,12 @@ var DATA = [];
  *
  * @param {*} title for Incoming chat
  */
-const Item = ({title, location, last_message}) => (
+const Item = ({title, location, last_message,onclick}) => (
   <Incoming_Chat_Card
     title={title}
     location={location}
-    onclick={() => 
-      SheetManager.hideAll()
+    onclick={(item) => onclick()
+      // SheetManager.hideAll()
     }
     last_message={last_message}
   />
@@ -51,11 +52,16 @@ const Action_Sheet = () => {
       title={item.display_name}
       location={item.location_name}
       last_message={item.message}
+      conversation_id={item.conversation_id}
+      onclick={() => acpect_Reject_API_Call(item.conversation_id)}
     />
   );
 
-  const acpect_Reject_API_Call = () => {
-    dispatch(loadAccept_RejectChat_Data());
+  const acpect_Reject_API_Call = async (conversation_id) => {
+    // dispatch(loadAccept_RejectChat_Data());
+    const data = await getAcceptRejectChatData(conversation_id);
+    console.log("acpect_Reject_API_Call",JSON.stringify(data))
+    // setReloadTopView(data.data.is_important);
   };
 
   return (

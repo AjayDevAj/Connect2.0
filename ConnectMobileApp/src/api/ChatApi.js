@@ -53,7 +53,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
  
     
 
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     /*
     **

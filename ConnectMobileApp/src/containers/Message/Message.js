@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {View, ImageBackground } from 'react-native';
+import {View, ImageBackground} from 'react-native';
 import TopHeader from '../../Header/TopHeader';
 import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
@@ -32,11 +32,13 @@ import PurchaseLeadForm from './PurchaseLeadForm';
 import CloseChatModal from './CloseChatModal';
 
 const Message = ({navigation, route}) => {
-  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
+  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
 
   const [loginUserData, setLoginUserData] = useState();
   const [reloadTopView, setReloadTopView] = useState(false);
   const [dotClicked, setDotClicked] = useState(false);
+  const [isTyping, setTyping] = useState(false);
+  // const [isFocused_Obj, setFocused_Obj] = useState(null);
 
   const getUserData = async () => {
     var test = await getOtpResponse(otpResponse_Storage_Key);
@@ -52,13 +54,14 @@ const Message = ({navigation, route}) => {
       reloadTopView == 1 ? 0 : 1,
     );
     setReloadTopView(data.data.is_important);
+    // ws.close(1000)
   };
 
   const mark_Unread_Api = async () => {
     const data = await mark_Unread_Chat(
       getDataFromParam.selected_Item.conversation_id,
     );
-    navigation.goBack()
+    navigation.goBack();
   };
 
   const openImage = async () => {
@@ -74,10 +77,18 @@ const Message = ({navigation, route}) => {
       file_type: 'sendChat',
     });
 
-    //  dispatch(send_Chat_Message_Data())
+    dispatch(
+      send_Chat_Message_Data(
+        'google',
+        getDataFromParam.selected_Item.conversation_id,
+        getDataFromParam.selected_Item.sub_conversation_id,
+        null,'image',
+        messages.assets[0].uri
+
+      ),
+    );
   };
   const openFile = async () => {
-    //  dispatch(send_Chat_Message_Data())
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
@@ -106,24 +117,56 @@ const Message = ({navigation, route}) => {
   const [messages, setMessages] = useState([]);
 
   const Incoming_Chat_Socket_Subscribe = () => {
-    console.log('uWebsocket Connected to the server');
-
     ws.onopen = () => {
-      console.log('uWebsocket Connected to the server');
+      console.log('uWebsocket Connected to the server Message');
       ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+      ws.send(
+        JSON.stringify({
+          action: 'subscribe_message_delivery_status',
+          agent_id: 64,
+        }),
+      );
+      ws.send(JSON.stringify({action: 'subscribe_typing_event', agent_id: 64}));
+
+      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 64}));
+      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: 64}));
     };
     ws.onclose = e => {
-      console.log('uWebsocket Disconnected. Check internet or server.');
+      console.log('uWebsocket Disconnected. Check internet or server.', e);
     };
     ws.onerror = e => {
       console.log('uWebsocket incomming chat onerror', e);
     };
     ws.onmessage = e => {
-      // if (Object.keys(e.data).length == 0) {
-      console.log('uWebsocket incomming chat onmessage', e.data);
-      setMessages(previousMessages =>
-        GiftedChat.append(previousMessages, [e.data]),
-      );
+      let json_Data = JSON.parse(e.data);
+      // console.log(
+      //   'uWebsocket incomming chat onmessage print before e',
+      //   json_Data,
+      //   isFocused_Obj,
+      // );
+
+      // if (isFocused_Obj) {
+        console.log(
+          'uWebsocket incomming chat onmessage print e',
+          json_Data,
+        );
+
+        switch (json_Data.socket_name) {
+          case 'subscribe_message':
+            setMessages(previousMessages =>
+              GiftedChat.append(previousMessages, [json_Data]),
+            );
+            break;
+          case 'subscribe_typing_event':
+            setTyping(json_Data.is_typing);
+            break;
+          case 'subscribe_message_delivery_status':
+            // write a code
+            break;
+
+          default:
+            break;
+        }
       // }
     };
   };
@@ -132,6 +175,8 @@ const Message = ({navigation, route}) => {
     setReloadTopView(
       getDataFromParam.selected_Item.is_important == 1 ? true : false,
     );
+    // setFocused_Obj(!isFocused);
+    console.log('uWebsocket print ws', isFocused);
 
     if (isFocused) {
       Incoming_Chat_Socket_Subscribe();
@@ -154,7 +199,7 @@ const Message = ({navigation, route}) => {
   }, [allChat_Conversation_Data]);
 
   const callAPI = () => {
-    console.log('getDataFromParam ', getDataFromParam.allChat);
+    console.log('getDataFromParam ', getDataFromParam);
     dispatch(
       loadAllChat_Conversation_Data(
         getDataFromParam.selected_Item.conversation_id,
@@ -167,7 +212,7 @@ const Message = ({navigation, route}) => {
     );
   };
 
-  const [unSendMessage, setUnSendMessage] = useState({
+  const initial_Value = {
     message: null,
     createdAt: null,
     user: {
@@ -175,7 +220,8 @@ const Message = ({navigation, route}) => {
       _id: null,
     },
     _id: null,
-  });
+  };
+  const [unSendMessage, setUnSendMessage] = useState(initial_Value);
 
   const onSend = useCallback((messages = []) => {
     setUnSendMessage({
@@ -194,11 +240,14 @@ const Message = ({navigation, route}) => {
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, [unSendMessage]),
       );
+      {console.log('send_Chat_Message_Data ',getDataFromParam.selected_Item.conversation_id,
+      getDataFromParam.selected_Item.sub_conversation_id)}
       dispatch(
         send_Chat_Message_Data(
           'google',
           getDataFromParam.selected_Item.conversation_id,
-          unSendMessage.message,
+          getDataFromParam.selected_Item.sub_conversation_id,
+          unSendMessage.message,null,null
         ),
       );
     }
@@ -213,6 +262,7 @@ const Message = ({navigation, route}) => {
       'SendMessageApi api testing Send_Message_ResponceData :- ',
       Send_Message_ResponceData,
     );
+    setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
   const materialMenuItemData = [
@@ -234,109 +284,107 @@ const Message = ({navigation, route}) => {
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
   const purchaseHandler = () => {
-    setShowPurchaseForm(!showPurchaseForm)
-  }
+    setShowPurchaseForm(!showPurchaseForm);
+  };
 
   return (
-    <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF' }]}>
-
-      {showPurchaseForm ? 
-      ( 
+    <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF'}]}>
+      {showPurchaseForm ? (
         <>
-        <TopHeader
-        firstIcon="arrow-back"
-        secondIcon=""
-        thirdIcon=""
-        color={reloadTopView ? '#FFAA00' : null}
-        name={getDataFromParam.selected_Item.display_name}
-        menuHandler={menuHandler}
-        logo={getDataFromParam.selected_Item.publisher_type}
-      />
-        <PurchaseLeadForm 
-          formData={getDataFromParam.selected_Item} 
-          navigation={navigation}
-          /> 
+          <TopHeader
+            firstIcon="arrow-back"
+            secondIcon=""
+            thirdIcon=""
+            color={reloadTopView ? '#FFAA00' : null}
+            name={getDataFromParam.selected_Item.display_name}
+            menuHandler={menuHandler}
+            logo={getDataFromParam.selected_Item.publisher_type}
+          />
+          <PurchaseLeadForm
+            formData={getDataFromParam.selected_Item}
+            navigation={navigation}
+          />
         </>
       ) : (
         <>
-        <TopHeader
-        firstIcon="arrow-back"
-        secondIcon="star-border"
-        thirdIcon="more-vert"
-        color={reloadTopView ? '#FFAA00' : null}
-        name={getDataFromParam.selected_Item.display_name}
-        menuHandler={menuHandler}
-        searchHandler={markasImportant}
-        filterHandler={dotHandler}
-        logo={getDataFromParam.selected_Item.publisher_type}
-      />
+          <TopHeader
+            firstIcon="arrow-back"
+            secondIcon="star-border"
+            thirdIcon="more-vert"
+            color={reloadTopView ? '#FFAA00' : null}
+            name={getDataFromParam.selected_Item.display_name}
+            menuHandler={menuHandler}
+            searchHandler={markasImportant}
+            filterHandler={dotHandler}
+            logo={getDataFromParam.selected_Item.publisher_type}
+          />
 
-      <PurchaseLeadSection purchaseHandler={purchaseHandler} />
-      
-      {dotClicked && (
-        <MaterialMenu
-          itemData={materialMenuItemData}
-          onClick={index => {
-            switch (index) {
-              case 1:
-                setIsClosedChatClicked(!isClosedChatClicked);
-                setDotClicked(!dotClicked);
-                break;
-              case 2:
-                mark_Unread_Api()
-                break;
-              case 3:
-                break;
+          <PurchaseLeadSection purchaseHandler={purchaseHandler} />
 
-              default:
-                break;
-            }
-          }}
-        />
-      )}
+          {dotClicked && (
+            <MaterialMenu
+              itemData={materialMenuItemData}
+              onClick={index => {
+                switch (index) {
+                  case 1:
+                    setIsClosedChatClicked(!isClosedChatClicked);
+                    setDotClicked(!dotClicked);
+                    break;
+                  case 2:
+                    mark_Unread_Api();
+                    break;
+                  case 3:
+                    break;
 
-      
-      <View style={{flex: 1}}>
-        {isClosedChatClicked && <CloseChatModal />}
-        {allChat_Conversation_Data.data && loginUserData != undefined && (
-        // <ImageBackground source={require('./img/MaskGroup17.svg')} >
-          <GiftedChat
-          listViewProps={{
-            contentContainerStyle: {
-              flexGrow: 0.02,
-              paddingTop: 20,
-            },
-            onEndReachedThreshold: 0.2,
-          }}
-          infiniteScroll={true}
-          alignTop={true}
-          messages={messages}
-          onSend={messages => onSend(messages)}
-          renderComposer={renderComposer}
-          renderSend={renderSend}
-          renderInputToolbar={
-            getDataFromParam.allChat == true
-              ? render_Blank_InputToolbar
-              : getDataFromParam.selected_Item.chat_status == 'closed'
-              ? render_Blank_InputToolbar
-              : renderInputToolbar
-          }
-          selectFile={openFile}
-          selectImage={openImage}
-          renderBubble={renderBubble}
-          renderCustomView={renderCustomView}
-          renderMessageImage={renderMessageImage}
-          user={{
-            _id: 'a',
-            agent_name: loginUserData.user.name,
-          }}
-          renderDay={renderDays}
-          renderTime={renderTime}
-        />
-            // {/* </ImageBackground> */}
-        )}
-      </View>
-      </>
+                  default:
+                    break;
+                }
+              }}
+            />
+          )}
+
+          <View style={{flex: 1}}>
+            {isClosedChatClicked && <CloseChatModal />}
+            {allChat_Conversation_Data.data && loginUserData != undefined && (
+              // <ImageBackground source={require('./img/MaskGroup17.svg')} >
+              <GiftedChat
+                listViewProps={{
+                  contentContainerStyle: {
+                    flexGrow: 0.02,
+                    paddingTop: 20,
+                  },
+                  onEndReachedThreshold: 0.2,
+                }}
+                isTyping={isTyping}
+                infiniteScroll={true}
+                alignTop={true}
+                messages={messages}
+                onSend={messages => onSend(messages)}
+                renderComposer={renderComposer}
+                renderSend={renderSend}
+                renderInputToolbar={
+                  getDataFromParam.allChat == true
+                    ? render_Blank_InputToolbar
+                    : getDataFromParam.selected_Item.chat_status == 'closed'
+                    ? render_Blank_InputToolbar
+                    : renderInputToolbar
+                }
+                selectFile={openFile}
+                selectImage={openImage}
+                renderBubble={renderBubble}
+                renderCustomView={renderCustomView}
+                renderMessageImage={renderMessageImage}
+                user={{
+                  _id: 'a',
+                  agent_name: loginUserData.user.name,
+                }}
+                renderDay={renderDays}
+                renderTime={renderTime}
+              />
+              // {/* </ImageBackground> */}
+            )}
+          </View>
+        </>
       )}
     </View>
   );
