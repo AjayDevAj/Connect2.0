@@ -11,7 +11,7 @@ const store = configureStore();
 const App = () => {
   return (
     <Provider store ={store}>
-      <New_Post/>
+      <Routes/>
       
     </Provider>
     
