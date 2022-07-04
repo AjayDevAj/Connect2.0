@@ -105,8 +105,8 @@ const Message = ({navigation, route}) => {
   const getDataFromParam = route.params;
   const [messages, setMessages] = useState([]);
 
-  const Incoming_Chat_Socket_Subscribe = () => {
-    console.log('uWebsocket Connected to the server');
+  // const Incoming_Chat_Socket_Subscribe = () => {
+  //   console.log('uWebsocket Connected to the server');
 
     ws.onopen = () => {
       console.log('uWebsocket Connected to the server');
@@ -334,13 +334,10 @@ const Message = ({navigation, route}) => {
           renderTime={renderTime}
         />
             // {/* </ImageBackground> */}
-            
         )}
       </View>
       </>
       )}
-      
-      
     </View>
   );
 };

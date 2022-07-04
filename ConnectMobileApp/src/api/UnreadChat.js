@@ -14,13 +14,13 @@ const mark_Unread_Chat = async (conversation_id) => {
         "is_seen": 0, //1
     };
 
-    console.log('Message importent mark ',bodyRawData)
+    console.log('Message importent mark ', bodyRawData)
     var api_url = API_URL_STAGING + '/message/read-unread-message';
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
-      }
+    }
 
     const response = await fetch(api_url, {
         method: 'POST',
@@ -29,18 +29,23 @@ const mark_Unread_Chat = async (conversation_id) => {
     })
 
     const data = response.json()
-    console.log('isImportant API data : ',data)
-   
-    switch (response.status) {
-        case response.status > 400 :
-            throw new Error(data.errors)
+    console.log('isImportant API data : ', data)
 
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);
+            // if (response.status == 401) {
+            //     navigation.navigate(NavigationString.LOGIN)
+            // }
+            // else {
+            //     throw new Error(data.errors);
+            // }
             break
-        case 204 :
+        case 204:
             throw new Error("NO Data")
             break
 
-        default:break
+        default: break
     }
 
     return data;

@@ -29,26 +29,36 @@
  **
  */
 
-import React, {useState, useEffect} from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {NavigationContainer, StackActions} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
 import Storelocation from '../containers/Location/Storelocation';
-import RouteTabBar from '../navigation/RouteTabBar';
+// import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
-import {viewed_Onboarding, location_Data_Key} from '../utility/Constant';
+import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
 import Filter from '../containers/dashboard/Filter';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
-import {CommonActions} from '@react-navigation/native';
-import Drawer from './Drawer';
+import { CommonActions } from '@react-navigation/native';
+// import Drawer from './Drawer';
+import CustomDrawer from '../component/CustomDrawer';
+// import RouteTabBar from './RouteTabBar';
+import RouteTabBar from "../navigation/RouteTabBar";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import NavigationString from '../utility/NavigationString';
+import Chat from '../Chat/Chat';
+import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+
+
+
 
 
 /*
@@ -59,9 +69,9 @@ import Drawer from './Drawer';
  **
  */
 
-const StoreLocation = () => {
-  return <Text style={locationStyle.locationText}>Store Location</Text>;
-};
+// const StoreLocation = () => {
+//   return <Text style={locationStyle.locationText}>Store Location</Text>;
+// };
 
 const locationStyle = StyleSheet.create({
   locationText: {
@@ -87,17 +97,18 @@ const OtpScreen = () => {
 };
 
 const Stack = createNativeStackNavigator();
-// const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 
 /**
  * Routes matain the navigation stacks
  */
 const Routes = () => {
+
   const [statusKeyLoaded, setStatusKeyLoaded] = useState(false);
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-    getUserState();
+    // getUserState();
   });
 
   const getUserState = async () => {
@@ -113,7 +124,7 @@ const Routes = () => {
         className = navigationString.RouteTabBar;
       }
       setinitialState(className);
-      setStatusKeyLoaded(true);
+      //setStatusKeyLoaded(true);
     } catch (error) {
       console.error(error);
     }
@@ -122,9 +133,32 @@ const Routes = () => {
 
   return (
     <>
-      {statusKeyLoaded && (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName={initialState}>
+      {/* {statusKeyLoaded && ( */}
+
+      <NavigationContainer>
+
+        <Drawer.Navigator
+          drawerContent={(props) => <CustomDrawer {...props} />}
+          screenOptions={{ headerShown: false }}>
+
+          <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+          {/* <Drawer.Screen component={Chat} name={navigationString.Chat} /> */}
+
+          <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+          <Drawer.Screen component={Login} name={navigationString.LOGIN} />
+          <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+          <Drawer.Screen component={Storelocation} name={navigationString.Location} />
+
+          <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
+          <Drawer.Screen component={Message} name={navigationString.Message} />
+          <Drawer.Screen component={Filter} name={navigationString.Filter} />
+          <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+          {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
+
+        </Drawer.Navigator>
+
+
+        {/* <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
@@ -192,11 +226,10 @@ const Routes = () => {
               component={Chat_Filter}
               options={{ headerShown: false }}
             />
-
-
-          </Stack.Navigator>
-        </NavigationContainer>
-      )}
+          </Stack.Navigator> */}
+        <Incoming_Chat />
+      </NavigationContainer>
+      {/* )}  */}
     </>
   );
 };
@@ -206,7 +239,7 @@ export default Routes;
 export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
-    routes: [{name: navigationString.RouteTabBar}],
+    routes: [{ name: navigationString.RouteTabBar }],
   });
 };
 
@@ -215,7 +248,7 @@ export const signOut = navigation => {
   navigation.navigate(navigationString.LOGIN);
   navigation.reset({
     index: 0,
-    routes: [{name: navigationString.LOGIN}],
+    routes: [{ name: navigationString.LOGIN }],
   });
   //  deleteAll()
 };

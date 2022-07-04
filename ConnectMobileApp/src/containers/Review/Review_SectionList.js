@@ -166,7 +166,19 @@ const ItemReview = ({item}) => {
               width: 40,
               borderRadius: 20,
               backgroundColor: '#0E0071',
-            }}></View>
+              justifyContent:'center',
+              alignItems:'center'
+            }}>
+               <Text
+              style={{
+                fontFamily: fontFamily.Alte_DIN,
+                fontSize: 15,
+                color: '#FFF',
+                fontWeight:'bold'
+              }}>
+              {item.reviewer_name.charAt(0)}
+            </Text>
+            </View>
           <View style={{paddingHorizontal: 12, justifyContent: 'center'}}>
             <Text
               style={{
@@ -206,15 +218,13 @@ const ItemReview = ({item}) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           paddingVertical: 15,
-          //   alignItems:'center'
         }}>
         <Text
           style={{
             color: '#666666',
             fontFamily: fontFamily.Poppins,
             fontSize: 14,
-            flex: 10,
-            // backgroundColor:'red'
+            flex: 9,
           }}>
           {item.review}
         </Text>
@@ -224,8 +234,8 @@ const ItemReview = ({item}) => {
             fontFamily: fontFamily.Poppins,
             fontSize: 10,
             flex: 1.5,
-            // backgroundColor:'green',
             paddingTop: 4,
+            
           }}>
           {dateToFromNowDaily(item.review_date)}
         </Text>

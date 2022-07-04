@@ -15,13 +15,13 @@ const getIsImportantData = async (conversation_id, is_important) => {
         "is_important": is_important, //1
     };
 
-    console.log('Message importent mark ',bodyRawData)
+    console.log('Message importent mark ', bodyRawData)
     var api_url = API_URL_STAGING + '/message/mark-as-important';
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
-      }
+    }
 
     const response = await fetch(api_url, {
         method: 'POST',
@@ -30,10 +30,16 @@ const getIsImportantData = async (conversation_id, is_important) => {
     })
 
     const data = response.json()
-    console.log('isImportant API data : ',data)
-   
+    console.log('isImportant API data : ', data)
+
     if (response.status > 400) {
-        throw new Error(data.errors)
+        // if (response.status == 401) {
+        //     navigation.navigate(NavigationString.LOGIN)
+        // }
+        // else {
+        //     throw new Error(data.errors);
+        // }
+        throw new Error(data.errors);
     }
     return data;
 }

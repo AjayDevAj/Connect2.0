@@ -31,6 +31,7 @@
 */
 
 import { API_URL_STAGING } from '../utility/Config_File'
+
 const getLogin = async (mobileNumber) => {
 
     /****** constant defined to get login from an api ****/
@@ -48,6 +49,7 @@ const getLogin = async (mobileNumber) => {
         if (response.status > 400) {
             throw new Error(data.errors)
         }
+       
         return data;
 
     } catch (err) {

@@ -28,7 +28,7 @@
 
  import materialStyles from './styles/MaterialMenuStylesheet';
 
-const MaterialMenu = ({ itemData,onClick }) => {
+const MaterialMenu = ({ itemData, onClick }) => {
   const [visible, setVisible] = useState(true);
 
   const hideMenu = () => setVisible(false);

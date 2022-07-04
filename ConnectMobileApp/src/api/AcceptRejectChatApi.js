@@ -1,12 +1,14 @@
 
 
-import {API_URL_STAGING} from '../utility/Config_File'
+import { API_URL_STAGING } from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
-import {otpResponse_Storage_Key} from '../utility/Constant'
-import {getOtpResponse} from '../utility/StorageClass'
+import { otpResponse_Storage_Key } from '../utility/Constant'
+import { getOtpResponse } from '../utility/StorageClass'
+
 
 const getAcceptRejectChatData = async (conversation_id, is_accept) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
+
 
     /****** constant defined to get accept reject chat from an api ****/
 
@@ -19,9 +21,9 @@ const getAcceptRejectChatData = async (conversation_id, is_accept) => {
     var api_url = API_URL_STAGING + '/accept-reject-chat';
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
-      }
+    }
 
     const response = await fetch(api_url, {
         method: 'PUT',
@@ -30,13 +32,19 @@ const getAcceptRejectChatData = async (conversation_id, is_accept) => {
     })
 
     const data = response.json()
-    console.log('Accept Reject Chat API data : ',data)
-   
+    console.log('Accept Reject Chat API data : ', data)
+
     if (response.status > 400) {
-        throw new Error(data.errors)
+        // if (response.status == 401) {
+        //     navigation.navigate(NavigationString.LOGIN)
+        // }
+        // else {
+        //     throw new Error(data.errors);
+        // }
+        throw new Error(data.errors);
     }
     return data;
 }
 
-export {getAcceptRejectChatData}
-   
+export { getAcceptRejectChatData }
+

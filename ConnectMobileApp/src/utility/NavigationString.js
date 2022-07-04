@@ -32,9 +32,8 @@ export default {
     Filter:'Filter',
     Drawer:"Drawer",
     Chat_Filter:"Chat_Filter",
-    // Review:"Review",
-
-    
+    Review:"Review",
+  
 /*
 **
 *
@@ -47,6 +46,8 @@ Dashboard: "Dashboard",
 Chat: "Chat",
 Customers: "Customers",
 Reviews: "Reviews",
+
+TABS: "Tabs",
 
 
 /*

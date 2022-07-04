@@ -65,16 +65,15 @@ import React,{useEffect,useRef} from 'react';
 import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
-import Count_Badge from '../component/Count_Badge';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Chat from '../Chat/Chat';
 import Customer from '../Customer/Customer';
 import uWebSockets from '../component/uWebSockets'
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
+import ChatStack from '../navigation/ChatStack';
 
 // import {useDispatch, useSelector} from 'react-redux';
-
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
 function HomeScreen() {
@@ -89,22 +88,6 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dashboard</Text>
-    </View>
-  );
-}
-
-function CustomersScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Customers</Text>
-    </View>
-  );
-}
-
-function ReviewsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Reviews</Text>
     </View>
   );
 }
@@ -128,19 +111,21 @@ export default function RouteTabBar() {
             );
           },
         }} />
-        <Tab.Screen name={navigationString.Chat} component={Chat} options={{headerShown: false, 
+        <Tab.Screen name={navigationString.Chat} component={ChatStack} options={{
+          headerShown: false, 
+          tabBarBadge: 5,
+          tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
           tabBarIcon: (tabInfo) => {
             return (
               <Icon
                 name="chat"
                 size={24}
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              >
-                   {/* <Count_Badge topRight={20} top={10} /> */}
-                </Icon>
+              />
             );
           }}} />
-        <Tab.Screen name={navigationString.Customers} component={Customer} options={{headerShown: false, 
+        <Tab.Screen name={navigationString.Customers} component={Customer} options={{
+          headerShown: false, 
           tabBarIcon: (tabInfo) => {
             return (
               <Icon
@@ -153,6 +138,8 @@ export default function RouteTabBar() {
         }} />
         <Tab.Screen name={navigationString.Reviews} component={Review} options={{
           headerShown: false,
+          tabBarBadge: 7,
+          tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
           tabBarIcon: (tabInfo) => {
             return (
               <Icon

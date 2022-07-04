@@ -29,9 +29,10 @@
 ** 
 */
 
-import {API_URL_STAGING } from '../utility/Config_File'
-import {getOtpResponse} from '../utility/StorageClass'
-import {otpResponse_Storage_Key} from '../utility/Constant'
+import { API_URL_STAGING } from '../utility/Config_File'
+import { getOtpResponse } from '../utility/StorageClass'
+import { otpResponse_Storage_Key } from '../utility/Constant'
+
 
 
 /*
@@ -46,7 +47,7 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 ** 
 */
 
-const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id=null, search_text = '') => {
+const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id = null, search_text = '') => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
 
     /*
@@ -56,7 +57,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-console.log('user_iduser_id',user_id)
+
     // const bodyData = new FormData(); 
     const bodyRawData = {
         "chat_status": chat_status,
@@ -68,15 +69,15 @@ console.log('user_iduser_id',user_id)
         "unread": unread,
         "user_id": user_id == null ? token_Value.user.id : user_id,
     };
-    
+
     console.log('Search Text - ', search_text)
     var api_url = API_URL_STAGING + '/message/message-list';
-    search_text !== null ? api_url = api_url + '?search='+search_text : api_url = api_url
-   
+    search_text !== null ? api_url = api_url + '?search=' + search_text : api_url = api_url
+
     console.log('API url', api_url);
     var headers = {
         Authorization:
-        `Bearer ${token_Value.token}`,
+            `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
     }
 
@@ -85,7 +86,7 @@ console.log('user_iduser_id',user_id)
         headers: headers,
         body: JSON.stringify(bodyRawData),
     });
-    
+
     /*
     **
     *
@@ -106,22 +107,22 @@ console.log('user_iduser_id',user_id)
     *
     ** 
     */
-//    console.log('response.status',response.status)
+    //    console.log('response.status',response.status)
     switch (response.status) {
-        case response.status > 400 :
-            throw new Error(data.errors)
-
+        case response.status > 400:
+            throw new Error(data.errors);
             break
-        case 204 :
+        case 204:
             throw new Error("NO Data")
             break
 
-        default:break
+        default: break
     }
     // if (response.status > 400) {
     //     // console.log('Chat Message Error : '+ data.errors);
     //     throw new Error(data.errors)
     // }
+
 
     return data;
 }
@@ -137,7 +138,6 @@ console.log('user_iduser_id',user_id)
 ** 
 */
 
-export {getChatList}
-   
+export { getChatList }
 
-     
+

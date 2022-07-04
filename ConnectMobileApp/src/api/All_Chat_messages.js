@@ -1,6 +1,6 @@
-import {API_URL_STAGING} from '../utility/Config_File';
-import {getOtpResponse} from '../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../utility/Constant'
+import { API_URL_STAGING } from '../utility/Config_File';
+import { getOtpResponse } from '../utility/StorageClass';
+import { otpResponse_Storage_Key } from '../utility/Constant';
 
 /**
  * 
@@ -15,27 +15,28 @@ const getAll_Conversation = async (
   page,
   sub_conversation_id,
   view_Own_Chat = 0,
-  chat_status=0,
-  chat_status_type="open"
+  chat_status = 0,
+  chat_status_type = "open"
 ) => {
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
-  console.log('allChat_Conversation_Data apicall getAll_Conversation',token_Value,)
+  console.log('allChat_Conversation_Data apicall getAll_Conversation', token_Value,)
+
 
   const response = await fetch(
     API_URL_STAGING +
-      '/message/' +
-      conversation_id +
-      '?page=' +
-      page +
-      '&sub_conversation_id=' +
-      sub_conversation_id +
-      '&other=' +
-      view_Own_Chat +
-      '&is_closed=' +
-      chat_status +
-      '&chat_status=' +
-      chat_status_type +
-      '&pagination=1',
+    '/message/' +
+    conversation_id +
+    '?page=' +
+    page +
+    '&sub_conversation_id=' +
+    sub_conversation_id +
+    '&other=' +
+    view_Own_Chat +
+    '&is_closed=' +
+    chat_status +
+    '&chat_status=' +
+    chat_status_type +
+    '&pagination=1',
     {
       method: 'GET',
       headers: {
@@ -46,10 +47,12 @@ const getAll_Conversation = async (
   const data = response.json();
   console.log('Gat All message list ', data);
 
-  if (response.status > 400) {
+  if (response.status > 400) { 
     throw new Error(data.errors);
+
   }
+
   return data;
 };
 
-export {getAll_Conversation};
+export { getAll_Conversation };

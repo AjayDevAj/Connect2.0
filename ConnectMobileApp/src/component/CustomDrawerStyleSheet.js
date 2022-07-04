@@ -34,6 +34,7 @@ export default StyleSheet.create({
         color: 'gray'
     },
     logoutStyle: {
+        flexDirection: 'row',
         position: 'absolute', bottom: 20, backgroundColor: 'white',
         height: '5%', width: '100%', elevation: 10,
         shadowRadius: 5,
@@ -51,7 +52,15 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'rgba(14, 0, 113, 1)'
-    }
+    },
+    closeImg: {
+        position: 'absolute',
+        right: 30,
+        marginTop: 12,
+        opacity: 0.5
+
+
+    },
 });
 
 
