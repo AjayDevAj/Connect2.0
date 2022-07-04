@@ -42,11 +42,11 @@ import isImportantDataReducer from "./IsImportantReducer";
 import AcceptRejectChatDataReducer from "./AcceptRejectChatReducer";
 import Send_Message_Reducer from "./Send_Message_Reducer";
 import FilterDataReducer from "./FilterDataReducer";
-
+import PostReducer from "./PostReducer";
 import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
 import CustomerReducer from "./CustomerReducer";
-
+import PostListReducer from "./PostListReducer";
 
 
 const loginDataReducer = (state = '', action) => {
@@ -81,6 +81,8 @@ const rootReducers = combineReducers({
     OverAllReducer_ResponceData:OverAllReducer,
     GetReviewListData:GetReviewListReducer,
     CustomerResponseData: CustomerReducer,
+    PostResponceData:PostReducer,
+    PostListResponceData:PostListReducer,
 
 })
 

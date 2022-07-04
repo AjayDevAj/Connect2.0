@@ -5,6 +5,8 @@ import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg'
 import fontfaimly from '../../utility/Font-Declarations';
 import TopHeader from '../../Header/TopHeader';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import { loadpostlistdata } from '../../actions/PostListAction';
+import {useDispatch, useSelector} from 'react-redux';
 const MyPostHome = () => {
 
     const DATA = [

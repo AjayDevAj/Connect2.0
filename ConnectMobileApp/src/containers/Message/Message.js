@@ -110,7 +110,7 @@ const Message = ({navigation, route}) => {
 
     ws.onopen = () => {
       console.log('uWebsocket Connected to the server');
-      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+     // ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
     };
     ws.onclose = e => {
       console.log('uWebsocket Disconnected. Check internet or server.');
@@ -134,7 +134,7 @@ const Message = ({navigation, route}) => {
     );
 
     if (isFocused) {
-      Incoming_Chat_Socket_Subscribe();
+      //Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }

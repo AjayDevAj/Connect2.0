@@ -21,6 +21,7 @@ import {useSelector} from 'react-redux';
 import FilterLocationData from '../../component/FilterLocationData';
 import SyncStorage from 'sync-storage';
 import { result } from 'lodash';
+import NavigationString from '../../utility/NavigationString';
 
 export default Filter = ({navigation, route}) => {
   const [applyfilter, setApplyFilter] = useState(false);
@@ -104,7 +105,8 @@ export default Filter = ({navigation, route}) => {
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
             //navigation.navigate('RouteTabBar')
-            navigation.goBack(() => Alert.alert('hi'));
+            navigation.goBack(() => console.log());
+           
           }}>
           <Text
             style={{
@@ -154,6 +156,7 @@ export default Filter = ({navigation, route}) => {
         <TouchableOpacity
           onPress={() => {
             {
+              navigation.navigate(NavigationString.Filter)
             }
           }}>
           <Text style={styles.clearAllBtnText}>CLEAR ALL</Text>
