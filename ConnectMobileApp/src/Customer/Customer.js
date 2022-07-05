@@ -36,7 +36,6 @@
  import AddNewCustomer from './AddNewCustomer';
  import PurchaseLeadComponent from '../containers/Message/PurchaseLeadComponent';
  
- 
  const Customer = ({navigation, Route}) => {
    const isFocused = useIsFocused();
    const [isSearch, setIsSearch] = useState(false);
@@ -133,7 +132,7 @@
     customerResponseData.data.customers.map((item) => {
       item.id==id ? setSelectedCustomerData(item) : ''
     });
-    purchaseHandler()
+    purchaseHandler();
    }
 
    const loadMoreCustomerData = (updatedPageNo) => {
@@ -149,6 +148,17 @@
       : callAPI()
    }
 
+   const getCustomerIntentData = (customer_intent) => {
+    var intentVal = '';
+    {customer_intent !== '' ? 
+      customer_intent.map((item) => {
+        intentVal = item.id
+      }) 
+      : ''
+    }
+    return intentVal;
+   }
+
    return (
     <View style={customerStyles.customerMainContainer}>
       {showPurchaseForm ? 
@@ -161,7 +171,7 @@
           dataComponent={selectedCustomerData != '' ? "customer" : ''}
           type={selectedCustomerData != '' ? "" : 'add'}
           conversation_id={selectedCustomerData.conversation_id}
-          customer_intent={selectedCustomerData.customer_intent}
+          customer_intent={getCustomerIntentData(selectedCustomerData.customer_intent)}
           navigation={navigation}
         />
       ) : (

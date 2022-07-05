@@ -10,11 +10,11 @@ import PurchaseLeadForm from './PurchaseLeadForm';
 import NavigationString from '../../utility/NavigationString';
 
 const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, logo, 
-    menuHandler, conversation_id, dataComponent='', type='', customer_intent='' }) => {
+    menuHandler, conversation_id, dataComponent='', type='', customer_intent='', }) => {
     const dispatch = useDispatch();
     const isFocused = useIsFocused();
 
-    const GetLeadResponseData= useSelector(
+    var GetLeadResponseData= useSelector(
         store => store.GetLeadResponseData
     );
     
@@ -31,17 +31,10 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
     };
 
     useEffect(() => {
-        if (isFocused) {
+        if (conversation_id) {
             getLeadApi(0,0,conversation_id);
         }
-    }, [isFocused]);
-
-    const backHandler = () => {
-        dataComponent == 'customer' ? 
-            navigation.navigate(NavigationString.Customers)
-        :
-            navigation.navigate(NavigationString.Chat)
-    }
+    }, [conversation_id]);
 
     const formHandler = (customerFormValue) => {
         saveAPI(customerFormValue.display_name, customerFormValue.mobile_number, 
@@ -63,7 +56,7 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
                 thirdIcon=""
                 color={color}
                 name={name}
-                menuHandler={backHandler}
+                menuHandler={menuHandler}
                 logo={logo}
             />
 
@@ -79,6 +72,7 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
                     dataComponent={dataComponent}
                     type={type}
                     customer_intent={customer_intent}
+                    cancelHandler={menuHandler}
                 /> 
             )}
         </View>
