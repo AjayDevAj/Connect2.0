@@ -23,19 +23,18 @@ const Incoming_Chat = () => {
   const isFocused = useIsFocused();
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co')).current;
   const [isVisible, setIsVisible] = useState(true);
-
-  // const [panelProps, setPanelProps] = useState({
-  //   fullWidth: true,
-  //   onClose: () => closePanel(),
-  //   onPressCloseButton: () => closePanel(),
-  // });
   const dispatch = useDispatch();
   const unassigned_Chat_Response = useSelector(
     store => store.Unassigned_Chat_Data,
   );
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
+    // navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
+
     if (unassigned_Chat_Response.data != null) {
+      // console.log('unassigned_Chat_Response::' ,unassigned_Chat_Response)
+      setCount(unassigned_Chat_Response.data.totalCount)
       openSheet(unassigned_Chat_Response.data.result);
     }
   }, [unassigned_Chat_Response]);
@@ -70,6 +69,9 @@ const Incoming_Chat = () => {
     };
     ws.onmessage = e => {
       let json_Data = JSON.parse(e.data);
+      if (json_Data.socket_name == "subscribe_incoming_chat_count") {
+        setCount(json_Data.chat_count)
+      }
       console.log('uWebsocket incomming chat onmessage print e', json_Data);
     };
   };
@@ -96,9 +98,7 @@ const Incoming_Chat = () => {
                 alignItems: 'center',
               }}>
               <Sms_black_24dp />
-              <Count_Badge topRight={-5} top={-5} badge_Value={
-                unassigned_Chat_Response.data != undefined ? 
-                unassigned_Chat_Response.data.totalCount:0} />
+              <Count_Badge topRight={-5} top={-5} badge_Value={count} />
             </View>
           </Draggable>
         </>

@@ -56,6 +56,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+import {navigationRef} from '../navigation/RootNavigation';
 
 
 
@@ -135,7 +136,7 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
 
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
 
         <Drawer.Navigator initialRouteName={initialState}
           drawerContent={(props) => <CustomDrawer {...props} />}

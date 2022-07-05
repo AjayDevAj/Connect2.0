@@ -95,9 +95,6 @@ const Chat = ({navigation ,Route}) => {
     ws.onopen = () => {
       console.log('uWebsocket Connected to the server Message');
       ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
-
-      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 64}));
-      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: 64}));
     };
     ws.onclose = e => {
       console.log('uWebsocket Disconnected. Check internet or server.', e);
@@ -236,7 +233,9 @@ const Chat = ({navigation ,Route}) => {
       {chatResponseData.data != null && (
         <ChatList
           onPress_Chat={selected_Item =>
-            navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
+            {
+              return navigation.navigate(navigationString.Message, { selected_Item, allChat: false });
+            }
           }
           data={chatResponseData.data.result}
           msgCount={currentTabStatus == 'open' ? chatResponseData.data.openMessageCount 
