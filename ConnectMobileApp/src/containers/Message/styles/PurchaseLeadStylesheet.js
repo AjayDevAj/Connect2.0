@@ -98,7 +98,7 @@ const purchaseLeadStyles = StyleSheet.create({
     purchaseLeadFormLabel: {
         color: '#000',
         opacity: 0.5,
-        fontFamily: fontFamily.DINRegular,
+        fontFamily: fontFamily.Alte_DIN,
         fontSize: 14,
         letterSpacing: 0.14,
         marginBottom: 5
@@ -109,13 +109,17 @@ const purchaseLeadStyles = StyleSheet.create({
         opacity: 1,
         borderWidth: 1,
         color: '#5F6368',
-        padding: 15,
+        padding: 10,
+        fontFamily: fontFamily.Poppins,
+        textTransform: 'capitalize',
+        fontSize: 12,
+        height: 40
     },
     intentButton: {
         borderWidth: 1,
         borderRadius: 4,
-        width: 'auto',
-        height: 'auto',
+        // width: 'auto',
+        // height: 'auto',
         justifyContent: 'center',
         padding: 5,
         margin: 5,
@@ -134,13 +138,26 @@ const purchaseLeadStyles = StyleSheet.create({
         fontFamily: fontFamily.Poppins,
         opacity: 1,
     },
+    intentSwitchContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'space-around', 
+        alignItems:'center',
+        marginVertical: 20, 
+        backgroundColor: '#F8F8F8',
+        width: 295,
+        height: 37,
+        borderRadius: 8,
+        marginLeft: '9%'
+    },
     updateButtonStyle: {
         backgroundColor: '#0E0071',
         borderRadius: 8,
-        width: '43%',
+        width: 158,
+        height: 40,
+        padding: 10,
         alignSelf: 'flex-end',
-        marginTop: -48,
-        marginRight: 10
+        // marginTop: -48,
+        // marginRight: 10
     },
     updateButtonTextStyle: {
         textTransform: 'uppercase',
@@ -148,16 +165,17 @@ const purchaseLeadStyles = StyleSheet.create({
         color: '#FFF',
         opacity: 1,
         fontFamily: fontFamily.Alte_DIN,
+        textAlign: 'center',
     },
     cancelButton: {
         borderWidth: 1,
         borderColor: '#C3C7D9',
         borderRadius: 8,
-        width: '45%',
-        // height: '20%',
+        width: 158,
+        height: 40,
         alignSelf: 'flex-start',
         padding: 10,
-        marginLeft: 10,
+        // marginLeft: 10,
         
     },
     cancelButtonText: {
@@ -167,8 +185,15 @@ const purchaseLeadStyles = StyleSheet.create({
         opacity: 1,
         fontFamily: fontFamily.Alte_DIN,
         textAlign: 'center',
-        padding: 2
-    }
+        // padding: 2
+    },
+    errorText: {
+        color: 'crimson',
+        fontWeight: 'bold',
+        marginTop: 6,
+        marginBottom: 10,
+        textAlign: 'center'
+    },
     
 });
 

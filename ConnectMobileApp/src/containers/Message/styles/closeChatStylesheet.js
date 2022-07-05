@@ -38,7 +38,7 @@ const closeChatStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
         // // justifyContent: 'flex-end',
-        opacity: 0.8,
+        opacity: 1,
         justifyContent: "center",
         alignItems: "center",
         position:"relative",

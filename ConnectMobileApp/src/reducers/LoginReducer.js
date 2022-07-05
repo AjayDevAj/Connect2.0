@@ -45,7 +45,7 @@ import FilterDataReducer from "./FilterDataReducer";
 
 import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
-import CustomerReducer from "./CustomerReducer";
+import CustomerReducer, { GetLeadReducer, SendLeadReducer } from "./CustomerReducer";
 
 
 
@@ -80,7 +80,10 @@ const rootReducers = combineReducers({
 
     OverAllReducer_ResponceData:OverAllReducer,
     GetReviewListData:GetReviewListReducer,
+    
     CustomerResponseData: CustomerReducer,
+    GetLeadResponseData: GetLeadReducer,
+    SendLeadResponseData: SendLeadReducer,
 
 })
 

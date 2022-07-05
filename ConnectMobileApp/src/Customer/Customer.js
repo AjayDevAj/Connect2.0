@@ -27,7 +27,6 @@
  import customerStyles from './styles/customerStylesheet';
  import {useSelector, useDispatch} from 'react-redux';
  import {loadCustomerData} from '../actions/CustomerAction';
- import {loadChatData} from '../actions/ChatAction';
  import CustomerList from '../Customer/CustomerList';
  import navigationString from '../utility/NavigationString';
  import {useIsFocused} from '@react-navigation/native';
@@ -35,7 +34,7 @@
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
- import PurchaseLeadForm from '../containers/Message/PurchaseLeadForm';
+ import PurchaseLeadComponent from '../containers/Message/PurchaseLeadComponent';
  
  
  const Customer = ({navigation, Route}) => {
@@ -43,6 +42,8 @@
    const [isSearch, setIsSearch] = useState(false);
    const [isFilterApplied, setIsFilterApplied] = useState(true);
    const [searchText, setSearchText] = useState('');
+   const [pageNo, setPageNo] = useState(0);
+   const [totalCustomerPageCount, setTotalCustomerPageCount] = useState(1);
  
    const menuHandler = () => {
     //  navigation.navigate(navigationString.Customer);
@@ -61,7 +62,7 @@
  
    const dispatch = useDispatch();
    const customerResponseData = useSelector(store => store.CustomerResponseData);
-   const chatResponseData = useSelector(store => store.ChatResponseData);
+
    /**
     * Api call when page load
     */
@@ -135,80 +136,71 @@
     purchaseHandler()
    }
 
+   const loadMoreCustomerData = (updatedPageNo) => {
+    {customerResponseData.data != undefined && 
+      customerResponseData.data.totalPage != undefined && 
+      (setTotalCustomerPageCount(customerResponseData.data.totalPage))
+    }
+    
+    setPageNo(updatedPageNo);
+    
+    ((updatedPageNo > 0) && (updatedPageNo <= totalCustomerPageCount)) 
+      ? callAPI('', updatedPageNo) 
+      : callAPI()
+   }
+
    return (
-     <View style={customerStyles.customerMainContainer}>
+    <View style={customerStyles.customerMainContainer}>
       {showPurchaseForm ? 
-        ( 
-          <>
-          {selectedCustomerData != '' ? (
-            <>
-            <TopHeader
-              firstIcon="arrow-back"
-              secondIcon=""
-              thirdIcon=""
-              name={selectedCustomerData.display_name}
-              logo={selectedCustomerData.publisher_type}
-              menuHandler={menuHandler}
-            />
-            <PurchaseLeadForm 
-              formData={selectedCustomerData}
-              navigation={navigation}
-              dataComponent="customer"
-            /> 
-            </>
-          ) : (
-            <>
-            <TopHeader
-              firstIcon="arrow-back"
-              secondIcon=""
-              thirdIcon=""
-              name="Add New Customer"
-              menuHandler={menuHandler}
-            />
-            <PurchaseLeadForm 
-              formData=""
-              navigation={navigation}
-              type="add"
-            /> 
-          </>
-          )}
-          </>
-          
-        ) : (
-          <>
-          <TopHeader
-            firstIcon="menu"
-            secondIcon="search"
-            thirdIcon="filter-list"
-            name="Customers"
-            menuHandler={menuHandler}
-            searchHandler={searchHandler}
-            filterHandler={filterHandler}
-            navigation={navigation}
-            chatSearchHandler={customerSearchHandler}
-            isSearchEnable={isSearch}
-            isFilterApplied={isFilterApplied}
-          />
-        
-          {/* Add New customer component */}
-          <AddNewCustomer purchaseHandler={() => {
+      ( 
+        <PurchaseLeadComponent 
+          firstIcon="arrow-back"
+          name={selectedCustomerData != '' ? selectedCustomerData.display_name : "Add New Customer"}
+          logo={selectedCustomerData != '' ? selectedCustomerData.publisher_type : ''}
+          menuHandler={menuHandler}
+          dataComponent={selectedCustomerData != '' ? "customer" : ''}
+          type={selectedCustomerData != '' ? "" : 'add'}
+          conversation_id={selectedCustomerData.conversation_id}
+          customer_intent={selectedCustomerData.customer_intent}
+          navigation={navigation}
+        />
+      ) : (
+        <>
+        <TopHeader
+          firstIcon="menu"
+          secondIcon="search"
+          thirdIcon="filter-list"
+          name="Customers"
+          menuHandler={menuHandler}
+          searchHandler={searchHandler}
+          filterHandler={filterHandler}
+          navigation={navigation}
+          chatSearchHandler={customerSearchHandler}
+          isSearchEnable={isSearch}
+          isFilterApplied={isFilterApplied}
+        />
+       
+        {/* Add New customer component */}
+        <AddNewCustomer purchaseHandler={() => {
             purchaseHandler()
             setSelectedCustomerData('');
-            }} />
-  
-          {customerResponseData.data != null && (
-            <CustomerList
-              onPress_Customer={(val) => { 
-                onPressCustomerHandler(val)
-              }}
-              data={customerResponseData.data.customers}
-            />
-          )}
-          </>
+          }} 
+        />
+ 
+        {customerResponseData.data != null && (
+          <CustomerList
+            onPress_Customer={(val) => { 
+              onPressCustomerHandler(val)
+            }}
+            data={customerResponseData.data.customers}
+            loadMoreCustomerData={loadMoreCustomerData}
+            page={pageNo}
+          />
         )}
-       
-     </View>
-   );
+        </>
+      )}
+    </View>
+  );
  };
  
  export default Customer;

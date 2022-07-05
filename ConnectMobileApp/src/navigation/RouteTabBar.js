@@ -72,6 +72,7 @@ import uWebSockets from '../component/uWebSockets'
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
 import ChatStack from '../navigation/ChatStack';
+import fontFamily from '../utility/Font-Declarations';
 
 // import {useDispatch, useSelector} from 'react-redux';
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
@@ -106,10 +107,16 @@ export default function RouteTabBar() {
                 name="dashboard"
                 size={24}
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
-
               />
             );
           },
+          tabBarLabelStyle: { 
+            opacity: 1,
+            fontSize: 10,
+            fontFamily: fontFamily.Alte_DIN
+          },
+          tabBarInactiveTintColor: '#5F6368',
+          tabBarActiveTintColor: '#000',
         }} />
         <Tab.Screen name={navigationString.Chat} component={ChatStack} options={{
           headerShown: false, 
@@ -123,7 +130,15 @@ export default function RouteTabBar() {
                 color={tabInfo.focused ? "#00C158" : "#5F6368"}
               />
             );
-          }}} />
+          },
+          tabBarLabelStyle: { 
+            opacity: 1,
+            fontSize: 10,
+            fontFamily: fontFamily.Alte_DIN
+          },
+          tabBarInactiveTintColor: '#5F6368',
+          tabBarActiveTintColor: '#000',
+        }} />
         <Tab.Screen name={navigationString.Customers} component={Customer} options={{
           headerShown: false, 
           tabBarIcon: (tabInfo) => {
@@ -135,6 +150,13 @@ export default function RouteTabBar() {
               />
             );
           },
+          tabBarLabelStyle: { 
+            opacity: 1,
+            fontSize: 10,
+            fontFamily: fontFamily.Alte_DIN
+          },
+          tabBarInactiveTintColor: '#5F6368',
+          tabBarActiveTintColor: '#000',
         }} />
         <Tab.Screen name={navigationString.Reviews} component={Review} options={{
           headerShown: false,
@@ -149,6 +171,13 @@ export default function RouteTabBar() {
               />
             );
           },
+          tabBarLabelStyle: { 
+            opacity: 1,
+            fontSize: 10,
+            fontFamily: fontFamily.Alte_DIN
+          },
+          tabBarInactiveTintColor: '#5F6368',
+          tabBarActiveTintColor: '#000',
         }} />
       </Tab.Navigator>
       <Incoming_Chat />

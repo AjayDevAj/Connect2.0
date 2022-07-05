@@ -47,6 +47,9 @@ import OverAllWatcherSaga from './OverAllSaga';
 import ReviewListWatcherSaga from './GetReviewListSaga';
 import CustomerDataWatcherSaga from './CustomerSaga';
 
+import GetLeadDataWatcherSaga from './GetLeadSaga';
+import SendLeadDataWatcherSaga from './SendLeadSaga';
+
 /***************** Root saga method ********************/
 
 export default function* rootSaga() {
@@ -66,6 +69,9 @@ export default function* rootSaga() {
 
     OverAllWatcherSaga(),
     ReviewListWatcherSaga(),
+
     CustomerDataWatcherSaga(),
+    GetLeadDataWatcherSaga(),
+    SendLeadDataWatcherSaga(),
   ]);
 }

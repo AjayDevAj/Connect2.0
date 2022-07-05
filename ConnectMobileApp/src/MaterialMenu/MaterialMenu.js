@@ -35,10 +35,10 @@ const MaterialMenu = ({ itemData, onClick }) => {
 
   const showMenu = () => setVisible(true);
 
-  const menuItemPressHandler = (item) => {
-    alert(item)
-    hideMenu()
-  };
+  // const menuItemPressHandler = (item) => {
+  //   alert(item)
+  //   hideMenu()
+  // };
 
   return (
     <View style={ materialStyles.materialContainer}>

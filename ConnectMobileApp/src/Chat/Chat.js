@@ -32,13 +32,9 @@ import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
-import Loader from '../utility/Loader';
-import {signOut} from '../navigation/Routes'
-import Drawer from '../navigation/Drawer';
-import Filter from '../containers/dashboard/Filter';
+import {signOut} from '../navigation/Routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
-import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 // import uWebSockets from '../component/uWebSockets'
 
 const Chat = ({navigation ,Route}) => {
@@ -49,6 +45,8 @@ const Chat = ({navigation ,Route}) => {
   const [isFilterApplied, setIsFilterApplied] = useState(true);
   const [searchText, setSearchText] = useState('');
   const [currentTabStatus, setCurrentTabStatus] = useState('open');
+  const [pageNo, setPageNo] = useState(1);
+  const [totalChatPageCount, setTotalChatPageCount] = useState(1);
 
   const menuHandler = () => {
     // console.log('Menu Handler');
@@ -138,11 +136,9 @@ const Chat = ({navigation ,Route}) => {
    * @param {*} search_text 
    */
 
-  const callAPI = (type = 'open', searchText = '') => {
-    dispatch(loadChatData(0, null, 0, 'DESC', type, 1, 0,null, searchText !== null ? searchText:null))
+   const callAPI = (type = 'open', searchText = '', pageNo=0) => {
+    dispatch(loadChatData(0, null, 0, 'DESC', type, pageNo, 0,null, searchText !== null ? searchText:null))
   };
-
-  
 
   /**
    * Search Api call
@@ -174,6 +170,20 @@ const Chat = ({navigation ,Route}) => {
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+
+  const loadMoreChatData = (updatedPageNo) => {
+    {chatResponseData.data != undefined && 
+      chatResponseData.data.totalPage != undefined && 
+      (setTotalChatPageCount(chatResponseData.data.totalPage))
+    }
+    setPageNo(updatedPageNo);
+
+    ((updatedPageNo > 0) && (updatedPageNo <= totalChatPageCount)) 
+    ? callAPI(currentTabStatus, '', updatedPageNo) 
+    : callAPI(currentTabStatus)
+  }
+  
+  console.log('===== Chat response Data =====', chatResponseData);
   
   return (
     <View style={chatStyles.chatMainContainer}>
@@ -233,6 +243,8 @@ const Chat = ({navigation ,Route}) => {
           : currentTabStatus == 'closed' ? chatResponseData.data.closedMessageCount 
           : chatResponseData.data.assignedMessageCount}
           tabName={currentTabStatus}
+          loadMoreChatData={loadMoreChatData}
+          page={pageNo}
         />
       )}
     </View>

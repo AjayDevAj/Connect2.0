@@ -1,7 +1,6 @@
 
 
 import { API_URL_STAGING } from '../utility/Config_File'
-import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
 
@@ -20,7 +19,7 @@ const closedChat = async (chat_status,conversation_id) => {
 
     const bodyRawData = {
         "chat_status": chat_status,
-        "conversation_id": is_important,
+        "conversation_id": conversation_id,
     };
 
     const response = await fetch(api_url, {
@@ -30,7 +29,7 @@ const closedChat = async (chat_status,conversation_id) => {
     });
 
     const data = response.json()
-    console.log('isImportant API data : ', data)
+    console.log('Close chat API data : ', data)
 
     if (response.status > 400) {
         // if (response.status == 401) {

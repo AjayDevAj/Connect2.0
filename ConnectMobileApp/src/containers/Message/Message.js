@@ -18,7 +18,7 @@ import {
 } from './Gifted_Chat_Extention';
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {otpResponse_Storage_Key, materialMenuItemData} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 // import FileViewer from "react-native-file-viewer";
@@ -28,8 +28,10 @@ import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
 import PurchaseLeadSection from './PurchaseLeadSection';
-import PurchaseLeadForm from './PurchaseLeadForm';
+import PurchaseLeadComponent from './PurchaseLeadComponent';
 import CloseChatModal from './CloseChatModal';
+import { closedChat } from '../../api/closedChat';
+import navigationString from '../../utility/NavigationString';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
@@ -270,21 +272,6 @@ const Message = ({navigation, route}) => {
     setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
-  const materialMenuItemData = [
-    {
-      id: 1,
-      value: 'Close chat',
-    },
-    {
-      id: 2,
-      value: 'Mark as unread',
-    },
-    {
-      id: 3,
-      value: 'Assign to other',
-    },
-  ];
-
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
@@ -292,21 +279,25 @@ const Message = ({navigation, route}) => {
     setShowPurchaseForm(!showPurchaseForm);
   };
 
+  const closeChatHandler = async () => {
+    const data = await closedChat(
+      'closed',
+      getDataFromParam.selected_Item.conversation_id
+    );
+    navigation.navigate(navigationString.Chat);
+  };
+
   return (
     <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF'}]}>
       {showPurchaseForm ? (
         <>
-          <TopHeader
+          <PurchaseLeadComponent 
             firstIcon="arrow-back"
-            secondIcon=""
-            thirdIcon=""
             color={reloadTopView ? '#FFAA00' : null}
             name={getDataFromParam.selected_Item.display_name}
-            menuHandler={menuHandler}
+            menuHandler={() => navigation.goBack()}
             logo={getDataFromParam.selected_Item.publisher_type}
-          />
-          <PurchaseLeadForm
-            formData={getDataFromParam.selected_Item}
+            conversation_id={getDataFromParam.selected_Item.conversation_id}
             navigation={navigation}
           />
         </>
@@ -349,7 +340,7 @@ const Message = ({navigation, route}) => {
           )}
 
           <View style={{flex: 1}}>
-            {isClosedChatClicked && <CloseChatModal />}
+            {isClosedChatClicked && <CloseChatModal closeChatHandler={closeChatHandler} />}
             {allChat_Conversation_Data.data && loginUserData != undefined && (
               // <ImageBackground source={require('./img/MaskGroup17.svg')} >
               <GiftedChat

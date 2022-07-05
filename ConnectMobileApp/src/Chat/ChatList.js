@@ -21,7 +21,7 @@
 **
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, TouchableOpacity, Text } from 'react-native';
 import NoChatDataFoundSvg from './assets/undraw_team_chat_re_vbq1.svg';
 
@@ -34,10 +34,13 @@ import CardRowThree from '../Card/CardRowThree';
 import {dateToFromNowDaily} from '../utility/CommonFunc'
 
     
-const ChatList = ({data,onPress_Chat,isShowRowThree=false, msgCount=0, tabName='' }) => {
+const ChatList = ({data,onPress_Chat,isShowRowThree=false, msgCount=0, tabName='', loadMoreChatData, page }) => {
     const Capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+
+    const [chatData, setPrevChatData] = useState([]);
+
     return (
         <>
         {(data != '' && msgCount > 0) ? (
@@ -45,6 +48,11 @@ const ChatList = ({data,onPress_Chat,isShowRowThree=false, msgCount=0, tabName='
                 <FlatList 
                     animation={true}
                     data={data}
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() => {
+                        setPrevChatData(chatData.concat(data))
+                        loadMoreChatData(page+1)
+                    }}
                     renderItem={( { item }) => (
                         <TouchableOpacity onPress={() => onPress_Chat(item)}>
                             <Card>
