@@ -6,6 +6,8 @@ import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadAccept_RejectChat_Data} from '../actions/AcceptRejectChatAction';
 import {getAcceptRejectChatData} from '../api/AcceptRejectChatApi';
+import * as RootNavigation from '../navigation/RootNavigation';
+import navigationString from '../utility/NavigationString';
 
 /**
  * Open action sheet
@@ -42,7 +44,7 @@ const Item = ({title, location, last_message,onclick}) => (
   />
 );
 
-const Action_Sheet = () => {
+const Action_Sheet = ({navigation}) => {
   const dispatch = useDispatch();
 
   const actionSheetRef = useRef();
@@ -53,14 +55,21 @@ const Action_Sheet = () => {
       location={item.location_name}
       last_message={item.message}
       conversation_id={item.conversation_id}
-      onclick={() => acpect_Reject_API_Call(item.conversation_id)}
+      onclick={() => 
+        acpect_Reject_API_Call(item.conversation_id,item)
+        // console.log("acpect_Reject_API_Call",JSON.stringify(item))
+      }
     />
   );
 
-  const acpect_Reject_API_Call = async (conversation_id) => {
+  const acpect_Reject_API_Call = async (conversation_id,item) => {
     // dispatch(loadAccept_RejectChat_Data());
     const data = await getAcceptRejectChatData(conversation_id);
-    console.log("acpect_Reject_API_Call",JSON.stringify(data))
+        // console.log("acpect_Reject_API_Call",JSON.stringify(item))
+      SheetManager.hideAll()
+     RootNavigation.navigate(navigationString.Message, {"selected_Item":item,allChat:false})
+
+    // console.log("acpect_Reject_API_Call",JSON.stringify(data))
     // setReloadTopView(data.data.is_important);
   };
 

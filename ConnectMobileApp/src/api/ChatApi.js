@@ -120,7 +120,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
             throw new Error("NO Data")
             break
         case 401:
-            navigator.navigate(NavigationString.LOGIN)   
+            // navigator.navigate(NavigationString.LOGIN)   
  
         default: break
     }
