@@ -71,22 +71,12 @@ const Message = ({navigation, route}) => {
       createdAt: new Date(),
       user: {
         agent_name: messages.assets[0].fileName,
-        _id: messages.assets[0].fileSize,
+        _id: 'a',
       },
+      media_type:'image',
       _id: messages.assets[0].fileSize,
       file_type: 'sendChat',
     });
-
-    dispatch(
-      send_Chat_Message_Data(
-        'google',
-        getDataFromParam.selected_Item.conversation_id,
-        getDataFromParam.selected_Item.sub_conversation_id,
-        null,'image',
-        messages.assets[0].uri
-
-      ),
-    );
   };
   const openFile = async () => {
     try {
@@ -146,27 +136,24 @@ const Message = ({navigation, route}) => {
       // );
 
       // if (isFocused_Obj) {
-        console.log(
-          'uWebsocket incomming chat onmessage print e',
-          json_Data,
-        );
+      console.log('uWebsocket incomming chat onmessage print e', json_Data);
 
-        switch (json_Data.socket_name) {
-          case 'subscribe_message':
-            setMessages(previousMessages =>
-              GiftedChat.append(previousMessages, [json_Data]),
-            );
-            break;
-          case 'subscribe_typing_event':
-            setTyping(json_Data.is_typing);
-            break;
-          case 'subscribe_message_delivery_status':
-            // write a code
-            break;
+      switch (json_Data.socket_name) {
+        case 'subscribe_message':
+          setMessages(previousMessages =>
+            GiftedChat.append(previousMessages, [json_Data]),
+          );
+          break;
+        case 'subscribe_typing_event':
+          setTyping(json_Data.is_typing);
+          break;
+        case 'subscribe_message_delivery_status':
+          // write a code
+          break;
 
-          default:
-            break;
-        }
+        default:
+          break;
+      }
       // }
     };
   };
@@ -178,7 +165,7 @@ const Message = ({navigation, route}) => {
     console.log('uWebsocket print ws', isFocused);
 
     if (isFocused) {
-      // Incoming_Chat_Socket_Subscribe();
+      Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }
@@ -223,6 +210,7 @@ const Message = ({navigation, route}) => {
   const [unSendMessage, setUnSendMessage] = useState(initial_Value);
 
   const onSend = useCallback((messages = []) => {
+    console.log('messages :-', messages);
     setUnSendMessage({
       message: messages[0].text,
       createdAt: messages[0].createdAt,
@@ -235,20 +223,38 @@ const Message = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
+    {
+      console.log('send_Chat_Message_Data ',unSendMessage);
+    }
     if (unSendMessage._id != null) {
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, [unSendMessage]),
       );
-      {console.log('send_Chat_Message_Data ',getDataFromParam.selected_Item.conversation_id,
-      getDataFromParam.selected_Item.sub_conversation_id)}
-      dispatch(
-        send_Chat_Message_Data(
-          'google',
-          getDataFromParam.selected_Item.conversation_id,
-          getDataFromParam.selected_Item.sub_conversation_id,
-          unSendMessage.message,null,null
-        ),
-      );
+     
+      if (unSendMessage.message != null) {
+        dispatch(
+          send_Chat_Message_Data(
+            'google',
+            getDataFromParam.selected_Item.conversation_id,
+            getDataFromParam.selected_Item.sub_conversation_id,
+            unSendMessage.message,
+            null,
+            null,
+          ),
+        );
+      }
+      else{
+        dispatch(
+          send_Chat_Message_Data(
+            'google',
+            getDataFromParam.selected_Item.conversation_id,
+            getDataFromParam.selected_Item.sub_conversation_id,
+            null,
+            'image',
+            unSendMessage.image,
+          ),
+        );
+      }
     }
   }, [unSendMessage]);
 

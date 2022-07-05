@@ -237,16 +237,19 @@ export const renderCustomView = ({currentMessage, ...props}) => {
 
 // renderMessageImage
 export const renderMessageImage = ({currentMessage, ...props}) => {
+  // {console.log("currentMessage image",currentMessage)}
+
   return (
     <>
-      {/* {currentMessage.media_type == 'file' && ( */}
+    
+      {currentMessage.media_type == 'image' && (
       <View
         style={{
           width: 150,
           height: 100,
         }}>
         {/* <ImageBackground
-           source={require('../../assets/images/placholder_image.png')}
+           source={require('../../assets/images/Group.png')}
            resizeMode="contain"
            style={{flex: 1, justifyContent: 'center'}}> */}
         {/* <SingleImage uri={currentMessage.image}> */}
@@ -262,7 +265,7 @@ export const renderMessageImage = ({currentMessage, ...props}) => {
         {/* </SingleImage> */}
         {/* </ImageBackground> */}
       </View>
-      {/* )} */}
+     )} 
     </>
   );
 };
