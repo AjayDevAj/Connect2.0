@@ -46,3 +46,27 @@ const CustomerReducer = (state = '', action) => {
 }
 
 export default CustomerReducer;
+
+export const GetLeadReducer = (state = '', action) => {
+    if(action.type == CONSTANT.GET_LEAD_DATA_SUCCESS) {
+        return action.payload;
+    }
+
+    if (action.type == CONSTANT.GET_LEAD_DATA_ERROR) {
+        return action.payload;
+    }
+
+    return state;
+}
+
+export const SendLeadReducer = (state = '', action) => {
+    if(action.type == CONSTANT.SEND_LEAD_DATA_SUCCESS) {
+        return action.payload;
+    }
+
+    if (action.type == CONSTANT.SEND_LEAD_DATA_ERROR) {
+        return action.payload;
+    }
+
+    return state;
+}

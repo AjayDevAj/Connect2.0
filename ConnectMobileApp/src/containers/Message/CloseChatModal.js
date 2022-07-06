@@ -1,39 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, FlatList, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Modal, FlatList, TouchableOpacity } from 'react-native';
 import RadioButton from 'react-native-radio-button';
-
-
+import { closeChatReason } from '../../utility/Constant';
 import closeChatStyles from './styles/closeChatStylesheet';
 
-const CloseChatModal = () => {
+const CloseChatModal = ({ closeChatHandler }) => {
     const [modalVisible, setModalVisible] = useState(true);
     const [radioButton, setRadioButton] = useState({
         id: null,
         name: null,
-      });
-
-    const closeChatReason = [
-        {
-            id: 1,
-            value: 'Customer Wants To Close'
-        },
-        {
-            id: 2,
-            value: 'Sale Successful'
-        },
-        {
-            id: 3,
-            value: 'Abusive'
-        },
-        {
-            id: 4,
-            value: 'Not Interested'
-        },
-        {
-            id: 5,
-            value: 'Not Responding'
-        },
-    ]
+    });
 
     return (
         <>
@@ -91,7 +67,10 @@ const CloseChatModal = () => {
                         }}>
                             <Text style={closeChatStyles.cancelButtonText}>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={closeChatStyles.closeButton} onPress={() => {setModalVisible(!modalVisible)}}>
+                        <TouchableOpacity style={closeChatStyles.closeButton} onPress={() => {
+                            setModalVisible(!modalVisible);
+                            closeChatHandler()
+                            }}>
                             <Text style={closeChatStyles.closeButtonText}>Close</Text>
                         </TouchableOpacity>
                     </View>

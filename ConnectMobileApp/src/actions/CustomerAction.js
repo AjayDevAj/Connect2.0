@@ -119,6 +119,129 @@ const getResponse = payload => ({
 /*
 **
 *
+** Constant define to load chat data in a common 
+** constant imported from the constant file 
+*
+** 
+*/
+
+
+const loadLeadData = (
+    location_id,
+    id,
+    conversation_id
+) => ({
+    type: CONSTANT.GET_LEAD_DATA,
+    location_id,
+    id,
+    conversation_id
+});
+
+/*
+**
+*
+** Constant define to get the error data 
+** occured while sending otp using mobile number
+** a common constant imported from the constant file 
+*
+** 
+*/
+
+const getLeadDataError = payload => ({
+    type: CONSTANT.GET_LEAD_DATA_ERROR,
+    payload
+})
+
+
+
+/*
+**
+*
+** Constant define to get the response data 
+** from the otp section after a successful otp send
+** a common constant imported from the constant file 
+*
+** 
+*/
+
+const getLeadDataResponse = payload => ({
+    type: CONSTANT.GET_LEAD_DATA_SUCCESS,
+    payload
+});
+
+/*
+**
+*
+** Constant define to load chat data in a common 
+** constant imported from the constant file 
+*
+** 
+*/
+
+
+const sendLeadData = (
+    name,
+    mobile_number,
+    email,
+    conversation_id,
+    interests,
+    comments,
+    intents,
+    entry_points,
+    location_id,
+    id
+) => ({
+    type: CONSTANT.SEND_LEAD_DATA,
+    name,
+    mobile_number,
+    email,
+    conversation_id,
+    interests,
+    comments,
+    intents,
+    entry_points,
+    location_id,
+    id
+});
+
+
+/*
+**
+*
+** Constant define to get the error data 
+** occured while sending otp using mobile number
+** a common constant imported from the constant file 
+*
+** 
+*/
+
+const sendLeadDataError = payload => ({
+    type: CONSTANT.SEND_LEAD_DATA_ERROR,
+    payload
+})
+
+
+
+/*
+**
+*
+** Constant define to get the response data 
+** from the otp section after a successful otp send
+** a common constant imported from the constant file 
+*
+** 
+*/
+
+const sendLeadDataResponse = payload => ({
+    type: CONSTANT.SEND_LEAD_DATA_SUCCESS,
+    payload
+});
+
+
+
+/*
+**
+*
 ** All the constants defined above will be exported 
 ** so that it could be imported in otp file 
 ** & can be used as a common constants imported from 
@@ -131,4 +254,12 @@ export {
     loadCustomerData,
     getError,
     getResponse,
+
+    loadLeadData,
+    getLeadDataError,
+    getLeadDataResponse,
+    
+    sendLeadData,
+    sendLeadDataError,
+    sendLeadDataResponse
 }

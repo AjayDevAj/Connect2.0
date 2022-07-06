@@ -17,7 +17,10 @@ const CardRowOne = ({ logo, name, location, isImportant, createdAt='' }) => {
             
                 <Text style={ cardStyles.cardName }>{ name }</Text>
                 {isImportant > 0 && <Icon name="star-border" size={16} color="#FFAA00" style={{ opacity: 1, marginLeft: 5, marginTop: 2 }} />}
-                {createdAt !='' && ( <View style={{ alignSelf: 'flex-start', marginLeft: 6,  marginTop: -7}}><CardTime createdAt={createdAt} /></View> )}
+                {createdAt !='' && ( <View style={{ alignSelf: 'flex-start', marginLeft: 6,  marginTop: -7}}>
+            <CardTime time={createdAt} />
+            </View>
+             )}
             </View>
             
             {createdAt !='' 

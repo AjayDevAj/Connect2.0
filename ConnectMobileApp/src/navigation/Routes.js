@@ -56,10 +56,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+<<<<<<< HEAD
 import New_Post from '../containers/Post/New_Post';
 import My_Offers_Home from '../containers/Offers/My_Offers_Home';
 import MyPostHome from '../containers/Post/MyPostHome'
 import Add_new_offer from '../containers/Offers/Add_new_offers'
+=======
+import {navigationRef} from '../navigation/RootNavigation';
+>>>>>>> Swipeable-Panel
 
 
 
@@ -139,7 +143,7 @@ const Routes = () => {
     <>
       {statusKeyLoaded && (
 
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
 
         <Drawer.Navigator initialRouteName={initialState}
           drawerContent={(props) => <CustomDrawer {...props} />}

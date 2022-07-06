@@ -82,7 +82,7 @@ const Review = ({navigation ,Route}) => {
         chatSearchHandler={chatSearchHandler}
         isSearchEnable={isSearch}
       />
-      {isReload &&
+      {(isReload && GetReviewListData.data != undefined)  &&
          <Review_SectionList DATA={[...['Pizza', ''],...GetReviewListData.data.reviews]}/>
       }
     </View>

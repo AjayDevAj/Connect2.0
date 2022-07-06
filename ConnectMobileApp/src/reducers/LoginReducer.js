@@ -48,6 +48,8 @@ import GetReviewListReducer from "./GetReviewListReducer";
 import CustomerReducer from "./CustomerReducer";
 import PostListReducer from "./PostListReducer";
 import OfferListReducer from "./OfferListReducer"
+import CustomerReducer, { GetLeadReducer, SendLeadReducer } from "./CustomerReducer";
+
 
 
 const loginDataReducer = (state = '', action) => {
@@ -81,10 +83,13 @@ const rootReducers = combineReducers({
 
     OverAllReducer_ResponceData:OverAllReducer,
     GetReviewListData:GetReviewListReducer,
+    
     CustomerResponseData: CustomerReducer,
     PostResponceData:PostReducer,
     PostListResponceData:PostListReducer,
-    OfferListResponceData:OfferListReducer
+    OfferListResponceData:OfferListReducer,
+    GetLeadResponseData: GetLeadReducer,
+    SendLeadResponseData: SendLeadReducer,
 
 })
 

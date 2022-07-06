@@ -2,6 +2,8 @@ import React, {useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {viewed_Onboarding} from '../utility/Constant'
 
+export var store_Value = null
+
 /**
  * * This function is for storing data in local storage(AsyncStorage)
  * @param {*} storeObject 
@@ -25,13 +27,24 @@ export const saveObject = async (storeObject,Store_Key) => {
  * @param {*} Store_Key 
  */
 export const getOtpResponse = async (Store_Key) => {
+
+    if (store_Value != null) {
+        console.log("store_Value error is fail to store: if " + store_Value);
+        return store_Value
+    }
+    else {
+        // console.log("store_Value error is fail to store: else " + store_Value);
     try {
         const value = await AsyncStorage.getItem(Store_Key);
         if (value !== null) {
+            console.log("store_Value error is fail to store: else value :- " + value);
+            store_Value = JSON.parse(value)
+            console.log("store_Value error is fail to store: else store_Value :- " + store_Value);
             return JSON.parse(value)
         }
     } catch (error) {
     }
+}
 }
 
 /**
@@ -40,6 +53,7 @@ export const getOtpResponse = async (Store_Key) => {
 export const deleteAll = () => {
     try {
         AsyncStorage.clear();
+        store_Value=null
         // AsyncStorage.setItem(viewed_Onboarding, 'true');
     } catch (error) {
     }

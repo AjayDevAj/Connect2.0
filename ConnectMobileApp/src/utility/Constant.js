@@ -101,6 +101,13 @@ const CONSTANT = {
 
   
 
+  GET_LEAD_DATA: 'GET_LEAD_DATA',
+  GET_LEAD_DATA_ERROR: 'GET_LEAD_DATA_ERROR',
+  GET_LEAD_DATA_SUCCESS: 'GET_LEAD_DATA_SUCCESS',
+
+  SEND_LEAD_DATA: 'SEND_LEAD_DATA',
+  SEND_LEAD_DATA_ERROR: 'SEND_LEAD_DATA_ERROR',
+  SEND_LEAD_DATA_SUCCESS: 'SEND_LEAD_DATA_SUCCESS',
 };
 
 export {CONSTANT};
@@ -201,6 +208,59 @@ export const Offer_CTA = [
   {label: ' CTA Event Post', value: '3'},
   {label: 'CTA Covid Post', value: '4'},
  
+];
+
+export const intentData = [
+  {
+      id: 1,
+      value: 'Purchase'
+  },
+  {
+      id: 4,
+      value: 'Engagement'
+  },
+  {
+      id: 3,
+      value: 'Support'
+  }
+];
+
+export const materialMenuItemData = [
+  {
+    id: 1,
+    value: 'Close chat',
+  },
+  {
+    id: 2,
+    value: 'Mark as unread',
+  },
+  {
+    id: 3,
+    value: 'Assign to other',
+  },
+];
+
+export const closeChatReason = [
+  {
+      id: 1,
+      value: 'Customer Wants To Close'
+  },
+  {
+      id: 2,
+      value: 'Sale Successful'
+  },
+  {
+      id: 3,
+      value: 'Abusive'
+  },
+  {
+      id: 4,
+      value: 'Not Interested'
+  },
+  {
+      id: 5,
+      value: 'Not Responding'
+  },
 ];
 
 export const otpResponse_Storage_Key = 'otp_response_Key';

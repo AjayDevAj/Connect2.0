@@ -18,7 +18,7 @@ import {
 } from './Gifted_Chat_Extention';
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {otpResponse_Storage_Key, materialMenuItemData} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 // import FileViewer from "react-native-file-viewer";
@@ -28,8 +28,10 @@ import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
 import PurchaseLeadSection from './PurchaseLeadSection';
-import PurchaseLeadForm from './PurchaseLeadForm';
+import PurchaseLeadComponent from './PurchaseLeadComponent';
 import CloseChatModal from './CloseChatModal';
+import { closedChat } from '../../api/closedChat';
+import navigationString from '../../utility/NavigationString';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
@@ -46,6 +48,7 @@ const Message = ({navigation, route}) => {
   };
   const menuHandler = () => {
     navigation.goBack();
+    setShowPurchaseForm(!showPurchaseForm);
   };
 
   const markasImportant = async () => {
@@ -71,29 +74,30 @@ const Message = ({navigation, route}) => {
       createdAt: new Date(),
       user: {
         agent_name: messages.assets[0].fileName,
-        _id: messages.assets[0].fileSize,
+        _id: 'a',
       },
+      media_type:'image',
       _id: messages.assets[0].fileSize,
       file_type: 'sendChat',
     });
-
-    dispatch(
-      send_Chat_Message_Data(
-        'google',
-        getDataFromParam.selected_Item.conversation_id,
-        getDataFromParam.selected_Item.sub_conversation_id,
-        null,'image',
-        messages.assets[0].uri
-
-      ),
-    );
   };
   const openFile = async () => {
     try {
-      const res = await DocumentPicker.pick({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.allFiles],
       });
       // await FileViewer.open(res.uri);
+      setUnSendMessage({
+        image: res.uri,
+        createdAt: new Date(),
+        user: {
+          agent_name: res.name,
+          _id: 'a',
+        },
+        media_type:'file',
+        _id: res.size,
+        file_type: 'sendChat',
+      });
     } catch (e) {
       // error
     }
@@ -119,14 +123,14 @@ const Message = ({navigation, route}) => {
   const Incoming_Chat_Socket_Subscribe = () => {
     ws.onopen = () => {
       console.log('uWebsocket Connected to the server Message');
-      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: getDataFromParam.selected_Item.user_id}));
       ws.send(
         JSON.stringify({
           action: 'subscribe_message_delivery_status',
-          agent_id: 64,
+          agent_id: getDataFromParam.selected_Item.user_id,
         }),
       );
-      ws.send(JSON.stringify({action: 'subscribe_typing_event', agent_id: 64}));
+      ws.send(JSON.stringify({action: 'subscribe_typing_event', agent_id: getDataFromParam.selected_Item.user_id}));
 
       // ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 64}));
       // ws.send(JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: 64}));
@@ -146,27 +150,24 @@ const Message = ({navigation, route}) => {
       // );
 
       // if (isFocused_Obj) {
-        console.log(
-          'uWebsocket incomming chat onmessage print e',
-          json_Data,
-        );
+      console.log('uWebsocket incomming chat onmessage print e', json_Data);
 
-        switch (json_Data.socket_name) {
-          case 'subscribe_message':
-            setMessages(previousMessages =>
-              GiftedChat.append(previousMessages, [json_Data]),
-            );
-            break;
-          case 'subscribe_typing_event':
-            setTyping(json_Data.is_typing);
-            break;
-          case 'subscribe_message_delivery_status':
-            // write a code
-            break;
+      switch (json_Data.socket_name) {
+        case 'subscribe_message':
+          setMessages(previousMessages =>
+            GiftedChat.append(previousMessages, [json_Data]),
+          );
+          break;
+        case 'subscribe_typing_event':
+          setTyping(json_Data.is_typing);
+          break;
+        case 'subscribe_message_delivery_status':
+          // write a code
+          break;
 
-          default:
-            break;
-        }
+        default:
+          break;
+      }
       // }
     };
   };
@@ -178,7 +179,7 @@ const Message = ({navigation, route}) => {
     console.log('uWebsocket print ws', isFocused);
 
     if (isFocused) {
-      // Incoming_Chat_Socket_Subscribe();
+      Incoming_Chat_Socket_Subscribe();
       callAPI();
       getUserData();
     }
@@ -223,6 +224,7 @@ const Message = ({navigation, route}) => {
   const [unSendMessage, setUnSendMessage] = useState(initial_Value);
 
   const onSend = useCallback((messages = []) => {
+    console.log('messages :-', messages);
     setUnSendMessage({
       message: messages[0].text,
       createdAt: messages[0].createdAt,
@@ -235,20 +237,38 @@ const Message = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
+    {
+      console.log('send_Chat_Message_Data ',unSendMessage);
+    }
     if (unSendMessage._id != null) {
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, [unSendMessage]),
       );
-      {console.log('send_Chat_Message_Data ',getDataFromParam.selected_Item.conversation_id,
-      getDataFromParam.selected_Item.sub_conversation_id)}
-      dispatch(
-        send_Chat_Message_Data(
-          'google',
-          getDataFromParam.selected_Item.conversation_id,
-          getDataFromParam.selected_Item.sub_conversation_id,
-          unSendMessage.message,null,null
-        ),
-      );
+     
+      if (unSendMessage.message != null) {
+        dispatch(
+          send_Chat_Message_Data(
+            'google',
+            getDataFromParam.selected_Item.conversation_id,
+            getDataFromParam.selected_Item.sub_conversation_id,
+            unSendMessage.message,
+            null,
+            null,
+          ),
+        );
+      }
+      else{
+        dispatch(
+          send_Chat_Message_Data(
+            'google',
+            getDataFromParam.selected_Item.conversation_id,
+            getDataFromParam.selected_Item.sub_conversation_id,
+            null,
+            'image',
+            unSendMessage.image,
+          ),
+        );
+      }
     }
   }, [unSendMessage]);
 
@@ -264,20 +284,6 @@ const Message = ({navigation, route}) => {
     setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
-  const materialMenuItemData = [
-    {
-      id: 1,
-      value: 'Close chat',
-    },
-    {
-      id: 2,
-      value: 'Mark as unread',
-    },
-    {
-      id: 3,
-      value: 'Assign to other',
-    },
-  ];
 
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
@@ -286,21 +292,25 @@ const Message = ({navigation, route}) => {
     setShowPurchaseForm(!showPurchaseForm);
   };
 
+  const closeChatHandler = async () => {
+    const data = await closedChat(
+      'closed',
+      getDataFromParam.selected_Item.conversation_id
+    );
+    navigation.navigate(navigationString.Chat);
+  };
+
   return (
     <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF'}]}>
       {showPurchaseForm ? (
         <>
-          <TopHeader
+          <PurchaseLeadComponent 
             firstIcon="arrow-back"
-            secondIcon=""
-            thirdIcon=""
             color={reloadTopView ? '#FFAA00' : null}
             name={getDataFromParam.selected_Item.display_name}
             menuHandler={menuHandler}
             logo={getDataFromParam.selected_Item.publisher_type}
-          />
-          <PurchaseLeadForm
-            formData={getDataFromParam.selected_Item}
+            conversation_id={getDataFromParam.selected_Item.conversation_id}
             navigation={navigation}
           />
         </>
@@ -326,8 +336,9 @@ const Message = ({navigation, route}) => {
               onClick={index => {
                 switch (index) {
                   case 1:
-                    setIsClosedChatClicked(!isClosedChatClicked);
-                    setDotClicked(!dotClicked);
+                    closeChatHandler();
+                    // setIsClosedChatClicked(!isClosedChatClicked);
+                    // setDotClicked(!dotClicked);
                     break;
                   case 2:
                     mark_Unread_Api();
@@ -343,7 +354,7 @@ const Message = ({navigation, route}) => {
           )}
 
           <View style={{flex: 1}}>
-            {isClosedChatClicked && <CloseChatModal />}
+            {isClosedChatClicked && <CloseChatModal closeChatHandler={closeChatHandler} />}
             {allChat_Conversation_Data.data && loginUserData != undefined && (
               // <ImageBackground source={require('./img/MaskGroup17.svg')} >
               <GiftedChat
@@ -372,7 +383,7 @@ const Message = ({navigation, route}) => {
                 selectImage={openImage}
                 renderBubble={renderBubble}
                 renderCustomView={renderCustomView}
-                renderMessageImage={renderMessageImage}
+                // renderMessageImage={renderMessageImage}
                 user={{
                   _id: 'a',
                   agent_name: loginUserData.user.name,
