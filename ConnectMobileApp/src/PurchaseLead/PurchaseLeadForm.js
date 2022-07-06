@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Switch, TextInput, Dimensions, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-// import TagInput from 'react-native-tags-input';
+import TagInput from 'react-native-tags-input';
 
 import purchaseLeadStyles from './styles/PurchaseLeadStylesheet';
 
 const ValidatePurchaseSchema = yup.object({
-    display_name: yup.string(),
-    intents: yup.string(),
-    publisher_type: yup.string(),
-    location_id: yup.string(),
-    email: yup.string(),
-    interests: yup.string(),
-    comments: yup.string(),
+    // display_name: yup.string(),
+    // intents: yup.string(),
+    // publisher_type: yup.string(),
+    // location_id: yup.string(),
+    // email: yup.string(),
+    // interests: yup.string(),
+    // comments: yup.string(),
     // mobile_number: yup.string(),
     
     // .test('is-num-10', 'Mobile No. must be of 10 digit', (val) => {
@@ -21,22 +21,39 @@ const ValidatePurchaseSchema = yup.object({
     // })
 });
 
-const PurchaseLeadForm = ({ 
-    formData, 
-    navigation, 
+const PurchaseLeadForm = ({  
     type='', 
-    dataComponent='', 
     formHandler, 
+    cancelHandler,
     conversation_id, 
+    formData,
+    id,
     customer_intent='',
     name='',
-    cancelHandler,
+    customer_interest=''
+    
 }) => {
     console.log('===== Form field data =====', formData);
+    console.log('===== Customer Interest =====', customer_interest);
     const [isEnabled, setIsEnabled] = useState(true);
-    const [interestVal, setInterestVal] = useState("dbdhdj");
+    const [interestVal, setInterestVal] = useState(customer_interest);
     const [intentsVal, setIntentsVal] = useState(customer_intent);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+    const [interestTags, setInterestTags] = useState({
+        tag: "",
+        tagsArray: ["Strong Engine", "Strong Engine"]
+    });
+    const [tagsColor, setTagsColor] = useState('');
+    const [tagsText, setTagsText] = useState('');
+
+    const updateTagState = (state) => {
+        setInterestTags({
+            ...interestTags, 
+            state
+        });
+        console.log("Interest Tags - ", interestTags);
+    };
     
     return (
         <ScrollView style={ purchaseLeadStyles.purchaseLeadFormContainer }>
@@ -44,7 +61,6 @@ const PurchaseLeadForm = ({
                 initialValues={{ 
                     display_name: name, 
                     intents: intentsVal, 
-                    publisher_type: formData.channel, 
                     entry_points: formData.entry_points,
                     location_id: formData.location_id, 
                     location_name: formData.location, 
@@ -58,8 +74,9 @@ const PurchaseLeadForm = ({
                 validationSchema={ValidatePurchaseSchema}
                 onSubmit={(values, actions) => {
                     // console.log('===== Values =====',values);
-                    formHandler(values)
-                    actions.resetForm();
+                    formHandler(values);
+                    alert(name, ' customer data updated successfully');
+                    // actions.resetForm();
                 }}
             >
                 {(props) => (
@@ -122,9 +139,9 @@ const PurchaseLeadForm = ({
                     <Text style={ purchaseLeadStyles.purchaseLeadFormLabel }>Entry Point</Text>
                     <TextInput 
                         style={ [purchaseLeadStyles.purchaseLeadFormTextInput, { backgroundColor: '#F8F8F8'}] }
-                        onChangeText={props.handleChange('publisher_type')}
-                        value={props.values.publisher_type}
-                        onBlur={props.handleBlur('publisher_type')}
+                        onChangeText={props.handleChange('entry_points')}
+                        value={props.values.entry_points}
+                        onBlur={props.handleBlur('entry_points')}
                     />
                     <Text style={ purchaseLeadStyles.errorText }>{props.touched.publisher_type && props.errors.publisher_type}</Text>
 
@@ -174,14 +191,14 @@ const PurchaseLeadForm = ({
                         leftElementContainerStyle={{marginLeft: 3}}
                         inputContainerStyle={[purchaseLeadStyles.purchaseLeadFormTextInput, {height: 45, marginBottom: 25, padding: 2}]}
                         inputStyle={{color: '#5F6368' }}
-                        onFocus={() => {
-                            setTagsColor('#5F6368');
-                            setTagsText('#0E0071');
-                        }}
-                        onBlur={() => {
-                            setTagsColor('#5F6368');
-                            setTagsText('#0E0071');
-                        }}
+                        // onFocus={() => {
+                        //     setTagsColor('#5F6368');
+                        //     setTagsText('#0E0071');
+                        // }}
+                        // onBlur={() => {
+                        //     setTagsColor('#5F6368');
+                        //     setTagsText('#0E0071');
+                        // }}
                         autoCorrect={false}
                         tagStyle={{ backgroundColor: '#fff' }}
                         tagTextStyle={{ color: '#5F6368' }}

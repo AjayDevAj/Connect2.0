@@ -34,7 +34,7 @@
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
- import PurchaseLeadComponent from '../containers/Message/PurchaseLeadComponent';
+ import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
  
  const Customer = ({navigation, Route}) => {
    const isFocused = useIsFocused();
@@ -168,7 +168,6 @@
           name={selectedCustomerData != '' ? selectedCustomerData.display_name : "Add New Customer"}
           logo={selectedCustomerData != '' ? selectedCustomerData.publisher_type : ''}
           menuHandler={menuHandler}
-          dataComponent={selectedCustomerData != '' ? "customer" : ''}
           type={selectedCustomerData != '' ? "" : 'add'}
           conversation_id={selectedCustomerData.conversation_id}
           customer_intent={getCustomerIntentData(selectedCustomerData.customer_intent)}

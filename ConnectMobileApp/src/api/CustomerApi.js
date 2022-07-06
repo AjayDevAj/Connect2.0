@@ -257,22 +257,24 @@ const getCustomerList = async (
         'Content-Type': 'application/json',
     }
   
-    const bodyData = new FormData();
-    {name != '' && bodyData.append('name', name)}
-    {mobile_number != '' && bodyData.append('mobile_number', mobile_number)}
-    {email != '' && bodyData.append('email', email)}
-    {conversation_id != '' && bodyData.append('conversation_id', conversation_id)}
-    {interests != '' && bodyData.append('interests', interests)}
-    {comments != '' && bodyData.append('comments', comments)}
-    {intents != '' && bodyData.append('intents', intents)}
-    {entry_points != '' && bodyData.append('entry_points', entry_points)}
-    {location_id > 0 && bodyData.append('location_id', location_id)}
-    {id > 0 && bodyData.append('id', id)}
-     console.log('===== Body Raw Data =====', bodyData)
+    const bodyRawData = {
+      "name": name,
+      "mobile_number": mobile_number,
+      "email": email,
+      "conversation_id": conversation_id,
+      "interests": interests,
+      "comments": comments,
+      "intents": intents,
+      "entry_points": entry_points,
+      "location_id": location_id,
+      "id": id
+    };
+
+     console.log('===== Body Raw Data =====', bodyRawData)
     const response = await fetch(api_url, {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(bodyData),
+        body: JSON.stringify(bodyRawData),
     });
   
     /*

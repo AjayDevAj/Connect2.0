@@ -27,11 +27,12 @@ import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
-import PurchaseLeadSection from './PurchaseLeadSection';
-import PurchaseLeadComponent from './PurchaseLeadComponent';
+import PurchaseLeadSection from '../../PurchaseLead/PurchaseLeadSection';
+import PurchaseLeadComponent from '../../PurchaseLead/PurchaseLeadComponent';
 import CloseChatModal from './CloseChatModal';
 import { closedChat } from '../../api/closedChat';
 import navigationString from '../../utility/NavigationString';
+import { loadLeadData, sendLeadData } from '../../actions/CustomerAction';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
@@ -48,7 +49,7 @@ const Message = ({navigation, route}) => {
   };
   const menuHandler = () => {
     navigation.goBack();
-    setShowPurchaseForm(!showPurchaseForm);
+    setShowPurchaseForm(false);
   };
 
   const markasImportant = async () => {
@@ -325,9 +326,9 @@ const Message = ({navigation, route}) => {
               onClick={index => {
                 switch (index) {
                   case 1:
-                    closeChatHandler();
                     // setIsClosedChatClicked(!isClosedChatClicked);
-                    // setDotClicked(!dotClicked);
+                    setDotClicked(false);
+                    closeChatHandler();
                     break;
                   case 2:
                     mark_Unread_Api();
@@ -343,7 +344,7 @@ const Message = ({navigation, route}) => {
           )}
 
           <View style={{flex: 1}}>
-            {isClosedChatClicked && <CloseChatModal closeChatHandler={closeChatHandler} />}
+            {/* {isClosedChatClicked && <CloseChatModal closeChatHandler={closeChatHandler} />} */}
             {allChat_Conversation_Data.data && loginUserData != undefined && (
               // <ImageBackground source={require('./img/MaskGroup17.svg')} >
               <GiftedChat
