@@ -37,7 +37,6 @@ const GetReviewListApi = async (master_outlet_id, enterprise_client_store_id) =>
             throw new Error("NO Data")
             break
         case 401:
-            navigator.navigate(NavigationString.LOGIN)
 
         default: break
     }

@@ -39,7 +39,6 @@ const mark_Unread_Chat = async (conversation_id) => {
             throw new Error("NO Data")
             break
         case 401:
-            navigator.navigate(NavigationString.LOGIN)
    
         default: break
     }

@@ -36,6 +36,7 @@ export default {
     My_Offers_home:'MyOffersHome',
     MyPostHome:'My_PostHome',
     Add_new_offer:'Add_new_offer',
+    InterNetScreen: 'InterNetScreen',
   
 /*
 **
