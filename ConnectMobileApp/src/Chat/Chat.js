@@ -39,9 +39,11 @@ import Filter from '../containers/dashboard/Filter';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
+// import uWebSockets from '../component/uWebSockets'
 
 const Chat = ({navigation ,Route}) => {
-  
+  const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
+
   const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(true);
@@ -74,7 +76,13 @@ const Chat = ({navigation ,Route}) => {
    */
   useEffect(() => {
     if (isFocused) {
+      // console.log('uWebsocket testSocket')
+      Incoming_Chat_Socket_Subscribe()
       callAPI(currentTabStatus);
+      // <uWebSockets callwhenSocketRecived={(testSocket) => 
+      //   console.log('uWebsocket testSocket',testSocket)
+      // }/>
+      // console.log('uWebsocket testSocket',testSocket)
     }
   }, [isFocused]);
 
@@ -83,6 +91,39 @@ const Chat = ({navigation ,Route}) => {
       signOut(navigation)
     }
   }, [chatResponseData]);
+
+
+  const Incoming_Chat_Socket_Subscribe = () => {
+    ws.onopen = () => {
+      console.log('uWebsocket Connected to the server Message');
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+
+      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 64}));
+      // ws.send(JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: 64}));
+    };
+    ws.onclose = e => {
+      console.log('uWebsocket Disconnected. Check internet or server.', e);
+    };
+    ws.onerror = e => {
+      console.log('uWebsocket incomming chat onerror', e);
+    };
+    ws.onmessage = e => {
+      let json_Data = JSON.parse(e.data);
+      console.log(
+        'uWebsocket Chat page onmessage print before e',
+        json_Data,
+      );
+
+   
+        switch (json_Data.socket_name) {
+          case 'subscribe_message':
+            callAPI(currentTabStatus);
+            break;
+          default:
+            break;
+        }
+    };
+  };
 
   /**
    *
@@ -174,9 +215,11 @@ const Chat = ({navigation ,Route}) => {
               chatResponseData.data.otherMessageCount
             } ${Capitalize(currentTabStatus)} chats with team`}
             right="chevron-right"
-            openAllChat={() => navigation.navigate(navigationString.AllChat,{
+            openAllChat={() => {
+              navigation.navigate(navigationString.AllChat,{
               openTab:currentTabStatus
             })}
+          }
           />
         )}
 

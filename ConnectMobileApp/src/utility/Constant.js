@@ -154,6 +154,39 @@ export const Date_Filter_Data = [
   },
 ];
 
+export const Customer_Filter_Btngroup_id = [
+  {
+    id: '1',
+    title: 'Locations',
+  },
+  {
+    id: '2',
+    title: 'Entry Point',
+  },
+  {
+    id: '3',
+    title: 'Date',
+  },
+  
+  {
+    id: '4',
+    title: 'Customer Intent',
+  },
+  {
+    id: '5',
+    title: 'Chat Status',
+  },
+  {
+    id: '6',
+    title: 'Contact Details',
+  },
+  {
+    id: '7',
+    title: 'Interested In',
+  },
+  
+]
+
 export const Post_type = [
   {label: 'Offer', value: '1'},
   {label: 'Standard Post', value: '2'},

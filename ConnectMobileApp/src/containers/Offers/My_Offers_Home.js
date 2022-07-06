@@ -8,7 +8,7 @@ import {
   Pressable,
   Alert,
 } from 'react-native';
-import React ,{useEffect,useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
 import fontfaimly from '../../utility/Font-Declarations';
@@ -19,16 +19,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 
-const My_Offers_Home = (navigation) => {
-
+const My_Offers_Home = navigation => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [offerlistdata, setofferlistdata] = useState('');
 
-  const Offer_List_Data = useSelector(store => store.OfferListResponceData);
-  console.log('Offer List data->>>>>>>>>>>>>>>',Offer_List_Data.data)
-
-  //setofferlistdata()
+  
 
   /**
    * Api call when page load
@@ -39,12 +35,29 @@ const My_Offers_Home = (navigation) => {
    */
 
   useEffect(() => {
-    if (isFocused) {
-      dispatch(loadofferlistdata(78104,10007));
+    if(isFocused){
+      dispatch(loadofferlistdata(78104, 10001));
     }
-  }, [isFocused]);
+    
+  },[isFocused]);
+
+  const Offer_List_Data = useSelector(store => store.OfferListResponceData);
+  //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',Offer_List_Data.data.offers[0].offer_image)
+  //const datalist = Offer_List_Data
+
+  useEffect(()=>{
+    if (Offer_List_Data != undefined && Offer_List_Data.data != undefined  && Offer_List_Data.data.offers != undefined) {
+      setofferlistdata(Offer_List_Data.data.offers[0].offer_image)
+      console.log('Offer List data->>>>>>>>>>>>>>>', Offer_List_Data.data);
+    }
+  },[Offer_List_Data])
 
   
+
+  //const datalist = Offer_List_Data.data;
+
+   //console.log('ofrer list in React hook', offerlistdata.offers[0].offer_image);
+
   return (
     <View style={{flex: 1, backgroundColor: '#F7FCFF'}}>
       <TopHeader
@@ -53,6 +66,7 @@ const My_Offers_Home = (navigation) => {
         secondIcon={'search'}
         thirdIcon={'filter-list'}
       />
+
       <View
         style={{
           flexDirection: 'row',
@@ -88,7 +102,7 @@ const My_Offers_Home = (navigation) => {
               color: '#000000',
               opacity: 100,
             }}>
-            101K
+            {/* {datalist.offers_count} */}
           </Text>
         </Card>
 
@@ -180,7 +194,7 @@ const My_Offers_Home = (navigation) => {
 
           <Card.Cover
             style={{borderTopEndRadius: 9}}
-            source={{uri: 'https://picsum.photos/700'}}
+             source={{uri: offerlistdata}}
           />
           <Text
             style={{
@@ -202,7 +216,10 @@ const My_Offers_Home = (navigation) => {
             <TouchableOpacity onPress={() => chooseFile()}>
               <PencilIcon height={50} width={50} />
             </TouchableOpacity>
-            <Pressable onPress={() => navigation.navigate(NavigationString.Add_new_offer) }>
+            <Pressable
+              onPress={() =>
+                navigation.navigate(NavigationString.Add_new_offer)
+              }>
               <View
                 style={{
                   minWidth: 80,
@@ -272,6 +289,7 @@ const My_Offers_Home = (navigation) => {
           </Card.Content>
         </Card>
       </View>
+      
     </View>
   );
 };

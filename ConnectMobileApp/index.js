@@ -9,6 +9,7 @@ import Add_new_offers from './src/containers/Offers/Add_new_offers'
 import My_Offers from './src/containers/Offers/My_Offers';
 import My_Offers_Home from './src/containers/Offers/My_Offers_Home';
 import New_Post from './src/containers/Post/New_Post';
+import CustomerFilter from './src/containers/Customer_Filter/CustomerFilter';
 
 
 
@@ -16,5 +17,5 @@ import New_Post from './src/containers/Post/New_Post';
 import {name as appName} from './app.json';
 
  AppRegistry.registerComponent(appName, () => App);
-//AppRegistry.registerComponent(appName, () => New_Post);
+//AppRegistry.registerComponent(appName, () => CustomerFilter);
 

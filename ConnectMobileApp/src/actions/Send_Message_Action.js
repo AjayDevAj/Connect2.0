@@ -1,7 +1,8 @@
 import { CONSTANT } from "../utility/Constant";
 
-const send_Chat_Message_Data = (modeType='google',conversation_id,message) => ({
-    type: CONSTANT.Send_message_DATA,modeType,conversation_id,message
+const send_Chat_Message_Data = (modeType='google',conversation_id,sub_conversation_id,message=null, media_type = null,
+file = null,) => ({
+    type: CONSTANT.Send_message_DATA,modeType,conversation_id,sub_conversation_id,message,media_type,file
 })
 
 const send_Chat_Message_Data_Error = payload => ({

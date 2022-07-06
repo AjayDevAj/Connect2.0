@@ -17,8 +17,11 @@ function* handle_Send_Message_ResponseData(action) {
     try {
         const data = yield call(SendMessageApi,
             action.modeType, 
-            action.conversation_id, 
+            action.conversation_id,
+            action.sub_conversation_id,  
             action.message, 
+            action.media_type, 
+            action.file, 
         );
         // console.log('Chat Data Response', data)
         yield put(send_Chat_Message_Data_Response(data))
