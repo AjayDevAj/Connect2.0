@@ -29,7 +29,7 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
   </TouchableOpacity>
 );
 
-const CustomerFilter = () => {
+const CustomerFilter = ({navigation}) => {
   const [selectedId, setSelectedId] = useState('');
   console.log(' button id cliked ---->>>>', selectedId);
 
@@ -47,8 +47,9 @@ const CustomerFilter = () => {
   }, []);
 
   const getdata = async () => {
+    
     const SlresponseData = await getOtpResponse(location_Data_Key);
-    console.log(SlresponseData);
+    console.log('SLResponce-----.... ------->',SlresponseData);
 
     if (
       SlresponseData != null &&
@@ -123,7 +124,7 @@ const CustomerFilter = () => {
               value={ischeckboxChecked} 
               colorScheme={'info'}
               onChange={() => {
-               // handleChange(Locality);
+                handleChange(Locality);
               setisChecked(true);
                 console.log(
                   'change handler---------inonChange()---->',

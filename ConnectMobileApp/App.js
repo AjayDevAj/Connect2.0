@@ -13,7 +13,7 @@ const store = configureStore();
 const App = () => {
   return (
     <Provider store ={store}>
-      <CustomerFilter/>
+      <Routes/>
       
     </Provider>
     

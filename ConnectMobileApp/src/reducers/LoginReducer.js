@@ -45,7 +45,7 @@ import FilterDataReducer from "./FilterDataReducer";
 import PostReducer from "./PostReducer";
 import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
-import CustomerReducer from "./CustomerReducer";
+//import CustomerReducer from "./CustomerReducer";
 import PostListReducer from "./PostListReducer";
 import OfferListReducer from "./OfferListReducer"
 import CustomerReducer, { GetLeadReducer, SendLeadReducer } from "./CustomerReducer";
