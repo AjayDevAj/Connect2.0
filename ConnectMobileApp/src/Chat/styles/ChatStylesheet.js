@@ -63,7 +63,7 @@ const chatStyles = StyleSheet.create({
         opacity: 1,
         letterSpacing: 0.18,
         fontSize: 18,
-        fontFamily: fontFamily.Alte_DIN,
+        fontFamily: FontFamily.Alte_DIN,
         fontWeight: 'bold',
     },
     noChatAssignedDesc: {
@@ -71,7 +71,7 @@ const chatStyles = StyleSheet.create({
         opacity: 0.5,
         letterSpacing: 0.12,
         fontSize: 12,
-        fontFamily: fontFamily.Poppins,
+        fontFamily: FontFamily.Poppins,
         fontWeight: 'bold',
         textAlign: 'center',
         width: '70%',

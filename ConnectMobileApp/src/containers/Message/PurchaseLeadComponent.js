@@ -5,9 +5,8 @@ import chatStyles from '../../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import { loadLeadData, sendLeadData } from '../../actions/CustomerAction';
-import {getOtpResponse} from '../../utility/StorageClass';
 import PurchaseLeadForm from './PurchaseLeadForm';
-import NavigationString from '../../utility/NavigationString';
+// No customer data screen, close chat reason in api, 
 
 const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, logo, 
     menuHandler, conversation_id, dataComponent='', type='', customer_intent='', }) => {

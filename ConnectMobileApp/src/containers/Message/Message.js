@@ -273,6 +273,7 @@ const Message = ({navigation, route}) => {
     setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
+
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
@@ -324,8 +325,9 @@ const Message = ({navigation, route}) => {
               onClick={index => {
                 switch (index) {
                   case 1:
-                    setIsClosedChatClicked(!isClosedChatClicked);
-                    setDotClicked(!dotClicked);
+                    closeChatHandler();
+                    // setIsClosedChatClicked(!isClosedChatClicked);
+                    // setDotClicked(!dotClicked);
                     break;
                   case 2:
                     mark_Unread_Api();

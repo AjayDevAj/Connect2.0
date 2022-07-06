@@ -191,11 +191,11 @@
         />
        
         {/* Add New customer component */}
-        <AddNewCustomer purchaseHandler={() => {
+        {/* <AddNewCustomer purchaseHandler={() => {
             purchaseHandler()
             setSelectedCustomerData('');
           }} 
-        />
+        /> */}
  
         {customerResponseData.data != null && (
           <CustomerList
@@ -203,6 +203,7 @@
               onPressCustomerHandler(val)
             }}
             data={customerResponseData.data.customers}
+            custCount={customerResponseData.data.customer_count}
             loadMoreCustomerData={loadMoreCustomerData}
             page={pageNo}
           />
