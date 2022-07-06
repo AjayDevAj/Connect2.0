@@ -37,7 +37,6 @@ import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
-import Storelocation from '../containers/Location/Storelocation';
 // import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
@@ -62,6 +61,7 @@ import My_Offers_Home from '../containers/Offers/My_Offers_Home';
 import MyPostHome from '../containers/Post/MyPostHome'
 import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
+import Storelocation from '../containers/Location/Storelocation'
 
 
 
@@ -74,10 +74,6 @@ import {navigationRef} from '../navigation/RootNavigation';
  *
  **
  */
-
-// const StoreLocation = () => {
-//   return <Text style={locationStyle.locationText}>Store Location</Text>;
-// };
 
 const locationStyle = StyleSheet.create({
   locationText: {
@@ -136,6 +132,7 @@ const Routes = () => {
     }
     console.log('Get all keys :- return', keys);
   };
+  
 
   return (
     <>

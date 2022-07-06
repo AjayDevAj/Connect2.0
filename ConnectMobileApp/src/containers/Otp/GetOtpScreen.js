@@ -52,7 +52,6 @@ import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import OtpErrorState from '../../component/OtpErrorState';
-import CheckInterNet from '../../utility/CheckInterNet';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../../utility/Constant';
@@ -128,7 +127,7 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
-    <CheckInterNet />;
+ 
     dispatch(loadOtpData(mobileNumber, otp));
   };
 
@@ -159,8 +158,7 @@ const GetOtpScreen = ({navigation}) => {
         <View>
           <Bubble />
         </View>
-        <CheckInterNet />
-
+       
         <ScrollView contentContainerStyle={{flex: 1}}>
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <View style={styles.UpperView}>

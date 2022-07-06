@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {
     DrawerContentScrollView, DrawerItemList, DrawerItem
 } from '@react-navigation/drawer';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TouchableOpacity, Alert } from 'react-native';
 import NavigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './CustomDrawerStyleSheet';
@@ -14,6 +14,7 @@ import fontFamily from '../utility/Font-Declarations'
 import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
+import { result } from 'lodash';
 
 
 
@@ -42,9 +43,10 @@ function CustomDrawer(props) {
         };
 
         fetch("https://test-chat.starify.co/user/auth/logout", requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => console.log("JSON Result :::: ", result))
             .catch(error => console.log('Error Result :::: ', error));
+            
         deleteAll()
         console.log("Logout User")
         navigation1.navigate(NavigationString.LOGIN);

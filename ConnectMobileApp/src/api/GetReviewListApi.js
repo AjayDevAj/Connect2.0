@@ -29,14 +29,17 @@ const GetReviewListApi = async (master_outlet_id, enterprise_client_store_id) =>
     const data = response.json()
     console.log('OverAllRatingApi API data : ', data)
 
-    if (response.status > 400) {
-        // if (response.status == 401) {
-        //     navigation.navigate(NavigationString.LOGIN)
-        // }
-        // else {
-        //     throw new Error(data.errors);
-        // }
-        throw new Error(data.errors);
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);
+            break
+        case 204:
+            throw new Error("NO Data")
+            break
+        case 401:
+            navigator.navigate(NavigationString.LOGIN)
+
+        default: break
     }
     return data;
 }

@@ -32,14 +32,17 @@ const getIsImportantData = async (conversation_id, is_important) => {
     const data = response.json()
     console.log('isImportant API data : ', data)
 
-    if (response.status > 400) {
-        // if (response.status == 401) {
-        //     navigation.navigate(NavigationString.LOGIN)
-        // }
-        // else {
-        //     throw new Error(data.errors);
-        // }
-        throw new Error(data.errors);
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);
+            break
+        case 204:
+            throw new Error("NO Data")
+            break
+        case 401:
+            navigator.navigate(NavigationString.LOGIN)
+
+        default: break
     }
     return data;
 }
