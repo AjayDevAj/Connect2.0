@@ -31,7 +31,7 @@
 */
 
 import { StyleSheet } from 'react-native';
-import FontFamily from '../../utility/Font-Declarations';
+import fontFamily from '../../utility/Font-Declarations';
 
 const customerStyles = StyleSheet.create({
     customerMainContainer: {
@@ -59,7 +59,7 @@ const customerStyles = StyleSheet.create({
         color: '#0E0071',
         fontSize: 16,
         opacity: 1,
-        fontFamily: FontFamily.Alte_DIN,
+        fontFamily: fontFamily.Alte_DIN,
         paddingTop: 5,
         fontWeight: 'bold'
     },
@@ -90,7 +90,7 @@ const customerStyles = StyleSheet.create({
         opacity: 1,
         letterSpacing: 0.18,
         fontSize: 18,
-        fontFamily: FontFamily.Alte_DIN,
+        fontFamily: fontFamily.Alte_DIN,
         fontWeight: 'bold',
     },
     noCustomerAssignedDesc: {
@@ -98,7 +98,7 @@ const customerStyles = StyleSheet.create({
         opacity: 0.5,
         letterSpacing: 0.12,
         fontSize: 12,
-        fontFamily: FontFamily.Poppins,
+        fontFamily: fontFamily.Poppins,
         fontWeight: 'bold',
         textAlign: 'center',
         width: '70%',

@@ -31,7 +31,6 @@
 */
 
 import { StyleSheet, Dimensions } from 'react-native';
-import fontFamily from '../../utility/Font-Declarations';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
