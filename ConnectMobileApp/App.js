@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from './src/store/Store';
 import Routes from './src/navigation/Routes';
-import New_Post from './src/containers/Post/New_Post';
-import My_Offers_Home from './src/containers/Offers/My_Offers_Home';
-import CustomerFilter from './src/containers/Customer_Filter/CustomerFilter';
 import InternetConnectionAlert from "react-native-internet-connection-alert";
+import navigationString from './src/utility/NavigationString';
 
 const store = configureStore();
 
-const App = () => {
+const App = ({navigation}) => {
   const [isInternetAvailable, setIsInternetAvailable] = useState(false);
 
   return (
@@ -20,6 +18,7 @@ const App = () => {
       onChange={(connectionState) => {
         console.log("Connection State ======>>> : ", connectionState);
         setIsInternetAvailable(connectionState.isConnected);
+
       }}
     >
      

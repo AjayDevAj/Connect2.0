@@ -40,7 +40,6 @@ const getIsImportantData = async (conversation_id, is_important) => {
             throw new Error("NO Data")
             break
         case 401:
-            navigator.navigate(NavigationString.LOGIN)
 
         default: break
     }
