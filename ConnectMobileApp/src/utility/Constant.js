@@ -85,6 +85,22 @@ const CONSTANT = {
   CUSTOMER_DATA_ERROR: 'CUSTOMER_DATA_ERROR',
   CUSTOMER_DATA_SUCCESS: 'CUSTOMER_DATA_SUCCESS',
 
+
+  POST_DATA: 'POST_DATA',
+  POST_DATA_ERROR: 'POST_DATA_ERROR',
+  POST_DATA_SUCCESS: 'POST_DATA_SUCCESS',
+
+
+  POST_LIST_DATA: 'POST_LIST_DATA',
+  POST_LIST_DATA_ERROR: 'POST_LIST_DATA_ERROR',
+  POST_LIST_DATA_SUCCESS: 'POST_LIST_DATA_SUCCESS',
+
+  OFFER_LIST_DATA: 'OFFER_LIST_DATA',
+  OFFER_LIST_DATA_ERROR: 'OFFER_LIST_DATA_ERROR',
+  OFFER_LIST_DATA_SUCCESS: 'OFFER_LIST_DATA_SUCCESS',
+
+  
+
   GET_LEAD_DATA: 'GET_LEAD_DATA',
   GET_LEAD_DATA_ERROR: 'GET_LEAD_DATA_ERROR',
   GET_LEAD_DATA_SUCCESS: 'GET_LEAD_DATA_SUCCESS',
@@ -144,6 +160,39 @@ export const Date_Filter_Data = [
     name: 'Custom Range',
   },
 ];
+
+export const Customer_Filter_Btngroup_id = [
+  {
+    id: '1',
+    title: 'Locations',
+  },
+  {
+    id: '2',
+    title: 'Entry Point',
+  },
+  {
+    id: '3',
+    title: 'Date',
+  },
+  
+  {
+    id: '4',
+    title: 'Customer Intent',
+  },
+  {
+    id: '5',
+    title: 'Chat Status',
+  },
+  {
+    id: '6',
+    title: 'Contact Details',
+  },
+  {
+    id: '7',
+    title: 'Interested In',
+  },
+  
+]
 
 export const Post_type = [
   {label: 'Offer', value: '1'},

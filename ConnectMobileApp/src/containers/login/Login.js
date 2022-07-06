@@ -50,7 +50,6 @@ import { loadLoginData } from '../../actions/LoginAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
-import CheckInterNet from '../../utility/CheckInterNet';
 import Loader from '../../utility/Loader';
 import { loadIsImportantData } from '../../actions/IsImportantAction';
 
@@ -107,7 +106,6 @@ const Login = ({navigation}) => {
       alert('Please enter 10 digit valid mobile number');
     } else {
       //calling API login
-      <CheckInterNet />
       setLoading(true);
       dispatch(loadLoginData(textInputPhoneNum));
 
@@ -151,7 +149,6 @@ const Login = ({navigation}) => {
         <View>
           <View style={styles.CircilePostion}></View>
         </View>
-        <CheckInterNet />
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
             <View style={styles.UpperView}>

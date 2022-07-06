@@ -49,9 +49,17 @@ const getAll_Conversation = async (
   const data = response.json();
   console.log('Gat All message list ', data);
 
-  if (response.status > 400) { 
-    throw new Error(data.errors);
+  switch (response.status) {
+    case response.status > 400:
+      throw new Error(data.errors);
+      break
+    case 204:
+      throw new Error("NO Data")
+      break
+    case 401:
+      navigator.navigate(NavigationString.LOGIN)
 
+    default: break
   }
 
   return data;

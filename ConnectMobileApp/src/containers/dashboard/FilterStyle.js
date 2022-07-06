@@ -107,8 +107,8 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(101, 113, 128, 1)',
   },
   rightContainer: {
-    height: 640,
-    width: 360,
+    minHeight: 640,
+    minWidth: 360,
     backgroundColor: 'rgba(255, 255, 255, 1)',
     opacity: 40,
     //alignItems:'flex-start',
@@ -116,8 +116,8 @@ export default StyleSheet.create({
     padding:15
   },
   leftContainer: {
-    height: 592,
-    width: 144,
+    minHeight: 592,
+    minWidth: 144,
     backgroundColor: 'rgba(241, 241, 241, 1)',
 
     opacity: 40,

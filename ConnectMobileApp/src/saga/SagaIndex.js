@@ -40,12 +40,13 @@ import AllChat_ConversationDataWatcherSaga from './AllChat_Conversation_Saga';
 import isImportantDataWatcherSaga from './IsImportantSaga';
 import AcceptRejectChatDataWatcherSaga from './AcceptRejectChatSaga';
 import Send_message_WatcherSaga from './Send_Message_Saga';
-
+import PostDataWatcherSaga from './PostSaga';
 import FilterDataWatcherSaga from './FilterDataSaga';
-
+import PostListDataWatcherSaga from './PostListSaga';
 import OverAllWatcherSaga from './OverAllSaga';
 import ReviewListWatcherSaga from './GetReviewListSaga';
 import CustomerDataWatcherSaga from './CustomerSaga';
+import OfferListDataWatcherSaga from './OfferListSaga';
 
 import GetLeadDataWatcherSaga from './GetLeadSaga';
 import SendLeadDataWatcherSaga from './SendLeadSaga';
@@ -64,13 +65,14 @@ export default function* rootSaga() {
     AllChat_ConversationDataWatcherSaga(),
     AcceptRejectChatDataWatcherSaga(),
     Send_message_WatcherSaga(),
-
     FilterDataWatcherSaga(),
-
     OverAllWatcherSaga(),
     ReviewListWatcherSaga(),
 
     CustomerDataWatcherSaga(),
+    PostDataWatcherSaga(),
+    OfferListDataWatcherSaga(),
+    PostListDataWatcherSaga(),
     GetLeadDataWatcherSaga(),
     SendLeadDataWatcherSaga(),
   ]);

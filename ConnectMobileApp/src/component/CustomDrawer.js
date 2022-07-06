@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {
     DrawerContentScrollView, DrawerItemList, DrawerItem
 } from '@react-navigation/drawer';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TouchableOpacity, Alert } from 'react-native';
 import NavigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './CustomDrawerStyleSheet';
@@ -14,6 +14,8 @@ import fontFamily from '../utility/Font-Declarations'
 import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
+import { result } from 'lodash';
+
 
 
 
@@ -41,9 +43,10 @@ function CustomDrawer(props) {
         };
 
         fetch("https://test-chat.starify.co/user/auth/logout", requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => console.log("JSON Result :::: ", result))
             .catch(error => console.log('Error Result :::: ', error));
+            
         deleteAll()
         console.log("Logout User")
         navigation1.navigate(NavigationString.LOGIN);
@@ -83,7 +86,8 @@ function CustomDrawer(props) {
                 <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10 }}>
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        onPress={() => navigation.navigate(NavigationString.Dashboard)}>
+                         onPress={() => navigation.navigate(NavigationString.MyPostHome)}
+                        >
                         <View style={styles.listView}>
                             <Icon name='post-add' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Posts</Text>
@@ -94,7 +98,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                        onPress={() => navigation.navigate(NavigationString.Chat)}
+                        onPress={() => navigation.navigate(NavigationString.My_Offers_home)}
                     >
                         <View style={styles.listView}>
                             <Icon name='local-offer' size={25} style={styles.iconList} />

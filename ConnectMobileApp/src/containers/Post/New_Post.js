@@ -21,20 +21,22 @@ import {SwipeablePanel} from 'rn-swipeable-panel';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import Googleimage from '../../../assets/svg/google-g-2015.svg';
 import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
-
+import {useDispatch, useSelector} from 'react-redux';
 import {Post_type, Offer_CTA, location_Data_Key} from '../../utility/Constant';
 import PostStyleSheet from './PostStyleSheet';
+import {loadpostdata} from '../../actions/PostAction';
+import {getOtpResponse} from '../../utility/StorageClass';
 
 const New_Post = () => {
-  const [postMessage, onChangeText] = useState(
+  const [message, onChangeText] = useState(
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );
   const [offerdis, setofferdisclimer] = useState(
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );
   const [Couponcode, setCouponcode] = useState('Code......');
-  const [offerlink, setOfferlink] = useState(
-    'Img Src=Https://Picsum.Photos.Random=1',
+  const [link, setOfferlink] = useState(
+    'https://singleinterface.com',
   );
 
   const [date, setDate] = useState(new Date());
@@ -43,9 +45,11 @@ const New_Post = () => {
   const [datevalidity, setvailidity] = useState({from: 'From', to: 'To'});
 
   const [data, setData] = useState('');
+  const [location_id, setLocation_id] = useState(1);
   const [arrayholder, setarrayholder] = useState('');
 
-  const [checkboxdata, setcheckboxdata] = useState('');
+  //const [checkboxdata, setcheckboxdata] = useState('');
+  const [call_to_action,setcall_to_action]= useState('LEARN_MORE')
 
   /// swipable panel
 
@@ -74,10 +78,12 @@ const New_Post = () => {
   }, []);
 
   const getdetas = async () => {
+
+    
     const SlresponseData = await getOtpResponse(location_Data_Key);
     console.log(
       'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
-      SlresponseData,
+      SlresponseData.locations,
     );
 
     if (
@@ -87,6 +93,10 @@ const New_Post = () => {
     ) {
       // ** Master Data
       setData(SlresponseData.locations);
+      const locationid = SlresponseData.locations.map(id => id.id);
+      console.log('Location_id -->', locationid);
+      // location id
+      //setLocation_id(locationid)
 
       console.log(
         'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
@@ -100,12 +110,17 @@ const New_Post = () => {
 
   //** */ Image picker for post
   const [filePath, setFilePath] = useState({});
+  const [picture_url,setPicture_url] = useState('')
+
+  console.log('-----------.......>>>>>picture url',picture_url)
+
   const chooseFile = type => {
     let options = {
       mediaType: type,
       maxWidth: 300,
       maxHeight: 550,
       quality: 1,
+      includeBase64: true,
     };
     launchImageLibrary(options, response => {
       console.log('Response = ', response);
@@ -123,16 +138,19 @@ const New_Post = () => {
         alert(response.errorMessage);
         return;
       }
-      console.log('base64 -> ', response.base64);
-      console.log('uri -> ', response.uri);
-      console.log('width -> ', response.width);
-      console.log('height -> ', response.height);
-      console.log('fileSize -> ', response.fileSize);
-      console.log('type -> ', response.type);
-      console.log('fileName -> ', response.fileName);
+      //console.log('base64 -> ', response.assets[0].base64);
+      console.log('uri -> ', response.assets[0].uri);
+      // console.log('width -> ', response.width);
+      // console.log('height -> ', response.height);
+      // console.log('fileSize -> ', response.fileSize);
+      // console.log('type -> ', response.type);
+      // console.log('fileName -> ', response.fileName);
       setFilePath(response);
+      setPicture_url(response.assets[0].uri)
     });
   };
+
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView
@@ -173,7 +191,7 @@ const New_Post = () => {
         </View>
 
         <View style={{backgroundColor: 'white', flex: 4, padding: 20}}>
-          <DropdownComponent listvalue={Post_type} title={'Post Type'} />
+          {/* <DropdownComponent listvalue={Post_type} title={'Post Type'} /> */}
 
           <View style={{paddingBottom: 15}}>
             <Text style={PostStyleSheet.addPostMessageLabelText}>
@@ -184,13 +202,13 @@ const New_Post = () => {
               multiline={true}
               numberOfLines={4}
               onChangeText={text => onChangeText(text)}
-              value={postMessage}
+              value={message}
             />
           </View>
 
           <DropdownComponent title={'Offer CTA'} listvalue={Offer_CTA} />
 
-          <View style={{paddingBottom: 15}}>
+          {/* <View style={{paddingBottom: 15}}>
             <Text style={PostStyleSheet.CouponCodeLabelText}>Coupon Code</Text>
             <TextInput
               style={PostStyleSheet.CouponCodeInputText}
@@ -252,12 +270,12 @@ const New_Post = () => {
               style={PostStyleSheet.OfferLinkInputText}
               numberOfLines={4}
               onChangeText={text => setOfferlink(text)}
-              value={offerlink}
+              value={link}
             />
           </View>
 
           <Text style={PostStyleSheet.LocationLabelText}>Locations</Text>
-          <Text>{data}</Text>
+          <Text>{data.locations}</Text>
           <Text style={PostStyleSheet.offerdisclimerLabelText}>
             Offer Disclaimer
           </Text>
@@ -267,17 +285,17 @@ const New_Post = () => {
             numberOfLines={4}
             onChangeText={text => setofferdisclimer(text)}
             value={offerdis}
-          />
-        </View>
+                /> */}
+        </View> 
       </ScrollView>
 
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+       <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => openPanel()}>
           <CommonButton buttonname={'SEE PREVIEW'} />
         </TouchableOpacity>
-      </View>
+      </View> 
 
-      <DatePicker
+      {/*<DatePicker
         modal
         open={open}
         date={date}
@@ -291,7 +309,7 @@ const New_Post = () => {
         onCancel={() => {
           setOpen(false);
         }}
-      />
+      /> */}
       {/* // Post data PREVIEW */}
       <SwipeablePanel
         {...panelProps}
@@ -315,19 +333,19 @@ const New_Post = () => {
      <Icon name='edit'/>
     </Card.Actions> */}
           <Card.Cover
-            style={{borderTopEndRadius:9}}
-            source={{uri: 'https://picsum.photos/700'}}
+            style={{borderTopEndRadius: 9}}
+            //source={{uri: 'https://picsum.photos/700'}}
+            source={{uri:picture_url}}
           />
           <View
             style={{
-              
               position: 'absolute',
               top: 10,
               right: 10,
               elevation: 10,
             }}>
-              <TouchableOpacity onPress={()=> chooseFile() }>
-            <PencilIcon height={50} width={50}/>
+            <TouchableOpacity onPress={() => chooseFile()}>
+              <PencilIcon height={50} width={50} />
             </TouchableOpacity>
           </View>
           <Card.Content>
@@ -339,7 +357,7 @@ const New_Post = () => {
 
                 fontSize: 14,
               }}>
-              {postMessage}
+              {message}
             </Text>
             <View
               style={{
@@ -399,7 +417,22 @@ const New_Post = () => {
         </Card>
 
         <View style={{alignItems: 'center', marginTop: 15}}>
+          {/* /**
+           *
+           * mandatory params
+           * @param {*} location_id
+           * @param {*} message  ---- postMessage
+           * @param {*} picture_url  ----bashe64
+           * @param {*} call_to_action --LEARN_MORE
+           * @param {*} link  -- offerlink
+           *
+           */}
           <TouchableOpacity
+             onPress={() => dispatch(loadpostdata(location_id,
+              message,
+              picture_url,
+              link,
+              call_to_action))}
             style={{
               backgroundColor: '#0070FC',
               width: 350,

@@ -37,7 +37,6 @@ import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
-import Storelocation from '../containers/Location/Storelocation';
 // import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
@@ -45,7 +44,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
 import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
-import Filter from '../containers/dashboard/Filter';
+//import Filter from '../containers/dashboard/Filter';
+import CustomerFilter from '../containers/Customer_Filter/CustomerFilter';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import { CommonActions } from '@react-navigation/native';
 // import Drawer from './Drawer';
@@ -56,8 +56,13 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+import New_Post from '../containers/Post/New_Post';
+import My_Offers_Home from '../containers/Offers/My_Offers_Home';
+import MyPostHome from '../containers/Post/MyPostHome'
+import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
+import Storelocation from '../containers/Location/Storelocation'
 
 
 
@@ -70,10 +75,6 @@ import * as RootNavigation from '../navigation/RootNavigation';
  *
  **
  */
-
-// const StoreLocation = () => {
-//   return <Text style={locationStyle.locationText}>Store Location</Text>;
-// };
 
 const locationStyle = StyleSheet.create({
   locationText: {
@@ -132,6 +133,7 @@ const Routes = () => {
     }
     console.log('Get all keys :- return', keys);
   };
+  
 
   return (
     <>
@@ -152,8 +154,14 @@ const Routes = () => {
 
           <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
           <Drawer.Screen component={Message} name={navigationString.Message} />
-          <Drawer.Screen component={Filter} name={navigationString.Filter} />
+          {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
+          <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+          <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
+          <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
+          <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+
+         
           {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
 
         </Drawer.Navigator>

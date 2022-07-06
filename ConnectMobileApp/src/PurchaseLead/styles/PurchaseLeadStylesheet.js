@@ -31,7 +31,7 @@
 */
 
 import { StyleSheet } from 'react-native';
-import fontFamily from '../../../utility/Font-Declarations';
+import fontFamily from '../../utility/Font-Declarations';
 
 const purchaseLeadStyles = StyleSheet.create({
     purchaseLeadMainContainer: {

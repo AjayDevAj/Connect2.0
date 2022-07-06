@@ -1,11 +1,52 @@
-import {StyleSheet, Text, View, FlatList, SafeAreaView ,TouchableOpacity} from 'react-native';
-import React from 'react';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import {StyleSheet, Text, View, FlatList, SafeAreaView ,TouchableOpacity ,Pressable} from 'react-native';
+import React, { useState } from 'react';
+import {Avatar, Button, Card, Title, Paragraph, List} from 'react-native-paper';
 import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg'
 import fontfaimly from '../../utility/Font-Declarations';
 import TopHeader from '../../Header/TopHeader';
 import  Icon  from 'react-native-vector-icons/MaterialIcons';
+import { loadpostlistdata } from '../../actions/PostListAction';
+import {useDispatch, useSelector} from 'react-redux';
+import { useEffect } from 'react';
+import {useIsFocused} from '@react-navigation/native';
 const MyPostHome = () => {
+
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const[listdata ,setlistdata]=useState('')
+
+  
+  
+  
+
+   
+      const Post_List_Data = useSelector(store => store.PostListResponceData);
+  //    //console.log('POST LITS SELECTOR DATA ----------->',Post_List_Data.data[1].picture_url)
+  //    const Post_List_Data = Post_List_Data_Responce.data.map((e)=>{
+  //     return e
+  //    });
+
+  // if (Post_List_Data_Responce.data != undefined )
+  // {
+  //   console.log('POST LITS SELECTOR DATA ----------->',Post_List_Data.data[0].picture_url)
+    
+  //   console.log('list data ->>>>>>',Post_List_Data.data[0].picture_url)
+  // }
+    
+    
+
+   
+  
+  /**
+   * Api call when page load
+  * location_id:1
+   */
+   useEffect(() => {
+    if (isFocused) {
+        dispatch(loadpostlistdata(1))
+        
+    }
+  },[isFocused]);
 
     const DATA = [
         {
@@ -29,6 +70,8 @@ const MyPostHome = () => {
         secondIcon={'search'}
         thirdIcon={'filter-list'}
       />
+
+
       <View
         style={{
           flexDirection: 'row',
@@ -45,8 +88,8 @@ const MyPostHome = () => {
             elevation: 5,
           }}
           mode="elevated">
-          <Text>Total Posts</Text>
-          <Text>2.3K</Text>
+          <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:14,color:'#000000',opacity:50}}>Total Posts</Text>
+          <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:20,color:'#000000',opacity:100}}>2.3K</Text>
         </Card>
 
         <Card
@@ -59,8 +102,8 @@ const MyPostHome = () => {
             elevation: 5,
           }}
           mode="elevated">
-          <Text>Total Posts</Text>
-          <Text>2.3K</Text>
+          <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:14,color:'#000000',opacity:50}}>Total Clicks</Text>
+          <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:20,color:'#000000',opacity:100}}>172</Text>
         </Card>
 
         <Card
@@ -73,8 +116,8 @@ const MyPostHome = () => {
             elevation: 5,
           }}
           mode="elevated">
-          <Text>Total Posts</Text>
-          <Text>2.3K</Text>
+        <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:14,color:'#000000',opacity:50}}>Total Views</Text>
+          <Text style={{fontFamily:fontfaimly.Alte_DIN,fontSize:20,color:'#000000',opacity:100}}>101K</Text>
         </Card>
       </View>
       <View style={{alignItems:'center',paddingTop:20}}>
@@ -97,8 +140,8 @@ const MyPostHome = () => {
        <Icon name='edit'/>
       </Card.Actions> */}
             <Card.Cover
-              style={{borderTopEndRadius:9}}
-              source={{uri: 'https://picsum.photos/700'}}
+              // style={{borderTopEndRadius:9}}
+               //source={{uri: Post_List_Data.data[1].picture_url}}
             />
             <View
               style={{
@@ -111,6 +154,7 @@ const MyPostHome = () => {
                 <TouchableOpacity onPress={()=> chooseFile() }>
               <PencilIcon height={50} width={50}/>
               </TouchableOpacity>
+             
             </View>
             <Card.Content>
               <Text
@@ -147,7 +191,7 @@ const MyPostHome = () => {
                       color: '#FFFFFF',
                       fontSize: 14,
                     }}>
-                    LEARN MORE
+                    {/* {Post_List_Data.data[1].call_to_action} */}
                   </Text>
                 </TouchableOpacity>
                 <View
@@ -173,7 +217,7 @@ const MyPostHome = () => {
                       fontSize: 14,
                       color: '#5F6368',
                     }}>
-                    22nd feb’ 22
+                   {/* {Post_List_Data.data[1].date} */}
                   </Text>
                 </View>
               </View>
@@ -182,8 +226,27 @@ const MyPostHome = () => {
           )}
         keyExtractor={item => item.id}
       />
-      <View style={{width:100,height:100,backgroundColor:'#0070FC'}}></View>
+    
+    {/* <Pressable onPress={()=>Alert.alert('hello')}>
+              <View
+                style={{
+                  minWidth: 80,
+                  minHeight: 80,
+                  backgroundColor: '#0070FC',
+                  top: 240,
+                 right:-9,
+                  borderRadius: 100 / 2,
+                alignItems:'center',
+                justifyContent:'center',
+                position:'absolute'
+                  
+                }}>
+                    <Icon name='local-offer' color={'#FFFFFF'} borderColor={'#fff0'} size={30}/>
+                </View>
+            </Pressable> */}
+
       </View>
+    
       
     </View>
   );
