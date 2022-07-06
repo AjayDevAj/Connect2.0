@@ -124,6 +124,9 @@ const getCustomerList = async (
         case 204:
             throw new Error("NO Data")
             break
+        case 401:
+            navigator.navigate(NavigationString.LOGIN)
+    
         default: break
     }
     return data;

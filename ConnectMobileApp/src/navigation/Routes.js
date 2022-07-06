@@ -37,7 +37,6 @@ import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
-import Storelocation from '../containers/Location/Storelocation';
 // import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
@@ -56,6 +55,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
+import Storelocation from '../containers/Location/Storelocation'
 
 
 
@@ -68,10 +68,6 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
  *
  **
  */
-
-// const StoreLocation = () => {
-//   return <Text style={locationStyle.locationText}>Store Location</Text>;
-// };
 
 const locationStyle = StyleSheet.create({
   locationText: {
@@ -130,6 +126,7 @@ const Routes = () => {
     }
     console.log('Get all keys :- return', keys);
   };
+  
 
   return (
     <>
@@ -142,7 +139,6 @@ const Routes = () => {
           screenOptions={{ headerShown: false }}>
 
           <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
-          {/* <Drawer.Screen component={Chat} name={navigationString.Chat} /> */}
 
           <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
           <Drawer.Screen component={Login} name={navigationString.LOGIN} />

@@ -5,6 +5,7 @@ import InternetConnectionAlert from "react-native-internet-connection-alert";
 
 
 const CheckInterNet = () => {
+
     return (
             <View style={{ width: '100%', height: '12%' }}>
                 <InternetConnectionAlert

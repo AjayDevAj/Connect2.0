@@ -47,16 +47,13 @@ export const Unassigned_Chat_Fetch_Call = async () => {
 
   switch (response.status) {
     case response.status > 400:
-      // if (response.status == 401) {
-      //   navigation.navigate(NavigationString.LOGIN)
-      // }
-      // else {
-      //   throw new Error(data.errors);
-      // }
       throw new Error(data.errors);
       break
     case 204:
       throw new Error("NO Data")
+    case 401:
+      navigator.navigate(NavigationString.LOGIN)
+
     default: break
   }
   return data;

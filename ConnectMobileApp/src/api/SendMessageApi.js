@@ -34,15 +34,17 @@ const SendMessageApi = async (modeType = 'google', conversation_id, message) => 
     console.log('SendMessageApi api testing SendMessageApi Response : Api Call response', data);
 
 
-    if (response.status > 400) {
-        console.log('Chat Message Error : ' + data.errors);
-        // if (response.status == 401) {
-        //     navigation.navigate(NavigationString.LOGIN)
-        // }
-        // else {
-        //     throw new Error(data.errors);
-        // }
-        throw new Error(data.errors);
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);
+            break
+        case 204:
+            throw new Error("NO Data")
+            break
+        case 401:
+            navigator.navigate(NavigationString.LOGIN)
+
+        default: break
     }
     return data;
 }
