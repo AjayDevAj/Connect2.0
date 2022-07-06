@@ -33,6 +33,7 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import NavigationString from '../utility/NavigationString'
+import {signOut} from '../navigation/Routes'
 
 
 
@@ -121,7 +122,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
             break
         case 401:
             // navigator.navigate(NavigationString.LOGIN)   
- 
+            signOut()
         default: break
     }
     // if (response.status > 400) {

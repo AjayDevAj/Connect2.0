@@ -61,7 +61,9 @@ import My_Offers_Home from '../containers/Offers/My_Offers_Home';
 import MyPostHome from '../containers/Post/MyPostHome'
 import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
+import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
+import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
 
 
 
@@ -110,7 +112,7 @@ const Routes = () => {
   const [initialState, setinitialState] = useState('OnBoarding');
 
   useEffect(() => {
-     getUserState();
+    getUserState();
   });
 
   const getUserState = async () => {
@@ -132,41 +134,41 @@ const Routes = () => {
     }
     console.log('Get all keys :- return', keys);
   };
-  
+
 
   return (
     <>
       {statusKeyLoaded && (
 
-      <NavigationContainer ref={navigationRef}>
+        <NavigationContainer ref={navigationRef}>
 
-        <Drawer.Navigator initialRouteName={initialState}
-          drawerContent={(props) => <CustomDrawer {...props} />}
-          screenOptions={{ headerShown: false }}>
+          <Drawer.Navigator initialRouteName={initialState}
+            drawerContent={(props) => <CustomDrawer {...props} />}
+            screenOptions={{ headerShown: false }}>
 
-          <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+            <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
 
-          <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
-          <Drawer.Screen component={Login} name={navigationString.LOGIN} />
-          <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
-          <Drawer.Screen component={Storelocation} name={navigationString.Location} />
+            <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+            <Drawer.Screen component={Login} name={navigationString.LOGIN} />
+            <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+            <Drawer.Screen component={Storelocation} name={navigationString.Location} />
 
-          <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
-          <Drawer.Screen component={Message} name={navigationString.Message} />
-          {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
-          <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
-          <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
-          <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
-          <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
-          <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+            <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
+            <Drawer.Screen component={Message} name={navigationString.Message} />
+            {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
+            <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
+            <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+            <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
+            <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
+            <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+            <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} />
 
-         
-          {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
+            {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
 
-        </Drawer.Navigator>
+          </Drawer.Navigator>
 
 
-        {/* <Stack.Navigator initialRouteName={initialState}>
+          {/* <Stack.Navigator initialRouteName={initialState}>
            <Stack.Screen
               name={navigationString.OnBoarding}
               component={OnBoarding}
@@ -235,9 +237,9 @@ const Routes = () => {
               options={{ headerShown: false }}
             />
           </Stack.Navigator> */}
-        {/* <Incoming_Chat /> */}
-      </NavigationContainer>
-      )}  
+          {/* <Incoming_Chat /> */}
+        </NavigationContainer>
+      )}
     </>
   );
 };
@@ -251,10 +253,10 @@ export const resetNavigation = navigation => {
   });
 };
 
-export const signOut = navigation => {
+export const signOut = () => {
   console.log('response.status getChatList signOut', CommonActions);
-  navigation.navigate(navigationString.LOGIN);
-  navigation.reset({
+  RootNavigation.navigate(navigationString.LOGIN);
+  RootNavigation.reset({
     index: 0,
     routes: [{ name: navigationString.LOGIN }],
   });

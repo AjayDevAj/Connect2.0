@@ -52,7 +52,6 @@ export const Unassigned_Chat_Fetch_Call = async () => {
     case 204:
       throw new Error("NO Data")
     case 401:
-      navigator.navigate(NavigationString.LOGIN)
 
     default: break
   }

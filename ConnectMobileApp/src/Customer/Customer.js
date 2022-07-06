@@ -73,7 +73,7 @@
  
    useEffect(() => {
       if (customerResponseData == 'Error: 401') {
-        signOut(navigation)
+        signOut()
       }
    }, [customerResponseData]);
 

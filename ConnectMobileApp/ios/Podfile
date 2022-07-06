@@ -13,13 +13,21 @@ target 'ConnectMobileApp' do
     inherit! :complete
     # Pods for testing
   end
+
+#  use_flipper!({ 'Flipper-Folly' => '2.5.3', 'Flipper' => '0.87.0', 'Flipper-RSocket' => '1.3.1' }, configurations: ['debug', 'release'])  #    flipper_post_install(installer)
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+   use_flipper!()
+#  use_frameworks! :linkage => :static
+
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
+
+#target 'SiConnectNotification' do
+#  pod 'Firebase/Messaging' # eg 6.31.0
+#end

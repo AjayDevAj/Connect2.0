@@ -29,7 +29,6 @@ const getStoreLocations = async () => {
             throw new Error("NO Data")
             break
         case 401:
-            navigator.navigate(NavigationString.LOGIN)
 
         default: break
     }
