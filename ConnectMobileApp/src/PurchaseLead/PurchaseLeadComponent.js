@@ -6,6 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import { loadLeadData, sendLeadData } from '../actions/CustomerAction';
 import PurchaseLeadForm from './PurchaseLeadForm';
+import { set } from 'lodash';
 
 const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, logo, 
     menuHandler, conversation_id, type='', customer_intent=''}) => {
@@ -33,6 +34,8 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
            getLeadApi(0,0,conversation_id);
         }
     }, [conversation_id]);
+
+    const [customerIntentVal, setCustomerIntentVal] = useState([]);
 
     const formHandler = (customerFormValue) => {
         console.log('===== Set Lead Value API =====', customerFormValue);
@@ -70,7 +73,16 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
                     customer_interest={GetLeadResponseData.data.customer_interest} 
                     conversation_id={conversation_id}
                     name={name}
-                    customer_intent={customer_intent}
+                    customer_intent={() => {
+                        {GetLeadResponseData.data.intent_list !== '' ? 
+                        GetLeadResponseData.data.intent_list.map((item) => {
+                                item.selected == true && setCustomerIntentVal(current => [...current, item.id])
+                            }) 
+                            : setCustomerIntentVal([customer_intent])
+                        }
+
+                        return customerIntentVal;
+                    }}
                 /> 
             )} 
         </View>

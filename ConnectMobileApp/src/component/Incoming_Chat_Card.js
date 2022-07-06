@@ -25,7 +25,7 @@ export const Incoming_Chat_Card = ({title,location,onclick,last_message}) => {
               style={styles.acpectButtonStyle}>
               <Text
                 style={styles.acpectButtonTextStyle}>
-                Acpect
+                Accept
               </Text>
             </View>
           </View>
