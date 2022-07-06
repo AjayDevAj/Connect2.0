@@ -48,6 +48,7 @@ const Message = ({navigation, route}) => {
   };
   const menuHandler = () => {
     navigation.goBack();
+    setShowPurchaseForm(!showPurchaseForm);
   };
 
   const markasImportant = async () => {
@@ -283,6 +284,7 @@ const Message = ({navigation, route}) => {
     setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
+
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
@@ -306,7 +308,7 @@ const Message = ({navigation, route}) => {
             firstIcon="arrow-back"
             color={reloadTopView ? '#FFAA00' : null}
             name={getDataFromParam.selected_Item.display_name}
-            menuHandler={() => navigation.goBack()}
+            menuHandler={menuHandler}
             logo={getDataFromParam.selected_Item.publisher_type}
             conversation_id={getDataFromParam.selected_Item.conversation_id}
             navigation={navigation}
@@ -334,8 +336,9 @@ const Message = ({navigation, route}) => {
               onClick={index => {
                 switch (index) {
                   case 1:
-                    setIsClosedChatClicked(!isClosedChatClicked);
-                    setDotClicked(!dotClicked);
+                    closeChatHandler();
+                    // setIsClosedChatClicked(!isClosedChatClicked);
+                    // setDotClicked(!dotClicked);
                     break;
                   case 2:
                     mark_Unread_Api();

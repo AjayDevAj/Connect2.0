@@ -29,39 +29,14 @@ const PurchaseLeadForm = ({
     formHandler, 
     conversation_id, 
     customer_intent='',
-    name='' 
+    name='',
+    cancelHandler,
 }) => {
+    console.log('===== Form field data =====', formData);
     const [isEnabled, setIsEnabled] = useState(true);
     const [interestVal, setInterestVal] = useState("dbdhdj");
-    const [intentsVal, setIntentsVal] = useState(0);
+    const [intentsVal, setIntentsVal] = useState(customer_intent);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
-    {dataComponent == 'customer' ? (
-       <>
-        {customer_intent !== '' 
-            ? 
-            customer_intent.map((item) => {
-                setIntentsVal(item.id)
-            }) 
-            : ''
-        }
-        </>
-    ) : ''}
-    
-    const [interestTags, setInterestTags] = useState({
-        tag: "",
-        tagsArray: ["dbdhdj", "cbjckd"]
-    });
-    const [tagsColor, setTagsColor] = useState('');
-    const [tagsText, setTagsText] = useState('');
-
-    const updateTagState = (state) => {
-        setInterestTags({
-            ...interestTags, 
-            state
-        });
-        console.log("Interest Tags - ", interestTags);
-    };
     
     return (
         <ScrollView style={ purchaseLeadStyles.purchaseLeadFormContainer }>
@@ -83,7 +58,7 @@ const PurchaseLeadForm = ({
                 validationSchema={ValidatePurchaseSchema}
                 onSubmit={(values, actions) => {
                     // console.log('===== Values =====',values);
-                    // formHandler(values)
+                    formHandler(values)
                     actions.resetForm();
                 }}
             >
@@ -224,7 +199,7 @@ const PurchaseLeadForm = ({
                     <Text style={ purchaseLeadStyles.errorText }>{props.touched.comments && props.errors.comments}</Text>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'space-around', marginBottom: 80}}>
-                        <TouchableOpacity onPress={() => {navigation.goBack()}}>
+                        <TouchableOpacity onPress={cancelHandler}>
                             <View style={purchaseLeadStyles.cancelButton}>
                                 <Text style={purchaseLeadStyles.cancelButtonText}>Cancel</Text>
                             </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, FlatList, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Modal, FlatList, TouchableOpacity } from 'react-native';
 import RadioButton from 'react-native-radio-button';
 import { closeChatReason } from '../../utility/Constant';
 import closeChatStyles from './styles/closeChatStylesheet';

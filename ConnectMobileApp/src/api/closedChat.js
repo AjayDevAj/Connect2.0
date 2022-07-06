@@ -44,4 +44,3 @@ const closedChat = async (chat_status,conversation_id) => {
 }
 
 export { closedChat }
-

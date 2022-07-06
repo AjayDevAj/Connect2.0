@@ -31,7 +31,7 @@
 */
 
 import { StyleSheet } from 'react-native';
-import FontFamily from '../../utility/Font-Declarations';
+import fontFamily from '../../utility/Font-Declarations';
 
 const customerStyles = StyleSheet.create({
     customerMainContainer: {
@@ -59,7 +59,7 @@ const customerStyles = StyleSheet.create({
         color: '#0E0071',
         fontSize: 16,
         opacity: 1,
-        fontFamily: FontFamily.Alte_DIN,
+        fontFamily: fontFamily.Alte_DIN,
         paddingTop: 5,
         fontWeight: 'bold'
     },
@@ -71,6 +71,39 @@ const customerStyles = StyleSheet.create({
         marginLeft: '40%',
         color: '#0E0071'
     },
+
+    noCustomerAssignedMainContainer: {
+        flexDirection: 'column', 
+        justifyContent: 'space-between',
+        
+    },
+    noCustomerAssignedSvgView: {
+        marginTop: '20%',
+        alignItems: 'center'
+    },
+    noCustomerAssignedTextView: {
+        alignItems: 'center',
+        marginTop: '7%'
+    },
+    noCustomerAssignedText: {
+        color: '#000',
+        opacity: 1,
+        letterSpacing: 0.18,
+        fontSize: 18,
+        fontFamily: fontFamily.Alte_DIN,
+        fontWeight: 'bold',
+    },
+    noCustomerAssignedDesc: {
+        color: '#000',
+        opacity: 0.5,
+        letterSpacing: 0.12,
+        fontSize: 12,
+        fontFamily: fontFamily.Poppins,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        width: '70%',
+        marginTop: '2%'
+    }
 });
 
 export default customerStyles;
