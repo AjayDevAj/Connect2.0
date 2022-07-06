@@ -35,6 +35,8 @@ import {useIsFocused} from '@react-navigation/native';
 import {signOut} from '../navigation/Routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
+import {store_Value} from '../utility/StorageClass';
+
 // import uWebSockets from '../component/uWebSockets'
 
 const Chat = ({navigation ,Route}) => {
@@ -92,9 +94,10 @@ const Chat = ({navigation ,Route}) => {
 
 
   const Incoming_Chat_Socket_Subscribe = () => {
+    console.log('uWebsocket Connected to the server Message',store_Value.id);
+
     ws.onopen = () => {
-      console.log('uWebsocket Connected to the server Message');
-      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: store_Value.id}));
     };
     ws.onclose = e => {
       console.log('uWebsocket Disconnected. Check internet or server.', e);

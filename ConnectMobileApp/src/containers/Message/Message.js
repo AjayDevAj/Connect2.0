@@ -82,10 +82,21 @@ const Message = ({navigation, route}) => {
   };
   const openFile = async () => {
     try {
-      const res = await DocumentPicker.pick({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.allFiles],
       });
       // await FileViewer.open(res.uri);
+      setUnSendMessage({
+        image: res.uri,
+        createdAt: new Date(),
+        user: {
+          agent_name: res.name,
+          _id: 'a',
+        },
+        media_type:'file',
+        _id: res.size,
+        file_type: 'sendChat',
+      });
     } catch (e) {
       // error
     }
@@ -111,14 +122,14 @@ const Message = ({navigation, route}) => {
   const Incoming_Chat_Socket_Subscribe = () => {
     ws.onopen = () => {
       console.log('uWebsocket Connected to the server Message');
-      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: 64}));
+      ws.send(JSON.stringify({action: 'subscribe_message', agent_id: getDataFromParam.selected_Item.user_id}));
       ws.send(
         JSON.stringify({
           action: 'subscribe_message_delivery_status',
-          agent_id: 64,
+          agent_id: getDataFromParam.selected_Item.user_id,
         }),
       );
-      ws.send(JSON.stringify({action: 'subscribe_typing_event', agent_id: 64}));
+      ws.send(JSON.stringify({action: 'subscribe_typing_event', agent_id: getDataFromParam.selected_Item.user_id}));
 
       // ws.send(JSON.stringify({action: 'subscribe_incoming_chat', agent_id: 64}));
       // ws.send(JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: 64}));
@@ -369,7 +380,7 @@ const Message = ({navigation, route}) => {
                 selectImage={openImage}
                 renderBubble={renderBubble}
                 renderCustomView={renderCustomView}
-                renderMessageImage={renderMessageImage}
+                // renderMessageImage={renderMessageImage}
                 user={{
                   _id: 'a',
                   agent_name: loginUserData.user.name,

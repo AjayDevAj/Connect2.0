@@ -19,16 +19,16 @@ const SendMessageApi = async (
     sub_conversation_id: sub_conversation_id,
     message: message,
   };
-  
+
   var api_url = API_URL_STAGING + modeType_Url;
 
   var formdata = new FormData();
   formdata.append('conversation_id', conversation_id);
-  formdata.append('media_type', 'image');
+  formdata.append('media_type', media_type);
   formdata.append('sub_conversation_id', sub_conversation_id);
   formdata.append('file', {
     uri: file,
-    name: 'img.name',
+    name: 'jpg',
     type: 'jpg',
   });
 
@@ -42,7 +42,7 @@ const SendMessageApi = async (
   const response = await fetch(api_url, {
     method: 'POST',
     headers: headers,
-    body: media_type != null ? formdata: JSON.stringify(bodyRawData),
+    body: media_type != null ? formdata : JSON.stringify(bodyRawData),
   });
 
   const data = response.json();

@@ -20,19 +20,19 @@ const CardRowThree = ({ name, type='', status }) => {
                 <View style={{ flexDirection: 'row', alignSelf: 'baseline'}}>
                     {status == 'Open' ? (
                         <>
-                        <Icon name="mail" size={22} color="#5F6368" style={{marginRight: 20}} />
+                        <Icon name="mail-outline" size={17} color="#5F6368" style={{marginRight: 20}} />
                          <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
-                            <Icon name="call" size={22} color="#5F6368" style={{}} />
+                            <Icon name="phone" size={17} color="#5F6368" style={{}} />
                             <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101',  marginVertical: 2 }] }></View>
                         </View>
                         </>
                     ) : (
                         <>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
-                            <Icon name="mail" size={22} color="#5F6368" style={{marginRight: 20}} />
+                            <Icon name="mail-outline" size={17} color="#5F6368" style={{marginRight: 20}} />
                             <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101', marginRight: 2}] }></View>
                         </View>
-                        <Icon name="call" size={22} color="#5F6368" />
+                        <Icon name="phone" size={17} color="#5F6368" />
                         </>
                     )}
                 </View>         
