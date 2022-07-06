@@ -58,6 +58,8 @@ import {saveObject} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../../utility/Constant';
 import {CONSTANT} from '../../utility/Constant';
 import Loader from '../../utility/Loader';
+// import messaging from '@react-native-firebase/messaging';
+
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -80,6 +82,7 @@ const GetOtpScreen = ({navigation}) => {
 
   useEffect(() => {
     if (otpResponce.code != null) {
+      // setupCloudMessage();
       saveObject(otpResponce.data, otpResponse_Storage_Key);
       navigation.navigate(NavigationString.Location, {
         userName: otpResponce.data.user.name,
@@ -115,6 +118,45 @@ const GetOtpScreen = ({navigation}) => {
 
     // }
   }, [otpResponce]);
+
+  // const setupCloudMessage = async () => {
+  //   const authStatus = await messaging().requestPermission();
+  //   if (authStatus) {
+  //     firebasePushSetup();
+  //   } else {
+  //     console.log(`firebase authStatus false`);
+  //   }
+  // };
+
+  // const firebasePushSetup = async () => {
+  //   await messaging().registerDeviceForRemoteMessages();
+
+  //   const authStatus = await messaging().requestPermission();
+
+  //   const enabled =
+  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  //     console.log('Firebase line status:');
+
+  //   if (enabled) {
+  //     var permisson = await messaging().hasPermission();
+  //     console.log('Firebase Authorization enabled:', permisson);
+
+  //     if (permisson) {
+  //       var token = await messaging().getToken();
+  //       console.log('Firebase Authorization status:', token);
+  //       setFcmToken(token);
+  //     } else {
+  //       console.log(`Firebase permisson false`);
+  //     }
+  //   } else {
+  //     console.log(`Firebase enabled false`);
+  //   }
+
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {});
+
+  //   return unsubscribe;
+  // };
 
   useEffect(() => {
     if(otpResponce != undefined && otpResponce.data != undefined && otpResponce.data.code==401)

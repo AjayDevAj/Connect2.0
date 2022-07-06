@@ -11,6 +11,7 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+//#import <Firebase.h>
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -57,6 +58,10 @@ static void InitializeFlipper(UIApplication *application) {
             NSLog(@"custom font check  %@", name);
         }
     }
+//  if ([FIRApp defaultApp] == nil) {
+//     [FIRApp configure];
+//
+//   }
   return YES;
 }
 

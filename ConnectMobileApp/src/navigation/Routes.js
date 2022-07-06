@@ -57,6 +57,7 @@ import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import {navigationRef} from '../navigation/RootNavigation';
+import * as RootNavigation from '../navigation/RootNavigation';
 
 
 
@@ -243,10 +244,10 @@ export const resetNavigation = navigation => {
   });
 };
 
-export const signOut = navigation => {
+export const signOut = () => {
   console.log('response.status getChatList signOut', CommonActions);
-  navigation.navigate(navigationString.LOGIN);
-  navigation.reset({
+  RootNavigation.navigate(navigationString.LOGIN);
+  RootNavigation.reset({
     index: 0,
     routes: [{ name: navigationString.LOGIN }],
   });

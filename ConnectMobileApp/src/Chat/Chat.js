@@ -88,7 +88,7 @@ const Chat = ({navigation ,Route}) => {
 
   useEffect(() => {
     if (chatResponseData == 'Error: 401') {
-      signOut(navigation)
+      signOut()
     }
   }, [chatResponseData]);
 

@@ -97,6 +97,7 @@ const Tab = createBottomTabNavigator();
 
 
 export default function RouteTabBar() {
+  {console.log('******* RouteTabBar call *******')}
   return (
     <>
       <Tab.Navigator>
