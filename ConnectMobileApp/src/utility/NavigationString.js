@@ -33,6 +33,9 @@ export default {
     Drawer:"Drawer",
     Chat_Filter:"Chat_Filter",
     Review:"Review",
+    My_Offers_home:'MyOffersHome',
+    MyPostHome:'My_PostHome',
+    Add_new_offer:'Add_new_offer',
   
 /*
 **
@@ -65,5 +68,7 @@ ManageTeam: "Manage Team",
 Profile: "Profile",
 
 
+
+ 
 
 }

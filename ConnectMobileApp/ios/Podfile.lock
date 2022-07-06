@@ -272,6 +272,8 @@ PODS:
   - React-jsinspector (0.66.3)
   - React-logger (0.66.3):
     - glog
+  - react-native-background-upload (6.5.1):
+    - React
   - react-native-date-picker (4.2.2):
     - React-Core
   - react-native-document-picker (8.1.1):
@@ -447,6 +449,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-background-upload (from `../node_modules/react-native-background-upload`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
@@ -530,6 +533,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-background-upload:
+    :path: "../node_modules/react-native-background-upload"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
   react-native-document-picker:
@@ -622,6 +627,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 433a691aee158533a6a6ee9c86cb4a1684fa2853
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
+  react-native-background-upload: 221b35720317853266f3eb09b9a5747db8649793
   react-native-date-picker: 9088350e06918f7d842a34c171acadc66583cb94
   react-native-document-picker: 3c074fa194fddbcd46867c3a1c44b9331bd9dcbc
   react-native-image-picker: 9f9eb160a4f4fc0702f9d0a60fa453b413258ef8

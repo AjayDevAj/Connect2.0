@@ -127,7 +127,7 @@ const cardStyles = StyleSheet.create({
     cardMessage: {
         color: '#000000',
         marginVertical: 8,
-        width: '66%',
+        maxWidth: '66%',
         height: 20,
         opacity: 1,
         letterSpacing: 0,
@@ -137,8 +137,10 @@ const cardStyles = StyleSheet.create({
     },
     cardTimeContainer: {
         flexDirection:'row',
-        justifyContent:'space-between',
-        marginVertical: 10
+        marginVertical: 10,
+        alignItems:'center'
+        // marginRight:10,
+        // backgroundColor:'red'
     },
     cardTimeIcon: {
         width: 4,
@@ -167,11 +169,11 @@ const cardStyles = StyleSheet.create({
     },
     cardAgentNameContainer: {
         flexDirection: 'row',
-        backgroundColor:'rgba(244, 251, 255, 1)',
+        backgroundColor:'#F4F4F4',
         marginLeft: 25,
         alignItems: 'center',
         marginBottom: 12,
-        borderColor: 'rgba(224, 243, 255, 1)',
+        borderColor: '#EAEAEA',
         borderRadius:4,
         borderWidth:1 ,
     },

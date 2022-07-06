@@ -32,5 +32,5 @@ export default function* FilterDataWatcherSaga() {
 
     yield takeEvery(CONSTANT.FILTER_DATA_BTN_ID, handleFilterBtnIdDataResponse)
 
-    console.log('Filter watcher',getResponse)
+    //console.log('Filter watcher',getResponse)
 }
