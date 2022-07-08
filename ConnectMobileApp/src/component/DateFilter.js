@@ -8,15 +8,21 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-
 import FontDeclarations from '../utility/Font-Declarations';
-
+import DatePicker from 'react-native-date-picker';
 import {getOtpResponse} from '../utility/StorageClass';
-
 import RadioButtonRN from 'radio-buttons-react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const DateFilter = () => {
+  const [selectedRange, setRange] = useState({});
+  const [date, setDate] = useState(new Date());
+  const [toDate, settoDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [opentoDatepicker, setOpenDatepicker] = useState(false);
+  const [fromdate, setfromdate] = useState('From');
+  const [todate, settodate] = useState('To');
+
   const datedata = [
     {label: 'Last 7 Days'},
     {label: 'Last Month'},
@@ -55,9 +61,43 @@ const DateFilter = () => {
           alignItems: 'center',
           paddingLeft: 12,
         }}>
-        <TouchableOpacity>
-          <Icon name="date-range" size={20} color="#657180" />
-        </TouchableOpacity>
+        <DatePicker
+          modal
+          open={open}
+          date={date}
+          mode={'date'}
+          onConfirm={date => {
+            setOpen(false);
+            setDate(date);
+            setfromdate(date.toDateString());
+            
+
+            console.log(date.toDateString());
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
+        />
+
+        <DatePicker
+          modal
+          open={opentoDatepicker}
+          date={toDate}
+          mode={'date'}
+          onConfirm={date => {
+            setOpenDatepicker(false);
+            settoDate(date);
+            
+            settodate(date.toDateString());
+
+            console.log(date.toDateString());
+          }}
+          onCancel={() => {
+            setOpenDatepicker(false);
+          }}
+        />
+
+        <Icon name="date-range" size={20} color="#657180" />
 
         <Text
           style={{
@@ -68,17 +108,23 @@ const DateFilter = () => {
           Custom Range
         </Text>
       </View>
+      <TouchableOpacity
+        style={styles.frpmToLabel}
+        onPress={() => setOpen(true)}>
+        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12}}>
+          {/* { open != true ? 'From' : date.toDateString()} */}
 
-      <View style={styles.frpmToLabel}>
-        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12}}>
-          From
+          {fromdate}
         </Text>
-      </View>
-      <View style={styles.frpmToLabel}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.frpmToLabel}
+        onPress={() => setOpenDatepicker(true)}>
         <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12}}>
-          To
+          {todate}
         </Text>
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

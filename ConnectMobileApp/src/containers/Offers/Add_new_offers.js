@@ -143,7 +143,7 @@ const Add_new_offers = () => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         opacity: 100,
@@ -368,7 +368,7 @@ const Add_new_offers = () => {
           </TouchableOpacity>
         </View>
       </SwipeablePanel>
-    </SafeAreaView>
+    </View>
   );
 };
 
