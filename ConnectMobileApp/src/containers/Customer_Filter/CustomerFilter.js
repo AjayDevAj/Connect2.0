@@ -10,7 +10,7 @@ import {
   SectionList,
 } from 'react-native';
 import React, {useState} from 'react';
-
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimly from '../../utility/Font-Declarations';
 import filterstyle from '../dashboard/FilterStyle';
@@ -25,6 +25,8 @@ import EntryPointFilter from '../../component/EntryPointFilter';
 import RadioButtonRN from 'radio-buttons-react-native';
 import {useSelector} from 'react-redux';
 import navigationstring from '../../utility/NavigationString';
+import Sorting_Sheet from './Sorting_Sheet'
+
 const Item = ({item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <Text style={[styles.title, textColor]}>{item.title}</Text>
@@ -43,6 +45,9 @@ const CustomerFilter = ({navigation}) => {
   const [ischeckboxChecked, setisChecked] = useState(false);
   const [isContactcheckboxChecked, setisContactChecked] = useState(false);
   const customerResponseData = useSelector(store => store.CustomerResponseData);
+  const [opensheet,setopensheet]=useState(false)
+
+  const [sortingsheetactive,setsortingsheetactive]=useState(true)
 
   useEffect(() => {
     getdata();
@@ -200,10 +205,10 @@ const CustomerFilter = ({navigation}) => {
 
   const CustomerIntenthandler = () => {
     const [enagementcheck, setenagmentcheck] = useState(false);
-    const lead = [{label : customerResponseData.data.filters.intents[0].intent}];
-    const handleintentChange = () => {
-      return <View>{Alert.alert('hlo')}</View>;
-    };
+    const [Purchasecheck,setpurchasecheck] =useState(false)
+    const engagement = [{label: customerResponseData.data.filters.intents[0].intent}];
+    const lead = [{label: customerResponseData.data.filters.intents[3].intent}];
+   
 
     console.log(
       'Customer Intent------->',
@@ -212,41 +217,75 @@ const CustomerFilter = ({navigation}) => {
     return (
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <NativeBaseProvider style={{}}>
+
+          {/* //Purchase */}
+
           <Checkbox
             shadow={2}
+            value={Purchasecheck}
+           
+            accessibilityLabel="Purchasecheck"
+            style={[styles.item , filterstyle.chekboxstyle]}
+            onChange={() => {
+              setpurchasecheck(true);
+            }}>
+            {customerResponseData.data.filters.intents[4].intent}
+          </Checkbox>
+
+          {Purchasecheck == true ? (
+           
+            <RadioButtonRN
+              data={lead}
+              selectedBtn={e => {
+                console.log('selected radio btn', e);
+                Alert.alert(e.label.toString());
+              }}
+              box={false}
+              textStyle={styles.title}
+              deactiveColor={'#657180'}
+              activeColor={'#0E0071'}
+              circleSize={13}
+            />
+          ) : null}
+
+          {/* //Enagement */}
+          <Checkbox
+            shadow={0}
             value={isContactcheckboxChecked}
             accessibilityLabel="Mobile Number"
-            style={styles.item}
+            style={[styles.item , filterstyle.chekboxstyle]}
             onChange={() => {
               setenagmentcheck(true);
             }}>
             {customerResponseData.data.filters.intents[1].intent}
           </Checkbox>
           {enagementcheck == true ? (
-           
-              <RadioButtonRN
-                data={lead}
-                selectedBtn={e => {
-                  console.log('selected radio btn',e);
-                  Alert.alert(e.label.toString());
-                }}
-                box={false}
-                textStyle={styles.title}
-                deactiveColor={'#657180'}
-                activeColor={'#0E0071'}
-                circleSize={13}
-              />
-           
-          ) : (
-            null
-          )}
-
-          {/* <Checkbox
+            <RadioButtonRN
+              data={engagement}
+              selectedBtn={e => {
+                console.log('selected radio btn', e);
+                Alert.alert(e.label.toString());
+              }}
+              box={false}
+              textStyle={styles.title}
+              deactiveColor={'#657180'}
+              activeColor={'#0E0071'}
+              circleSize={13}
+            />
+          ) : null}
+{/* //Support */}
+          <Checkbox
+          
             shadow={2}
             value={isContactcheckboxChecked}
-            accessibilityLabel="E mail Id">
-            E mail Id
-          </Checkbox> */}
+            accessibilityLabel="Mobile Number"
+            style={[styles.item , filterstyle.chekboxstyle]}
+            onChange={() => {
+              setenagmentcheck(true);
+            }}>
+            {customerResponseData.data.filters.intents[2].intent}
+          </Checkbox >
+       
         </NativeBaseProvider>
       </View>
     );
@@ -361,9 +400,17 @@ const CustomerFilter = ({navigation}) => {
         break;
       default:
         return <LocationList />;
+        
     }
   };
-
+const Sheethandler =()=>{
+  
+  
+  
+  
+    
+  
+}
   return (
     <SafeAreaView style={styles.container}>
       {/* //Header */}
@@ -411,8 +458,12 @@ const CustomerFilter = ({navigation}) => {
           size={30}
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
-            navigation.navigate('RouteTabBar');
+            //setsortingsheetactive(true)
+            //navigation.navigate(navigationstring.Customers,{sorting:true});
             //navigation.goBack(() => console.log());
+            //navigation.navigate(navigationstring.Customers)
+            setopensheet(true)
+          
           }}>
           <Text
             style={{
@@ -473,7 +524,10 @@ const CustomerFilter = ({navigation}) => {
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      {opensheet == true ? <Sorting_Sheet open={true}/> : null }
+     
+      
+    </SafeAreaView >
   );
 };
 
@@ -487,6 +541,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 4,
     //marginHorizontal: 16,
+    
   },
   title: {
     fontSize: 16,
