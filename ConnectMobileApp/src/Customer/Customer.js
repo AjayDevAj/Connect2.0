@@ -249,6 +249,7 @@ const Customer = ({navigation, Route, route}) => {
               custCount={customerResponseData.data.customer_count}
               loadMoreCustomerData={loadMoreCustomerData}
               page={pageNo}
+              navigation={navigation}
             />
           )}
         </>
