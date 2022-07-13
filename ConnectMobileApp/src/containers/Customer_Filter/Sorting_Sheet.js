@@ -5,7 +5,7 @@ import {color} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RadioButtonRN from 'radio-buttons-react-native';
 import fontfaimly from '../../utility/Font-Declarations';
-import {min} from 'lodash';
+
 const Sorting_Sheet = open => {
   const data = [
     {

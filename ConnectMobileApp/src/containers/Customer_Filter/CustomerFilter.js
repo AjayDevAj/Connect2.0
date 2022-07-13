@@ -422,6 +422,7 @@ const Sheethandler =()=>{
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
+          paddingRight:30
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
@@ -446,10 +447,12 @@ const Sheethandler =()=>{
         <View
           style={{
             width: 1,
-            height: '100%',
+            height: '70%',
             backgroundColor: '#657180',
-            alignItems: 'center',
+            //alignItems: 'center',
             alignSelf: 'center',
+            
+           
           }}></View>
 
         <Icon.Button
@@ -505,6 +508,7 @@ const Sheethandler =()=>{
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
+          paddingLeft:45
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}

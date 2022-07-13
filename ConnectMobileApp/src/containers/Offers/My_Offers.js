@@ -4,10 +4,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import TopHeader from '../../Header/TopHeader';
 import Offer_Published from '../../../assets/svg/Offer_Published.svg';
 import fontfaimly from '../../utility/Font-Declarations';
+import NavigationString from '../../utility/NavigationString';
 
-const My_Offers = () => {
+const My_Offers = ({navigation}) => {
   return (
-    <SafeAreaView style={{backgroundColor: '#F7FCFF', flex: 1}}>
+    <View style={{backgroundColor: '#F7FCFF', flex: 1}}>
       <TopHeader name={'My Offers'} firstIcon={'menu'} />
       <View
         style={{
@@ -45,7 +46,7 @@ const My_Offers = () => {
           can visit to have a look.
         </Text>
 
-        <TouchableOpacity
+        <TouchableOpacity onPress={()=>navigation.navigate(NavigationString.My_Offers_home)}
           style={{
             width: 99,
             height: 32,
@@ -64,7 +65,7 @@ const My_Offers = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

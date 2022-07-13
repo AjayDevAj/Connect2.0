@@ -22,11 +22,11 @@ import {SwipeablePanel} from 'rn-swipeable-panel';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import Singleinterfaceicon from '../../../assets/svg/singleinterfaceicon.svg';
 import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
-
+import NavigationString from '../../utility/NavigationString';
 import {Post_type, Offer_CTA, location_Data_Key} from '../../utility/Constant';
 import PostStyleSheet from '../Post/PostStyleSheet';
 
-const Add_new_offers = () => {
+const Add_new_offers = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -345,7 +345,7 @@ const Add_new_offers = () => {
         </Card>
 
         <View style={{alignItems: 'center', marginTop: 15}}>
-          <TouchableOpacity
+          <TouchableOpacity onPress={()=>navigation.navigate(NavigationString.My_Offers)}
             style={{
               backgroundColor: '#0070FC',
               width: 350,
