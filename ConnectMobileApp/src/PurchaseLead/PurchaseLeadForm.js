@@ -6,23 +6,20 @@ import TagInput from 'react-native-tags-input';
 
 import purchaseLeadStyles from './styles/PurchaseLeadStylesheet';
 
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const ValidatePurchaseSchema = yup.object({
     // display_name: yup.string(),
     // intents: yup.string(),
     // publisher_type: yup.string(),
     // location_id: yup.string(),
-    // email: yup.string(),
     // interests: yup.string(),
     // comments: yup.string(),
-    // mobile_number: yup.string(),
-    
-    // .test('is-num-10', 'Mobile No. must be of 10 digit', (val) => {
-    //     return parseInt(val) == 10;
-    // })
 
     mobile_number: yup
     .string()
-    .matches(/(01)(\d){8}\b/, 'Enter a valid mobile number')
+    // .matches(/(01)(\d){8}\b/, 'Enter a valid mobile number')
+    .matches(phoneRegExp, 'Entered mobile number is not valid')
     .required('Mobile number is required'),
     email: yup
     .string()
@@ -106,16 +103,16 @@ const PurchaseLeadForm = ({
                         <Text style={purchaseLeadStyles.purchaseLeadFormLabel}>Intent</Text>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10, marginRight: '30%'}}>
-                            <TouchableOpacity style={customer_intent.includes(1) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(1)}>
-                                <Text style={customer_intent.includes(1) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Purchase</Text>
+                            <TouchableOpacity style={customer_intent.includes('1') ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(1)}>
+                                <Text style={customer_intent.includes('1') ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Purchase</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={customer_intent.includes(4) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(4)}>
-                                <Text style={customer_intent.includes(4) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Engagement</Text>
+                            <TouchableOpacity style={customer_intent.includes('4') ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(4)}>
+                                <Text style={customer_intent.includes('4') ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Engagement</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={customer_intent.includes(3) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(3)}>
-                                <Text style={customer_intent.includes(3) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Support</Text>
+                            <TouchableOpacity style={customer_intent.includes('3') ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(3)}>
+                                <Text style={customer_intent.includes('3') ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Support</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -124,7 +121,7 @@ const PurchaseLeadForm = ({
 
                         {(intentsVal != '' && intentsVal != 3) ? (
                             <View style={ purchaseLeadStyles.intentSwitchContainer }>
-                                <Text style={[purchaseLeadStyles.purchaseLeadFormLabel, { fontWeight: 'bold', textAlign: 'left', marginRight: 100, opacity: 0.7}]}>{customer_intent.includes(1) ? 'Hot Lead' : customer_intent.includes(4) ? 'Follow up required' : ''}</Text>
+                                <Text style={[purchaseLeadStyles.purchaseLeadFormLabel, { fontWeight: 'bold', textAlign: 'left', marginRight: 100, opacity: 0.7}]}>{customer_intent.includes('1') ? 'Hot Lead' : customer_intent.includes('4') ? 'Follow up required' : ''}</Text>
                                 <Switch
                                     trackColor={{ false: "#F4F4F4", true: "#0070FC" }}
                                     thumbColor={isEnabled ? "#FFFFFF" : "#E4E4E4"}

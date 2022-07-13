@@ -63,11 +63,7 @@ import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
-import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
-
-
-
-
+// import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
 
 /*
  **
@@ -161,7 +157,7 @@ const Routes = () => {
             <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-            <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} />
+            {/* <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} /> */}
 
             {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
 
