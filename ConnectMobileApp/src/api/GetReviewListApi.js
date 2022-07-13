@@ -2,6 +2,7 @@
 import { API_URL_STAGING } from '../utility/Config_File'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes'
 
 
 const GetReviewListApi = async (master_outlet_id, enterprise_client_store_id) => {
@@ -37,7 +38,7 @@ const GetReviewListApi = async (master_outlet_id, enterprise_client_store_id) =>
             throw new Error("NO Data")
             break
         case 401:
-
+            signOut()
         default: break
     }
     return data;

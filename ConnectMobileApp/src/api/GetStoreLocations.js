@@ -2,6 +2,8 @@
 import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant';
+import {signOut} from '../navigation/Routes'
+
 
 const getStoreLocations = async () => {
 
@@ -29,6 +31,7 @@ const getStoreLocations = async () => {
             throw new Error("NO Data")
             break
         case 401:
+            signOut()
 
         default: break
     }

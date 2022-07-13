@@ -3,6 +3,7 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes';
 
 const OverAllRatingApi = async (master_outlet_id, enterprise_client_store_id, location_id) => {
 
@@ -37,7 +38,7 @@ const OverAllRatingApi = async (master_outlet_id, enterprise_client_store_id, lo
             throw new Error("NO Data")
             break
         case 401:
-
+           signOut()
         default: break
     }
     return data;

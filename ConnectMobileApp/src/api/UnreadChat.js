@@ -3,6 +3,8 @@
 import { API_URL_STAGING } from '../utility/Config_File'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes';
+
 
 const mark_Unread_Chat = async (conversation_id) => {
 
@@ -39,6 +41,7 @@ const mark_Unread_Chat = async (conversation_id) => {
             throw new Error("NO Data")
             break
         case 401:
+            signOut()
    
         default: break
     }

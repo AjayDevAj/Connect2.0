@@ -2,6 +2,8 @@
 import { API_URL_STAGING } from '../utility/Config_File';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes';
+
 
 export const Unassigned_Chat_Fetch_Call = async () => {
   const token_Value = await getOtpResponse(otpResponse_Storage_Key)
@@ -52,7 +54,7 @@ export const Unassigned_Chat_Fetch_Call = async () => {
     case 204:
       throw new Error("NO Data")
     case 401:
-
+      signOut()
     default: break
   }
   return data;
