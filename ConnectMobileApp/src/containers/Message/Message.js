@@ -18,7 +18,7 @@ import {
 } from './Gifted_Chat_Extention';
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key, materialMenuItemData} from '../../utility/Constant';
+import {otpResponse_Storage_Key, materialMenuMessageData} from '../../utility/Constant';
 import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
 // import FileViewer from "react-native-file-viewer";
@@ -333,7 +333,7 @@ const Message = ({navigation, route}) => {
 
           {dotClicked && (
             <MaterialMenu
-              itemData={materialMenuItemData}
+              itemData={materialMenuMessageData}
               onClick={index => {
                 switch (index) {
                   case 1:

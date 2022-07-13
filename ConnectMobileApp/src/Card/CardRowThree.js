@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import cardStyles from './styles/CardStylesheet';
 import CardLocation from './CardLocation';
 import CardIcon from './CardIcon';
 
-const CardRowThree = ({ name, type='', status }) => {
+const CardRowThree = ({ name, type='', email='', mobile_number='', status }) => {
     return (
         <>
         {type == 'customer' ? (
@@ -18,22 +18,22 @@ const CardRowThree = ({ name, type='', status }) => {
                 </View> 
 
                 <View style={{ flexDirection: 'row', alignSelf: 'baseline'}}>
-                    {status == 'Open' ? (
-                        <>
-                        <Icon name="mail-outline" size={17} color="#5F6368" style={{marginRight: 20}} />
-                         <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
-                            <Icon name="phone" size={17} color="#5F6368" style={{}} />
-                            <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101',  marginVertical: 2 }] }></View>
+                    {email != null && (
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                            <TouchableOpacity onPress={() => {Linking.openURL(`mailto:${email}`)}}>
+                                <Icon name="mail-outline" size={20} color="#5F6368" style={{alignSelf: 'flex-start', marginRight: 20}} />
+                            </TouchableOpacity>
+                            
+                            <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101',  marginVertical: 2, marginLeft: -19, marginRight: 15 }] }></View>
                         </View>
-                        </>
-                    ) : (
-                        <>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around',}}>
-                            <Icon name="mail-outline" size={17} color="#5F6368" style={{marginRight: 20}} />
-                            <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101', marginRight: 2}] }></View>
+                    )}
+                    {mobile_number != null && (
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+                            <TouchableOpacity onPress={() => {Linking.openURL(`tel:${mobile_number}`)}}>
+                                <Icon name="phone" size={20} color="#5F6368" style={{}} />
+                            </TouchableOpacity>
+                            <View style={ [cardStyles.cardTimeIcon, {backgroundColor: '#BA0101',  marginVertical: 2, marginLeft: -6 }] }></View>
                         </View>
-                        <Icon name="phone" size={17} color="#5F6368" />
-                        </>
                     )}
                 </View>         
             </View>

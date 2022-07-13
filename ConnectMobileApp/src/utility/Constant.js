@@ -225,7 +225,7 @@ export const intentData = [
   }
 ];
 
-export const materialMenuItemData = [
+export const materialMenuMessageData = [
   {
     id: 1,
     value: 'Close chat',
@@ -237,6 +237,17 @@ export const materialMenuItemData = [
   {
     id: 3,
     value: 'Assign to other',
+  },
+];
+
+export const materialMenuCustomerData = [
+  {
+    id: 1,
+    value: 'Edit Customer',
+  },
+  {
+    id: 2,
+    value: 'New Chat',
   },
 ];
 

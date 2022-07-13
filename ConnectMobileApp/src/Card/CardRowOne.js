@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import cardStyles from './styles/CardStylesheet';
 
@@ -9,7 +9,7 @@ import CardTime from './CardTime';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CardRowOne = ({ logo, name, location, isImportant, createdAt='' }) => {
+const CardRowOne = ({ logo, name, location, isImportant, createdAt='', item_id=0, dotHandler }) => {
     return (
         <View style={ cardStyles.cardRowOne }>
             <View style={ cardStyles.cardLogoNameContainer}>
@@ -18,16 +18,18 @@ const CardRowOne = ({ logo, name, location, isImportant, createdAt='' }) => {
                 <Text style={ cardStyles.cardName }>{ name }</Text>
                 {isImportant > 0 && <Icon name="star-border" size={16} color="#FFAA00" style={{ opacity: 1, marginLeft: 5, marginTop: 2 }} />}
                 {createdAt !='' && ( <View style={{ alignSelf: 'flex-start', marginLeft: 6,  marginTop: -7}}>
-            <CardTime time={createdAt} />
+                <CardTime time={createdAt} />
             </View>
              )}
             </View>
             
-            {createdAt !='' 
-            ? <Icon name="more-vert" size={20} color="#5F6368" />
+            {createdAt !='' ? (
+                <TouchableOpacity onPress={(item_id) => dotHandler(item_id)}>
+                    <Icon name="more-vert" size={20} color="#5F6368" />
+                </TouchableOpacity>
+            )
             : <CardLocation location={location} /> 
             }
-            
         </View>
     )
 }

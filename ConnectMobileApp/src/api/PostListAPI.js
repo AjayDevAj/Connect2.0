@@ -3,6 +3,7 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes';
 
 const getpostlist = async (location_id) => {
 
@@ -29,16 +30,16 @@ const getpostlist = async (location_id) => {
     const data = response.json()
     console.log('Post list API Data : ', data)
 
-    if (response.status > 400) {
-        // if (response.status == 401) {
-        //     navigation.navigate(NavigationString.LOGIN)
-        // }
-        // else {
-        //     throw new Error(data.errors);
-        // }
-        console.log('error ')
-        throw new Error(data.errors);
-        
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);
+            break
+        case 204:
+            throw new Error("NO Data")
+            break
+        case 401:
+           signOut()
+        default: break
     }
     return data;
 }

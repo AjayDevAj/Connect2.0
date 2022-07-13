@@ -37,11 +37,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 import {store_Value} from '../utility/StorageClass';
 
+
 // import uWebSockets from '../component/uWebSockets'
 
-const Chat = ({navigation ,Route}) => {
+const Chat = ({navigation ,Route  }) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
-
+ 
   const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(true);

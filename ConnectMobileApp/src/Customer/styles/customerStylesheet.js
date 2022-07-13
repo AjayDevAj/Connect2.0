@@ -75,10 +75,12 @@ const customerStyles = StyleSheet.create({
     noCustomerAssignedMainContainer: {
         flexDirection: 'column', 
         justifyContent: 'space-between',
+        backgroundColor: '#F7FCFF',
+        opacity: 1
         
     },
     noCustomerAssignedSvgView: {
-        marginTop: '20%',
+        marginTop: '30%',
         alignItems: 'center'
     },
     noCustomerAssignedTextView: {
@@ -91,7 +93,7 @@ const customerStyles = StyleSheet.create({
         letterSpacing: 0.18,
         fontSize: 18,
         fontFamily: fontFamily.Alte_DIN,
-        fontWeight: 'bold',
+        fontWeight: '700',
     },
     noCustomerAssignedDesc: {
         color: '#000',
@@ -99,11 +101,26 @@ const customerStyles = StyleSheet.create({
         letterSpacing: 0.12,
         fontSize: 12,
         fontFamily: fontFamily.Poppins,
-        fontWeight: 'bold',
         textAlign: 'center',
-        width: '70%',
+        width: '80%',
         marginTop: '2%'
-    }
+    },
+    tryAgainButton: {
+        borderRadius: 8,
+        width: 118,
+        height: 40,
+        padding: 6,
+        backgroundColor: '#0070FC',
+        marginTop: '5%'
+    },
+    tryAgainButtonText: {
+        textTransform: 'uppercase',
+        // fontSize: 14,
+        color: '#FFFFFF',
+        opacity: 1,
+        fontFamily: fontFamily.Alte_DIN,
+        textAlign: 'center',
+    },
 });
 
 export default customerStyles;

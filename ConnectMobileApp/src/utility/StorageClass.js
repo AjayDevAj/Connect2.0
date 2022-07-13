@@ -28,23 +28,23 @@ export const saveObject = async (storeObject,Store_Key) => {
  */
 export const getOtpResponse = async (Store_Key) => {
 
-    if (store_Value != null) {
+    if (store_Value !== null) {
         console.log("store_Value error is fail to store: if " + store_Value);
         return store_Value
-    }
-    else {
+    } else {
         // console.log("store_Value error is fail to store: else " + store_Value);
-    try {
-        const value = await AsyncStorage.getItem(Store_Key);
-        if (value !== null) {
-            console.log("store_Value error is fail to store: else value :- " + value);
-            store_Value = JSON.parse(value)
-            console.log("store_Value error is fail to store: else store_Value :- " + store_Value);
-            return JSON.parse(value)
+        try {
+            const value = await AsyncStorage.getItem(Store_Key);
+            if (value !== null) {
+                console.log("store_Value error is fail to store: else value :- " + value);
+                store_Value = JSON.parse(value)
+                console.log("store_Value error is fail to store: else store_Value :- " + store_Value);
+                return JSON.parse(value)
+            }
+        } catch (error) {
+            console.log("@store_Value Exception : " + error);
         }
-    } catch (error) {
     }
-}
 }
 
 /**
