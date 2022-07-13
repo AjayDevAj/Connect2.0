@@ -103,7 +103,25 @@ const customerStyles = StyleSheet.create({
         textAlign: 'center',
         width: '70%',
         marginTop: '2%'
-    }
+    },
+    tryAgainButton: {
+        borderWidth: 1,
+        borderColor: '#0070FC',
+        borderRadius: 8,
+        width: 101,
+        height: 32,
+        alignSelf: 'flex-start',
+        padding: 10,
+        backgroundColor: '#0070FC',
+    },
+    tryAgainButtonText: {
+        textTransform: 'uppercase',
+        fontSize: 14,
+        color: '#FFFFFF',
+        opacity: 1,
+        fontFamily: fontFamily.Alte_DIN,
+        textAlign: 'center',
+    },
 });
 
 export default customerStyles;

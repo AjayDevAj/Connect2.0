@@ -23,7 +23,7 @@
 
 import React, {useState } from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
-import NoChatDataFoundSvg from './assets/undraw_team_chat_re_vbq1.svg';
+import NoDataFoundSvg from './assets/Group3072.svg';
 
 import customerStyles from './styles/customerStylesheet';
 
@@ -61,12 +61,18 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
         ) : (
             <View style={ customerStyles.noCustomerAssignedMainContainer }>
                 <View style={ customerStyles.noCustomerAssignedSvgView }>
-                    <NoChatDataFoundSvg /> 
+                    <NoDataFoundSvg /> 
                 </View>
 
                 <View style={ customerStyles.noCustomerAssignedTextView }>
-                    <Text style={ customerStyles.noCustomerAssignedText }>No customer data found</Text>
+                    <Text style={ customerStyles.noCustomerAssignedText }>No Data Found !!!</Text>
                     <Text style={ customerStyles.noCustomerAssignedDesc }>Lorem ipsum dolor sit amet. Vel minus voluptas non dicta reprehenderit est sunt dolor qui repellat deserunt.</Text>
+
+                    <TouchableOpacity onPress={alert('Try Again')}>
+                        <View style={customerStyles.tryAgainButton}>
+                            <Text style={customerStyles.tryAgainButtonText}>Try Again</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 
             </View>
