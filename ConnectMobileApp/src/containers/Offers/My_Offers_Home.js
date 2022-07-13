@@ -19,7 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 
-const My_Offers_Home = navigation => {
+const My_Offers_Home = ({navigation}) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [offerlistdata, setofferlistdata] = useState('');

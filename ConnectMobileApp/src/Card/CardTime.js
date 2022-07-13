@@ -11,7 +11,7 @@ const CardTime = ({ time='', createdAt='' }) => {
         <View style={ cardStyles.cardTimeContainer }>
             <View style={ cardStyles.cardTimeIcon }></View>
             <Text style={ cardStyles.cardTime }>
-                {console.log('createdAt :-', time)}
+                {/* {console.log('createdAt :-', time)} */}
             {dateToFromNowDaily(time)}
 
             {/* {(createdAt != '' && (moment().diff(createdAt, 'days')) > 7) 

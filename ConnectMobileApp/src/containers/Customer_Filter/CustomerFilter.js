@@ -7,9 +7,10 @@ import {
   Alert,
   FlatList,
   TextInput,
+  SectionList,
 } from 'react-native';
 import React, {useState} from 'react';
-
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimly from '../../utility/Font-Declarations';
 import filterstyle from '../dashboard/FilterStyle';
@@ -22,7 +23,10 @@ import {HStack, Checkbox, Center, NativeBaseProvider} from 'native-base';
 import DateFilter from '../../component/DateFilter';
 import EntryPointFilter from '../../component/EntryPointFilter';
 import RadioButtonRN from 'radio-buttons-react-native';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import navigationstring from '../../utility/NavigationString';
+import Sorting_Sheet from './Sorting_Sheet'
+
 const Item = ({item, onPress, backgroundColor, textColor}) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <Text style={[styles.title, textColor]}>{item.title}</Text>
@@ -38,18 +42,20 @@ const CustomerFilter = ({navigation}) => {
 
   const [searchValue, setSearchValue] = useState('');
   const [checkboxdata, setcheckboxdata] = useState('');
-  const [ischeckboxChecked ,setisChecked]=useState(false)
+  const [ischeckboxChecked, setisChecked] = useState(false);
+  const [isContactcheckboxChecked, setisContactChecked] = useState(false);
   const customerResponseData = useSelector(store => store.CustomerResponseData);
-  console.log('viviviviviviviiviviviviivivCustomerResponceeeeeeeee>>>>>',customerResponseData.data)
+  const [opensheet,setopensheet]=useState(false)
+
+  const [sortingsheetactive,setsortingsheetactive]=useState(true)
 
   useEffect(() => {
     getdata();
   }, []);
 
   const getdata = async () => {
-    
     const SlresponseData = await getOtpResponse(location_Data_Key);
-    console.log('SLResponce-----.... ------->',SlresponseData);
+    console.log('SLResponce-----.... ------->', SlresponseData);
 
     if (
       SlresponseData != null &&
@@ -86,7 +92,6 @@ const CustomerFilter = ({navigation}) => {
   };
 
   const LocationList = () => {
-
     const handleChange = Locality => {
       console.log(
         'handler locality before if contion in handlechae()---------------->',
@@ -95,7 +100,7 @@ const CustomerFilter = ({navigation}) => {
       // mapping the state data to object checklist
       let temp = locationlistdata.map(cheklist => {
         // Locality == item.locality
-  
+
         // checking item.locality == checklist.locality
         if (Locality == cheklist.locality) {
           console.log(
@@ -103,29 +108,28 @@ const CustomerFilter = ({navigation}) => {
             cheklist.locality,
           );
           //return {cheklist};
-          
-          return cheklist.locality;
-          
-          
-        }
-        
-      });
-      
-      setcheckboxdata(temp);
-      console.log('chekbox data----------111111111111!!!!!!!!!!!!!!>',checkboxdata)
-    };
 
+          return cheklist.locality;
+        }
+      });
+
+      setcheckboxdata(temp);
+      console.log(
+        'chekbox data----------111111111111!!!!!!!!!!!!!!>',
+        checkboxdata,
+      );
+    };
 
     const LocationItem = ({item, index, Locality}) => (
       <View style={styles.item}>
         <NativeBaseProvider style={styles.item}>
           <HStack space={4}>
             <Checkbox
-              value={ischeckboxChecked} 
+              value={ischeckboxChecked}
               colorScheme={'info'}
               onChange={() => {
                 handleChange(Locality);
-              setisChecked(true);
+                setisChecked(true);
                 console.log(
                   'change handler---------inonChange()---->',
                   Locality,
@@ -179,39 +183,119 @@ const CustomerFilter = ({navigation}) => {
   };
 
   const EntryPoint = () => {
+    console.log(
+      'Entry point--------->',
+      customerResponseData.data.filters.entry_points,
+    );
+
     return (
-      
-        <EntryPointFilter/>
-     
+      <EntryPointFilter
+        entrypoints={customerResponseData.data.filters.entry_points}
+      />
     );
   };
 
   const DateHandler = () => {
     return (
       <View>
-       <DateFilter/>
+        <DateFilter />
       </View>
     );
   };
 
   const CustomerIntenthandler = () => {
+    const [enagementcheck, setenagmentcheck] = useState(false);
+    const [Purchasecheck,setpurchasecheck] =useState(false)
+    const engagement = [{label: customerResponseData.data.filters.intents[0].intent}];
+    const lead = [{label: customerResponseData.data.filters.intents[3].intent}];
+   
+
+    console.log(
+      'Customer Intent------->',
+      customerResponseData.data.filters.intents,
+    );
     return (
-      <View>
-        <Text>Intent handler</Text>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        <NativeBaseProvider style={{}}>
+
+          {/* //Purchase */}
+
+          <Checkbox
+            shadow={2}
+            value={Purchasecheck}
+           
+            accessibilityLabel="Purchasecheck"
+            style={[styles.item , filterstyle.chekboxstyle]}
+            onChange={() => {
+              setpurchasecheck(true);
+            }}>
+            {customerResponseData.data.filters.intents[4].intent}
+          </Checkbox>
+
+          {Purchasecheck == true ? (
+           
+            <RadioButtonRN
+              data={lead}
+              selectedBtn={e => {
+                console.log('selected radio btn', e);
+                Alert.alert(e.label.toString());
+              }}
+              box={false}
+              textStyle={styles.title}
+              deactiveColor={'#657180'}
+              activeColor={'#0E0071'}
+              circleSize={13}
+            />
+          ) : null}
+
+          {/* //Enagement */}
+          <Checkbox
+            shadow={0}
+            value={isContactcheckboxChecked}
+            accessibilityLabel="Mobile Number"
+            style={[styles.item , filterstyle.chekboxstyle]}
+            onChange={() => {
+              setenagmentcheck(true);
+            }}>
+            {customerResponseData.data.filters.intents[1].intent}
+          </Checkbox>
+          {enagementcheck == true ? (
+            <RadioButtonRN
+              data={engagement}
+              selectedBtn={e => {
+                console.log('selected radio btn', e);
+                Alert.alert(e.label.toString());
+              }}
+              box={false}
+              textStyle={styles.title}
+              deactiveColor={'#657180'}
+              activeColor={'#0E0071'}
+              circleSize={13}
+            />
+          ) : null}
+{/* //Support */}
+          <Checkbox
+          
+            shadow={2}
+            value={isContactcheckboxChecked}
+            accessibilityLabel="Mobile Number"
+            style={[styles.item , filterstyle.chekboxstyle]}
+            onChange={() => {
+              setenagmentcheck(true);
+            }}>
+            {customerResponseData.data.filters.intents[2].intent}
+          </Checkbox >
+       
+        </NativeBaseProvider>
       </View>
     );
   };
 
   const ChatStatushandler = () => {
-
-    const chatstataus = [
-      {label: 'OPEN'},
-      {label: 'CLOSE'},
-     
-    ];
+    const chatstataus = [{label: 'OPEN'}, {label: 'CLOSE'}];
     return (
       <View>
-       <RadioButtonRN
+        <RadioButtonRN
           data={chatstataus}
           selectedBtn={e => {
             console.log(e);
@@ -228,18 +312,64 @@ const CustomerFilter = ({navigation}) => {
   };
 
   const Contacthandler = () => {
-    console.log('customer responce data',customerResponseData)
+    console.log(
+      'customer Contact responce data',
+      customerResponseData.data.filters,
+    );
     return (
-      <View>
-        <Text>{customerResponseData} </Text>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        <NativeBaseProvider style={{}}>
+          <Checkbox
+            shadow={2}
+            value={isContactcheckboxChecked}
+            accessibilityLabel="Mobile Number"
+            style={styles.item}>
+            Mobile Number
+          </Checkbox>
+          <Checkbox
+            shadow={2}
+            value={isContactcheckboxChecked}
+            accessibilityLabel="E mail Id">
+            E mail Id
+          </Checkbox>
+        </NativeBaseProvider>
       </View>
     );
   };
-
   const IntrestedInhandler = () => {
+    console.log(
+      'customer customer_interest responce data',
+      customerResponseData.data.filters.customer_interest,
+    );
+
+    const CustomerIntrestItem = ({title}) => (
+      <TouchableOpacity onPress={() => Alert.alert(title)}>
+        <View
+          style={{
+            borderRadius: 8,
+            margin: 5,
+            alignItems: 'center',
+            borderColor: '#2F6EF3',
+            borderWidth: 1,
+            justifyContent: 'center',
+            padding: 3,
+          }}>
+          <Text style={{fontFamily: fontfaimly.Poppins, fontSize: 12}}>
+            {title}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+
+    const renderItem = ({item}) => <CustomerIntrestItem title={item} />;
     return (
       <View>
-        <Text>Intrested </Text>
+        <FlatList
+          numColumns={2}
+          data={customerResponseData.data.filters.customer_interest}
+          renderItem={renderItem}
+          keyExtractor={index => index.toString()}
+        />
       </View>
     );
   };
@@ -270,9 +400,17 @@ const CustomerFilter = ({navigation}) => {
         break;
       default:
         return <LocationList />;
+        
     }
   };
-
+const Sheethandler =()=>{
+  
+  
+  
+  
+    
+  
+}
   return (
     <SafeAreaView style={styles.container}>
       {/* //Header */}
@@ -284,6 +422,7 @@ const CustomerFilter = ({navigation}) => {
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
+          paddingRight:30
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
@@ -308,10 +447,12 @@ const CustomerFilter = ({navigation}) => {
         <View
           style={{
             width: 1,
-            height: '100%',
+            height: '70%',
             backgroundColor: '#657180',
-            alignItems: 'center',
+            //alignItems: 'center',
             alignSelf: 'center',
+            
+           
           }}></View>
 
         <Icon.Button
@@ -320,8 +461,12 @@ const CustomerFilter = ({navigation}) => {
           size={30}
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
-            //navigation.navigate('RouteTabBar')
+            //setsortingsheetactive(true)
+            //navigation.navigate(navigationstring.Customers,{sorting:true});
             //navigation.goBack(() => console.log());
+            //navigation.navigate(navigationstring.Customers)
+            setopensheet(true)
+          
           }}>
           <Text
             style={{
@@ -350,32 +495,6 @@ const CustomerFilter = ({navigation}) => {
 
         <View style={filterstyle.rightContainer}>
           {CheckSwitch(selectedId)}
-
-          {/* {
-            selectedId == 2 ? <Text>Entry Point</Text> : <Text>Location</Text>
-           
-          }
-          {
-            selectedId == 3 ? <Text>Date</Text> : <><Text></Text></>
-           
-          }
-           {
-            selectedId == 4? <Text>Customer Intent</Text> : <></>
-           
-          }
-          {
-            selectedId == 5? <Text>Chat status</Text> : <></>
-           
-          }
-           {
-            selectedId == 6? <Text>Contact Detail</Text> : <></>
-           
-          }
-           {
-            selectedId == 7 ? <Text>Intrested in</Text> : <></>
-           
-          }
-               */}
         </View>
       </View>
 
@@ -389,10 +508,11 @@ const CustomerFilter = ({navigation}) => {
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
+          paddingLeft:45
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
-          onPress={() => navigation.goBack()}>
+          onPress={() => navigation.navigate(navigationstring.Dashboard)}>
           <Text style={filterstyle.clearAllBtnText}>CLEAR ALL</Text>
         </TouchableOpacity>
 
@@ -408,7 +528,10 @@ const CustomerFilter = ({navigation}) => {
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      {opensheet == true ? <Sorting_Sheet open={true}/> : null }
+     
+      
+    </SafeAreaView >
   );
 };
 
@@ -422,6 +545,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 4,
     //marginHorizontal: 16,
+    
   },
   title: {
     fontSize: 16,

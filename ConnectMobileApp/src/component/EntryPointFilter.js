@@ -22,10 +22,11 @@ import {
   
   import {useEffect} from 'react';
   
-  export default function EntryPointFilter() {
+  export default function EntryPointFilter(entrypoints) {
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
     const [searchValue, setSearchValue] = useState('');
   
+    console.log('entry point name -- > ',entrypoints.entrypoints)
     // ** Fetch Location data from  the saga Store
     //const SLResponce = useSelector(store => store.StoreLocationDataResponse);
   
@@ -33,7 +34,7 @@ import {
     const [arrayholder, setarrayholder] = useState('');
   
     const changehandler =()=>{
-      const checkeddata = arrayholder.map( boxdata =>console.log(boxdata.name))
+     // const checkeddata = arrayholder.map( boxdata =>console.log(boxdata.name))
     }
   
     useEffect(() => {
@@ -81,7 +82,7 @@ import {
       </View>
     );
   
-    const renderItem = ({item}) => <Item EntryPoints={item.entrypoint} />;
+    const renderItem = ({item}) => <Item EntryPoints={item.name} />;
   
     const keyExtractor = (item, index) => index.toString();
   
@@ -93,11 +94,7 @@ import {
   
         <FlatList
           keyExtractor={keyExtractor}
-          data={[{  entrypoint: 'first entry' },
-          {  entrypoint: 'second entry' },
-          {  entrypoint: 'third entry'},
-          {  entrypoint: 'fourth entry' },
-         ]}
+          data={entrypoints.entrypoints}
           renderItem={renderItem}
         />
       </SafeAreaView>
