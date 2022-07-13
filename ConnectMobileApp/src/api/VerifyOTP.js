@@ -32,6 +32,8 @@
 import { API_URL_STAGING } from '../utility/Config_File';
 import { DeviceInfo } from 'react-native-device-info';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import {signOut} from '../navigation/Routes';
+
 
 /** * Get device mac id */
 
@@ -93,8 +95,17 @@ import { getUniqueId, getManufacturer } from 'react-native-device-info';
     const data = response.json()
     console.log('otp data : ', data)
 
-    if (response.status > 400) {
-        throw new Error(data.errors)
+    switch (response.status) {
+        case response.status > 400:
+            throw new Error(data.errors);     
+            break
+        case 204:
+            throw new Error("NO Data")
+            break
+        case 401:
+            signOut()
+   
+        default: break
     }
     return data;
 }

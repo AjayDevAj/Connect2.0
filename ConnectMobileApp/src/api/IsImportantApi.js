@@ -4,6 +4,8 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { CONSTANT } from '../utility/Constant';
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { getOtpResponse } from '../utility/StorageClass'
+import {signOut} from '../navigation/Routes'
+
 
 const getIsImportantData = async (conversation_id, is_important) => {
 
@@ -40,7 +42,7 @@ const getIsImportantData = async (conversation_id, is_important) => {
             throw new Error("NO Data")
             break
         case 401:
-
+           signOut()
         default: break
     }
     return data;

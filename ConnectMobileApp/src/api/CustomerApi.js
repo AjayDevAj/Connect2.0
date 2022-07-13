@@ -33,6 +33,7 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { Alert } from 'react-native'
+import {signOut} from '../navigation/Routes'
 
 
 
@@ -111,6 +112,7 @@ const getCustomerList = async (
     ** 
     */
     console.log("Responce ====== ", response)
+
     switch (response.status) {
         case response.status > 400:
             throw new Error(data.errors);
@@ -119,6 +121,7 @@ const getCustomerList = async (
             throw new Error("NO Data")
             break
         case 401:
+          signOut()
     
         default: break
     }

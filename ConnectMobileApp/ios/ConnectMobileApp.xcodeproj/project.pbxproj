@@ -712,10 +712,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LWCGRE9AX7;
+				DEVELOPMENT_TEAM = TR98QRFCHS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ConnectMobileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -729,7 +729,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uma.appdev;
 				PRODUCT_NAME = ConnectMobileApp;
-				PROVISIONING_PROFILE_SPECIFIER = UMADev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -744,9 +744,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: WANNAMO MARKETING PRIVATE LIMITED (LWCGRE9AX7)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LWCGRE9AX7;
+				DEVELOPMENT_TEAM = TR98QRFCHS;
 				INFOPLIST_FILE = ConnectMobileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -760,7 +760,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uma.appdev;
 				PRODUCT_NAME = ConnectMobileApp;
-				PROVISIONING_PROFILE_SPECIFIER = UMA_App_Store;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -1,6 +1,7 @@
 import { API_URL_STAGING } from '../utility/Config_File';
 import { getOtpResponse } from '../utility/StorageClass';
 import { otpResponse_Storage_Key } from '../utility/Constant';
+import {signOut} from '../navigation/Routes'
 
 /**
  * 
@@ -21,9 +22,6 @@ const getAll_Conversation = async (
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
   console.log('allChat_Conversation_',token_Value)
   
-
-
-
   const response = await fetch(
     API_URL_STAGING +
     '/message/' +
@@ -57,8 +55,7 @@ const getAll_Conversation = async (
       throw new Error("NO Data")
       break
     case 401:
-      navigator.navigate(NavigationString.LOGIN)
-
+      signOut()
     default: break
   }
 
