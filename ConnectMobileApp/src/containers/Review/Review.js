@@ -33,7 +33,7 @@ const Review = ({navigation ,Route}) => {
   };
 
   const filterHandler = () => {
-    navigation.navigate(navigationString.Chat_Filter)
+    navigation.navigate(navigationString.Filter)
   };
   const arrowDownHandler = () => {
   };

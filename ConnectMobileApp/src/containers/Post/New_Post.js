@@ -26,8 +26,9 @@ import {Post_type, Offer_CTA, location_Data_Key} from '../../utility/Constant';
 import PostStyleSheet from './PostStyleSheet';
 import {loadpostdata} from '../../actions/PostAction';
 import {getOtpResponse} from '../../utility/StorageClass';
+import NavigationString from '../../utility/NavigationString';
 
-const New_Post = () => {
+const New_Post = ({navigation}) => {
   const [message, onChangeText] = useState(
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );

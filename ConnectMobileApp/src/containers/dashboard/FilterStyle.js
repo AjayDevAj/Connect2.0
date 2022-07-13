@@ -122,4 +122,8 @@ export default StyleSheet.create({
 
     opacity: 40,
   },
+  chekboxstyle:{
+    backgroundColor:'#B2D6FF',
+    borderColor:'#5AA3F7',opacity:100
+  }
 });
