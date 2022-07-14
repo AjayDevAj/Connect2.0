@@ -80,8 +80,7 @@ const PurchaseLeadForm = ({
         
         return interestVal;
     }
-    console.log('=== set State customer Value ===', interestVal);
-    console.log('=== set State string customer Value ===', initialInterestValue);
+    
     return (
         <ScrollView style={ purchaseLeadStyles.purchaseLeadFormContainer }>
             <Formik 
@@ -103,6 +102,7 @@ const PurchaseLeadForm = ({
                 onSubmit={(values, actions) => {
                     values.intents = intentsVal.toString();
                     {values.interests !== undefined && customerInterestVal(values.interests.split(/[\s,]+/))}
+                    console.log('=== customer interest Value ===', interestVal);
                     values.interests = interestVal.toString();
                     console.log('===== Form Values =====',values);
 
