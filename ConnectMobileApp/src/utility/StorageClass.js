@@ -11,7 +11,7 @@ export var store_Value = null
  */
 export const saveObject = async (storeObject,Store_Key) => {
     console.log("Before storage-------",JSON.stringify(storeObject));
-
+    
     AsyncStorage.setItem(Store_Key, JSON.stringify(storeObject), (err)=> {
         if(err){
             console.log("an error");
