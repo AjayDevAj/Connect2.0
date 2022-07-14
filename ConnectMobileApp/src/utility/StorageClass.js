@@ -54,7 +54,7 @@ export const deleteAll = () => {
     try {
         AsyncStorage.clear();
         store_Value=null
-        // AsyncStorage.setItem(viewed_Onboarding, 'true');
+        //  AsyncStorage.setItem(viewed_Onboarding, 'true');
     } catch (error) {
     }
 }

@@ -6,6 +6,7 @@ import configureStore from './src/store/Store';
 import Routes from './src/navigation/Routes';
 import InternetConnectionAlert from "react-native-internet-connection-alert";
 import navigationString from './src/utility/NavigationString';
+import CustomerFilter from './src/containers/Customer_Filter/CustomerFilter';
 
 const store = configureStore();
 

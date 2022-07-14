@@ -25,10 +25,12 @@ import EntryPointFilter from '../../component/EntryPointFilter';
 import RadioButtonRN from 'radio-buttons-react-native';
 import {useSelector} from 'react-redux';
 import navigationstring from '../../utility/NavigationString';
-import Sorting_Sheet from './Sorting_Sheet'
+import Sorting_Sheet from './Sorting_Sheet';
 
 const Item = ({item, onPress, backgroundColor, textColor}) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+  <TouchableOpacity
+    onPress={onPress}
+    style={[styles.leftcontaineritem, backgroundColor]}>
     <Text style={[styles.title, textColor]}>{item.title}</Text>
   </TouchableOpacity>
 );
@@ -45,9 +47,9 @@ const CustomerFilter = ({navigation}) => {
   const [ischeckboxChecked, setisChecked] = useState(false);
   const [isContactcheckboxChecked, setisContactChecked] = useState(false);
   const customerResponseData = useSelector(store => store.CustomerResponseData);
-  const [opensheet,setopensheet]=useState(false)
+  const [opensheet, setopensheet] = useState(false);
 
-  const [sortingsheetactive,setsortingsheetactive]=useState(true)
+  const [sortingsheetactive, setsortingsheetactive] = useState(true);
 
   useEffect(() => {
     getdata();
@@ -205,35 +207,59 @@ const CustomerFilter = ({navigation}) => {
 
   const CustomerIntenthandler = () => {
     const [enagementcheck, setenagmentcheck] = useState(false);
-    const [Purchasecheck,setpurchasecheck] =useState(false)
-    const engagement = [{label: customerResponseData.data.filters.intents[0].intent}];
+    const [Purchasecheck, setpurchasecheck] = useState(false);
+    const engagement = [
+      {label: customerResponseData.data.filters.intents[0].intent},
+    ];
     const lead = [{label: customerResponseData.data.filters.intents[3].intent}];
-   
 
     console.log(
       'Customer Intent------->',
       customerResponseData.data.filters.intents,
     );
     return (
-      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+      <View
+        style={{
+          justifyContent: 'center',
+          flexDirection: 'row',
+          paddingLeft: 10,
+        }}>
         <NativeBaseProvider style={{}}>
-
           {/* //Purchase */}
 
-          <Checkbox
+          {/* <Checkbox
             shadow={2}
             value={Purchasecheck}
-           
             accessibilityLabel="Purchasecheck"
-            style={[styles.item , filterstyle.chekboxstyle]}
-            onChange={() => {
-              setpurchasecheck(true);
+            style={[styles.item, filterstyle.chekboxstyle]}
+            onChange={e => {
+              setpurchasecheck(e);
             }}>
-            {customerResponseData.data.filters.intents[4].intent}
-          </Checkbox>
+            <Text style={styles.itemtitle}>
+              {customerResponseData.data.filters.intents[4].intent}
+            </Text>
+          </Checkbox> */}
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginVertical:15}}>
+            <CheckBox
+              disabled={false}
+              value={Purchasecheck}
+              onValueChange={newValue => setpurchasecheck(newValue)}
+              boxType="square"
+              style={{
+                backgroundColor: 'rgba(178, 214, 255, 1)',
+                width: 20,
+                height: 20,
+                opacity: 500,
+              }}
+              onTintColor="#5AA3F7"
+              tintColor="#5AA3F7"
+            />
+            <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
+              {customerResponseData.data.filters.intents[4].intent}
+            </Text>
+          </View>
 
           {Purchasecheck == true ? (
-           
             <RadioButtonRN
               data={lead}
               selectedBtn={e => {
@@ -241,24 +267,53 @@ const CustomerFilter = ({navigation}) => {
                 Alert.alert(e.label.toString());
               }}
               box={false}
-              textStyle={styles.title}
+              textStyle={styles.itemlist}
               deactiveColor={'#657180'}
-              activeColor={'#0E0071'}
+              activeColor={'#ED4900'}
               circleSize={13}
+              style={{padding: 5}}
             />
-          ) : null}
+          ) : (
+            <></>
+          )}
 
           {/* //Enagement */}
-          <Checkbox
+          {/* <Checkbox
             shadow={0}
             value={isContactcheckboxChecked}
             accessibilityLabel="Mobile Number"
-            style={[styles.item , filterstyle.chekboxstyle]}
-            onChange={() => {
-              setenagmentcheck(true);
+            style={[styles.item, filterstyle.chekboxstyle]}
+            onChange={e => {
+              setenagmentcheck(e);
             }}>
+            <Text style={styles.itemtitle}>
+              {customerResponseData.data.filters.intents[1].intent}
+            </Text>
+          </Checkbox> */}
+
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginVertical: 15,}}>
+            <CheckBox
+              disabled={false}
+              value={enagementcheck}
+              onValueChange={newValue => setenagmentcheck(newValue)}
+              boxType="square"
+              style={{
+                backgroundColor: 'rgba(178, 214, 255, 1)',
+                width: 20,
+                height: 20,
+                opacity: 500,
+              }}
+              onTintColor="#5AA3F7"
+              tintColor="#5AA3F7"
+              
+            />
+            <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
             {customerResponseData.data.filters.intents[1].intent}
-          </Checkbox>
+            </Text>
+          </View>
+
+
+
           {enagementcheck == true ? (
             <RadioButtonRN
               data={engagement}
@@ -267,25 +322,23 @@ const CustomerFilter = ({navigation}) => {
                 Alert.alert(e.label.toString());
               }}
               box={false}
-              textStyle={styles.title}
+              textStyle={styles.itemlist}
               deactiveColor={'#657180'}
-              activeColor={'#0E0071'}
+              activeColor={'#0070FC'}
               circleSize={13}
             />
           ) : null}
-{/* //Support */}
+          {/* //Support */}
           <Checkbox
-          
             shadow={2}
             value={isContactcheckboxChecked}
             accessibilityLabel="Mobile Number"
-            style={[styles.item , filterstyle.chekboxstyle]}
-            onChange={() => {
-              setenagmentcheck(true);
-            }}>
-            {customerResponseData.data.filters.intents[2].intent}
-          </Checkbox >
-       
+            style={[styles.item, filterstyle.chekboxstyle]}
+            onChange={e => {}}>
+            <Text style={styles.itemtitle}>
+              {customerResponseData.data.filters.intents[2].intent}
+            </Text>
+          </Checkbox>
         </NativeBaseProvider>
       </View>
     );
@@ -302,7 +355,7 @@ const CustomerFilter = ({navigation}) => {
             Alert.alert(e.label.toString());
           }}
           box={false}
-          textStyle={styles.title}
+          textStyle={[styles.itemtitle, {marginVertical: 10}]}
           deactiveColor={'#657180'}
           activeColor={'#0E0071'}
           circleSize={13}
@@ -400,17 +453,9 @@ const CustomerFilter = ({navigation}) => {
         break;
       default:
         return <LocationList />;
-        
     }
   };
-const Sheethandler =()=>{
-  
-  
-  
-  
-    
-  
-}
+  const Sheethandler = () => {};
   return (
     <SafeAreaView style={styles.container}>
       {/* //Header */}
@@ -422,7 +467,12 @@ const Sheethandler =()=>{
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
-          paddingRight:30
+          paddingRight: 30,
+          shadowColor: '#000',
+          shadowOffset: {width: 1, height: 0},
+          shadowOpacity: 0.15,
+          shadowRadius: 5,
+          elevation: 5,
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
@@ -451,8 +501,6 @@ const Sheethandler =()=>{
             backgroundColor: '#657180',
             //alignItems: 'center',
             alignSelf: 'center',
-            
-           
           }}></View>
 
         <Icon.Button
@@ -465,8 +513,7 @@ const Sheethandler =()=>{
             //navigation.navigate(navigationstring.Customers,{sorting:true});
             //navigation.goBack(() => console.log());
             //navigation.navigate(navigationstring.Customers)
-            setopensheet(true)
-          
+            //setopensheet(true);
           }}>
           <Text
             style={{
@@ -508,7 +555,12 @@ const Sheethandler =()=>{
           backgroundColor: '#FFFFFF',
           justifyContent: 'space-evenly',
           alignItems: 'center',
-          paddingLeft:45
+          paddingLeft: 45,
+          shadowColor: '#00000008',
+          shadowOffset: {width: 1, height: 1},
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
+          elevation: 5,
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
@@ -528,10 +580,8 @@ const Sheethandler =()=>{
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
         </TouchableOpacity>
       </View>
-      {opensheet == true ? <Sorting_Sheet open={true}/> : null }
-     
-      
-    </SafeAreaView >
+      {opensheet == true ? <Sorting_Sheet open={true} /> : null}
+    </SafeAreaView>
   );
 };
 
@@ -542,10 +592,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    padding: 15,
-    marginVertical: 4,
+    marginVertical: 15,
     //marginHorizontal: 16,
-    
+  },
+  leftcontaineritem: {
+    padding: 15,
   },
   title: {
     fontSize: 16,
@@ -564,5 +615,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#0000000D',
     justifyContent: 'space-between',
+  },
+  itemtitle: {
+    fontFamily: fontfaimly.Poppins,
+    fontSize: 14,
+    color: '#000000',
+    opacity: 70,
+  },
+  itemlist: {
+    fontFamily: fontfaimly.Poppins,
+    fontSize: 12,
+    color: '#000000',
+    opacity: 70,
+    
   },
 });
