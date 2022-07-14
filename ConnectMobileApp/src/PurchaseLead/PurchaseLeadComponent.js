@@ -39,16 +39,16 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
 
     const formHandler = (customerFormValue) => {
         console.log('===== Set Lead Value API =====', customerFormValue);
-        saveAPI(
-          customerFormValue.display_name, customerFormValue.mobile_number, 
-          customerFormValue.email, customerFormValue.conversation_id, 
-          customerFormValue.interests, customerFormValue.comments, 
-          customerFormValue.intents, customerFormValue.entry_points, 
-          customerFormValue.location_id, customerFormValue.id 
-        );
+        // saveAPI(
+        //   customerFormValue.display_name, customerFormValue.mobile_number, 
+        //   customerFormValue.email, customerFormValue.conversation_id, 
+        //   customerFormValue.interests, customerFormValue.comments, 
+        //   customerFormValue.intents, customerFormValue.entry_points, 
+        //   customerFormValue.location_id, customerFormValue.id 
+        // );
         navigation.goBack();
     }
-    console.log('===== Get Lead Value API =====', GetLeadResponseData);
+    // console.log('===== Get Lead Value API =====', GetLeadResponseData);
     
     return (
         <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF' }]}>
@@ -73,16 +73,7 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
                     customer_interest={GetLeadResponseData.data.customer_interest} 
                     conversation_id={conversation_id}
                     name={name}
-                    customer_intent={() => {
-                        {GetLeadResponseData.data.intent_list !== '' ? 
-                        GetLeadResponseData.data.intent_list.map((item) => {
-                                item.selected == true && setCustomerIntentVal(current => [...current, item.id])
-                            }) 
-                            : setCustomerIntentVal([customer_intent])
-                        }
-
-                        return customerIntentVal;
-                    }}
+                    customer_intent={GetLeadResponseData.data.intent_list}
                 /> 
             )} 
         </View>
