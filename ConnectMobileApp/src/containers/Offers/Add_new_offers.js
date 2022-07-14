@@ -25,25 +25,87 @@ import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
 import NavigationString from '../../utility/NavigationString';
 import {Post_type, Offer_CTA, location_Data_Key} from '../../utility/Constant';
 import PostStyleSheet from '../Post/PostStyleSheet';
+import {API_URL_STAGING} from '../../utility/Config_File';
+import {getOtpResponse} from '../../utility/StorageClass';
+import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {signOut} from '../../navigation/Routes';
 
 const Add_new_offers = ({navigation}) => {
+  //API Call
+
+  // * master_outlet_id:78104
+  // * store_code:10007
+  //* detail - desclimer
+  // * to date - vailidtill
+  // * from date - vailid till -- UI dose not have 2 seprate date components 
+
+  const AddofferAPI = async (
+    master_outlet_id,
+    store_code,
+    title,
+    description,
+    detail,
+    from_date,
+    to_date,
+    offer_image,
+    detail_page_url,
+  ) => {
+    const bodyRawData = {
+      master_outlet_id: master_outlet_id,
+      store_code: store_code,
+      title: title,
+      description: description,
+      detail: detail,
+      from_date: from_date,
+      to_date: to_date,
+      offer_image: offer_image,
+      detail_page_url: detail_page_url,
+    };
+
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key);
+
+    const response = await fetch(API_URL_STAGING + '/offer/save', {
+      method: 'POST',
+      body: JSON.stringify(bodyRawData),
+      headers: {
+        Authorization: `Bearer ${token_Value.token}`,
+      },
+    });
+    const data = response.json();
+    console.log('Add NEW Offer RESPONCE  == ', data);
+
+    switch (response.status) {
+      case response.status > 400:
+        throw new Error(data.errors);
+        break;
+      case 204:
+        throw new Error('NO Data');
+        break;
+      case 401:
+        signOut();
+      default:
+        break;
+    }
+    return data;
+  };
+
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  const [postMessage, onChangeText] = useState(
+  const [description, setDescription] = useState(
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );
-  const [offerdis, setofferdisclimer] = useState(
+  const [offerdisclimer, setofferdisclimer] = useState(
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );
   const [Couponcode, setCouponcode] = useState('Code......');
   const [offerlink, setOfferlink] = useState(
     'Img Src=Https://Picsum.Photos.Random=1',
   );
+  const [detail_page_url,setDetail_page_url]=useState('https://www.singleinterface.com/')
+  const [title, settitle] = useState('');
 
-  const [validtill, setvailidtill] = useState(
-    'Wednesday, 13th Feb 2022',
-  );
+  const [validtill, setvailidtill] = useState('Wednesday, 13th Feb 2022');
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -54,6 +116,8 @@ const Add_new_offers = ({navigation}) => {
   const [arrayholder, setarrayholder] = useState('');
 
   const [checkboxdata, setcheckboxdata] = useState('');
+
+  const [offer_image, setoffer_image]=useState('')
 
   //   /// swipable panel
 
@@ -139,7 +203,15 @@ const Add_new_offers = ({navigation}) => {
       console.log('type -> ', response.type);
       console.log('fileName -> ', response.fileName);
       setFilePath(response);
+      setoffer_image(response.assets[0].uri)
     });
+  };
+
+  const menuHandler = () => {
+    // console.log('Menu Handler');
+     // alert('Menu Handler');
+
+     navigation.navigate(NavigationString.My_Offers_home)
   };
 
   return (
@@ -149,9 +221,11 @@ const Add_new_offers = ({navigation}) => {
         opacity: 100,
       }}>
       <TopHeader
+     
         firstIcon={'arrow-back'}
         name={'Add New Offer'}
         thirdIcon={'more-vert'}
+        menuHandler={menuHandler}
       />
 
       <ScrollView style={{}}>
@@ -185,8 +259,8 @@ const Add_new_offers = ({navigation}) => {
           <TextInput
             style={PostStyleSheet.OfferLinkInputText}
             numberOfLines={4}
-            onChangeText={text => setOfferlink(text)}
-            value
+            onChangeText={text => settitle(text)}
+            value={title}
           />
 
           <View style={{paddingBottom: 15}}>
@@ -197,8 +271,8 @@ const Add_new_offers = ({navigation}) => {
               style={PostStyleSheet.addPostMeassgInputText}
               multiline={true}
               numberOfLines={4}
-              onChangeText={text => onChangeText(text)}
-              value={postMessage}
+              onChangeText={text => setDescription(text)}
+              value={description}
             />
           </View>
 
@@ -211,8 +285,16 @@ const Add_new_offers = ({navigation}) => {
           />
 
           {/* //toggleSwitch */}
-          <View style={{flexDirection:'row',justifyContent:'space-between',paddingTop:20,alignItems:'center'}}>
-            <Text style={PostStyleSheet.addPostMessageLabelText}>Offer Status</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: 20,
+              alignItems: 'center',
+            }}>
+            <Text style={PostStyleSheet.addPostMessageLabelText}>
+              Offer Status
+            </Text>
             <Switch
               trackColor={{false: '#F4F4F4', true: '#0070FC'}}
               thumbColor={isEnabled ? '#FFFFFF' : '#f4f3f4'}
@@ -235,9 +317,7 @@ const Add_new_offers = ({navigation}) => {
           </View>
 
           <View style={{paddingBottom: 15}}>
-            <Text style={PostStyleSheet.LinktoOfferLabelText}>
-              Vailid Till
-            </Text>
+            <Text style={PostStyleSheet.LinktoOfferLabelText}>Vailid Till</Text>
             <TextInput
               style={PostStyleSheet.OfferLinkInputText}
               numberOfLines={4}
@@ -256,7 +336,7 @@ const Add_new_offers = ({navigation}) => {
             multiline={true}
             numberOfLines={4}
             onChangeText={text => setofferdisclimer(text)}
-            value={offerdis}
+            value={offerdisclimer}
           />
         </View>
       </ScrollView>
@@ -291,11 +371,20 @@ const Add_new_offers = ({navigation}) => {
       </Card.Actions> */}
           <Card.Cover
             style={{borderTopEndRadius: 9}}
-            source={{uri: 'https://picsum.photos/700'}}
+            source={{uri:offer_image}}
           />
-          
+
           <Card.Content>
-            <Text style={{color:'#000000',fontSize:18,opacity:100,fontFamily:fontfaimly.Alte_DIN,paddingTop:10}}>Need A Car ?</Text>
+            <Text
+              style={{
+                color: '#000000',
+                fontSize: 18,
+                opacity: 100,
+                fontFamily: fontfaimly.Alte_DIN,
+                paddingTop: 10,
+              }}>
+              {title}
+            </Text>
             <Text
               style={{
                 paddingTop: 10,
@@ -304,7 +393,7 @@ const Add_new_offers = ({navigation}) => {
 
                 fontSize: 14,
               }}>
-              {postMessage}
+              {description}
             </Text>
             <View
               style={{
@@ -313,7 +402,6 @@ const Add_new_offers = ({navigation}) => {
                 paddingTop: 10,
                 alignItems: 'center',
               }}>
-              
               <View
                 style={{
                   flexDirection: 'row',
@@ -337,7 +425,7 @@ const Add_new_offers = ({navigation}) => {
                     fontSize: 14,
                     color: '#5F6368',
                   }}>
-                  22nd feb’ 22
+                  {validtill}
                 </Text>
               </View>
             </View>
@@ -345,7 +433,11 @@ const Add_new_offers = ({navigation}) => {
         </Card>
 
         <View style={{alignItems: 'center', marginTop: 15}}>
-          <TouchableOpacity onPress={()=>navigation.navigate(NavigationString.My_Offers)}
+          <TouchableOpacity
+            onPress={
+              () => AddofferAPI(78104, 10007 ,title , description , offerdisclimer,validtill,validtill,offer_image,detail_page_url)
+              //navigation.navigate(NavigationString.My_Offers)
+            }
             style={{
               backgroundColor: '#0070FC',
               width: 350,

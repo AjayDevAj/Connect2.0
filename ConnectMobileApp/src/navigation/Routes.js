@@ -163,6 +163,7 @@ const Routes = () => {
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
 
+
             <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
 
             {/* <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} /> */}
