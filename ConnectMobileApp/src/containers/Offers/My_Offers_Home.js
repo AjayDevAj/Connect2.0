@@ -203,6 +203,7 @@ const My_Offers_Home = ({navigation}) => {
               opacity: 100,
               fontFamily: fontfaimly.Alte_DIN,
               paddingTop: 10,
+              paddingLeft:15
             }}>
             Need A Car ?
           </Text>

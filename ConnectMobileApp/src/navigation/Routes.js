@@ -162,10 +162,10 @@ const Routes = () => {
             <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-<<<<<<< HEAD
-=======
+
+
             <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
->>>>>>> 1c797a76e53857e5a73470f705a9f218cfb890d3
+
             {/* <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} /> */}
 
             {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
