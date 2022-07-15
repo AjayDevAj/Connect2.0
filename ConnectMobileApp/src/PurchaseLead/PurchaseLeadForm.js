@@ -102,9 +102,9 @@ const PurchaseLeadForm = ({
                 onSubmit={(values, actions) => {
                     values.intents = intentsVal.toString();
                     {values.interests !== undefined && customerInterestVal(values.interests.split(/[\s,]+/))}
-                    console.log('=== customer interest Value ===', interestVal);
+                    // console.log('=== customer interest Value ===', interestVal);
                     values.interests = interestVal.toString();
-                    console.log('===== Form Values =====',values);
+                    // console.log('===== Form Values =====',values);
 
                     formHandler(values);
                     alert(name + ' customer data updated successfully');

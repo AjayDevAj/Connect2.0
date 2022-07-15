@@ -4,8 +4,6 @@ import { View, Text, TouchableOpacity, Linking } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import cardStyles from './styles/CardStylesheet';
-import CardLocation from './CardLocation';
-import CardIcon from './CardIcon';
 
 const CardRowThree = ({ name, type='', email='', mobile_number='', status }) => {
     return (

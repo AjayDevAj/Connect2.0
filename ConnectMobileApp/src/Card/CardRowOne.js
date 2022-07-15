@@ -9,7 +9,7 @@ import CardTime from './CardTime';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CardRowOne = ({ logo, name, location, isImportant, createdAt='', item_id=0, dotHandler }) => {
+const CardRowOne = ({ logo, name, location, isImportant, createdAt='', itemId, customerItemData, dotHandler }) => {
     return (
         <View style={ cardStyles.cardRowOne }>
             <View style={ cardStyles.cardLogoNameContainer}>
@@ -17,14 +17,15 @@ const CardRowOne = ({ logo, name, location, isImportant, createdAt='', item_id=0
             
                 <Text style={ cardStyles.cardName }>{ name }</Text>
                 {isImportant > 0 && <Icon name="star-border" size={16} color="#FFAA00" style={{ opacity: 1, marginLeft: 5, marginTop: 2 }} />}
-                {createdAt !='' && ( <View style={{ alignSelf: 'flex-start', marginLeft: 6,  marginTop: -7}}>
-                <CardTime time={createdAt} />
-            </View>
-             )}
+                {createdAt !='' && ( 
+                    <View style={{ alignSelf: 'flex-start', marginLeft: 6,  marginTop: -7}}>
+                        <CardTime time={createdAt} />
+                    </View>
+                )}
             </View>
             
             {createdAt !='' ? (
-                <TouchableOpacity onPress={(item_id) => dotHandler(item_id)}>
+                <TouchableOpacity onPress={(val) => dotHandler(itemId, customerItemData)}>
                     <Icon name="more-vert" size={20} color="#5F6368" />
                 </TouchableOpacity>
             )
