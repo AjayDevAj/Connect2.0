@@ -10,30 +10,28 @@ import { deleteAll, StorageClass } from '../utility/StorageClass'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Singleinterfaceicon from '../../assets/svg/singleinterfaceicon.svg'
 import fontFamily from '../utility/Font-Declarations'
-
 import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import { result } from 'lodash';
-
-
+import { signOut } from '../navigation/Routes'
 
 
 function CustomDrawer(props) {
 
     const navigation1 = useNavigation();
-  
+
     //Logout api calling..
     const logout = async () => {
 
         const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-        console.log("Token Value :::: =",token_Value.token)
+        console.log("Token Value :::: =", token_Value.token)
 
-         var myHeaders = new Headers();
-         myHeaders.append("Authorization", `Bearer ${token_Value.token}`);
-         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token_Value.token}`);
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-         var urlencoded = new URLSearchParams();
+        var urlencoded = new URLSearchParams();
 
         var requestOptions = {
             method: 'POST',
@@ -46,10 +44,11 @@ function CustomDrawer(props) {
             .then(response => response.json())
             .then(result => console.log("JSON Result :::: ", result))
             .catch(error => console.log('Error Result :::: ', error));
-            
+
         deleteAll()
         console.log("Logout User")
-        navigation1.navigate(NavigationString.LOGIN);
+        // navigation1.navigate(NavigationString.LOGIN);
+        signOut()
 
         if (response.status > 400) {
             throw new Error(data.errors)
@@ -86,8 +85,8 @@ function CustomDrawer(props) {
                 <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10 }}>
                     <TouchableOpacity
                         style={styles.btnStyle}
-                         onPress={() => navigation.navigate(NavigationString.MyPostHome)}
-                        >
+                        onPress={() => navigation.navigate(NavigationString.MyPostHome)}
+                    >
                         <View style={styles.listView}>
                             <Icon name='post-add' size={25} style={styles.iconList} />
                             <Text style={styles.listText}>Posts</Text>

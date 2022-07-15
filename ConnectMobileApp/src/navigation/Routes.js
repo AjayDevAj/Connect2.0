@@ -63,8 +63,7 @@ import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
-import My_Offers from '../containers/Offers/My_Offers'
-// import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
+import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
 
 
 
