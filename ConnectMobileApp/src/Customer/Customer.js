@@ -26,7 +26,7 @@ import {View, Text, Alert} from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import customerStyles from './styles/customerStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
-import {loadCustomerData} from '../actions/CustomerAction';
+import {loadCustomerData, loadLeadData, sendLeadData } from '../actions/CustomerAction';
 import CustomerList from '../Customer/CustomerList';
 import navigationString from '../utility/NavigationString';
 import {useIsFocused} from '@react-navigation/native';
@@ -36,7 +36,6 @@ import {searchedListData} from '../utility/Constant';
 import AddNewCustomer from './AddNewCustomer';
 import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
-
 const Customer = ({navigation, Route, route}) => {
   const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
@@ -44,9 +43,6 @@ const Customer = ({navigation, Route, route}) => {
   const [searchText, setSearchText] = useState('');
   const [pageNo, setPageNo] = useState(0);
   const [totalCustomerPageCount, setTotalCustomerPageCount] = useState(1);
-
-  
-  
 
   const menuHandler = () => {
     //  navigation.navigate(navigationString.Customer);
@@ -59,14 +55,20 @@ const Customer = ({navigation, Route, route}) => {
   };
 
   const filterHandler = () => {
-   
-   
     setIsFilterApplied(!isFilterApplied);
     navigation.navigate(navigationString.Filter);
   };
 
   const dispatch = useDispatch();
   const customerResponseData = useSelector(store => store.CustomerResponseData);
+
+  var GetLeadResponseData= useSelector(
+    store => store.GetLeadResponseData
+  );
+
+  const getLeadApi = (location_id=0, id=0, conversation_id='') => {
+    dispatch(loadLeadData(location_id, id, conversation_id));
+  }
 
   /**
    * Api call when page load
@@ -161,10 +163,38 @@ const Customer = ({navigation, Route, route}) => {
     setShowPurchaseForm(!showPurchaseForm);
   };
 
+  const [customerIntentVal, setCustomerIntentVal] = useState([]);
+  const [customerInterestVal, setCustomerInterestVal] = useState([]);
+
   const onPressCustomerHandler = id => {
     customerResponseData.data.customers.map(item => {
-      item.id == id ? setSelectedCustomerData(item) : '';
+      item.id == id ? (setSelectedCustomerData(item), 
+      getLeadApi(0,0,item.conversation_id)) 
+      : '';
     });
+
+    {GetLeadResponseData !== undefined && 
+      GetLeadResponseData.data !== undefined && 
+      GetLeadResponseData.data.intent_list !== undefined && 
+      (GetLeadResponseData.data.intent_list !== '' && 
+          GetLeadResponseData.data.intent_list.map((item) => {
+              ((item.selected == true) && (!customerIntentVal.includes(item.id))) && 
+              setCustomerIntentVal(current => [...current, item.id])
+          })
+      )
+  }
+
+  {GetLeadResponseData !== undefined && 
+      GetLeadResponseData.data !== undefined && 
+      GetLeadResponseData.data.customer_interest !== undefined && 
+      (
+          GetLeadResponseData.data.customer_interest !== '' && 
+              GetLeadResponseData.data.customer_interest.map((item) => {
+                  (!customerInterestVal.includes(item)) && 
+                  setCustomerInterestVal(current => [...current, item])
+              })
+      )
+  }
     purchaseHandler();
   };
 
@@ -197,26 +227,35 @@ const Customer = ({navigation, Route, route}) => {
   return (
     <View style={customerStyles.customerMainContainer}>
       {showPurchaseForm ? (
-        <PurchaseLeadComponent
-          firstIcon="arrow-back"
-          name={
-            selectedCustomerData != ''
-              ? selectedCustomerData.display_name
-              : 'Add New Customer'
-          }
-          logo={
-            selectedCustomerData != ''
-              ? selectedCustomerData.publisher_type
-              : ''
-          }
-          menuHandler={menuHandler}
-          type={selectedCustomerData != '' ? '' : 'add'}
-          conversation_id={selectedCustomerData.conversation_id}
-          customer_intent={getCustomerIntentData(
-            selectedCustomerData.customer_intent,
+        <>
+        {GetLeadResponseData !== undefined && 
+          GetLeadResponseData.data !== undefined && 
+          GetLeadResponseData.data.customer_lead !== undefined && (
+            <PurchaseLeadComponent
+              firstIcon="arrow-back"
+              name={
+                selectedCustomerData != ''
+                  ? selectedCustomerData.display_name
+                  : 'Add New Customer'
+              }
+              logo={
+                selectedCustomerData != ''
+                  ? selectedCustomerData.publisher_type
+                  : ''
+              }
+              menuHandler={menuHandler}
+              type={selectedCustomerData != '' ? '' : 'add'}
+              conversation_id={selectedCustomerData.conversation_id}
+              // customer_intent={getCustomerIntentData(
+              //   selectedCustomerData.customer_intent,
+              // )}
+              customer_lead_data={GetLeadResponseData.data.customer_lead}
+              customerIntentVal={customerIntentVal}
+              customerInterestVal={customerInterestVal}
+              navigation={navigation}
+            />
           )}
-          navigation={navigation}
-        />
+        </>
       ) : (
         <>
           <TopHeader

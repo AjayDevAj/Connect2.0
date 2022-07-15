@@ -42,21 +42,20 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
     const [selectedCustomerId, setSelectedCustomerId] = useState(0);
     const [selectedCustomerData, setSelectedCustomerData] = useState('');
 
-    const dotHandler = (id) => {
-        {id > 0 && (
-            setSelectedCustomerId(id),
-            data.map((item) => {
-                item.id == id && setSelectedCustomerData(item)
-            })
+    const dotHandler = (id, customerItemData) => {
+        {(id > 0 && customerItemData != '') && (
+            // setSelectedCustomerId(id),
+            // setSelectedCustomerData(customerItemData),
+            setDotClicked(!dotClicked)
         )}
-        setDotClicked(!dotClicked);
     }
 
-    const newChatHandler = (selected_Item) => {
-        navigation.navigate(navigationString.Message, {
-        selected_Item,
-        allChat: true,
-        })
+    const newChatHandler = () => {
+        console.log('New Chat Data -', selectedCustomerData)
+        // navigation.navigate(navigationString.Message, {
+        // selected_Item,
+        // allChat: true,
+        // })
     }
 
     return (
@@ -74,7 +73,7 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
                     renderItem={( { item }) => (
                         <TouchableOpacity onPress={(val) => onPress_Customer(item.id)}>
                             <Card>
-                                <CardRowOne logo={item.publisher_type} name={item.display_name} createdAt={item.created_at} item_id={item.id} dotHandler={dotHandler} />
+                                <CardRowOne logo={item.publisher_type} name={item.display_name} createdAt={item.created_at} itemId={item.id} customerItemData={item} dotHandler={dotHandler} />
                                 <CardRowTwo status={item.chat_status} type="customer" intentData={item.customer_intent} />
                                 <CardRowThree name={item.agent_name} status={item.chat_status} email={item.lead_has.email} mobile_number={item.lead_has.mobile_number} type="customer" />
                             </Card>
@@ -82,7 +81,7 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
                     )}
                 />
 
-                {dotClicked && (
+                {(dotClicked === true) && (
                     <MaterialMenu
                     itemData={materialMenuCustomerData}
                     style={{ height: '5%' }}
@@ -93,7 +92,7 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
                             onPress_Customer(selectedCustomerId);
                             break;
                         case 2:
-                            newChatHandler(selectedCustomerData);
+                            newChatHandler();
                             break;
                         default:
                             break;
