@@ -153,6 +153,10 @@ const New_Post = ({navigation}) => {
 
   const dispatch = useDispatch();
 
+  const menuHandler =()=>{
+    navigation.goBack()
+  }
+
   return (
     <SafeAreaView
       style={{
@@ -163,6 +167,7 @@ const New_Post = ({navigation}) => {
         firstIcon={'arrow-back'}
         name={'Add New Post'}
         thirdIcon={'more-vert'}
+        menuHandler={menuHandler}
       />
 
       <ScrollView style={{}}>

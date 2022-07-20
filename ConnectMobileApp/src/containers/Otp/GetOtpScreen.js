@@ -57,6 +57,7 @@ import {saveObject} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../../utility/Constant';
 import {CONSTANT} from '../../utility/Constant';
 import Loader from '../../utility/Loader';
+
 // import messaging from '@react-native-firebase/messaging';
 
 
@@ -195,7 +196,7 @@ const GetOtpScreen = ({navigation}) => {
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        animated={true}
+        animated={false}
         style={{backgroundColor: 'rgba(247, 252, 255, 1)', flex: 1}}>
         <View>
           <Bubble />
@@ -273,6 +274,7 @@ const GetOtpScreen = ({navigation}) => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+     
     </View>
   );
 };

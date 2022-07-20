@@ -73,6 +73,7 @@ import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
 import ChatStack from '../navigation/ChatStack';
 import fontFamily from '../utility/Font-Declarations';
+import PostStack from './PostStack';
 
 // import {useDispatch, useSelector} from 'react-redux';
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
@@ -180,6 +181,9 @@ export default function RouteTabBar() {
           tabBarInactiveTintColor: '#5F6368',
           tabBarActiveTintColor: '#000',
         }} />
+
+
+        
       </Tab.Navigator>
       <Incoming_Chat />
       </>
