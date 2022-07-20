@@ -63,7 +63,14 @@ import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
+
 import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
+
+import My_Offers from '../containers/Offers/My_Offers'
+import ChatStack from './ChatStack';
+import PostStack from './PostStack';
+// import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
+
 
 
 
@@ -147,6 +154,7 @@ const Routes = () => {
             screenOptions={{ headerShown: false }}>
 
             <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+            <Drawer.Screen component={PostStack} name={navigationString.PostStack} />
 
             <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
             <Drawer.Screen component={Login} name={navigationString.LOGIN} />
@@ -161,6 +169,8 @@ const Routes = () => {
             <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+            <Drawer.Screen component={New_Post} name={navigationString.New_Post} />
+
 
 
             <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
