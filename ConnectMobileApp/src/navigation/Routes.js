@@ -92,9 +92,6 @@ const OtpScreen = () => {
   return <Icon name="backward" size={24} color="#fff" />;
 };
 
-const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-
 /**
  * Routes matain the navigation stacks
  */
@@ -111,7 +108,7 @@ const Routes = () => {
     var className = 'navigationString.OnBoarding';
     try {
       const keys = await AsyncStorage.getAllKeys();
-
+alert(!keys.includes(viewed_Onboarding))
       // Check if user is logged in : if not loggin
       if (!keys.includes(viewed_Onboarding) || (await AsyncStorage.getItem(viewed_Onboarding) !== true)) {
         className = navigationString.OnBoarding;
@@ -122,7 +119,7 @@ const Routes = () => {
         // Check if user is logged in : if yes, go to dashboard
         if (!keys.includes(location_Data_Key) && (await AsyncStorage.getItem(location_Data_Key) === null)) {
           className = navigationString.RouteTabBar;
-          setNavigateTo('LocationScreen');
+          setNavigateTo('DashboardScreen');
         } else {
           // Check if user is logged in first time
           className = navigationString.OnBoarding;
@@ -139,80 +136,75 @@ const Routes = () => {
  console.log('=== Navigate to following screen ===', navigateTo);
  console.log('=== Initial Route name is ===', navigationRef);
 
+ /*=== OnBoarding stack Navigator ===*/
+
+ const StackOnboard = createNativeStackNavigator();
+
+ function OnBoardingScreenStack() {
+  return (
+    <StackOnboard.Navigator initialRouteName={navigationString.OnBoarding} 
+      screenOptions={{headerShown: false}}>
+        <StackOnboard.Screen component={OnBoarding} name={navigationString.OnBoarding} />
+    </StackOnboard.Navigator>
+  );
+ };
+
+ /*=== Login stack Navigator ===*/
+ 
+ const StackLogin = createNativeStackNavigator();
+
+ function LoginScreenStack() {
+  return (
+    <StackLogin.Navigator initialRouteName={navigationString.LOGIN} 
+      screenOptions={{headerShown: false}}>
+        <StackLogin.Screen component={Login} name={navigationString.LOGIN} />
+        <StackLogin.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+        <StackLogin.Screen component={Storelocation} name={navigationString.Location} />
+    </StackLogin.Navigator>
+  );
+ };
+
+ /*=== Dashboard Drawer Navigator ===*/
+ 
+ const Drawer = createDrawerNavigator();
+
+ function DashboardScreenStack() {
+  return (
+    <Drawer.Navigator initialRouteName={navigationString.RouteTabBar}
+      drawerContent={(props) => <CustomDrawer {...props} />}
+      screenOptions={{ headerShown: false }}>
+      {/* <Drawer.Screen component={Storelocation} name={navigationString.Location} /> */}
+      <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+
+      <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+      <Drawer.Screen component={Message} name={navigationString.Message} />
+      <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
+      <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+      <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
+      <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
+      <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+      <Drawer.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
+      <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
+    </Drawer.Navigator>
+  );
+ };
+
+
+ const StackApp = createNativeStackNavigator();
   return (
     <>
     <NavigationContainer ref={navigationRef}>
-    
-      {navigateTo == 'LocationScreen' 
-      ? (
-          <Drawer.Navigator initialRouteName={initialState}
-            drawerContent={(props) => <CustomDrawer {...props} />}
-            screenOptions={{ headerShown: false }}>
-            {/* <Drawer.Screen component={Storelocation} name={navigationString.Location} /> */}
-            <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+      <StackLogin.Navigator initialRouteName={initialState} 
+        screenOptions={{headerShown: false}}>
+          <StackLogin.Screen component={OnBoardingScreenStack} name={navigationString.OnBoarding} />
+          <StackLogin.Screen component={LoginScreenStack} name={navigationString.LOGIN} />
 
-            <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
-            <Drawer.Screen component={Message} name={navigationString.Message} />
-            <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
-            <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
-            <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
-            <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
-            <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-            <Drawer.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
-            <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
-          </Drawer.Navigator>
-        ) 
-      : (
-        <Stack.Navigator initialRouteName={initialState} 
-          screenOptions={{headerShown: false}}>
-          {navigateTo == 'LoginScreen' 
-          ? (
-            <>
-              <Stack.Screen component={Login} name={navigationString.LOGIN} />
-              <Stack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
-              <Stack.Screen component={Storelocation} name={navigationString.Location} />
-            </>
-          ) : (
-            <Stack.Screen component={OnBoarding} name={navigationString.OnBoarding} />
-          )
-        }
-        </Stack.Navigator>
-        )
-      }
+          <StackLogin.Screen component={DashboardScreenStack} name={navigationString.RouteTabBar} />
+      </StackLogin.Navigator>
     </NavigationContainer>
     </>
   );
 };
-
-// {statusKeyLoaded && (
-
-      //   <NavigationContainer ref={navigationRef}>
-
-      //     <Drawer.Navigator initialRouteName={initialState}
-      //       drawerContent={(props) => <CustomDrawer {...props} />}
-      //       screenOptions={{ headerShown: false }}>
-
-      //       <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
-
-      //       <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
-      //       <Drawer.Screen component={Login} name={navigationString.LOGIN} />
-      //       <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
-      //       <Drawer.Screen component={Storelocation} name={navigationString.Location} />
-
-      //       <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
-      //       <Drawer.Screen component={Message} name={navigationString.Message} />
-      //       {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
-      //       <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
-      //       <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
-      //       <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
-      //       <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
-      //       <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-      //       <Drawer.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
-            
-      //       <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
-      //     </Drawer.Navigator>
-      //   </NavigationContainer>
-      // )}
 
 export default Routes;
 
