@@ -383,9 +383,11 @@ const Message = ({navigation, route}) => {
                     closeChatHandler();
                     break;
                   case 2:
+                    setDotClicked(false);
                     mark_Unread_Api();
                     break;
                   case 3:
+                    setDotClicked(false);
                     break;
 
                   default:

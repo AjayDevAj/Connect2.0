@@ -48,7 +48,6 @@ const CustomerList = ({data, onPress_Customer, loadMoreCustomerData, page, custC
             // setSelectedCustomerData(customerItemData),
             setDotClicked(!dotClicked)
         )}
-        
     }
 
     const newChatHandler = () => {

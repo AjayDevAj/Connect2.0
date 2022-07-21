@@ -30,44 +30,36 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationString from '../utility/NavigationString';
 import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import OnBoarding from '../Splash/OnBoarding';
-// import RouteTabBar from '../navigation/RouteTabBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fontFamily from '../utility/Font-Declarations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AllChat from '../AllChat/AllChat';
-import { viewed_Onboarding, location_Data_Key } from '../utility/Constant';
+import { viewed_Onboarding, setIsLoggedIn, location_Data_Key } from '../utility/Constant';
 import Message from '../containers/Message/Message';
-//import Filter from '../containers/dashboard/Filter';
 import CustomerFilter from '../containers/Customer_Filter/CustomerFilter';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
 import { CommonActions } from '@react-navigation/native';
-// import Drawer from './Drawer';
 import CustomDrawer from '../component/CustomDrawer';
-// import RouteTabBar from './RouteTabBar';
 import RouteTabBar from "../navigation/RouteTabBar";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import NavigationString from '../utility/NavigationString';
-import Chat from '../Chat/Chat';
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
-import New_Post from '../containers/Post/New_Post';
 import My_Offers_Home from '../containers/Offers/My_Offers_Home';
 import MyPostHome from '../containers/Post/MyPostHome'
 import Add_new_offer from '../containers/Offers/Add_new_offers'
 import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
-import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
+// import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
 
-
-
-
+import My_Offers from '../containers/Offers/My_Offers';
+import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
 /*
  **
@@ -110,7 +102,7 @@ const Routes = () => {
 
   const [statusKeyLoaded, setStatusKeyLoaded] = useState(false);
   const [initialState, setinitialState] = useState('OnBoarding');
-
+  const [navigateTo, setNavigateTo] = useState('OnBoardingScreen')
   useEffect(() => {
     getUserState();
   });
@@ -119,14 +111,24 @@ const Routes = () => {
     var className = 'navigationString.OnBoarding';
     try {
       const keys = await AsyncStorage.getAllKeys();
-      if (keys.includes(viewed_Onboarding)) {
+
+      // Check if user is logged in : if not loggin
+      if (!keys.includes(viewed_Onboarding) || (await AsyncStorage.getItem(viewed_Onboarding) !== true)) {
         className = navigationString.OnBoarding;
-      } else {
+      } else if (!keys.includes(setIsLoggedIn) || (await AsyncStorage.getItem(setIsLoggedIn) !== true)) {
         className = navigationString.LOGIN;
+        setNavigateTo('LoginScreen');
+      } else {
+        // Check if user is logged in : if yes, go to dashboard
+        if (!keys.includes(location_Data_Key) && (await AsyncStorage.getItem(location_Data_Key) === null)) {
+          className = navigationString.RouteTabBar;
+          setNavigateTo('LocationScreen');
+        } else {
+          // Check if user is logged in first time
+          className = navigationString.OnBoarding;
+        }
       }
-      if (keys.includes(location_Data_Key)) {
-        className = navigationString.RouteTabBar;
-      }
+      
       setinitialState(className);
       setStatusKeyLoaded(true);
     } catch (error) {
@@ -134,119 +136,83 @@ const Routes = () => {
     }
     console.log('Get all keys :- return', keys);
   };
-
+ console.log('=== Navigate to following screen ===', navigateTo);
+ console.log('=== Initial Route name is ===', navigationRef);
 
   return (
     <>
-      {statusKeyLoaded && (
-
-        <NavigationContainer ref={navigationRef}>
-
+    <NavigationContainer ref={navigationRef}>
+    
+      {navigateTo == 'LocationScreen' 
+      ? (
           <Drawer.Navigator initialRouteName={initialState}
             drawerContent={(props) => <CustomDrawer {...props} />}
             screenOptions={{ headerShown: false }}>
-
+            {/* <Drawer.Screen component={Storelocation} name={navigationString.Location} /> */}
             <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
 
             <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
-            <Drawer.Screen component={Login} name={navigationString.LOGIN} />
-            <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
-            <Drawer.Screen component={Storelocation} name={navigationString.Location} />
-
-            <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
             <Drawer.Screen component={Message} name={navigationString.Message} />
-            {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
             <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
             <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
             <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-
-
+            <Drawer.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
             <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
-
-            {/* <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} /> */}
-
-            {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
-
           </Drawer.Navigator>
-
-
-          {/* <Stack.Navigator initialRouteName={initialState}>
-           <Stack.Screen
-              name={navigationString.OnBoarding}
-              component={OnBoarding}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name={navigationString.LOGIN}
-              component={Login}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name={navigationString.GetOtpScreen}
-              component={GetOtpScreen}
-              options={{
-                headerTintColor: '#000',
-                headerStyle: {
-                  backgroundColor: '#F7FCFF',
-                  height: 60,
-                  shadowColor: '#F7FCFF', // this covers iOS
-                  elevation: 0, // this covers Android
-                },
-                headerShadowVisible: false,
-                headerTitle: () => (
-                  <OtpScreen onPress={() => navigationString.goBack()} />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name={navigationString.Location}
-              component={Storelocation}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={navigationString.RouteTabBar}
-              component={RouteTabBar}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name={navigationString.AllChat}
-              component={AllChat}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name={navigationString.Message}
-              component={Message}
-              options={{headerShown: false}}
-            />
-
-            <Stack.Screen
-              name={navigationString.Filter}
-              component={Filter}
-              options={{headerShown: false}}
-            />
-
-            <Stack.Screen
-              name={navigationString.Drawer}
-              component={Drawer}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name={navigationString.Chat_Filter}
-              component={Chat_Filter}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator> */}
-          {/* <Incoming_Chat /> */}
-        </NavigationContainer>
-      )}
+        ) 
+      : (
+        <Stack.Navigator initialRouteName={initialState} 
+          screenOptions={{headerShown: false}}>
+          {navigateTo == 'LoginScreen' 
+          ? (
+            <>
+              <Stack.Screen component={Login} name={navigationString.LOGIN} />
+              <Stack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+              <Stack.Screen component={Storelocation} name={navigationString.Location} />
+            </>
+          ) : (
+            <Stack.Screen component={OnBoarding} name={navigationString.OnBoarding} />
+          )
+        }
+        </Stack.Navigator>
+        )
+      }
+    </NavigationContainer>
     </>
   );
 };
+
+// {statusKeyLoaded && (
+
+      //   <NavigationContainer ref={navigationRef}>
+
+      //     <Drawer.Navigator initialRouteName={initialState}
+      //       drawerContent={(props) => <CustomDrawer {...props} />}
+      //       screenOptions={{ headerShown: false }}>
+
+      //       <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
+
+      //       <Drawer.Screen component={AllChat} name={navigationString.AllChat} />
+      //       <Drawer.Screen component={Login} name={navigationString.LOGIN} />
+      //       <Drawer.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
+      //       <Drawer.Screen component={Storelocation} name={navigationString.Location} />
+
+      //       <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} />
+      //       <Drawer.Screen component={Message} name={navigationString.Message} />
+      //       {/* <Drawer.Screen component={Filter} name={navigationString.Filter} /> */}
+      //       <Drawer.Screen component={CustomerFilter} name={navigationString.Filter} />
+      //       <Drawer.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
+      //       <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
+      //       <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
+      //       <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+      //       <Drawer.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
+            
+      //       <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
+      //     </Drawer.Navigator>
+      //   </NavigationContainer>
+      // )}
 
 export default Routes;
 
@@ -264,5 +230,5 @@ export const signOut = () => {
     index: 0,
     routes: [{ name: navigationString.LOGIN }],
   });
-  //  deleteAll()
+  deleteAll()
 };

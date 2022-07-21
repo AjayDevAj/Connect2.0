@@ -112,8 +112,6 @@ const Chat = ({navigation ,Route  }) => {
         'uWebsocket Chat page onmessage print before e',
         json_Data,
       );
-
-   
         switch (json_Data.socket_name) {
           case 'subscribe_message':
             callAPI(currentTabStatus);

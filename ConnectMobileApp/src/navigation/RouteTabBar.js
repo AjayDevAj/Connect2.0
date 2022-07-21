@@ -74,6 +74,9 @@ import Review from '../containers/Review/Review'
 import ChatStack from '../navigation/ChatStack';
 import fontFamily from '../utility/Font-Declarations';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setIsLoggedIn } from '../utility/Constant';
+
 // import {useDispatch, useSelector} from 'react-redux';
 // import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
 
@@ -84,8 +87,8 @@ function HomeScreen() {
   useEffect(() => {
     // Incoming_Chat_Socket_Subscribe()
     // dispatch(Unassigned_Chat());
+  });
 
-  })
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dashboard</Text>
@@ -95,93 +98,105 @@ function HomeScreen() {
 
 const Tab = createBottomTabNavigator();
 
-
 export default function RouteTabBar() {
-  {console.log('******* RouteTabBar call *******')}
+  useEffect(() => {
+    checkIfUserLoggedIn()
+  }, []);
+  
+  var isUserLoggedIn = false
+  const checkIfUserLoggedIn = async() => {
+    isUserLoggedIn = await AsyncStorage.getItem(setIsLoggedIn);
+  }
+  
   return (
     <>
+    {isUserLoggedIn && (
+      <>
       <Tab.Navigator>
-        <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Icon
-                name="dashboard"
-                size={24}
-                color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              />
-            );
-          },
-          tabBarLabelStyle: { 
-            opacity: 1,
-            fontSize: 10,
-            fontFamily: fontFamily.Alte_DIN
-          },
-          tabBarInactiveTintColor: '#5F6368',
-          tabBarActiveTintColor: '#000',
-        }} />
-        <Tab.Screen name={navigationString.Chat} component={ChatStack} options={{
-          headerShown: false, 
-          tabBarBadge: 5,
-          tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Icon
-                name="chat"
-                size={24}
-                color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              />
-            );
-          },
-          tabBarLabelStyle: { 
-            opacity: 1,
-            fontSize: 10,
-            fontFamily: fontFamily.Alte_DIN
-          },
-          tabBarInactiveTintColor: '#5F6368',
-          tabBarActiveTintColor: '#000',
-        }} />
-        <Tab.Screen name={navigationString.Customers} component={Customer} options={{
-          headerShown: false, 
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Icon
-                name="group"
-                size={24}
-                color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              />
-            );
-          },
-          tabBarLabelStyle: { 
-            opacity: 1,
-            fontSize: 10,
-            fontFamily: fontFamily.Alte_DIN
-          },
-          tabBarInactiveTintColor: '#5F6368',
-          tabBarActiveTintColor: '#000',
-        }} />
-        <Tab.Screen name={navigationString.Reviews} component={Review} options={{
-          headerShown: false,
-          tabBarBadge: 7,
-          tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Icon
-                name="grade"
-                size={24}
-                color={tabInfo.focused ? "#00C158" : "#5F6368"}
-              />
-            );
-          },
-          tabBarLabelStyle: { 
-            opacity: 1,
-            fontSize: 10,
-            fontFamily: fontFamily.Alte_DIN
-          },
-          tabBarInactiveTintColor: '#5F6368',
-          tabBarActiveTintColor: '#000',
-        }} />
-      </Tab.Navigator>
-      <Incoming_Chat />
+      <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Icon
+              name="dashboard"
+              size={24}
+              color={tabInfo.focused ? "#00C158" : "#5F6368"}
+            />
+          );
+        },
+        tabBarLabelStyle: { 
+          opacity: 1,
+          fontSize: 10,
+          fontFamily: fontFamily.Alte_DIN
+        },
+        tabBarInactiveTintColor: '#5F6368',
+        tabBarActiveTintColor: '#000',
+      }} />
+      <Tab.Screen name={navigationString.Chat} component={ChatStack} options={{
+        headerShown: false, 
+        tabBarBadge: 5,
+        tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Icon
+              name="chat"
+              size={24}
+              color={tabInfo.focused ? "#00C158" : "#5F6368"}
+            />
+          );
+        },
+        tabBarLabelStyle: { 
+          opacity: 1,
+          fontSize: 10,
+          fontFamily: fontFamily.Alte_DIN
+        },
+        tabBarInactiveTintColor: '#5F6368',
+        tabBarActiveTintColor: '#000',
+      }} />
+      <Tab.Screen name={navigationString.Customers} component={Customer} options={{
+        headerShown: false, 
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Icon
+              name="group"
+              size={24}
+              color={tabInfo.focused ? "#00C158" : "#5F6368"}
+            />
+          );
+        },
+        tabBarLabelStyle: { 
+          opacity: 1,
+          fontSize: 10,
+          fontFamily: fontFamily.Alte_DIN
+        },
+        tabBarInactiveTintColor: '#5F6368',
+        tabBarActiveTintColor: '#000',
+      }} />
+      <Tab.Screen name={navigationString.Reviews} component={Review} options={{
+        headerShown: false,
+        tabBarBadge: 7,
+        tabBarBadgeStyle: { backgroundColor: '#EDEDED', color: '#657180'},
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Icon
+              name="grade"
+              size={24}
+              color={tabInfo.focused ? "#00C158" : "#5F6368"}
+            />
+          );
+        },
+        tabBarLabelStyle: { 
+          opacity: 1,
+          fontSize: 10,
+          fontFamily: fontFamily.Alte_DIN
+        },
+        tabBarInactiveTintColor: '#5F6368',
+        tabBarActiveTintColor: '#000',
+      }} />
+    </Tab.Navigator>
+    <Incoming_Chat />
+    </>
+    )}
+      
       </>
   );
 }
