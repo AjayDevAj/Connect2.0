@@ -35,17 +35,24 @@ const Item = ({item, onPress, backgroundColor, textColor}) => (
   </TouchableOpacity>
 );
 
-const CustomerFilter = ({navigation}) => {
+
+const CustomerFilter = ({navigation ,route}) => {
+
+
+  
+
   const [selectedId, setSelectedId] = useState('');
   console.log(' button id cliked ---->>>>', selectedId);
-
+  const [isnavigated,setisnavigated]=useState(false)
+  
+console.log('isnaviagted from chat',isnavigated)
   const [locationlistdata, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
 
   const [searchValue, setSearchValue] = useState('');
   const [checkboxdata, setcheckboxdata] = useState('');
   const [ischeckboxChecked, setisChecked] = useState(false);
-  const [isContactcheckboxChecked, setisContactChecked] = useState(false);
+  const [isContactcheckboxChecked, setisContactChecked] = useState('flase');
   const customerResponseData = useSelector(store => store.CustomerResponseData);
   const [opensheet, setopensheet] = useState(false);
 
@@ -53,7 +60,14 @@ const CustomerFilter = ({navigation}) => {
 
   useEffect(() => {
     getdata();
+    //setisnavigated(route.params.isnavigtedfromchat)
+    
   }, []);
+
+  useEffect(
+    () => navigation.addListener('blur', () => setisnavigated('false')),
+    []
+  );
 
   const getdata = async () => {
     const SlresponseData = await getOtpResponse(location_Data_Key);
@@ -187,12 +201,12 @@ const CustomerFilter = ({navigation}) => {
   const EntryPoint = () => {
     console.log(
       'Entry point--------->',
-      customerResponseData.data.filters.entry_points,
+      customerResponseData.data.filters.channels,
     );
 
     return (
       <EntryPointFilter
-        entrypoints={customerResponseData.data.filters.entry_points}
+        entrypoints={customerResponseData.data.filters.channels}
       />
     );
   };
@@ -427,6 +441,62 @@ const CustomerFilter = ({navigation}) => {
     );
   };
 
+  const Assigned_To_Handler = ()=>{
+    console.log('Assigned To -->',customerResponseData.data.filters.assigned_users)
+
+    //const Assigned_To = [{label: 'OPEN'}, {label: 'CLOSE'}];
+    const Assigned_user = customerResponseData.data.filters.assigned_users
+
+   const  Assigned_To = Assigned_user.map(function(obj) {
+     
+      return { 
+        label: obj.name
+        }
+  });
+
+  
+
+  console.log(Assigned_To);
+
+    const Assigned_To_Agent = ({Item}) => (
+      
+      
+
+      <RadioButtonRN
+          data={Assigned_To}
+          selectedBtn={e => {
+            console.log(e);
+            Alert.alert(e.label.toString());
+          }}
+          box={false}
+          textStyle={[styles.itemtitle, {marginVertical: 10}]}
+          deactiveColor={'#657180'}
+          activeColor={'#0E0071'}
+          circleSize={13}/>
+
+            
+
+    );
+
+    const renderItem = ({item}) => <Assigned_To_Agent Item={item} />;
+    return (
+      <View>
+
+        <FlatList 
+        data={Assigned_To}
+        renderItem={renderItem}
+        keyExtractor={index => index.toString()}
+        />
+        
+        
+        
+
+        
+      </View>
+    );
+    
+  }
+
   const CheckSwitch = selectedId => {
     switch (selectedId) {
       case '1':
@@ -450,6 +520,10 @@ const CustomerFilter = ({navigation}) => {
         break;
       case '7':
         return <IntrestedInhandler />;
+        break;
+        case '8':
+        return <Assigned_To_Handler />;
+        
         break;
       default:
         return <LocationList />;
@@ -476,7 +550,7 @@ const CustomerFilter = ({navigation}) => {
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
-          onPress={() => navigation.goBack()}>
+          onPress={() => (navigation.goBack())}>
           <Icon name="arrow-back" size={30} color={'#5F6368'} />
         </TouchableOpacity>
 
@@ -532,6 +606,7 @@ const CustomerFilter = ({navigation}) => {
         <View style={filterstyle.leftContainer}>
           <FlatList
             data={Customer_Filter_Btngroup_id}
+          
             renderItem={renderItem}
             keyExtractor={item => item.id}
             extraData={selectedId}
@@ -561,6 +636,7 @@ const CustomerFilter = ({navigation}) => {
           shadowOpacity: 0.15,
           shadowRadius: 10,
           elevation: 5,
+          bottom:10
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}

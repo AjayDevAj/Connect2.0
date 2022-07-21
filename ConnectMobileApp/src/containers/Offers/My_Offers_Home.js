@@ -58,6 +58,11 @@ const My_Offers_Home = ({navigation}) => {
 
    //console.log('ofrer list in React hook', offerlistdata.offers[0].offer_image);
 
+
+   const menuHandler = () => {
+     navigation.openDrawer();
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: '#F7FCFF'}}>
       <TopHeader
@@ -65,6 +70,7 @@ const My_Offers_Home = ({navigation}) => {
         firstIcon={'menu'}
         secondIcon={'search'}
         thirdIcon={'filter-list'}
+        menuHandler={menuHandler}
       />
 
       <View

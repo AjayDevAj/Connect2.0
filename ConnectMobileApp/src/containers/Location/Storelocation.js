@@ -69,7 +69,7 @@ export default Storelocation = ({navigation}) => {
         }}>
           
           
-        <Icon.Button
+        {/* <Icon.Button
           name="arrow-back"
           size={30}
           color="#000000"
@@ -91,7 +91,7 @@ export default Storelocation = ({navigation}) => {
             }}>
             Store Locations
           </Text>
-        </Icon.Button>
+        </Icon.Button> */}
 
         {/* <Icon name='arrow-back' size={30}  onPress={()=> navigation.goBack()}> <Text style={{fontSize:18,fontFamily: fontFamily.Alte_DIN,fontWeight: 'bold',}}> Store Location</Text> </Icon> */}
         
