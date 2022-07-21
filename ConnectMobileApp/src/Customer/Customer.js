@@ -50,7 +50,8 @@ const Customer = ({navigation, Route, route}) => {
 
   const menuHandler = () => {
     //  navigation.navigate(navigationString.Customer);
-    //  navigation.goBack();
+      //navigation.goBack();
+      navigation.openDrawer();
     setShowPurchaseForm(false);
   };
 
