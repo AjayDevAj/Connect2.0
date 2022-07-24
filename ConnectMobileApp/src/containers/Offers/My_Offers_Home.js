@@ -68,7 +68,7 @@ const My_Offers_Home = ({navigation}) => {
       <TopHeader
         name={'My Offers'}
         firstIcon={'menu'}
-        secondIcon={'search'}
+        //secondIcon={'search'}
         thirdIcon={'filter-list'}
         menuHandler={menuHandler}
       />
