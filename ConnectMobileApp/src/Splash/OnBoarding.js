@@ -51,7 +51,6 @@ import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {viewed_Onboarding} from '../utility/Constant'
-
 /*
 **
 *
@@ -78,7 +77,7 @@ const OnBoarding = ({ navigation }) => {
         slidesRef.current.scrollToIndex({ index: currentIndex + 1});
       } else {
         try {
-          AsyncStorage.setItem(viewed_Onboarding, 'true');
+          await AsyncStorage.setItem(viewed_Onboarding, 'true');
           // navigate to login screen
           navigation.navigate(NavigationString.LOGIN)
         } catch (err) {

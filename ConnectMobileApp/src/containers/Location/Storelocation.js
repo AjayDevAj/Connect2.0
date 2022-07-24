@@ -9,7 +9,7 @@ import NavigationString from '../../utility/NavigationString';
 import {loadStoreLocationData} from '../../actions/StoreLocationAction';
 import {useIsFocused} from '@react-navigation/native';
 import {saveObject} from '../../utility/StorageClass';
-import {location_Data_Key} from '../../utility/Constant';
+import {location_Data_Key } from '../../utility/Constant';
 import {useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {resetNavigation} from '../../navigation/Routes'
@@ -22,7 +22,7 @@ export default Storelocation = ({navigation}) => {
   const [responceData, setData] = useState([]);
   const [username, SetuserName] = useState('');
   const [isPanelActive, setIsPanelActive] = useState(true);
-  const userName = route.params.userName;
+  const userName = (!route?.params && !route?.params?.userName) ? route?.params?.userName : '';
 
   useEffect(() => {
     SetuserName(userName);

@@ -85,9 +85,11 @@ const Login = ({navigation}) => {
           errorStatus: loginResponce.error,
         }
       )
+      
       // navigate to next screen.
-      if (loginResponce.error == false) {
-        setLoading(false);
+      if ((loginResponce.error == false)) {
+        // setLoading(false);
+        // alert(loginResponce);
         navigation.navigate(navigationString.GetOtpScreen, {
           mobile_Number: textInputPhoneNum,
         });
@@ -97,7 +99,7 @@ const Login = ({navigation}) => {
 
   //Check for the Phone Number TextInput
   checkTextInput = async () => {
-    console.log('checkTextInput');
+    // console.log('checkTextInput');
     if (!textInputPhoneNum.trim()) {
       alert('Please Enter Mobile Number');
     } else if (textInputPhoneNum.trim().length != 10) {

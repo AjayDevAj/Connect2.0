@@ -61,34 +61,18 @@
 ** 
 */
 
-import React,{useEffect,useRef} from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import navigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Chat from '../Chat/Chat';
 import Customer from '../Customer/Customer';
-import uWebSockets from '../component/uWebSockets'
 import Incoming_Chat from '../containers/Incoming_Chat/Incoming_Chat';
 import Review from '../containers/Review/Review'
 import ChatStack from '../navigation/ChatStack';
 import fontFamily from '../utility/Font-Declarations';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setIsLoggedIn } from '../utility/Constant';
-
-// import {useDispatch, useSelector} from 'react-redux';
-// import Incoming_Chat_Socket_Subscribe from '../component/uWebSockets'
-
 function HomeScreen() {
-  // const testSocket = () => {
-    
-  // }
-  useEffect(() => {
-    // Incoming_Chat_Socket_Subscribe()
-    // dispatch(Unassigned_Chat());
-  });
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Dashboard</Text>
@@ -99,20 +83,9 @@ function HomeScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function RouteTabBar() {
-  useEffect(() => {
-    checkIfUserLoggedIn()
-  }, []);
-  
-  var isUserLoggedIn = false
-  const checkIfUserLoggedIn = async() => {
-    isUserLoggedIn = await AsyncStorage.getItem(setIsLoggedIn);
-  }
-  
   return (
     <>
-    {isUserLoggedIn && (
-      <>
-      <Tab.Navigator>
+    <Tab.Navigator>
       <Tab.Screen name={navigationString.Dashboard} component={HomeScreen} options={{
         tabBarIcon: (tabInfo) => {
           return (
@@ -194,8 +167,6 @@ export default function RouteTabBar() {
       }} />
     </Tab.Navigator>
     <Incoming_Chat />
-    </>
-    )}
       
       </>
   );

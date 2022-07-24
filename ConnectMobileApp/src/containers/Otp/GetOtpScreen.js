@@ -29,7 +29,7 @@
  **
  */
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -48,18 +48,15 @@ import Bubble from '../../component/Bubble';
 import OTPTextInput from '../../component/Otp-Form';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
-import {loadOtpData_Resend} from '../../actions/ResendOTPAction';
 import {useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
-import OtpErrorState from '../../component/OtpErrorState';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key, setIsLoggedIn} from '../../utility/Constant';
-import {CONSTANT} from '../../utility/Constant';
-import Loader from '../../utility/Loader';
+import {otpResponse_Storage_Key, appToken} from '../../utility/Constant';
 
-// import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import AuthContext from '../../navigation/AuthContext';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -77,22 +74,16 @@ const GetOtpScreen = ({navigation}) => {
     backgroundColor: 'rgba(239, 240, 242, 1)',
   });
   const [disbaleval, setVisbal] = useState(true);
-  const [timerEnable, setTimerEnable] = useState(false);
   const [isErrorstate, setisErrorState] = useState(false);
 
-  const setIsLoginToTrue = async () => {
-    AsyncStorage.setItem(setIsLoggedIn, 'true');
-  }
-
-  const setIsLoginToFalse = async () => {
-    AsyncStorage.setItem(setIsLoggedIn, 'false');
+  const setToken = async (token) => {
+    await AsyncStorage.setItem(appToken, token);
   }
 
   useEffect(() => {
     if (otpResponce.code == 200) {
-      setIsLoginToTrue();
       saveObject(otpResponce.data, otpResponse_Storage_Key);
-      
+      { otpResponce?.data?.token && setToken(otpResponce.data.token) }
       navigation.navigate(NavigationString.Location, {
         userName: otpResponce.data.user.name,
       });
@@ -126,46 +117,28 @@ const GetOtpScreen = ({navigation}) => {
   }, [otpResponce]);
 
   useEffect(() => {
-    if(otpResponce != undefined && otpResponce.data != undefined && otpResponce.data.code==401)
+    if(otpResponce?.data?.code==401)
     {
-      alert('n ncn')
-      // navigation.goBack()
+      navigation.goBack();
     }
-    // setTimerEnable(true)
   }, [resendOtpResponce]);
+
+  const editNoHandler = () => {
+    navigation.goBack();
+  }
 
   /**
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
     dispatch(loadOtpData(mobileNumber, otp));
+    loginHandler(mobileNumber, otp);
   };
 
-  // const reSendOTP = () => {
-  //  // dispatch(loadOtpData_Resend(mobileNumber));
+  const { signIn } = useContext(AuthContext);
 
-  //   Loader(true)
-
-  // };
-
-  /** depricated function */
-  // const OtpErrorHandler = () => {
-  //   if (
-  //     otpResponce != undefined &&
-  //     otpResponce.data != undefined &&
-  //     otpResponce.data.code != 200
-  //   ) {
-  //     return (<OtpErrorState />);
-  //   }
-  // };
-
-  const editNoHandler = () => {
-    navigation.goBack();
-    // navigation.navigate(NavigationString.LOGIN
-    //   , {
-    //   userName: otpResponce.data.user.name,
-    // }
-    // );
+  const loginHandler = (mobileNumber, otp) => {
+    signIn(mobileNumber, otp);
   }
 
   return (
