@@ -26,7 +26,7 @@ const MyPostHome = ({navigation}) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [listdata, setlistdata] = useState('');
-  const [isSearch, setIsSearch] = useState(false);
+
   const Post_List_Data = useSelector(store => store.PostListResponceData);
   //    //console.log('POST LITS SELECTOR DATA ----------->',Post_List_Data.data[1].picture_url)
 
@@ -67,19 +67,14 @@ const MyPostHome = ({navigation}) => {
   const menuHandler = () => {
     navigation.openDrawer();
   };
-  const searchHandler = () => {
-    setIsSearch(!isSearch);
-  };
-  
   return (
     <View style={{flex: 1, backgroundColor: '#F7FCFF'}}>
       <TopHeader
         name={'My Posts'}
         firstIcon={'menu'}
-        //secondIcon={'search'}
+        secondIcon={'search'}
         thirdIcon={'filter-list'}
         menuHandler={menuHandler}
-        searchHandler={searchHandler}
       />
 
       <View

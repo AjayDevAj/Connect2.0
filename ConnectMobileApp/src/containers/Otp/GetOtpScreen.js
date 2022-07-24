@@ -54,12 +54,12 @@ import NavigationString from '../../utility/NavigationString';
 import OtpErrorState from '../../component/OtpErrorState';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {otpResponse_Storage_Key, setIsLoggedIn} from '../../utility/Constant';
 import {CONSTANT} from '../../utility/Constant';
 import Loader from '../../utility/Loader';
 
 // import messaging from '@react-native-firebase/messaging';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GetOtpScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -80,21 +80,29 @@ const GetOtpScreen = ({navigation}) => {
   const [timerEnable, setTimerEnable] = useState(false);
   const [isErrorstate, setisErrorState] = useState(false);
 
+  const setIsLoginToTrue = async () => {
+    AsyncStorage.setItem(setIsLoggedIn, 'true');
+  }
+
+  const setIsLoginToFalse = async () => {
+    AsyncStorage.setItem(setIsLoggedIn, 'false');
+  }
+
   useEffect(() => {
-    if (otpResponce.code != null) {
-      // setupCloudMessage();
+    if (otpResponce.code == 200) {
+      setIsLoginToTrue();
       saveObject(otpResponce.data, otpResponse_Storage_Key);
+      
       navigation.navigate(NavigationString.Location, {
         userName: otpResponce.data.user.name,
       });
-    }
-    if (
+    } else if (
       otpResponce != '' &&
       otpResponce.data.code != null &&
       otpResponce.data.code == 400
     ) {
       // if (otpResponce.data.code == 400) {
-
+        setIsLoginToFalse();
       setisErrorState(true);
 
       console.log('Error State-------------->', isErrorstate);
@@ -115,53 +123,13 @@ const GetOtpScreen = ({navigation}) => {
         backgroundColor: 'rgba(239, 240, 242, 1)',
       });
     }
-
-    // }
   }, [otpResponce]);
-
-  // const setupCloudMessage = async () => {
-  //   const authStatus = await messaging().requestPermission();
-  //   if (authStatus) {
-  //     firebasePushSetup();
-  //   } else {
-  //     console.log(`firebase authStatus false`);
-  //   }
-  // };
-
-  // const firebasePushSetup = async () => {
-  //   await messaging().registerDeviceForRemoteMessages();
-
-  //   const authStatus = await messaging().requestPermission();
-
-  //   const enabled =
-  //     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-  //     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-  //     console.log('Firebase line status:');
-
-  //   if (enabled) {
-  //     var permisson = await messaging().hasPermission();
-  //     console.log('Firebase Authorization enabled:', permisson);
-
-  //     if (permisson) {
-  //       var token = await messaging().getToken();
-  //       console.log('Firebase Authorization status:', token);
-  //       setFcmToken(token);
-  //     } else {
-  //       console.log(`Firebase permisson false`);
-  //     }
-  //   } else {
-  //     console.log(`Firebase enabled false`);
-  //   }
-
-  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {});
-
-  //   return unsubscribe;
-  // };
 
   useEffect(() => {
     if(otpResponce != undefined && otpResponce.data != undefined && otpResponce.data.code==401)
     {
-      navigation.goBack()
+      alert('n ncn')
+      // navigation.goBack()
     }
     // setTimerEnable(true)
   }, [resendOtpResponce]);
@@ -170,7 +138,6 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
- 
     dispatch(loadOtpData(mobileNumber, otp));
   };
 
@@ -192,6 +159,15 @@ const GetOtpScreen = ({navigation}) => {
   //   }
   // };
 
+  const editNoHandler = () => {
+    navigation.goBack();
+    // navigation.navigate(NavigationString.LOGIN
+    //   , {
+    //   userName: otpResponce.data.user.name,
+    // }
+    // );
+  }
+
   return (
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
@@ -202,7 +178,7 @@ const GetOtpScreen = ({navigation}) => {
           <Bubble />
         </View>
        
-        <ScrollView contentContainerStyle={{flex: 1}}>
+        {/* <ScrollView contentContainerStyle={{flex: 1}}> */}
           <View style={{position: 'absolute', bottom: 0, width: '100%'}}>
             <View style={styles.UpperView}>
               <GetOtpBg width={'190'} height={'190'} />
@@ -224,7 +200,7 @@ const GetOtpScreen = ({navigation}) => {
                   ]}>
                   {mobileNumber}
                   {'  '}
-                  <TouchableOpacity onPress={navigation.goBack}>
+                  <TouchableOpacity onPress={() => editNoHandler()}>
                     <EditPencilIcon />
                   </TouchableOpacity>
                 </Text>
@@ -233,7 +209,7 @@ const GetOtpScreen = ({navigation}) => {
               <View
                 style={{display: isErrorstate == 'false' ? 'none' : 'flex'}}>
                 <OTPTextInput
-                  ref={e => console.log(';sdd')}
+                  ref={() => {}}
                   containerStyle={{borderColor: 'red'}}
                   adjustFontSizeToFit={true}
                   numberOfLines={1}
@@ -272,7 +248,7 @@ const GetOtpScreen = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        {/* </ScrollView> */}
       </KeyboardAvoidingView>
      
     </View>

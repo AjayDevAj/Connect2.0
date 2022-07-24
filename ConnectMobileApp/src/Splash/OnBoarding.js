@@ -46,7 +46,7 @@ import OnBoardingItems from './OnBoardingItems';
 import Paginator from './Paginator';
 import NextButton from './NextButton';
 import SkipButton from './SkipButton';
-import navigationString from '../utility/NavigationString';
+import NavigationString from '../utility/NavigationString';
 import onBoardingStyles from './styles/OnBoardingStyleSheet';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -74,17 +74,17 @@ const OnBoarding = ({ navigation }) => {
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
     const scrollTo = async () => {
-        if (currentIndex < slides.length - 1) {
-            slidesRef.current.scrollToIndex({ index: currentIndex + 1});
-        } else {
-            try {
-              AsyncStorage.setItem(viewed_Onboarding, 'true');
-                // navigate to login screen
-                navigation.navigate(navigationString.LOGIN)
-            } catch (err) {
-                console.log('Error @setItem: ', err);
-            }
+      if (currentIndex < slides.length - 1) {
+        slidesRef.current.scrollToIndex({ index: currentIndex + 1});
+      } else {
+        try {
+          AsyncStorage.setItem(viewed_Onboarding, 'true');
+          // navigate to login screen
+          navigation.navigate(NavigationString.LOGIN)
+        } catch (err) {
+          console.log('Error @setItem: ', err);
         }
+      }
     };
 
   return (

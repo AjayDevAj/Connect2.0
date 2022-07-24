@@ -37,7 +37,7 @@ export const Unassigned_Chat_Fetch_Call = async () => {
    */
 
   const data = response.json();
-  console.log('Unassigned Chat Body Data data: ', response.status);
+  // console.log('Unassigned Chat Body Data data: ', response.status);
 
   /*
    **

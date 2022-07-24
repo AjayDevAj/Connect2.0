@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Switch, TextInput, Dimensions, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -37,41 +37,50 @@ const PurchaseLeadForm = ({
     id,
     customer_intent=[],
     name='',
-    customer_interest=''
+    customer_interest=[]
     
 }) => {
+    // var initial_interest_value = '';
     const [isEnabled, setIsEnabled] = useState(true);
     const [intentsVal, setIntentsVal] = useState([]);
+    
+    const [interestVal, setInterestVal] = useState([]);
+    const [initialInterestValue, setInitialInterestValue] = useState('');
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-    const [interestVal, setInterestVal] = useState(customer_interest);
-    const [interestTags, setInterestTags] = useState({
-        tag: "",
-        tagsArray: ["Strong Engine", "Strong Engine"]
-    });
-    const [tagsColor, setTagsColor] = useState('');
-    const [tagsText, setTagsText] = useState('');
-
-    const updateTagState = (state) => {
-        setInterestTags({
-            ...interestTags, 
-            state
-        });
-        // console.log("Interest Tags - ", interestTags);
-    };
-
-    const customerIntentVal = () => {
-        {customer_intent !== '' ? 
+    useEffect(() => {
+        if(customer_intent !== '' || customer_intent !== undefined) {
             customer_intent.map((item) => {
-                item.selected == true && setIntentsVal(current => [...current, item.id])
-            }) 
-            : setIntentsVal([customer_intent])
+                (!intentsVal.includes(item)) &&
+                setIntentsVal(current => [...current, item])
+                })
         }
+    }, [customer_intent]);
 
-        return intentsVal;
+    useEffect(() => {
+        if(customer_interest !== '' || customer_interest !== undefined) {
+            customer_interest.map((item) => {
+                (!interestVal.includes(item)) &&
+                setInterestVal(current => [...current, item])
+                })
+                setInitialInterestValue(interestVal.toString())
+        }
+    }, [customer_interest]);
+    
+    const customerInterestVal = (interest_entered_value='') => {
+        {interest_entered_value !== '' &&
+            Array.isArray(interest_entered_value) ?
+                interest_entered_value.map((item) => {
+                (!interestVal.includes(item)) &&
+                    setInterestVal(current => [...current, item])
+                })
+            : (!interestVal.includes(item)) &&
+            setInterestVal(current => [...current, item])
+        }
+        
+        return interestVal;
     }
-    // userid is dynamic
-    console.log('===== Customer Intent =====', intentsVal);
+    
     return (
         <ScrollView style={ purchaseLeadStyles.purchaseLeadFormContainer }>
             <Formik 
@@ -83,20 +92,26 @@ const PurchaseLeadForm = ({
                     location_name: formData.location, 
                     mobile_number: formData.mobile_number,
                     email: formData.email,
-                    interests: interestVal,
+                    interests: initialInterestValue,
+                    // interests: interestVal.toString(),
                     comments: formData.comments,
                     conversation_id: conversation_id,
                     id: formData.id
                 }}
                 validationSchema={ValidatePurchaseSchema}
                 onSubmit={(values, actions) => {
-                    values.intents = intentsVal;
-                    // console.log('===== Values =====',values);
+                    values.intents = intentsVal.toString();
+                    {values.interests !== undefined && customerInterestVal(values.interests.split(/[\s,]+/))}
+                    // console.log('=== customer interest Value ===', interestVal);
+                    values.interests = interestVal.toString();
+                    // console.log('===== Form Values =====',values);
+
                     formHandler(values);
                     alert(name + ' customer data updated successfully');
                     // actions.resetForm();
                 }}
             >
+                
                 {(props) => (
                     <>
                     <Text style={ purchaseLeadStyles.purchaseLeadFormLabel }>Customer Name</Text>
@@ -112,15 +127,39 @@ const PurchaseLeadForm = ({
                         <Text style={purchaseLeadStyles.purchaseLeadFormLabel}>Intent</Text>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 10, marginRight: '30%'}}>
-                            <TouchableOpacity style={intentsVal.includes(1) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(current => [...current, 1])}>
+                            <TouchableOpacity style={intentsVal.includes(1) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {
+                                (!intentsVal.includes(1)) 
+                                    ? 
+                                        setIntentsVal(current => [...current, 1])
+                                    : 
+                                        setIntentsVal((current) => {
+                                            return current.filter((todos) => todos !== 1);
+                                        })
+                                }}>
                                 <Text style={intentsVal.includes(1) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Purchase</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={intentsVal.includes(4) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(current => [...current, 4])}>
+                            <TouchableOpacity style={intentsVal.includes(4) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {
+                                (!intentsVal.includes(4)) 
+                                    ? 
+                                        setIntentsVal(current => [...current, 4])
+                                    : 
+                                        setIntentsVal((current) => {
+                                            return current.filter((todos) => todos !== 4);
+                                        })
+                                }}>
                                 <Text style={intentsVal.includes(4) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Engagement</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={intentsVal.includes(3) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => setIntentsVal(current => [...current, 3])}>
+                            <TouchableOpacity style={intentsVal.includes(3) ? [purchaseLeadStyles.intentButton, { borderColor: '#2F6EF3', backgroundColor: '#FAFDFF',}] : purchaseLeadStyles.intentButton}  onPress={() => {
+                                (!intentsVal.includes(3)) 
+                                    ? 
+                                        setIntentsVal(current => [...current, 3]) 
+                                    : 
+                                        setIntentsVal((current) => {
+                                            return current.filter((todos) => todos !== 3);
+                                        })
+                                }}>
                                 <Text style={intentsVal.includes(3) ? [purchaseLeadStyles.intentText, { color: '#2F6EF3', }] : purchaseLeadStyles.intentText}>Support</Text>
                             </TouchableOpacity>
                         </View>
@@ -128,7 +167,7 @@ const PurchaseLeadForm = ({
                         {/* Purchase - hot lead */}
                         {/* Engagement -follow up required */}
 
-                        {(intentsVal != '' && (intentsVal.includes(1) || intentsVal.includes(3))) ? (
+                        {(intentsVal != '' && !intentsVal.includes(3)) ? (
                             <View style={ purchaseLeadStyles.intentSwitchContainer }>
                                 <Text style={[purchaseLeadStyles.purchaseLeadFormLabel, { fontWeight: 'bold', textAlign: 'left', marginRight: 100, opacity: 0.7}]}>{intentsVal.includes(1) ? 'Hot Lead' : intentsVal.includes(4) ? 'Follow up required' : ''}</Text>
                                 <Switch
@@ -136,7 +175,7 @@ const PurchaseLeadForm = ({
                                     thumbColor={isEnabled ? "#FFFFFF" : "#E4E4E4"}
                                     ios_backgroundColor="#3e3e3e"
                                     onValueChange={toggleSwitch}
-                                    value={intentsVal.includes(2) ? isEnabled : intentsVal.includes(5) ? isEnabled : setIsEnabled(false)}
+                                    value={isEnabled}
                                 />
                             </View>
                         ) : (
@@ -189,29 +228,6 @@ const PurchaseLeadForm = ({
                         onBlur={props.handleBlur('interests')}
                     />
                     <Text style={ purchaseLeadStyles.errorText }>{props.touched.interests && props.errors.interests}</Text>
-
-                    {/* <TagInput
-                        updateState={updateTagState}
-                        tags={interestTags}
-                        label="Interests"
-                        labelStyle={[purchaseLeadStyles.purchaseLeadFormLabel, { marginTop: 0}]}
-
-                        leftElementContainerStyle={{marginLeft: 3}}
-                        inputContainerStyle={[purchaseLeadStyles.purchaseLeadFormTextInput, {height: 45, marginBottom: 25, padding: 2}]}
-                        inputStyle={{color: '#5F6368' }}
-                        // onFocus={() => {
-                        //     setTagsColor('#5F6368');
-                        //     setTagsText('#0E0071');
-                        // }}
-                        // onBlur={() => {
-                        //     setTagsColor('#5F6368');
-                        //     setTagsText('#0E0071');
-                        // }}
-                        autoCorrect={false}
-                        tagStyle={{ backgroundColor: '#fff' }}
-                        tagTextStyle={{ color: '#5F6368' }}
-                        keysForTag={', '}
-                    /> */}
 
                     <Text style={ purchaseLeadStyles.purchaseLeadFormLabel }>Comments</Text>
                     <TextInput 

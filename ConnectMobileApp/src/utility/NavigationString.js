@@ -38,8 +38,7 @@ export default {
     Add_new_offer:'Add_new_offer',
     InterNetScreen: 'InterNetScreen',
     My_Offers:'My_Offers',
-    PostStack:'PostStack',
-    New_Post:'New_Post',
+    Purchase_Lead_Component: 'Purchase_Lead_Component',
   
 /*
 **

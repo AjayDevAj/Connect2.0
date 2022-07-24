@@ -19,9 +19,7 @@ import {
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key, materialMenuMessageData} from '../../utility/Constant';
-import {loadIsImportantData} from '../../actions/IsImportantAction';
 import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
-// import FileViewer from "react-native-file-viewer";
 import DocumentPicker from 'react-native-document-picker';
 import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
@@ -29,10 +27,9 @@ import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
 import PurchaseLeadSection from '../../PurchaseLead/PurchaseLeadSection';
 import PurchaseLeadComponent from '../../PurchaseLead/PurchaseLeadComponent';
-import CloseChatModal from './CloseChatModal';
 import { closedChat } from '../../api/closedChat';
 import navigationString from '../../utility/NavigationString';
-import { loadLeadData, sendLeadData } from '../../actions/CustomerAction';
+import { loadLeadData } from '../../actions/CustomerAction';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
@@ -116,6 +113,14 @@ const Message = ({navigation, route}) => {
   const isImportantResonceData = useSelector(
     store => store.isImportantResonceData,
   );
+
+  var GetLeadResponseData= useSelector(
+    store => store.GetLeadResponseData
+  );
+
+  const getLeadApi = (location_id=0, id=0, conversation_id='') => {
+    dispatch(loadLeadData(location_id, id, conversation_id));
+  }
 
   const isFocused = useIsFocused();
   const getDataFromParam = route.params;
@@ -289,7 +294,35 @@ const Message = ({navigation, route}) => {
   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
   const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
 
+  const [customerIntentVal, setCustomerIntentVal] = useState([]);
+  const [customerInterestVal, setCustomerInterestVal] = useState([]);
+ 
+
   const purchaseHandler = () => {
+    getLeadApi(0,0,getDataFromParam.selected_Item.conversation_id);
+
+    {GetLeadResponseData !== undefined && 
+      GetLeadResponseData.data !== undefined && 
+      GetLeadResponseData.data.intent_list !== undefined && 
+      (GetLeadResponseData.data.intent_list !== '' && 
+          GetLeadResponseData.data.intent_list.map((item) => {
+              ((item.selected == true) && (!customerIntentVal.includes(item.id))) && 
+              setCustomerIntentVal(current => [...current, item.id])
+          })
+      )
+    }
+
+  {GetLeadResponseData !== undefined && 
+      GetLeadResponseData.data !== undefined && 
+      GetLeadResponseData.data.customer_interest !== undefined && 
+      (
+          GetLeadResponseData.data.customer_interest !== '' && 
+              GetLeadResponseData.data.customer_interest.map((item) => {
+                  (!customerInterestVal.includes(item)) && 
+                  setCustomerInterestVal(current => [...current, item])
+              })
+      )
+  }
     setShowPurchaseForm(!showPurchaseForm);
   };
 
@@ -305,15 +338,23 @@ const Message = ({navigation, route}) => {
     <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF'}]}>
       {showPurchaseForm ? (
         <>
-          <PurchaseLeadComponent 
-            firstIcon="arrow-back"
-            color={reloadTopView ? '#FFAA00' : null}
-            name={getDataFromParam.selected_Item.display_name}
-            menuHandler={menuHandler}
-            logo={getDataFromParam.selected_Item.publisher_type}
-            conversation_id={getDataFromParam.selected_Item.conversation_id}
-            navigation={navigation}
-          />
+        
+         {GetLeadResponseData !== undefined && 
+           GetLeadResponseData.data !== undefined && 
+           GetLeadResponseData.data.customer_lead !== undefined && (
+            <PurchaseLeadComponent 
+              firstIcon="arrow-back"
+              color={reloadTopView ? '#FFAA00' : null}
+              name={getDataFromParam.selected_Item.display_name}
+              menuHandler={menuHandler}
+              logo={getDataFromParam.selected_Item.publisher_type}
+              conversation_id={getDataFromParam.selected_Item.conversation_id}
+              navigation={navigation}
+              customer_lead_data={GetLeadResponseData.data.customer_lead}
+               customerIntentVal={customerIntentVal}
+               customerInterestVal={customerInterestVal}
+            />
+          )}
         </>
       ) : (
         <>
@@ -342,9 +383,11 @@ const Message = ({navigation, route}) => {
                     closeChatHandler();
                     break;
                   case 2:
+                    setDotClicked(false);
                     mark_Unread_Api();
                     break;
                   case 3:
+                    setDotClicked(false);
                     break;
 
                   default:

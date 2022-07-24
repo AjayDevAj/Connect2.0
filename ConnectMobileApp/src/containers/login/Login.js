@@ -74,8 +74,6 @@ const Login = ({navigation}) => {
   const [conversation_id, setconversation_id] = useState('');
   const [is_important, setis_important] = useState('');
 
-
-
   useEffect(() => {
     //console.log("loginResponce : ", JSON.stringify(loginResponce.message));
 
@@ -108,7 +106,6 @@ const Login = ({navigation}) => {
       //calling API login
       setLoading(true);
       dispatch(loadLoginData(textInputPhoneNum));
-
     }
   };
 
@@ -149,7 +146,7 @@ const Login = ({navigation}) => {
         <View>
           <View style={styles.CircilePostion}></View>
         </View>
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        {/* <ScrollView contentContainerStyle={{ flex: 1 }}> */}
           <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
             <View style={styles.UpperView}>
               <Image
@@ -213,7 +210,7 @@ const Login = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+        {/* </ScrollView> */}
       </KeyboardAvoidingView>
     </View>
   );

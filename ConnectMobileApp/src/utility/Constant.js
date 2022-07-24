@@ -285,3 +285,4 @@ export const viewed_Onboarding = 'viewed_Onboarding';
 export const ConnectAppCommonBottomSheet = 'ConnectAppCommonBottomSheet';
 export const searchedListData = 'searchedListData';
 export const selectedbtnid = 'selectedbtnid';
+export const setIsLoggedIn = 'is_loggedIn';

@@ -5,8 +5,8 @@
 **
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: chatStylesheet.js
-** UsedFor: Chat StyleSheet at connect 2.0 app
+** FileName: AllchatStylesheet.js
+** UsedFor: AllChat StyleSheet at connect 2.0 app
 ** Author:
 **
 ** ========================================================
@@ -15,7 +15,7 @@
 **
 *
 ** ==========================================================
-**                   Chat Stylesheet
+**                   AllChat Stylesheet
 ** ==========================================================
 *
 **

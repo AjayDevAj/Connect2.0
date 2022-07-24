@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  AppState
 } from 'react-native';
 import Draggable from 'react-native-draggable';
 import Count_Badge from '../../component/Count_Badge';
@@ -14,7 +15,7 @@ import {Unassigned_Chat} from '../../actions/Unassigned_Chat_Action';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {store_Value} from '../../utility/StorageClass';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * This class is for imcoming chat icon.
@@ -29,6 +30,19 @@ const Incoming_Chat = () => {
     store => store.Unassigned_Chat_Data,
   );
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const setStoreValue = async () => {
+      const storeVal = await AsyncStorage.getItem(Store_Key);
+      console.log('===== Store Value =====', storeVal);
+      return store_Value = JSON.parse(value)
+    }
+    if (store_Value === null) {
+      setStoreValue();
+    }
+  }, [store_Value]);
+    
+
 
   useEffect(() => {
     // navigation.navigate(navigationString.Message, {selected_Item,allChat:false})

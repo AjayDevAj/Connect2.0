@@ -1,23 +1,25 @@
 import 'react-native-gesture-handler';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import { AppState } from 'react-native';
 import { Provider } from 'react-redux';
 import configureStore from './src/store/Store';
 import Routes from './src/navigation/Routes';
 import InternetConnectionAlert from "react-native-internet-connection-alert";
 import navigationString from './src/utility/NavigationString';
-import CustomerFilter from './src/containers/Customer_Filter/CustomerFilter';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import GetOtpScreen from './src/containers/Location/Storelocation';
+import MyPostHome from './src/containers/Post/MyPostHome';
 
 const store = configureStore();
 
-const App = ({navigation}) => {
+const App =  ({navigation}) => {
   const [isInternetAvailable, setIsInternetAvailable] = useState(false);
-
   return (
 
     <InternetConnectionAlert
       onChange={(connectionState) => {
-        console.log("Connection State ======>>> : ", connectionState);
+        // console.log("Connection State ======>>> : ", connectionState);
         setIsInternetAvailable(connectionState.isConnected);
 
       }}
