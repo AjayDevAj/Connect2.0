@@ -42,10 +42,10 @@ function CustomDrawer(props) {
             .then(result => console.log("JSON Result :::: ", result))
             .catch(error => console.log('Error Result :::: ', error));
 
-        deleteAll()
-        console.log("Logout User")
-        // navigation1.navigate(NavigationString.LOGIN);
+        // deleteAll()
         signOut();
+
+        navigation1.closeDrawer();
 
         if (response.status > 400) {
             throw new Error(data.errors)
@@ -150,7 +150,9 @@ function CustomDrawer(props) {
                     }}>
                     <Text style={styles.logoutText}>Logout</Text>
                 </Icon.Button>
-                <Icon name='close' size={20} color='rgba(95, 99, 104, 1)' style={styles.closeImg} />
+                <TouchableOpacity onPress={ {} }>
+                 <Icon name='close' size={20} color='rgba(95, 99, 104, 1)' style={styles.closeImg} />
+                </TouchableOpacity>
             </View>
         </View>
     );

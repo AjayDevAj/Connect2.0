@@ -32,17 +32,17 @@ const Incoming_Chat = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const setStoreValue = async () => {
+    const setStoreValue = async() => {
       const storeVal = await AsyncStorage.getItem(Store_Key);
-      console.log('===== Store Value =====', storeVal);
-      return store_Value = JSON.parse(value)
+      console.log('===== Store Value =====', JSON.parse(storeVal));
+      return store_Value = JSON.parse(storeVal)
     }
+
     if (store_Value === null) {
       setStoreValue();
     }
   }, [store_Value]);
     
-
 
   useEffect(() => {
     // navigation.navigate(navigationString.Message, {selected_Item,allChat:false})

@@ -29,15 +29,13 @@
  **
  */
 
-import React, {useEffect, useState, useRef, useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
   KeyboardAvoidingView,
-  Platform,
-  Dimensions,
+  Platform
 } from 'react-native';
 import GetOtpBg from '../../../assets/svg/Group_2433.svg';
 import EditPencilIcon from '../../component/EditPencilIcon';
@@ -48,17 +46,17 @@ import Bubble from '../../component/Bubble';
 import OTPTextInput from '../../component/Otp-Form';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadOtpData} from '../../actions/OtpScreenAction';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass';
-import {otpResponse_Storage_Key, appToken} from '../../utility/Constant';
+import {otpResponse_Storage_Key, appToken, viewed_Onboarding } from '../../utility/Constant';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AuthContext from '../../navigation/AuthContext';
 
-const GetOtpScreen = ({navigation}) => {
+const GetOtpScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const otpResponce = useSelector(store => store.OtpResponceData);
@@ -81,12 +79,26 @@ const GetOtpScreen = ({navigation}) => {
   }
 
   useEffect(() => {
+    const isAppInstalledFirstTime = async () => {
+      var val = await AsyncStorage.getItem(viewed_Onboarding);
+      console.log('=== GetOtpScreen appInstalledFirstTime =======', val)
+      return val;
+    }
+
     if (otpResponce.code == 200) {
       saveObject(otpResponce.data, otpResponse_Storage_Key);
       { otpResponce?.data?.token && setToken(otpResponce.data.token) }
-      navigation.navigate(NavigationString.Location, {
-        userName: otpResponce.data.user.name,
-      });
+      var appInstalledFirstTime = isAppInstalledFirstTime();
+
+      {appInstalledFirstTime == true 
+        ? (
+          navigation.navigate(NavigationString.Location, {
+            userName: otpResponce.data.user.name,
+          })
+        ) : (
+          navigation.navigate(NavigationString.RouteTabBar)
+        )
+      }
     } else if (
       otpResponce != '' &&
       otpResponce.data.code != null &&
@@ -117,7 +129,7 @@ const GetOtpScreen = ({navigation}) => {
   }, [otpResponce]);
 
   useEffect(() => {
-    if(otpResponce?.data?.code==401)
+    if(otpResponce?.data?.code === 401)
     {
       navigation.goBack();
     }
@@ -131,8 +143,8 @@ const GetOtpScreen = ({navigation}) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = () => {
-    dispatch(loadOtpData(mobileNumber, otp));
     loginHandler(mobileNumber, otp);
+    dispatch(loadOtpData(mobileNumber, otp));
   };
 
   const { signIn } = useContext(AuthContext);

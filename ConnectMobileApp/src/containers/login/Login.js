@@ -75,10 +75,9 @@ const Login = ({navigation}) => {
   const [is_important, setis_important] = useState('');
 
   useEffect(() => {
-    //console.log("loginResponce : ", JSON.stringify(loginResponce.message));
-
+    // console.log("loginResponce : ", JSON.stringify(loginResponce.message) != null);
+    setLoading(false)
     if (JSON.stringify(loginResponce.message) != null) {
-      setLoading(false)
       setError(
         {
           errorMsg: loginResponce.message,
@@ -87,12 +86,17 @@ const Login = ({navigation}) => {
       )
       
       // navigate to next screen.
-      if ((loginResponce.error == false)) {
+      if ((loginResponce.error === false)) {
         // setLoading(false);
         // alert(loginResponce);
         navigation.navigate(navigationString.GetOtpScreen, {
           mobile_Number: textInputPhoneNum,
         });
+
+        // navigation.navigate(navigationString.AUTH, { 
+        //   screen: navigationString.GetOtpScreen,
+        //   params: { mobile_Number: textInputPhoneNum, }
+        // });
       }
     }
   }, [loginResponce]);
