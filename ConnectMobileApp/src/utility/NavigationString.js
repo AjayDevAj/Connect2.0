@@ -39,6 +39,7 @@ export default {
     InterNetScreen: 'InterNetScreen',
     My_Offers:'My_Offers',
     Purchase_Lead_Component: 'Purchase_Lead_Component',
+    AUTH: 'Auth',
   
 /*
 **

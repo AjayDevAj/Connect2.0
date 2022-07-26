@@ -45,7 +45,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import skipButtonStyles from './styles/SkipButtonStyleSheet';
 import navigationString from '../utility/NavigationString'
-import {viewed_Onboarding} from '../utility/Constant'
+import { viewed_Onboarding } from '../utility/Constant'
 
 
 /*
@@ -65,14 +65,17 @@ const SkipButton = ({ navigation }) => {
     *
     ** 
     */
-    const goToLoginPage = () => {
-        AsyncStorage.setItem(viewed_Onboarding, 'true');
+    const goToLoginPage = async() => {
+        await AsyncStorage.setItem(viewed_Onboarding, 'true');
 
-        navigation.navigate(navigationString.LOGIN)
+        // navigation.navigate(navigationString.LOGIN)
+        navigation.navigate(navigationString.AUTH, { 
+            screen: navigationString.LOGIN
+        });
     }
     return (
-        <TouchableOpacity onPress={goToLoginPage} >
-            <Text style={ skipButtonStyles.text }>Skip </Text>
+        <TouchableOpacity onPress={() => goToLoginPage()} >
+            <Text style={ skipButtonStyles.text }> Skip </Text>
             <Icon name="chevron-right" size={22} style={ skipButtonStyles.icon } />
         </TouchableOpacity>
     );

@@ -55,10 +55,11 @@ export default StyleSheet.create({
     },
     closeImg: {
         position: 'absolute',
-        right: 30,
-        marginTop: 12,
-        opacity: 0.5
-
+        left: 130,
+        marginTop: 8,
+        opacity: 0.5,
+        flexDirection: 'row',
+        alignItems: 'flex-end'
 
     },
 });
