@@ -96,7 +96,7 @@ const GetOtpScreen = ({ navigation }) => {
             userName: otpResponce.data.user.name,
           })
         ) : (
-          navigation.navigate(NavigationString.RouteTabBar)
+          navigation.navigate(NavigationString.Dashboard)
         )
       }
     } else if (

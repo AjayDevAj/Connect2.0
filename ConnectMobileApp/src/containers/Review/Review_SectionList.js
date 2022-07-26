@@ -140,7 +140,7 @@ const ItemReview = ({item}) => {
   
   const [isExpend, SetExpend] = useState(item.review_reply);
   const [isReplied, setReplied] = useState(true);
-{console.log('item ItemReview',item)}
+// {console.log('item ItemReview',item)}
   return (
     <View
       style={{

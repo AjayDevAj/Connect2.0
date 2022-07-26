@@ -49,61 +49,17 @@ import Login from '../containers/login/Login';
 import GetOtpScreen from '../containers/Otp/GetOtpScreen';
 import Storelocation from '../containers/Location/Storelocation';
 
-import CustomDrawer from '../component/CustomDrawer';
-import RouteTabBar from "./RouteTabBar";
 import Message from '../containers/Message/Message';
 import CustomerFilter from '../containers/Customer_Filter/CustomerFilter';
 import Chat_Filter from '../containers/FilterChat/Chat_Filter'
-import My_Offers_Home from '../containers/Offers/My_Offers_Home';
-import MyPostHome from '../containers/Post/MyPostHome'
-import Add_new_offer from '../containers/Offers/Add_new_offers'
-import My_Offers from '../containers/Offers/My_Offers';
+
 import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const AuthStack = createNativeStackNavigator();
+import DrawerStack from './DrawerStack';
+
 const Stack = createNativeStackNavigator();
-
-const Drawer = createDrawerNavigator();
-
-const AuthenticationStack = () => {
-  return (
-    <AuthStack.Navigator>
-      <AuthStack.Group screenOptions={{headerShown: false}}>
-        <AuthStack.Screen component={Login} name={navigationString.LOGIN} />
-        <AuthStack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
-      </AuthStack.Group>
-    </AuthStack.Navigator>
-  )
-}
-
-const CommonStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Group screenOptions={{headerShown: false}}>
-        <Stack.Screen component={Storelocation} name={navigationString.Location} />
-        <Stack.Screen component={Message} name={navigationString.Message} />
-        <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
-        <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
-        <Stack.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
-      </Stack.Group> 
-    </Stack.Navigator>
-  )
-}
-
-const DashboardDrawer = () => {
-  return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}
-      screenOptions={{ headerShown: false }}>
-      <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
-      <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
-      <Drawer.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-      <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
-    </Drawer.Navigator>
-  );
-}
 
 /**
  * Routes matain the navigation stacks
@@ -180,20 +136,21 @@ const Routes = () => {
 //  Login, otp, onboarding
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer >
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {loginState.userToken != null ? (
             <>
-              <Stack.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
-              {/* <Stack.Screen component={AuthenticationStack} name={navigationString.AUTH} /> */}
+              <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} 
+              // initialParams={{signOut}}
+              />
             </>
           ) : (
             <>
               {loginState.isAppInstalledFirstTime == true  && (
                 <Stack.Screen component={OnBoarding} name={navigationString.OnBoarding}  />
               )}
-              <Stack.Screen component={AuthenticationStack} name={navigationString.AUTH}  />
-              {/* <Stack.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
+              <Stack.Screen component={Login} name={navigationString.LOGIN} />
+              <Stack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
             </>
           )}
           <Stack.Screen component={Storelocation} name={navigationString.Location} />
@@ -201,9 +158,9 @@ const Routes = () => {
           <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
           <Stack.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
-          <Stack.Screen component={DashboardDrawer} name='DrawerNav' />     
+          {/* <Stack.Screen component={DrawerStack} name={navigationString.MyPostHome} />  */}
         </Stack.Navigator>
-        
+
         {/* <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}
           screenOptions={{ headerShown: false }}>
           {loginState.userToken != null ? (
@@ -232,7 +189,8 @@ export default Routes;
 export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
-    routes: [{ name: navigationString.RouteTabBar }],
+    // routes: [{ name: navigationString.RouteTabBar }],
+    routes: [{ name: navigationString.Dashboard }],
   });
 };
 
