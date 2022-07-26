@@ -42,8 +42,8 @@ const My_Offers_Home = ({navigation}) => {
   },[isFocused]);
 
   const Offer_List_Data = useSelector(store => store.OfferListResponceData);
-  //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',Offer_List_Data.data.offers[0].offer_image)
-  //const datalist = Offer_List_Data
+  
+  
 
   useEffect(()=>{
     if (Offer_List_Data != undefined && Offer_List_Data.data != undefined  && Offer_List_Data.data.offers != undefined) {
@@ -53,12 +53,6 @@ const My_Offers_Home = ({navigation}) => {
   },[Offer_List_Data])
 
   
-
-  //const datalist = Offer_List_Data.data;
-
-   //console.log('ofrer list in React hook', offerlistdata.offers[0].offer_image);
-
-
    const menuHandler = () => {
      navigation.openDrawer();
   };
