@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {viewed_Onboarding} from '../utility/Constant'
 
-export var store_Value = null
+export var store_Value = null;
 
 /**
  * * This function is for storing data in local storage(AsyncStorage)

@@ -30,19 +30,20 @@ const Incoming_Chat = () => {
     store => store.Unassigned_Chat_Data,
   );
   const [count, setCount] = useState(0);
+  const [agentId, setAgentId] = useState(store_Value?.id);
 
   useEffect(() => {
     const setStoreValue = async() => {
       const storeVal = await AsyncStorage.getItem(Store_Key);
       console.log('===== Store Value =====', JSON.parse(storeVal));
-      return store_Value = JSON.parse(storeVal)
+      var store_Val = JSON.parse(storeVal);
+      setAgentId(store_Val.id);
     }
 
-    if (store_Value === null) {
+    if (agentId === null) {
       setStoreValue();
     }
   }, [store_Value]);
-    
 
   useEffect(() => {
     // navigation.navigate(navigationString.Message, {selected_Item,allChat:false})
@@ -74,10 +75,10 @@ const Incoming_Chat = () => {
 
       console.log('uWebsocket Connected to the server Message');
       ws.send(
-        JSON.stringify({action: 'subscribe_incoming_chat', agent_id: store_Value.id}),
+        JSON.stringify({action: 'subscribe_incoming_chat', agent_id: agentId}),
       );
       ws.send(
-        JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: store_Value.id}),
+        JSON.stringify({action: 'subscribe_incoming_chat_count', agent_id: agentId}),
       );
     };
     ws.onclose = e => {

@@ -95,7 +95,7 @@ const New_Post = ({navigation}) => {
       // ** Master Data
       setData(SlresponseData.locations);
       const locationid = SlresponseData.locations.map(id => id.id);
-      console.log('Location_id -->', locationid);
+      // console.log('Location_id -->', locationid);
       // location id
       //setLocation_id(locationid)
 
@@ -113,7 +113,7 @@ const New_Post = ({navigation}) => {
   const [filePath, setFilePath] = useState({});
   const [picture_url,setPicture_url] = useState('')
 
-  console.log('-----------.......>>>>>picture url',picture_url)
+  // console.log('-----------.......>>>>>picture url',picture_url)
 
   const chooseFile = type => {
     let options = {
@@ -155,6 +155,15 @@ const New_Post = ({navigation}) => {
 
   const menuHandler =()=>{
     navigation.goBack()
+  }
+
+  const sendPost = async() => {
+    await getpost(location_id,
+      message,
+      picture_url,
+      link,
+      call_to_action
+    )
   }
 
   return (
@@ -434,11 +443,7 @@ const New_Post = ({navigation}) => {
            *
            */}
           <TouchableOpacity
-             onPress={() => await getpost(location_id,
-              message,
-              picture_url,
-              link,
-              call_to_action)}
+            onPress={() => sendPost()}
             style={{
               backgroundColor: '#0070FC',
               width: 350,

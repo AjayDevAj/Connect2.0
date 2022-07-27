@@ -52,9 +52,7 @@ export default function* rootSaga() {
     
     StoreLocationDataWatcherSaga(),
     Unassigned_Chat_Data_Saga(),
-    isImportantDataWatcherSaga(),
     AllChat_ConversationDataWatcherSaga(),
-    AcceptRejectChatDataWatcherSaga(),
     
     FilterDataWatcherSaga(),
     OverAllWatcherSaga(),
