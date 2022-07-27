@@ -44,9 +44,8 @@ import styles from './GetOtpScreenStylesheet';
 import Bubble from '../../component/Bubble';
 
 import OTPTextInput from '../../component/Otp-Form';
-import {useSelector, useDispatch} from 'react-redux';
 import {verifyOTP} from '../../api/VerifyOTP';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import fontFamily from '../../utility/Font-Declarations';
 import {saveObject} from '../../utility/StorageClass';
@@ -57,10 +56,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from '../../navigation/AuthContext';
 
 const GetOtpScreen = ({ navigation }) => {
-  // const dispatch = useDispatch();
-
-  // const otpResponce = useSelector(store => store.OtpResponceData);
-  // const resendOtpResponce = useSelector(store => store.OtpResponceData);
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
   const [otp, setOtpNum] = useState('');
@@ -119,7 +114,7 @@ const GetOtpScreen = ({ navigation }) => {
         setIsLoginToFalse();
       setisErrorState(true);
 
-      console.log('Error State-------------->', isErrorstate);
+      // console.log('Error State-------------->', isErrorstate);
 
       setOtptextColor({
         textcolor: 'rgba(164, 34, 22, 1)',
@@ -128,7 +123,6 @@ const GetOtpScreen = ({ navigation }) => {
         backgroundColor: 'rgba(255, 255, 255, 1)',
       });
     } else {
-      
       setisErrorState(false);
       setOtptextColor({
         textcolor: '#5F6368',
@@ -147,7 +141,6 @@ const GetOtpScreen = ({ navigation }) => {
   }
 
   return (
-    
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}

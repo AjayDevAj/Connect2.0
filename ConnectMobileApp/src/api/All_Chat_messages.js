@@ -45,7 +45,7 @@ const getAll_Conversation = async (
     },
   );
   const data = response.json();
-  console.log('Gat All message list ', data);
+  console.log('Get All message list ', data);
 
   switch (response.status) {
     case response.status > 400:

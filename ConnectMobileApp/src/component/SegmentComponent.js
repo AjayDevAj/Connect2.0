@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderRadius:9,
     // top:3,
     height:16,
-    width:21,
+    width:22,
     justifyContent:'center'
   },
   activeTabBadgeContainerStyle: {
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderRadius:9,
     // top:3,
     height:16,
-    width:21,
+    width:22,
     justifyContent:'center'
 
   },

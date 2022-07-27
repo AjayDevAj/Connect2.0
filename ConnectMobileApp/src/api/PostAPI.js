@@ -13,8 +13,6 @@ const getpost = async (location_id,
    
 
     const bodyRawData = {
-        
-      
         "location_id": location_id,
         "message": message,
         "picture_url": picture_url,

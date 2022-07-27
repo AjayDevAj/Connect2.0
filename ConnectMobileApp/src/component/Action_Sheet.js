@@ -1,10 +1,9 @@
 import React, {useRef} from 'react';
-import {View, FlatList, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, FlatList, Text, StyleSheet} from 'react-native';
 import ActionSheet, {SheetManager} from 'react-native-actions-sheet';
 import fontFamily from '../utility/Font-Declarations';
 import {Incoming_Chat_Card} from '../component/Incoming_Chat_Card';
-import {useSelector, useDispatch} from 'react-redux';
-import {loadAccept_RejectChat_Data} from '../actions/AcceptRejectChatAction';
+import {useDispatch} from 'react-redux';
 import {getAcceptRejectChatData} from '../api/AcceptRejectChatApi';
 import * as RootNavigation from '../navigation/RootNavigation';
 import navigationString from '../utility/NavigationString';
@@ -63,7 +62,6 @@ const Action_Sheet = ({navigation}) => {
   );
 
   const acpect_Reject_API_Call = async (conversation_id,item) => {
-    // dispatch(loadAccept_RejectChat_Data());
     const data = await getAcceptRejectChatData(conversation_id);
         // console.log("acpect_Reject_API_Call",JSON.stringify(item))
       SheetManager.hideAll()

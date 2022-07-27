@@ -26,8 +26,7 @@
  import TopHeader from '../Header/TopHeader';
  import chatStyles from './styles/AllChatChatStylesheet';
  import {SegmentComponent} from '../component/SegmentComponent';
- import {useSelector, useDispatch} from 'react-redux';
- import {loadChatData} from '../actions/ChatAction';
+ import {getChatList} from '../api/ChatApi';
  import ChatList from '../Chat/ChatList';
  import {useIsFocused} from '@react-navigation/native';
  import navigationString from '../utility/NavigationString';
@@ -53,8 +52,8 @@
      setShowAllUser(true);
    };
  
-   const dispatch = useDispatch();
-   const chatResponseData = useSelector(store => store.ChatResponseData);
+   const [chatResponseData, setChatResponseData] = useState({});
+
    const isFocused = useIsFocused();
    const [currentTabStatus, setCurrentTabStatus] = useState(
      route.params.openTab,
@@ -83,8 +82,10 @@
     * Search Api call
     * @param {*} type
     */
-   const callAPI = (type = 'open', searchText = '', pageNo=1) => {
-     dispatch(loadChatData(0, null, 0, 'DESC', type, pageNo, 1,headerName.id == null ? "":headerName.id, searchText !== null ? searchText:null))
+   const callAPI = async (type = 'open', searchText = '', pageNo=1) => {
+    var chatResponse =  await getChatList(0, null, 0, 'DESC', type, pageNo, 1,headerName.id == null ? "":headerName.id, searchText !== null ? searchText:null);
+    setChatResponseData(chatResponse);
+    return chatResponse;
    };
  
  
@@ -104,8 +105,8 @@
        (setTotalChatPageCount(chatResponseData.data.totalPage))}
      setPageNo(updatedPageNo);
      ((updatedPageNo > 0) && (updatedPageNo <= totalChatPageCount)) 
-     ? callAPI(currentTabStatus, '', updatedPageNo) 
-     : callAPI(currentTabStatus)
+     ? callAPI(currentTabStatus, searchText, updatedPageNo) 
+     : callAPI(currentTabStatus, searchText)
    }
  
    return (

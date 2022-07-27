@@ -4,8 +4,8 @@
 ** ================================================================
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: ChatApi.js
-** UsedFor: Chat API Calls at connect 2.0 app
+** FileName: CustomerApi.js
+** UsedFor: Customer API Calls at connect 2.0 app
 ** Author:
 ** ================================================================
 *
@@ -13,7 +13,7 @@
 **
 *
 ** ====================================================================
-**                  Chat API Calls
+**                  Customer API Calls
 ** ====================================================================
 *
 **
@@ -32,26 +32,33 @@
 import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
-import NavigationString from '../utility/NavigationString'
-import {signOut} from '../navigation/Routes'
-
-
-
-/*
-**
-*
-** getChatList func is used for getting message list.
-*
-**
-*
-** @param {*} Required!
-*
-** 
-*/
-
-const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id = null, search_text = '') => {
+  
+  /*
+  **
+  *
+  ** sendLead func is used to send customer form data.
+  *
+  **
+  *
+  ** @param {*} Required!
+  *
+  ** 
+  */
+  
+  const sendLead = async (
+    name = '',
+    mobile_number='',
+    email='',
+    conversation_id='',
+    interests='',
+    comments='',
+    intents='',
+    entry_points='',
+    location_id=0,
+    id=0
+    ) => {
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-
+    
     /*
     **
     *
@@ -59,34 +66,36 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-
-    // const bodyData = new FormData(); 
-    const bodyRawData = {
-        "chat_status": chat_status,
-        "is_important": is_important,
-        "location_id": location_id,
-        "order_by": order_by,
-        "other_chat": other_chat,
-        "pagination": pagination,
-        "unread": unread,
-        "user_id": user_id == null ? token_Value.user.id : user_id,
-    };
     
-    var api_url = API_URL_STAGING + '/message/message-list';
-    search_text !== null ? api_url = api_url + '?search=' + search_text : api_url = api_url
-
+    var api_url = API_URL_STAGING + '/crm/save-user-lead';
+   
+    console.log('API url', api_url);
     var headers = {
         Authorization:
-            `Bearer ${token_Value.token}`,
+        `Bearer ${token_Value.token}`,
         'Content-Type': 'application/json',
     }
-    
+  
+    const bodyRawData = {
+      "name": name,
+      "mobile_number": mobile_number,
+      "email": email,
+      "conversation_id": conversation_id,
+      "interests": interests,
+      "comments": comments,
+      "intents": intents,
+      "entry_points": entry_points,
+      "location_id": location_id,
+      "id": id
+    };
+
+     console.log('===== Body Raw Data =====', bodyRawData)
     const response = await fetch(api_url, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(bodyRawData),
     });
-
+  
     /*
     **
     *
@@ -94,10 +103,8 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-
+  
     const data = response.json();
-    console.log('Chat Message List Response : Api Call response',data);
-
     /*
     **
     *
@@ -105,22 +112,22 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
     *
     ** 
     */
-    
+  
     switch (response.status) {
-        case response.status > 400:
-            throw new Error(data.errors);
+        case response.status > 400 :
+            throw new Error(data.errors)
+  
             break
-        case 204:
+        case 204 :
             throw new Error("NO Data")
             break
-        case 401:
-            signOut()
-        default: break
+  
+        default:break
     }
-
+  
     return data;
-}
-
+  }
+  
 /*
 **
 *
@@ -131,7 +138,5 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
 *
 ** 
 */
-
-export { getChatList }
-
-
+  
+export { sendLead }

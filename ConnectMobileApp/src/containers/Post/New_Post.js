@@ -24,7 +24,7 @@ import PencilIcon from '../../../assets/svg/penciliconwithCircle.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {Post_type, Offer_CTA, location_Data_Key} from '../../utility/Constant';
 import PostStyleSheet from './PostStyleSheet';
-import {loadpostdata} from '../../actions/PostAction';
+import {getpost} from '../../api/PostAPI';
 import {getOtpResponse} from '../../utility/StorageClass';
 import NavigationString from '../../utility/NavigationString';
 
@@ -434,11 +434,11 @@ const New_Post = ({navigation}) => {
            *
            */}
           <TouchableOpacity
-             onPress={() => dispatch(loadpostdata(location_id,
+             onPress={() => await getpost(location_id,
               message,
               picture_url,
               link,
-              call_to_action))}
+              call_to_action)}
             style={{
               backgroundColor: '#0070FC',
               width: 350,

@@ -26,7 +26,7 @@
  import TopHeader from '../Header/TopHeader';
  import customerStyles from './styles/customerStylesheet';
  import {useSelector, useDispatch} from 'react-redux';
- import {loadCustomerData, loadLeadData, sendLeadData } from '../actions/CustomerAction';
+ import {loadCustomerData, loadLeadData } from '../actions/CustomerAction';
  import CustomerList from '../Customer/CustomerList';
  import navigationString from '../utility/NavigationString';
  import {useIsFocused} from '@react-navigation/native';

@@ -1,10 +1,11 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState } from 'react';
 import {View, ImageBackground } from 'react-native';
 import TopHeader from '../Header/TopHeader';
 import chatStyles from '../AllChat/styles/AllChatChatStylesheet';
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
-import { loadLeadData, sendLeadData } from '../actions/CustomerAction';
+import { loadLeadData } from '../actions/CustomerAction';
+import { sendLead } from '../api/sendLead';
 import PurchaseLeadForm from './PurchaseLeadForm';
 
 const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, logo, 
@@ -21,10 +22,6 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
         const getLeadApi = (location_id=0, id=0, conversation_id='') => {
             dispatch(loadLeadData(location_id, id, conversation_id));
         }
-
-        const saveAPI = (name='', mobile_number='', email='', conversation_id='', interests='', comments='', intents='', entry_points='', location_id=0, id=0) => {
-            dispatch(sendLeadData(name, mobile_number, email, conversation_id, interests, comments, intents, entry_points, location_id, id))
-        };
 
         useEffect(() => {
             if (conversation_id) {
@@ -57,7 +54,7 @@ const PurchaseLeadComponent = ({navigation, route, firstIcon, color='', name, lo
 
         const formHandler = (customerFormValue) => {
             console.log('===== Set Lead Value API =====', customerFormValue);
-            saveAPI(
+            sendLead(
                 customerFormValue.display_name, customerFormValue.mobile_number, 
                 customerFormValue.email, customerFormValue.conversation_id, 
                 customerFormValue.interests, customerFormValue.comments, 

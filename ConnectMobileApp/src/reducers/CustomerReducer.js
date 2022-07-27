@@ -58,15 +58,3 @@ export const GetLeadReducer = (state = '', action) => {
 
     return state;
 }
-
-export const SendLeadReducer = (state = '', action) => {
-    if(action.type == CONSTANT.SEND_LEAD_DATA_SUCCESS) {
-        return action.payload;
-    }
-
-    if (action.type == CONSTANT.SEND_LEAD_DATA_ERROR) {
-        return action.payload;
-    }
-
-    return state;
-}

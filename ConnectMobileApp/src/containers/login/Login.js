@@ -31,33 +31,26 @@
 ** 
 */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Alert,
   Text,
-  StyleSheet,
   TextInput,
   Image,
   TouchableOpacity,
   SafeAreaView,
   KeyboardAvoidingView,
   ScrollView,
-  Platform, Button
+  Platform
 } from 'react-native';
 import { image } from '../../../assets/images/Image';
 import { getLogin } from '../../api/MobileNumberAuthentication';
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
 import Loader from '../../utility/Loader';
-import { loadIsImportantData } from '../../actions/IsImportantAction';
 
 const Login = ({navigation}) => {
- 
-  const dispatch = useDispatch();
-  // const loginResponce = useSelector(store => store.loginDataResponse);
-
   const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
   const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
   const [inputVal, setInputVal] = useState('');
@@ -70,9 +63,6 @@ const Login = ({navigation}) => {
     errorMsg: ''
   });
   const [onFocus, setFocus] = useState(false);
-
-  const [conversation_id, setconversation_id] = useState('');
-  const [is_important, setis_important] = useState('');
 
   //Check for the Phone Number TextInput
   checkTextInput = async () => {
@@ -105,12 +95,6 @@ const Login = ({navigation}) => {
       }
     }
   };
-
-  // const isImportant=()=> {
-  //  // Alert.alert("Hii")
-  //  dispatch(loadIsImportantData(conversation_id, is_important))
-
-  // }
 
   const onChangeTextChar = enterString => {
     setError(
@@ -153,11 +137,6 @@ const Login = ({navigation}) => {
               />
             </View>
             <View style={styles.BottomView}>
-              {/* <Button
-                title="Press me"
-                onPress={() => isImportant()}
-              /> */}
-
               <Text style={styles.EnterText}>Enter Your</Text>
               <Text style={styles.MobileText}>Mobile Number</Text>
               <Text style={styles.NormalText}>

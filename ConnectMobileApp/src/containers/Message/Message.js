@@ -19,7 +19,7 @@ import {
 import {loadAllChat_Conversation_Data} from '../../actions/AllChat_Conversation_Action';
 import {getOtpResponse} from '../../utility/StorageClass';
 import {otpResponse_Storage_Key, materialMenuMessageData} from '../../utility/Constant';
-import {send_Chat_Message_Data} from '../../actions/Send_Message_Action';
+import {SendMessageApi} from '../../api/SendMessageApi';
 import DocumentPicker from 'react-native-document-picker';
 import {OpenGalary, OpenCam} from './OpenMedia';
 import MaterialMenu from '../../MaterialMenu/MaterialMenu';
@@ -243,36 +243,28 @@ const Message = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
-    {
-      console.log('send_Chat_Message_Data ',unSendMessage);
-    }
     if (unSendMessage._id != null) {
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, [unSendMessage]),
       );
      
       if (unSendMessage.message != null) {
-        dispatch(
-          send_Chat_Message_Data(
-            'google',
-            getDataFromParam.selected_Item.conversation_id,
-            getDataFromParam.selected_Item.sub_conversation_id,
-            unSendMessage.message,
-            null,
-            null,
-          ),
+        SendMessageApi(
+          'google',
+          getDataFromParam.selected_Item.conversation_id,
+          getDataFromParam.selected_Item.sub_conversation_id,
+          unSendMessage.message,
+          null,
+          null,
         );
-      }
-      else{
-        dispatch(
-          send_Chat_Message_Data(
-            'google',
-            getDataFromParam.selected_Item.conversation_id,
-            getDataFromParam.selected_Item.sub_conversation_id,
-            null,
-            'image',
-            unSendMessage.image,
-          ),
+      } else {
+        SendMessageApi(
+          'google',
+          getDataFromParam.selected_Item.conversation_id,
+          getDataFromParam.selected_Item.sub_conversation_id,
+          null,
+          'image',
+          unSendMessage.image,
         );
       }
     }

@@ -139,11 +139,9 @@ const Routes = () => {
       <NavigationContainer >
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {loginState.userToken != null ? (
-            <>
-              <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} 
-              // initialParams={{signOut}}
-              />
-            </>
+            <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} 
+            // initialParams={{signOut}} 
+            />
           ) : (
             <>
               {loginState.isAppInstalledFirstTime == true  && (
