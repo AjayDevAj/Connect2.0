@@ -167,13 +167,13 @@ export default Routes;
 export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
+    key: null,
     // routes: [{ name: navigationString.RouteTabBar }],
     routes: [{ name: navigationString.Dashboard }],
   });
 };
 
 export const signOut = () => {
-  // alert('ok')
   RootNavigation.navigate(navigationString.LOGIN);
   RootNavigation.reset({
     index: 0,

@@ -35,16 +35,19 @@ export default StyleSheet.create({
     },
     logoutStyle: {
         flexDirection: 'row',
-        position: 'absolute', bottom: 20, backgroundColor: 'white',
-        height: '5%', width: '100%', elevation: 10,
-        shadowRadius: 5,
-        shadowOpacity: 0.8,
+        position: 'absolute', 
+        bottom: 5, 
+        backgroundColor: 'white',
+        height: '5%', 
+        width: '100%', 
+        elevation: 20,
+        shadowRadius: 6,
+        shadowOpacity: 1,
         shadowOffset: {
-            width: 0,
-            height: -5,
+            width: 1,
+            height: 1,
         },
-        elevation: 10,
-        shadowColor: 'rgba(47, 110, 243, 0.16)',
+        shadowColor: '#00000012',
 
     },
     logoutText: {
@@ -55,12 +58,11 @@ export default StyleSheet.create({
     },
     closeImg: {
         position: 'absolute',
-        left: 130,
+        right: 20,
         marginTop: 8,
         opacity: 0.5,
         flexDirection: 'row',
         alignItems: 'flex-end'
-
     },
 });
 

@@ -143,16 +143,19 @@ function CustomDrawer(props) {
             </DrawerContentScrollView>
 
             <View style={styles.logoutStyle}>
-                <Icon.Button name='logout' size={25} color={'rgba(95, 99, 104, 1)'} backgroundColor={'rgba(255, 255, 255, 1)'} marginLeft={15}
+                <Icon.Button name='logout' size={22} color={'rgba(95, 99, 104, 1)'} backgroundColor={'rgba(255, 255, 255, 1)'} marginLeft={15}
                     onPress={() => {
                         logout();
                         logOut();
                     }}>
                     <Text style={styles.logoutText}>Logout</Text>
                 </Icon.Button>
-                <TouchableOpacity onPress={ {} }>
-                 <Icon name='close' size={20} color='rgba(95, 99, 104, 1)' style={styles.closeImg} />
-                </TouchableOpacity>
+                
+                <Icon name='close' size={20} color='rgba(95, 99, 104, 1)' style={styles.closeImg} 
+                onPress={() => {
+                    navigation1.goBack()
+                }} />
+                
             </View>
         </View>
     );

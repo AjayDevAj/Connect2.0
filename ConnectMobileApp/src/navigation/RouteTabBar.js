@@ -72,11 +72,6 @@ import Review from '../containers/Review/Review'
 import ChatStack from '../navigation/ChatStack';
 import fontFamily from '../utility/Font-Declarations';
 
-import DrawerStack from './DrawerStack';
-
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-
-
 function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -172,7 +167,6 @@ export default function RouteTabBar() {
       }} />
     </Tab.Navigator>
     <Incoming_Chat />
-      
-      </>
+    </>
   );
 }

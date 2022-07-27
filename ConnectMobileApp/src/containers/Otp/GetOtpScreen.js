@@ -83,7 +83,6 @@ const GetOtpScreen = ({ navigation }) => {
   const VerifyOTPApi = async () => {
     
     var verifyOtpResponse = await verifyOTP(mobileNumber, otp);
-    console.log('===== verifyOtpResponse =====', verifyOtpResponse);
 
     const appAlreadyInstalled = async () => {
       var val = await AsyncStorage.getItem(viewed_Onboarding);
