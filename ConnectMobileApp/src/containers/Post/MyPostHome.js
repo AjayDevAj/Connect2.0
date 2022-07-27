@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Avatar, Button, Card, Title, Paragraph, List} from 'react-native-paper';
@@ -26,7 +27,7 @@ const MyPostHome = ({navigation}) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [listdata, setlistdata] = useState('');
-
+  const [isSearch, setIsSearch] = useState(false);
   const Post_List_Data = useSelector(store => store.PostListResponceData);
   //    //console.log('POST LITS SELECTOR DATA ----------->',Post_List_Data.data[1].picture_url)
 
@@ -67,14 +68,19 @@ const MyPostHome = ({navigation}) => {
   const menuHandler = () => {
     navigation.openDrawer();
   };
+  const searchHandler = () => {
+    setIsSearch(!isSearch);
+  };
+  
   return (
     <View style={{flex: 1, backgroundColor: '#F7FCFF'}}>
       <TopHeader
         name={'My Posts'}
         firstIcon={'menu'}
-        secondIcon={'search'}
-        thirdIcon={'filter-list'}
+        //secondIcon={'search'}
+        // thirdIcon={'filter-list'}
         menuHandler={menuHandler}
+        searchHandler={searchHandler}
       />
 
       <View
@@ -300,6 +306,7 @@ const MyPostHome = ({navigation}) => {
         iconTextColor="#FFFFFF"
         onClickAction={() => {
           navigation.navigate(NavigationString.New_Post)
+          
         }}
         visible={true}
         iconTextComponent={<Icon name="post-add" />}

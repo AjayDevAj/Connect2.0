@@ -37,6 +37,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 import {store_Value} from '../utility/StorageClass';
 
+
 import { DrawerActions } from '@react-navigation/native';
 
 // import uWebSockets from '../component/uWebSockets'
@@ -55,8 +56,8 @@ const Chat = ({ navigation, Route }) => {
   const menuHandler = () => {
     // console.log('Menu Handler');
     //  alert('Menu Handler');
-    navigation.openDrawer();
-    // navigation.dispatch(DrawerActions.openDrawer());
+   // navigation.openDrawer();
+     navigation.dispatch(DrawerActions.openDrawer());
   };
 
   const searchHandler = () => {

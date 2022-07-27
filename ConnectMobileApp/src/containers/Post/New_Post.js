@@ -27,6 +27,11 @@ import PostStyleSheet from './PostStyleSheet';
 import {loadpostdata} from '../../actions/PostAction';
 import {getOtpResponse} from '../../utility/StorageClass';
 import NavigationString from '../../utility/NavigationString';
+import {uploadImage} from '../../api/UploadImage';
+
+import {otpResponse_Storage_Key} from '../../utility/Constant';
+import {API_URL_STAGING} from '../../utility/Config_File';
+import { result } from 'lodash';
 
 const New_Post = ({navigation}) => {
   const [message, onChangeText] = useState(
@@ -36,9 +41,7 @@ const New_Post = ({navigation}) => {
     'Lorem Impsun Lorem Impsun Lorelorem Impsun Lorem Impsun Lore…',
   );
   const [Couponcode, setCouponcode] = useState('Code......');
-  const [link, setOfferlink] = useState(
-    'https://singleinterface.com',
-  );
+  const [link, setOfferlink] = useState('https://singleinterface.com');
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -49,8 +52,11 @@ const New_Post = ({navigation}) => {
   const [location_id, setLocation_id] = useState(1);
   const [arrayholder, setarrayholder] = useState('');
 
+  const [file, setFilePath] = useState({});
+  const [picture_url, setPicture_url] = useState();
+
   //const [checkboxdata, setcheckboxdata] = useState('');
-  const [call_to_action,setcall_to_action]= useState('LEARN_MORE')
+  const [call_to_action, setcall_to_action] = useState('LEARN_MORE');
 
   /// swipable panel
 
@@ -79,8 +85,6 @@ const New_Post = ({navigation}) => {
   }, []);
 
   const getdetas = async () => {
-
-    
     const SlresponseData = await getOtpResponse(location_Data_Key);
     console.log(
       'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
@@ -109,12 +113,46 @@ const New_Post = ({navigation}) => {
     }
   };
 
+// upload image api
+  const uploadImage_forPost = async response => {
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key);
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'multipart/form-data');
+    myHeaders.append('Authorization', `Bearer ${token_Value.token}`);
+
+    var formdata = new FormData();
+    formdata.append('file', {
+      uri: response.assets[0].uri,
+      type: response.assets[0].type,
+      name: response.assets[0].fileName,
+    });
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+   
+    fetch('https://test-chat.starify.co/google/upload-image', requestOptions)
+      .then(response => response.json())
+      .then(result => 
+      //setFilePath(result.data.file)
+      setPicture_url(result.data.file)
+      )
+      .catch(error => console.log('error', error));
+  };
+  console.log('-----------.......>>>>>picture url', file);
+
+
+
+
+
+
+
   //** */ Image picker for post
-  const [filePath, setFilePath] = useState({});
-  const [picture_url,setPicture_url] = useState('')
 
-  console.log('-----------.......>>>>>picture url',picture_url)
-
+  
   const chooseFile = type => {
     let options = {
       mediaType: type,
@@ -146,16 +184,34 @@ const New_Post = ({navigation}) => {
       // console.log('fileSize -> ', response.fileSize);
       // console.log('type -> ', response.type);
       // console.log('fileName -> ', response.fileName);
-      setFilePath(response);
-      setPicture_url(response.assets[0].uri)
+      
+      //setPicture_url(response.assets[0].uri);
+      uploadImage_forPost(response);
     });
   };
 
   const dispatch = useDispatch();
 
-  const menuHandler =()=>{
-    navigation.goBack()
-  }
+  const menuHandler = () => {
+    navigation.goBack();
+  };
+
+  const PublishPosthandler = () => {
+    navigation.navigate(NavigationString.My_Post);
+    closePanel();
+    dispatch(
+      loadpostdata(
+        location_id,
+        message,
+        picture_url,
+        call_to_action,
+       // file,
+        link,
+      ),
+    );
+
+    
+  };
 
   return (
     <SafeAreaView
@@ -292,14 +348,14 @@ const New_Post = ({navigation}) => {
             onChangeText={text => setofferdisclimer(text)}
             value={offerdis}
                 /> */}
-        </View> 
+        </View>
       </ScrollView>
 
-       <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => openPanel()}>
           <CommonButton buttonname={'SEE PREVIEW'} />
         </TouchableOpacity>
-      </View> 
+      </View>
 
       {/*<DatePicker
         modal
@@ -341,7 +397,7 @@ const New_Post = ({navigation}) => {
           <Card.Cover
             style={{borderTopEndRadius: 9}}
             //source={{uri: 'https://picsum.photos/700'}}
-            source={{uri:picture_url}}
+            source={{uri: picture_url}}
           />
           <View
             style={{
@@ -434,11 +490,7 @@ const New_Post = ({navigation}) => {
            *
            */}
           <TouchableOpacity
-             onPress={() => dispatch(loadpostdata(location_id,
-              message,
-              picture_url,
-              link,
-              call_to_action))}
+            onPress={() => PublishPosthandler()}
             style={{
               backgroundColor: '#0070FC',
               width: 350,

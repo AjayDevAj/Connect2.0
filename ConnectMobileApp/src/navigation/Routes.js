@@ -60,7 +60,7 @@ import Add_new_offer from '../containers/Offers/Add_new_offers'
 import My_Offers from '../containers/Offers/My_Offers';
 import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const AuthStack = createNativeStackNavigator();

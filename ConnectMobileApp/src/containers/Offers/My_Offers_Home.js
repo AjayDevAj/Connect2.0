@@ -18,11 +18,13 @@ import {loadofferlistdata} from '../../actions/OfferListAction';
 import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
+import FAB from 'react-native-fab';
 
 const My_Offers_Home = ({navigation}) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const [offerlistdata, setofferlistdata] = useState('');
+  const [offerlistdataimage, setofferlistdataimage] = useState(null);
+  const [offercounttotal, setoffercounttotal] = useState(null);
 
   
 
@@ -30,29 +32,57 @@ const My_Offers_Home = ({navigation}) => {
    * Api call when page load
    * 
    * master_outlet_id:78104
-   * store_code:10007
+   * store_code:10001
   
    */
+
+   const Offer_List_Data = useSelector(store => store.OfferListResponceData);
+
+
+
+useEffect(() => {
+  if (Offer_List_Data != undefined && Offer_List_Data.data != undefined  && Offer_List_Data.data.offers != undefined && Offer_List_Data.data.offers[0].offer_image !=undefined) {
+    setofferlistdataimage(Offer_List_Data.data.offers[0].offer_image)
+    setoffercounttotal(Offer_List_Data.data.offers_count)
+    console.log('Offer List data->>>>>>>>>>>>>>>', Offer_List_Data.data.offers[0].offer_image);
+    
+
+   
+  }
+}, [Offer_List_Data])   
+
 
   useEffect(() => {
     if(isFocused){
       dispatch(loadofferlistdata(78104, 10001));
+      
+
+      
     }
     
   },[isFocused]);
 
-  const Offer_List_Data = useSelector(store => store.OfferListResponceData);
   
+  //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',Offer_List_Data.data.offers)
+  //const datalist = Offer_List_Data
+
+  // useEffect(()=>{
+  //   if (Offer_List_Data != undefined && Offer_List_Data.data != undefined  && Offer_List_Data.data.offers != undefined) {
+  //     //setofferlistdata(Offer_List_Data.data.offers)
+  //     offer=Offer_List_Data
+  //     console.log('Offer List data->>>>>>>>>>>>>>>', Offer_List_Data.data.offers[0].offer_image);
+     
+  //   }
+  // },[Offer_List_Data])
+
   
 
-  useEffect(()=>{
-    if (Offer_List_Data != undefined && Offer_List_Data.data != undefined  && Offer_List_Data.data.offers != undefined) {
-      setofferlistdata(Offer_List_Data.data.offers[0].offer_image)
-      console.log('Offer List data->>>>>>>>>>>>>>>', Offer_List_Data.data);
-    }
-  },[Offer_List_Data])
 
-  
+  //const datalist = Offer_List_Data.data;
+
+   //console.log('ofrer list in React hook', offerlistdata.offers[0].offer_image);
+
+
    const menuHandler = () => {
      navigation.openDrawer();
   };
@@ -62,8 +92,8 @@ const My_Offers_Home = ({navigation}) => {
       <TopHeader
         name={'My Offers'}
         firstIcon={'menu'}
-        secondIcon={'search'}
-        thirdIcon={'filter-list'}
+        //secondIcon={'search'}
+        //thirdIcon={'filter-list'}
         menuHandler={menuHandler}
       />
 
@@ -102,7 +132,7 @@ const My_Offers_Home = ({navigation}) => {
               color: '#000000',
               opacity: 100,
             }}>
-            {/* {datalist.offers_count} */}
+            {offercounttotal}
           </Text>
         </Card>
 
@@ -194,7 +224,7 @@ const My_Offers_Home = ({navigation}) => {
 
           <Card.Cover
             style={{borderTopEndRadius: 9}}
-             source={{uri: offerlistdata}}
+           source={{uri: offerlistdataimage}}
           />
           <Text
             style={{
@@ -214,12 +244,13 @@ const My_Offers_Home = ({navigation}) => {
               right: 10,
               elevation: 10,
             }}>
-            <TouchableOpacity onPress={() => chooseFile()}>
+            {/* <TouchableOpacity onPress={() => chooseFile()}>
               <PencilIcon height={50} width={50} />
-            </TouchableOpacity>
-            <Pressable
+            </TouchableOpacity> */}
+            {/* <Pressable
               onPress={() =>
                 navigation.navigate(NavigationString.Add_new_offer)
+               
               }>
               <View
                 style={{
@@ -240,7 +271,18 @@ const My_Offers_Home = ({navigation}) => {
                   size={30}
                 />
               </View>
-            </Pressable>
+            </Pressable> */}
+            <FAB
+            style={{top:390,left:40}}
+        buttonColor="rgba(0, 112, 252, 1)"
+        iconTextColor="#FFFFFF"
+        onClickAction={() => {
+          navigation.navigate(NavigationString.Add_new_offer)
+          
+        }}
+        visible={true}
+        iconTextComponent={<Icon name="local-offer" />}
+      />
           </View>
           <Card.Content>
             <Text
@@ -289,7 +331,17 @@ const My_Offers_Home = ({navigation}) => {
             </View>
           </Card.Content>
         </Card>
+      
+      <FlatList
+      data={Offer_List_Data.data}
+      renderItem={({item})=>(
+        <Text>hi</Text>
+      )}
+      />
+      
       </View>
+
+      
       
     </View>
   );
