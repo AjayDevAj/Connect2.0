@@ -46,7 +46,7 @@ import {
   Platform, Button
 } from 'react-native';
 import { image } from '../../../assets/images/Image';
-import { loadLoginData } from '../../actions/LoginAction';
+import { getLogin } from '../../api/MobileNumberAuthentication';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LoginStyleSheet';
 import navigationString from '../../utility/NavigationString';
@@ -56,7 +56,7 @@ import { loadIsImportantData } from '../../actions/IsImportantAction';
 const Login = ({navigation}) => {
  
   const dispatch = useDispatch();
-  const loginResponce = useSelector(store => store.loginDataResponse);
+  // const loginResponce = useSelector(store => store.loginDataResponse);
 
   const [textInputPhoneNum, setTextInputPhoneNum] = useState('');
   const [activeBtn, setActiveBtn] = useState('rgba(112, 112, 112, 0.22)');
@@ -74,33 +74,6 @@ const Login = ({navigation}) => {
   const [conversation_id, setconversation_id] = useState('');
   const [is_important, setis_important] = useState('');
 
-  useEffect(() => {
-    // console.log("loginResponce : ", JSON.stringify(loginResponce.message) != null);
-    setLoading(false)
-    if (JSON.stringify(loginResponce.message) != null) {
-      setError(
-        {
-          errorMsg: loginResponce.message,
-          errorStatus: loginResponce.error,
-        }
-      )
-      
-      // navigate to next screen.
-      if ((loginResponce.error === false)) {
-        // setLoading(false);
-        // alert(loginResponce);
-        navigation.navigate(navigationString.GetOtpScreen, {
-          mobile_Number: textInputPhoneNum,
-        });
-
-        // navigation.navigate(navigationString.AUTH, { 
-        //   screen: navigationString.GetOtpScreen,
-        //   params: { mobile_Number: textInputPhoneNum, }
-        // });
-      }
-    }
-  }, [loginResponce]);
-
   //Check for the Phone Number TextInput
   checkTextInput = async () => {
     // console.log('checkTextInput');
@@ -111,7 +84,25 @@ const Login = ({navigation}) => {
     } else {
       //calling API login
       setLoading(true);
-      dispatch(loadLoginData(textInputPhoneNum));
+      var getOtpResponse = await getLogin(textInputPhoneNum);
+      console.log('===== getOtpResponse =====', getOtpResponse)
+
+      if (typeof getOtpResponse?.message) {
+        setError(
+          {
+            errorMsg: getOtpResponse.message,
+            errorStatus: getOtpResponse.error,
+          }
+        )
+        
+        // navigate to next screen.
+        if ((getOtpResponse.error === false)) {
+          setLoading(false);
+          navigation.navigate(navigationString.GetOtpScreen, {
+            mobile_Number: textInputPhoneNum,
+          });
+        }
+      }
     }
   };
 

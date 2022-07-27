@@ -115,7 +115,7 @@ const Routes = () => {
         }
         userToken = await AsyncStorage.getItem('userToken');
       } catch(err) {
-        console.log('@Routes::signIn Exception ', err);
+        console.log('@Routes::firstTimeLoader Exception ', err);
       }
       
       isAppInstalledFirstTime ? dispatch({ type: 'onboarding', token: userToken }) 
@@ -158,27 +158,7 @@ const Routes = () => {
           <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
           <Stack.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
-          {/* <Stack.Screen component={DrawerStack} name={navigationString.MyPostHome} />  */}
         </Stack.Navigator>
-
-        {/* <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}
-          screenOptions={{ headerShown: false }}>
-          {loginState.userToken != null ? (
-            <>
-              <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
-              <Drawer.Screen component={AuthenticationStack} name={navigationString.AUTH} options={{ swipeEnabled: false }} />
-            </>
-          ) : (
-            <>
-              {loginState.isAppInstalledFirstTime == true  && (
-                <Drawer.Screen component={OnBoarding} name={navigationString.OnBoarding} options={{ swipeEnabled: false }} />
-              )}
-              <Drawer.Screen component={AuthenticationStack} name={navigationString.AUTH} options={{ swipeEnabled: false }} />
-              <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} />
-            </>
-          )}
-          <Drawer.Screen component={CommonStack} name="CommonStack" options={{ swipeEnabled: false }} />
-        </Drawer.Navigator> */}
       </NavigationContainer>
     </AuthContext.Provider>
   );
@@ -195,6 +175,7 @@ export const resetNavigation = navigation => {
 };
 
 export const signOut = () => {
+  // alert('ok')
   RootNavigation.navigate(navigationString.LOGIN);
   RootNavigation.reset({
     index: 0,

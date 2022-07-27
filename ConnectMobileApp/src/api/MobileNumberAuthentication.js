@@ -37,7 +37,8 @@ const getLogin = async (mobileNumber) => {
     /****** constant defined to get login from an api ****/
 
     const bodyData = new FormData();
-    bodyData.append('phonenumber', mobileNumber)
+    bodyData.append('phonenumber', mobileNumber);
+    
     try {
         const response = await fetch(API_URL_STAGING + '/user/auth/getOTP', {
             method: 'POST',
@@ -53,7 +54,9 @@ const getLogin = async (mobileNumber) => {
         return data;
 
     } catch (err) {
-        console.log("Show Error :: ", err)
+        console.log("@MobileNoAuth::Show Error :: ", err)
+        return err;
+        
     }
 }
 

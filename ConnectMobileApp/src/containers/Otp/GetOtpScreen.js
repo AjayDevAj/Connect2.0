@@ -29,7 +29,7 @@
  **
  */
 
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -45,7 +45,7 @@ import Bubble from '../../component/Bubble';
 
 import OTPTextInput from '../../component/Otp-Form';
 import {useSelector, useDispatch} from 'react-redux';
-import {loadOtpData} from '../../actions/OtpScreenAction';
+import {verifyOTP} from '../../api/VerifyOTP';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationString from '../../utility/NavigationString';
 import fontFamily from '../../utility/Font-Declarations';
@@ -57,10 +57,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from '../../navigation/AuthContext';
 
 const GetOtpScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const otpResponce = useSelector(store => store.OtpResponceData);
-  const resendOtpResponce = useSelector(store => store.OtpResponceData);
+  // const otpResponce = useSelector(store => store.OtpResponceData);
+  // const resendOtpResponce = useSelector(store => store.OtpResponceData);
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
   const [otp, setOtpNum] = useState('');
@@ -78,33 +78,44 @@ const GetOtpScreen = ({ navigation }) => {
     await AsyncStorage.setItem(appToken, token);
   }
 
-  useEffect(() => {
-    const isAppInstalledFirstTime = async () => {
+  const editNoHandler = () => {
+    navigation.goBack();
+  }
+
+  /**
+   * OTP Api calling
+   *  */
+  const VerifyOTPApi = async () => {
+    
+    var verifyOtpResponse = await verifyOTP(mobileNumber, otp);
+    console.log('===== verifyOtpResponse =====', verifyOtpResponse);
+
+    const appAlreadyInstalled = async () => {
       var val = await AsyncStorage.getItem(viewed_Onboarding);
-      console.log('=== GetOtpScreen appInstalledFirstTime =======', val)
       return val;
     }
 
-    if (otpResponce.code == 200) {
-      saveObject(otpResponce.data, otpResponse_Storage_Key);
-      { otpResponce?.data?.token && setToken(otpResponce.data.token) }
-      var appInstalledFirstTime = isAppInstalledFirstTime();
+    if (verifyOtpResponse.code == 200) {
+      saveObject(verifyOtpResponse.data, otpResponse_Storage_Key);
+      { verifyOtpResponse?.data?.token && setToken(verifyOtpResponse.data.token) }
 
-      {appInstalledFirstTime == true 
+      var appInstalledAlready = appAlreadyInstalled();
+
+      {!appInstalledAlready
         ? (
           navigation.navigate(NavigationString.Location, {
-            userName: otpResponce.data.user.name,
+            userName: verifyOtpResponse.data.user.name,
           })
         ) : (
           navigation.navigate(NavigationString.Dashboard)
         )
       }
     } else if (
-      otpResponce != '' &&
-      otpResponce.data.code != null &&
-      otpResponce.data.code == 400
+      verifyOtpResponse != '' &&
+      verifyOtpResponse?.data?.code  &&
+      verifyOtpResponse.data.code == 400
     ) {
-      // if (otpResponce.data.code == 400) {
+      // if (verifyOtpResponse.data.code == 400) {
         setIsLoginToFalse();
       setisErrorState(true);
 
@@ -126,25 +137,7 @@ const GetOtpScreen = ({ navigation }) => {
         backgroundColor: 'rgba(239, 240, 242, 1)',
       });
     }
-  }, [otpResponce]);
-
-  useEffect(() => {
-    if(otpResponce?.data?.code === 401)
-    {
-      navigation.goBack();
-    }
-  }, [resendOtpResponce]);
-
-  const editNoHandler = () => {
-    navigation.goBack();
-  }
-
-  /**
-   * OTP Api calling
-   *  */
-  const VerifyOTPApi = () => {
     loginHandler(mobileNumber, otp);
-    dispatch(loadOtpData(mobileNumber, otp));
   };
 
   const { signIn } = useContext(AuthContext);
@@ -154,6 +147,7 @@ const GetOtpScreen = ({ navigation }) => {
   }
 
   return (
+    
     <View style={{flex: 1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
@@ -237,6 +231,7 @@ const GetOtpScreen = ({ navigation }) => {
       </KeyboardAvoidingView>
      
     </View>
+   
   );
 };
 

@@ -67,11 +67,7 @@ const SkipButton = ({ navigation }) => {
     */
     const goToLoginPage = async() => {
         await AsyncStorage.setItem(viewed_Onboarding, 'true');
-
-        // navigation.navigate(navigationString.LOGIN)
-        navigation.navigate(navigationString.AUTH, { 
-            screen: navigationString.LOGIN
-        });
+        navigation.navigate(navigationString.LOGIN)
     }
     return (
         <TouchableOpacity onPress={() => goToLoginPage()} >

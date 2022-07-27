@@ -31,19 +31,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import {loadChatData} from '../actions/ChatAction';
 import ChatList from '../Chat/ChatList';
 import navigationString from '../utility/NavigationString';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {signOut} from '../navigation/Routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {searchedListData} from '../utility/Constant';
 import {store_Value} from '../utility/StorageClass';
 
-import { DrawerActions } from '@react-navigation/native';
 
 // import uWebSockets from '../component/uWebSockets'
 
-const Chat = ({ navigation, Route }) => {
+const Chat = ({navigation ,Route  }) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
-
+ 
   const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(true);
@@ -52,14 +51,11 @@ const Chat = ({ navigation, Route }) => {
   const [pageNo, setPageNo] = useState(1);
   const [totalChatPageCount, setTotalChatPageCount] = useState(1);
 
-  const navigation1 = useNavigation();
-
   const menuHandler = () => {
     // console.log('Menu Handler');
-    //  alert('Menu Handler');
-    navigation.openDrawer();
-    // navigation1.dispatch(DrawerActions.openDrawer());
-    // navigation.dispatch(DrawerActions.openDrawer());
+     // alert('Menu Handler');
+
+     navigation.openDrawer()
   };
 
   const searchHandler = () => {

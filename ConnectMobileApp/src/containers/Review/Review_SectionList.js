@@ -49,7 +49,7 @@ const Item = () => {
             fontSize: 28,
             color: '#000000',
           }}>
-          {OverAllReducer_ResponceData.data.review_data.average_rating}
+          {OverAllReducer_ResponceData?.data?.review_data?.average_rating}
         </Text>
         <Icon name={'star'} size={21} color={'#FFAA00'} />
       </View>
@@ -60,7 +60,7 @@ const Item = () => {
           color: '#000000',
           marginTop: 5,
         }}>
-        {`Based on ${OverAllReducer_ResponceData.data.review_data.total_reviews} Reviews`}
+        {`Based on ${OverAllReducer_ResponceData?.data?.review_data?.total_reviews} Reviews`}
       </Text>
       {isExpend && (
         <View
