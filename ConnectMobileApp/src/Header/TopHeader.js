@@ -108,8 +108,8 @@ const TopHeader = ({
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
-                    <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
-                    onPress={searchHandler} color={color == null ? '#FFFFFF': color} />
+                    {secondIcon && (<Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
+                    onPress={searchHandler} color={color == null ? '#FFFFFF': color} />)}
                     {thirdIcon && (
                     <>
                         {isFilterApplied ? (
