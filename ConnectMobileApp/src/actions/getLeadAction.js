@@ -31,6 +31,7 @@
 
 import { CONSTANT } from "../utility/Constant";
 
+
 /*
 **
 *
@@ -41,45 +42,15 @@ import { CONSTANT } from "../utility/Constant";
 */
 
 
-const loadCustomerData = (
-    intent_id,
-    entry_point,
-    channel,
-    date_range,
+const loadLeadData = (
     location_id,
-    chat_status,
-    contact_details,
-    assigned_to,
-    page,
-    user_page,
-    interest_page,
-    searchLocation,
-    searchUser,
-    interest,
-    from_date,
-    to_date,
-    search,
-    order_by
+    id,
+    conversation_id
 ) => ({
-    type: CONSTANT.CUSTOMER_DATA,
-    intent_id,
-    entry_point,
-    channel,
-    date_range,
+    type: CONSTANT.GET_LEAD_DATA,
     location_id,
-    chat_status,
-    contact_details,
-    assigned_to,
-    page,
-    user_page,
-    interest_page,
-    searchLocation,
-    searchUser,
-    interest,
-    from_date,
-    to_date,
-    search,
-    order_by
+    id,
+    conversation_id
 });
 
 /*
@@ -92,8 +63,8 @@ const loadCustomerData = (
 ** 
 */
 
-const getError = payload => ({
-    type: CONSTANT.CUSTOMER_DATA_ERROR,
+const getLeadDataError = payload => ({
+    type: CONSTANT.GET_LEAD_DATA_ERROR,
     payload
 })
 
@@ -109,10 +80,11 @@ const getError = payload => ({
 ** 
 */
 
-const getResponse = payload => ({
-    type: CONSTANT.CUSTOMER_DATA_SUCCESS,
+const getLeadDataResponse = payload => ({
+    type: CONSTANT.GET_LEAD_DATA_SUCCESS,
     payload
-})
+});
+
 
 
 /*
@@ -127,7 +99,7 @@ const getResponse = payload => ({
 */
 
 export {
-    loadCustomerData,
-    getError,
-    getResponse
+    loadLeadData,
+    getLeadDataError,
+    getLeadDataResponse
 }

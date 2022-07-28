@@ -40,7 +40,8 @@ import OverAllReducer from "./OverAllReducer";
 import GetReviewListReducer from "./GetReviewListReducer";
 import PostListReducer from "./PostListReducer";
 import OfferListReducer from "./OfferListReducer"
-import CustomerReducer, { GetLeadReducer } from "./CustomerReducer";
+import CustomerReducer from "./CustomerReducer";
+import GetLeadReducer from "./GetLeadReducer";
 
 const loginDataReducer = (state = '', action) => {
 

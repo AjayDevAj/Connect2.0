@@ -26,10 +26,9 @@ import MaterialMenu from '../../MaterialMenu/MaterialMenu';
 import {getIsImportantData} from '../../api/IsImportantApi';
 import {mark_Unread_Chat} from '../../api/UnreadChat';
 import PurchaseLeadSection from '../../PurchaseLead/PurchaseLeadSection';
-import PurchaseLeadComponent from '../../PurchaseLead/PurchaseLeadComponent';
 import { closedChat } from '../../api/closedChat';
 import navigationString from '../../utility/NavigationString';
-import { loadLeadData } from '../../actions/CustomerAction';
+import { loadLeadData } from '../../actions/getLeadAction';
 
 const Message = ({navigation, route}) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
@@ -39,6 +38,11 @@ const Message = ({navigation, route}) => {
   const [dotClicked, setDotClicked] = useState(false);
   const [isTyping, setTyping] = useState(false);
   // const [isFocused_Obj, setFocused_Obj] = useState(null);
+  const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
+
+  const [customerIntentVal, setCustomerIntentVal] = useState([]);
+  const [customerInterestVal, setCustomerInterestVal] = useState([]);
+  const [purchaseLeadFormData, setPurchaseLeadFormData] = useState([]);
 
   const getUserData = async () => {
     var test = await getOtpResponse(otpResponse_Storage_Key);
@@ -46,7 +50,6 @@ const Message = ({navigation, route}) => {
   };
   const menuHandler = () => {
     navigation.goBack();
-    setShowPurchaseForm(false);
   };
 
   const markasImportant = async () => {
@@ -106,21 +109,8 @@ const Message = ({navigation, route}) => {
   };
 
   const dispatch = useDispatch();
-  const allChat_Conversation_Data = useSelector(
-    store => store.allChat_Conversation_Data,
-  );
-
-  const isImportantResonceData = useSelector(
-    store => store.isImportantResonceData,
-  );
-
-  var GetLeadResponseData= useSelector(
-    store => store.GetLeadResponseData
-  );
-
-  const getLeadApi = (location_id=0, id=0, conversation_id='') => {
-    dispatch(loadLeadData(location_id, id, conversation_id));
-  }
+  const allChat_Conversation_Data = useSelector(store => store.allChat_Conversation_Data);
+  const GetLeadResponseData= useSelector(store => store.GetLeadResponseData);
 
   const isFocused = useIsFocused();
   const getDataFromParam = route.params;
@@ -218,6 +208,10 @@ const Message = ({navigation, route}) => {
     );
   };
 
+  const getLeadApi = (location_id=0, id=0, conversation_id='') => {
+    dispatch(loadLeadData(location_id, id, conversation_id));
+  }
+
   const initial_Value = {
     message: null,
     createdAt: null,
@@ -282,40 +276,66 @@ const Message = ({navigation, route}) => {
     setUnSendMessage(initial_Value);
   }, [Send_Message_ResponceData]);
 
-
-  const [showPurchaseForm, setShowPurchaseForm] = useState(false);
-  const [isClosedChatClicked, setIsClosedChatClicked] = useState(false);
-
-  const [customerIntentVal, setCustomerIntentVal] = useState([]);
-  const [customerInterestVal, setCustomerInterestVal] = useState([]);
- 
-
   const purchaseHandler = () => {
     getLeadApi(0,0,getDataFromParam.selected_Item.conversation_id);
 
     {GetLeadResponseData !== undefined && 
-      GetLeadResponseData.data !== undefined && 
-      GetLeadResponseData.data.intent_list !== undefined && 
-      (GetLeadResponseData.data.intent_list !== '' && 
-          GetLeadResponseData.data.intent_list.map((item) => {
-              ((item.selected == true) && (!customerIntentVal.includes(item.id))) && 
-              setCustomerIntentVal(current => [...current, item.id])
-          })
+      GetLeadResponseData?.data && 
+      GetLeadResponseData?.data?.intent_list && (
+        GetLeadResponseData.data.intent_list.map((item) => {
+          ((item.selected == true) && (!customerIntentVal.includes(item.id))) && 
+          setCustomerIntentVal(current => [...current, item.id])
+        })
       )
     }
 
-  {GetLeadResponseData !== undefined && 
-      GetLeadResponseData.data !== undefined && 
-      GetLeadResponseData.data.customer_interest !== undefined && 
-      (
-          GetLeadResponseData.data.customer_interest !== '' && 
-              GetLeadResponseData.data.customer_interest.map((item) => {
-                  (!customerInterestVal.includes(item)) && 
-                  setCustomerInterestVal(current => [...current, item])
-              })
+   var custArrayData = '';
+   {GetLeadResponseData !== undefined && 
+    GetLeadResponseData?.data && 
+    GetLeadResponseData?.data?.customer_interest && (
+      custArrayData = GetLeadResponseData.data.customer_interest,
+      custArrayData.map((item) => {
+        (!customerInterestVal.includes(item)) && 
+        setCustomerInterestVal(current => [...current, item])
+      })
+    )
+   }
+
+   {GetLeadResponseData !== undefined && 
+    GetLeadResponseData?.data && 
+    GetLeadResponseData?.data?.customer_lead && (
+      setPurchaseLeadFormData(GetLeadResponseData.data.customer_lead)
+    )}
+
+    purchaseComponentHandler()
+  };
+
+  const purchaseComponentHandler = () => {
+    console.log('=====PurchaseLeadComponent Form Data =====', purchaseLeadFormData);
+    console.log('===== PurchaseLeadComponent Form customerIntentVal =====', customerIntentVal);
+    console.log('===== PurchaseLeadComponent Form customerInterestVal =====', customerInterestVal);
+
+    var leadName = getDataFromParam.selected_Item.display_name;
+    var leadLogo = getDataFromParam.selected_Item.publisher_type;
+    var leadConversation_id = getDataFromParam.selected_Item.conversation_id;
+    var leadColor = reloadTopView ? '#FFAA00' : null;
+
+    return (
+      navigation.navigate(
+        navigationString.Purchase_Lead_Component, 
+        {
+          firstIcon: "arrow-back",
+          name: leadName,
+          logo: leadLogo,
+          type: '',
+          color: leadColor,
+          conversation_id: leadConversation_id,
+          selectedLeadItem: purchaseLeadFormData,
+          selectedLeadIntentVal: customerIntentVal,
+          selectedLeadInterestVal: customerInterestVal,
+        }
       )
-  }
-    setShowPurchaseForm(!showPurchaseForm);
+    )
   };
 
   const closeChatHandler = async () => {
@@ -328,29 +348,7 @@ const Message = ({navigation, route}) => {
 
   return (
     <View style={[chatStyles.chatMainContainer, {backgroundColor: '#FFF'}]}>
-      {showPurchaseForm ? (
-        <>
-        
-         {GetLeadResponseData !== undefined && 
-           GetLeadResponseData.data !== undefined && 
-           GetLeadResponseData.data.customer_lead !== undefined && (
-            <PurchaseLeadComponent 
-              firstIcon="arrow-back"
-              color={reloadTopView ? '#FFAA00' : null}
-              name={getDataFromParam.selected_Item.display_name}
-              menuHandler={menuHandler}
-              logo={getDataFromParam.selected_Item.publisher_type}
-              conversation_id={getDataFromParam.selected_Item.conversation_id}
-              navigation={navigation}
-              customer_lead_data={GetLeadResponseData.data.customer_lead}
-               customerIntentVal={customerIntentVal}
-               customerInterestVal={customerInterestVal}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          <TopHeader
+      <TopHeader
             firstIcon="arrow-back"
             secondIcon="star-border"
             thirdIcon="more-vert"
@@ -430,8 +428,6 @@ const Message = ({navigation, route}) => {
               // {/* </ImageBackground> */}
             )}
           </View>
-        </>
-      )}
     </View>
   );
 };

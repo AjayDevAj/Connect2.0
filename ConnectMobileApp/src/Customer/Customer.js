@@ -26,7 +26,8 @@
  import TopHeader from '../Header/TopHeader';
  import customerStyles from './styles/customerStylesheet';
  import {useSelector, useDispatch} from 'react-redux';
- import {loadCustomerData, loadLeadData } from '../actions/CustomerAction';
+ import {loadCustomerData } from '../actions/CustomerAction';
+ import { loadLeadData } from '../actions/getLeadAction';
  import CustomerList from '../Customer/CustomerList';
  import navigationString from '../utility/NavigationString';
  import {useIsFocused} from '@react-navigation/native';
@@ -35,6 +36,7 @@
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
  import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
+import { array } from 'i/lib/util';
  
  const Customer = ({navigation, Route, route}) => {
    const isFocused = useIsFocused();
@@ -43,12 +45,12 @@
    const [searchText, setSearchText] = useState('');
    const [pageNo, setPageNo] = useState(0);
    const [totalCustomerPageCount, setTotalCustomerPageCount] = useState(1);
+   const [selectedCustomerData, setSelectedCustomerData] = useState('');
+   const [customerIntentVal, setCustomerIntentVal] = useState([]);
+   const [customerInterestVal, setCustomerInterestVal] = useState([]);
  
    const menuHandler = () => {
-     //  navigation.navigate(navigationString.Customer);
-     //  navigation.goBack();
-     navigation.openDrawer();
-     setShowPurchaseForm(false);
+     navigation.openDrawer()
    };
  
    const searchHandler = () => {
@@ -62,6 +64,7 @@
  
    const dispatch = useDispatch();
    const customerResponseData = useSelector(store => store.CustomerResponseData);
+   const GetLeadResponseData= useSelector(store => store.GetLeadResponseData);
  
    /**
     * Api call when page load
@@ -116,141 +119,151 @@
        ),
      );
    };
+
+  const getLeadApi = (location_id=0, id=0, conversation_id='') => {
+    dispatch(loadLeadData(location_id, id, conversation_id));
+  }
  
-   /**
+    /**
     * Search Api call
     * @param {*} searchTextParam
     */
-   const customerSearchHandler = async searchTextParam => {
+    const customerSearchHandler = async searchTextParam => {
      setSearchText(searchTextParam);
      searchTextParam ? callAPI(searchTextParam) : callAPI();
  
-     const keys = await AsyncStorage.getAllKeys();
-     if (keys.includes(searchedListData)) {
-       try {
-         const searchItemListData = [];
-         const searchItemListArrayData = await AsyncStorage.getItem(
-           searchedListData,
-         );
-         searchItemListData = JSON.parse(searchItemListArrayData);
-         //console.log('Search List Item array Data - ', searchItemListArrayData);
+    //  const keys = await AsyncStorage.getAllKeys();
+    //  if (keys.includes(searchedListData)) {
+    //    try {
+    //      const searchItemListData = [];
+    //      const searchItemListArrayData = await AsyncStorage.getItem(
+    //        searchedListData,
+    //      );
+    //      searchItemListData = JSON.parse(searchItemListArrayData);
+    //      //console.log('Search List Item array Data - ', searchItemListArrayData);
  
-         searchItemListData.push({
-           value: searchTextParam,
-         });
-         console.log('Search List Data - ', JSON.stringify(searchItemListData));
-         await AsyncStorage.setItem(
-           searchedListData,
-           JSON.stringify(searchItemListData),
-         );
-       } catch (error) {
-         console.log('Save searched item in list exception ', error);
-       }
-     }
-   };
- 
-   const [showPurchaseForm, setShowPurchaseForm] = useState(false);
-   const [selectedCustomerData, setSelectedCustomerData] = useState('');
- 
-   const purchaseHandler = () => {
-     setShowPurchaseForm(!showPurchaseForm);
-   };
+    //      searchItemListData.push({
+    //        value: searchTextParam,
+    //      });
+    //      console.log('Search List Data - ', JSON.stringify(searchItemListData));
+    //      await AsyncStorage.setItem(
+    //        searchedListData,
+    //        JSON.stringify(searchItemListData),
+    //      );
+    //    } catch (error) {
+    //      console.log('Save searched item in list exception ', error);
+    //    }
+    //  }
+    };
+
+    const loadMoreCustomerData = updatedPageNo => {
+      {customerResponseData?.data && customerResponseData?.data?.totalPage &&
+          setTotalCustomerPageCount(customerResponseData.data.totalPage);
+      }
+   
+      setPageNo(updatedPageNo);
+   
+      updatedPageNo > 0 && updatedPageNo <= totalCustomerPageCount
+        ? callAPI(searchText, updatedPageNo)
+        : callAPI(searchText);
+    };
  
    const onPressCustomerHandler = id => {
      customerResponseData.data.customers.map(item => {
-       item.id == id ? setSelectedCustomerData(item) : '';
+       item.id == id ? (setSelectedCustomerData(item), 
+       getLeadApi(0,0,item.conversation_id)) 
+       : '';
      });
-     purchaseHandler();
-   };
- 
-   const loadMoreCustomerData = updatedPageNo => {
-     {
-       customerResponseData.data != undefined &&
-         customerResponseData.data.totalPage != undefined &&
-         setTotalCustomerPageCount(customerResponseData.data.totalPage);
-     }
- 
-     setPageNo(updatedPageNo);
- 
-     updatedPageNo > 0 && updatedPageNo <= totalCustomerPageCount
-       ? callAPI('', updatedPageNo)
-       : callAPI();
-   };
- 
-   const getCustomerIntentData = customer_intent => {
-     var intentVal = '';
-     {
-       customer_intent !== ''
-         ? customer_intent.map(item => {
-             intentVal = item.id;
-           })
-         : '';
-     }
-     return intentVal;
-   };
+     
+     {GetLeadResponseData !== undefined && 
+      GetLeadResponseData?.data && 
+      GetLeadResponseData?.data?.intent_list && (
+        GetLeadResponseData.data.intent_list.map((item) => {
+          ((item.selected == true) && (!customerIntentVal.includes(item.id))) && 
+          setCustomerIntentVal(current => [...current, item.id])
+        })
+      )
+   }
+
+   var custArrayData = '';
+   {GetLeadResponseData !== undefined && 
+    GetLeadResponseData?.data && 
+    GetLeadResponseData?.data?.customer_interest && (
+      custArrayData = GetLeadResponseData.data.customer_interest,
+      custArrayData.map((item) => {
+        (!customerInterestVal.includes(item)) && 
+        setCustomerInterestVal(current => [...current, item])
+      })
+    )
+   }
+
+   {GetLeadResponseData !== undefined && 
+    GetLeadResponseData?.data && 
+    GetLeadResponseData?.data?.customer_lead && (
+      purchaseHandler(GetLeadResponseData.data.customer_lead)
+    )}
+  };
+
+  const purchaseHandler = (customerLeadData='') => {
+    var leadName = selectedCustomerData?.display_name  ? selectedCustomerData.display_name : 'Add New Customer';
+    var leadLogo = selectedCustomerData?.publisher_type ? selectedCustomerData.publisher_type : '';
+    var leadConversation_id = selectedCustomerData?.conversation_id ? selectedCustomerData.conversation_id : '';
+    var leadType = typeof selectedCustomerData !== '' ? '' : 'add'
+   
+    return (
+      navigation.navigate(
+        navigationString.Purchase_Lead_Component, 
+        {
+          firstIcon: "arrow-back",
+          name: leadName,
+          logo: leadLogo,
+          type: leadType,
+          color: '',
+          conversation_id: leadConversation_id,
+          selectedLeadItem: customerLeadData,
+          selectedLeadIntentVal: customerIntentVal,
+          selectedLeadInterestVal: customerInterestVal,
+        }
+      )
+    )
+  };
  
    return (
      <View style={customerStyles.customerMainContainer}>
-       {showPurchaseForm ? (
-         <PurchaseLeadComponent
-           firstIcon="arrow-back"
-           name={
-             selectedCustomerData != ''
-               ? selectedCustomerData.display_name
-               : 'Add New Customer'
-           }
-           logo={
-             selectedCustomerData != ''
-               ? selectedCustomerData.publisher_type
-               : ''
-           }
-           menuHandler={menuHandler}
-           type={selectedCustomerData != '' ? '' : 'add'}
-           conversation_id={selectedCustomerData.conversation_id}
-           customer_intent={getCustomerIntentData(
-             selectedCustomerData.customer_intent,
-           )}
-           navigation={navigation}
-         />
-       ) : (
-         <>
-           <TopHeader
-             firstIcon="menu"
-             secondIcon="search"
-             thirdIcon="filter-list"
-             name="Customers"
-             menuHandler={menuHandler}
-             searchHandler={searchHandler}
-             filterHandler={filterHandler}
-             navigation={navigation}
-             chatSearchHandler={customerSearchHandler}
-             isSearchEnable={isSearch}
-             isFilterApplied={isFilterApplied}
-           />
+      <TopHeader
+        firstIcon="menu"
+        secondIcon="search"
+        thirdIcon="filter-list"
+        name="Customers"
+        menuHandler={menuHandler}
+        searchHandler={searchHandler}
+        filterHandler={filterHandler}
+        navigation={navigation}
+        chatSearchHandler={customerSearchHandler}
+        isSearchEnable={isSearch}
+        isFilterApplied={isFilterApplied}
+      />
  
-           {/* Add New customer component */}
-           {/* <AddNewCustomer purchaseHandler={() => {
-             purchaseHandler()
-             setSelectedCustomerData('');
-           }} 
-         /> */}
+      {/* Add New customer component */}
+      {/* <AddNewCustomer purchaseHandler={() => {
+          purchaseHandler()
+          setSelectedCustomerData('');
+        }} 
+        /> 
+      */}
  
-           {customerResponseData.data != null && (
-             <CustomerList
-               onPress_Customer={val => {
-                 onPressCustomerHandler(val);
-               }}
-               data={customerResponseData.data.customers}
-               custCount={customerResponseData.data.customer_count}
-               loadMoreCustomerData={loadMoreCustomerData}
-               page={pageNo}
-               navigation={navigation}
-             />
-           )}
-         </>
-       )}
- 
-       
+      {customerResponseData.data != null && (
+        <CustomerList
+          onPress_Customer={val => {
+            onPressCustomerHandler(val);
+          }}
+          data={customerResponseData.data.customers}
+          custCount={customerResponseData.data.customer_count}
+          loadMoreCustomerData={loadMoreCustomerData}
+          page={pageNo}
+          navigation={navigation}
+        />
+      )}
      </View>
    );
  };

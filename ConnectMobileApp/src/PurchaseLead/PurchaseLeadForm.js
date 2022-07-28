@@ -252,7 +252,6 @@ const PurchaseLeadForm = ({
                             </View>
                         </TouchableOpacity>  
                     </View>
-                    
                     </>
                 )}
             </Formik>

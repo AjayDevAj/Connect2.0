@@ -4,7 +4,6 @@ import NavigationString from '../utility/NavigationString';
 import Chat from '../Chat/Chat';
 import AllChat from '../AllChat/AllChat';
 
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();

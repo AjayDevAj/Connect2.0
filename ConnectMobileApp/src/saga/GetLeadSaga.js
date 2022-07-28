@@ -5,8 +5,8 @@
 **
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: CustomerSaga.js
-** UsedFor: Customer Saga at connect 2.0 app
+** FileName: GetLeadSaga.js
+** UsedFor: GetLead Saga at connect 2.0 app
 ** Author:
 **
 ** ========================================================
@@ -15,7 +15,7 @@
 **
 *
 ** ==========================================================
-**                  Customer Saga component
+**                  GetLead Saga component
 ** ==========================================================
 *
 **
@@ -32,8 +32,8 @@
 
 import { take, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
 import { CONSTANT } from '../utility/Constant';
-import { getLead } from '../api/CustomerApi';
-import { getLeadDataError, getLeadDataResponse } from '../actions/CustomerAction';
+import { getLead } from '../api/getLeadApi';
+import { getLeadDataError, getLeadDataResponse } from '../actions/getLeadAction';
 
 
 /*

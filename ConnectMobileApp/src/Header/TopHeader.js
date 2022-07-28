@@ -103,26 +103,28 @@ const TopHeader = ({
                             </View>
                         ) }
                         <Text style={ headerStyles.headerText }>{name}</Text>
-                        
                         </>
                        )}
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
                     <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
-                    onPress={searchHandler} 
-                    color={color == null ? '#FFFFFF': color}
-                    />
-                    {isFilterApplied ? (
-                        <>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                    onPress={searchHandler} color={color == null ? '#FFFFFF': color} />
+                    {thirdIcon && (
+                    <>
+                        {isFilterApplied ? (
+                            <>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                                <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                                <Count_Badge topRight={16} top={1} width={16} height={16} badge_Value={2} fontSize={11} />
+                            </View>
+                            </>
+                        ) : (
                             <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
-                            <Count_Badge topRight={16} top={1} width={16} height={16} badge_Value={2} fontSize={11} />
-                        </View>
-                        </>
-                    ) : (
-                        <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                        )}
+                    </>
                     )}
+                    
                 </View>
                 
             </View>

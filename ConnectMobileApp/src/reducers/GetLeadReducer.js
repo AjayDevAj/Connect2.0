@@ -5,8 +5,8 @@
 **
 ** AppName: Connect2.0
 ** Version: X.0.0
-** FileName: CustomerReducer.js
-** UsedFor: Customer Reducer at connect 2.0 app
+** FileName: GetLeadReducer.js
+** UsedFor: Get Lead Reducer at connect 2.0 app
 ** Author:
 **
 ** ========================================================
@@ -15,7 +15,7 @@
 **
 *
 ** ==========================================================
-**               Customer Reducer component
+**               Get Lead Reducer component
 ** ==========================================================
 *
 **
@@ -32,17 +32,16 @@
 
 import { CONSTANT } from "../utility/Constant";
 
-const CustomerReducer = (state = '', action) => {
-
-    if(action.type == CONSTANT.CUSTOMER_DATA_SUCCESS) {
+const GetLeadReducer = (state = '', action) => {
+    if(action.type == CONSTANT.GET_LEAD_DATA_SUCCESS) {
         return action.payload;
     }
 
-    if (action.type == CONSTANT.CUSTOMER_DATA_ERROR) {
+    if (action.type == CONSTANT.GET_LEAD_DATA_ERROR) {
         return action.payload;
     }
 
     return state;
 }
 
-export default CustomerReducer;
+export default GetLeadReducer;
