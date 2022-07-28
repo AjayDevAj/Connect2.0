@@ -30,25 +30,11 @@
  */
 
 import React, {useState, useEffect ,} from 'react';
-import {
-  View,
-  Dimensions,
-  Text,
-  Alert,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import fontFamily from '../utility/Font-Declarations';
 import OtpErrorState from './OtpErrorState';
 import {useRoute} from '@react-navigation/native';
-import Loader from '../utility/Loader';
-import {loadOtpData_Resend} from '../actions/ResendOTPAction';
-import { useIsFocused } from '@react-navigation/native';
-
-
-
-import {useDispatch, useSelector} from 'react-redux';
-import OTPTextView from 'react-native-otp-textinput';
+import {resendOTP} from '../api/ResendOTP';
 
 /*
  **
@@ -59,46 +45,26 @@ import OTPTextView from 'react-native-otp-textinput';
  **
  */
 
-const OtpTimerHandler = ({ StopTimer,isErrorstate}) => {
-  console.log('error code from otp scren',isErrorstate)
-
-
-
-
-  const dispatch = useDispatch();
+const OtpTimerHandler = ({ StopTimer, isErrorstate}) => {
   const route = useRoute();
   const mobileNumber = route.params.mobile_Number;
-  const [loading, setLoading] = useState(false);
 
-  const resendOtpResponce = useSelector(store => store.ResendOtpResonceData);
-
- 
-
-
-  
   const reSendOTP = () => {
-   //dispatch(loadOtpData_Resend(mobileNumber));
-    console.log('resendotp--------------------->',resendOtpResponce)
-  
-    
+   //resendOTP(mobileNumber);
   };
 
   const [counter, setCounter] = useState(30);
   useEffect(() => {
-    // dispatch(loadOtpData_Resend(mobileNumber))
-    // console.log('resendotp------------------------',resendOtpResponce)
-   
+    // resendOTP(mobileNumber)
    
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
+      return () => clearInterval(timer);
+    }, [counter]);
 
   return (
     <View>
-      
       {counter > 0 && isErrorstate ==false ? (
-       
         <Text
           style={{
             color: 'rgba(95, 99, 104, 1)',
@@ -108,27 +74,8 @@ const OtpTimerHandler = ({ StopTimer,isErrorstate}) => {
           Time Left : {counter} sec
         </Text>
       ) : (
-        // <Text
-        //   style={{
-        //     color: 'rgba(95, 99, 104, 1)',
-        //     fontSize: 12,
-        //     fontFamily: fontFamily.Poppins,
-        //     // marginBottom:10
-        //   }}>
-        //   Didn’t Received?{' '}
-        //   <TouchableOpacity onPress={Resend}>
-        //     <Text style={styles.ResentButtonText}>Resend</Text>
-        //   </TouchableOpacity>
-        // </Text>
-        <>
-{
-
-
-           <OtpErrorState Resend={reSendOTP()}/>
-} 
-</>
+        <OtpErrorState Resend={reSendOTP()}/>
       )}
-
     </View>
   );
 };

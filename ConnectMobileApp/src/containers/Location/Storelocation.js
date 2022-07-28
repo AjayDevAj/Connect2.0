@@ -53,21 +53,18 @@ export default Storelocation = ({navigation}) => {
 
   const continueOnpress = () => {
     saveObject(SLResponce.data, location_Data_Key);
-    navigation.navigate(NavigationString.RouteTabBar);
+    navigation.navigate(NavigationString.Dashboard);
     resetNavigation(navigation)
   };
 
   return (
-    
     <>
-   
-      {/* // Uper View */}
+      {/* // Upper View */}
       <View
         style={{
           flex: 2,
           backgroundColor:'rgba(247, 252, 255, 1)'
         }}>
-          
           
         {/* <Icon.Button
           name="arrow-back"

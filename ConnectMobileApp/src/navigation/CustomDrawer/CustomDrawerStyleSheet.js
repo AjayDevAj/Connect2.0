@@ -1,7 +1,5 @@
-
 import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
-import fontFamily from '../utility/Font-Declarations'
+import fontFamily from '../../utility/Font-Declarations'
 
 export default StyleSheet.create({
 

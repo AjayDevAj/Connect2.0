@@ -17,7 +17,7 @@ const getStoreLocations = async () => {
         }
     })
     const data = response.json()
-    console.log("Store Location API Data == ", data)
+    // console.log("Store Location API Data == ", data)
 
     // if (response.status > 400) {
     //     throw new Error(data.errors)

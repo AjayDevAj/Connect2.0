@@ -1,18 +1,21 @@
 import React, { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { View, Text, TouchableOpacity } from 'react-native';
-import NavigationString from '../utility/NavigationString';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from './CustomDrawerStyleSheet';
-import { deleteAll } from '../utility/StorageClass'
-import { useNavigation } from '@react-navigation/native';
-import Singleinterfaceicon from '../../assets/svg/singleinterfaceicon.svg'
-import fontFamily from '../utility/Font-Declarations'
-import { getOtpResponse } from '../utility/StorageClass'
-import { otpResponse_Storage_Key } from '../utility/Constant'
-import { signOut } from '../navigation/Routes'
 
-import AuthContext from '../navigation/AuthContext';
+import styles from './CustomDrawerStyleSheet';
+
+import { signOut } from '../Routes'
+import AuthContext from '../AuthContext';
+
+import NavigationString from '../../utility/NavigationString';
+import { deleteAll } from '../../utility/StorageClass'
+
+import Singleinterfaceicon from '../../../assets/svg/singleinterfaceicon.svg'
+import fontFamily from '../../utility/Font-Declarations';
+
+import { logOutApi } from '../../api/logOutApi';
 
 function CustomDrawer(props) {
     const navigation1 = useNavigation();
@@ -21,37 +24,17 @@ function CustomDrawer(props) {
 
     //Logout api calling..
     const logout = async () => {
-        const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-        // console.log("Token Value :::: =", token_Value.token)
-        
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${token_Value.token}`);
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        const logOutResponse = await logOutApi();
 
-        var urlencoded = new URLSearchParams();
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: urlencoded,
-            redirect: 'follow'
-        };
-
-        fetch("https://test-chat.starify.co/user/auth/logout", requestOptions)
-            .then(response => response.json())
-            .then(result => console.log("JSON Result :::: ", result))
-            .catch(error => console.log('Error Result :::: ', error));
-
-        // deleteAll()
-        signOut();
-
-        navigation1.closeDrawer();
-
-        if (response.status > 400) {
-            throw new Error(data.errors)
+        if (logOutResponse?.error === false) {
+            navigation.closeDrawer();
+            // deleteAll()
+            signOut();
+            navigation.navigate(NavigationString.LOGIN);
+        } else if (logOutResponse?.error?.error) {
+            throw new Error(logOutResponse?.error?.error)
         }
     }
-
 
     const { navigation } = props
     return (

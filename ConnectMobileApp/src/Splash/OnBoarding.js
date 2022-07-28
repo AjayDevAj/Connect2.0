@@ -79,7 +79,7 @@ const OnBoarding = ({ navigation }) => {
         try {
           await AsyncStorage.setItem(viewed_Onboarding, 'true');
           // navigate to login screen
-          navigation.navigate(NavigationString.LOGIN)
+          navigation.navigate(NavigationString.LOGIN);
         } catch (err) {
           console.log('Error @setItem: ', err);
         }

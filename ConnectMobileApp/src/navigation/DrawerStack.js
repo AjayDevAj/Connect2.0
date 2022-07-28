@@ -1,7 +1,7 @@
 import React from 'react'
 import navigationString from '../utility/NavigationString';
 
-import CustomDrawer from '../component/CustomDrawer';
+import CustomDrawer from './CustomDrawer/CustomDrawer';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 

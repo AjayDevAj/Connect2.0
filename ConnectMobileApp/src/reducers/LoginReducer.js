@@ -34,7 +34,6 @@ import { CONSTANT } from "../utility/Constant";
 import { combineReducers } from "redux";
 import storeLocationDataReducer from "./StoreLocationReducer";
 import Unassigned_Chat_Reducer from "./Unassigned_Chat_Reducer";
-import resendotpDataReducer from "./ResendOtpReducer";
 import allChat_Conversation_Reducer from "./AllChat_Conversation_Reducer";
 import FilterDataReducer from "./FilterDataReducer";
 import OverAllReducer from "./OverAllReducer";
@@ -63,7 +62,6 @@ const rootReducers = combineReducers({
     StoreLocationDataResponse: storeLocationDataReducer,
     Unassigned_Chat_Data: Unassigned_Chat_Reducer,
     allChat_Conversation_Data:allChat_Conversation_Reducer,
-    ResendOtpResonceData:resendotpDataReducer,
 
     FilterDataReducer_Responce:FilterDataReducer,
 

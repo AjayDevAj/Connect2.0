@@ -30,7 +30,8 @@
  */
 
 import React, { useEffect, useMemo, useReducer } from 'react';
-import { NavigationContainer, NavigationActions, StackActions, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, NavigationActions, CommonActions } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 import navigationString from '../utility/NavigationString';
 import {navigationRef} from '../navigation/RootNavigation';
@@ -65,6 +66,7 @@ const Stack = createNativeStackNavigator();
  * Routes matain the navigation stacks
  */
 const Routes = () => {
+  
   const [loginState, dispatch] = useReducer(authReducer, initialLoginState);
 
   const authContext = useMemo(() => ({
@@ -136,12 +138,10 @@ const Routes = () => {
 //  Login, otp, onboarding
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer >
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {loginState.userToken != null ? (
-            <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} 
-            // initialParams={{signOut}} 
-            />
+            <Stack.Screen component={Storelocation} name={navigationString.Location} />
           ) : (
             <>
               {loginState.isAppInstalledFirstTime == true  && (
@@ -151,7 +151,7 @@ const Routes = () => {
               <Stack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
             </>
           )}
-          <Stack.Screen component={Storelocation} name={navigationString.Location} />
+          <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} />
           <Stack.Screen component={Message} name={navigationString.Message} />
           <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
@@ -168,7 +168,6 @@ export const resetNavigation = navigation => {
   navigation.reset({
     index: 0,
     key: null,
-    // routes: [{ name: navigationString.RouteTabBar }],
     routes: [{ name: navigationString.Dashboard }],
   });
 };
@@ -177,8 +176,8 @@ export const signOut = () => {
   RootNavigation.navigate(navigationString.LOGIN);
   RootNavigation.reset({
     index: 0,
-    key: null,
-    routes: [{ name: navigationString.LOGIN }],
+    actions: [{ routeName: navigationString.LOGIN }],
+    key: 0
   });
   // deleteAll()
 };

@@ -2,10 +2,7 @@ import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import fontFamily from '../utility/Font-Declarations';
 
-export default function OtpErrorState({Resend}) {
-  
-
-  
+export default function OtpErrorState({ Resend }) {
   return (
     <View style={{marginTop: 10}}>
       <Text style={styles.wrongOtpText}>Wrong OTP</Text>
@@ -46,7 +43,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontFamily: fontFamily.Poppins,
   },
-
   resendbutton: {
     color: 'rgba(0, 112, 252, 1)',
     fontSize: 12,

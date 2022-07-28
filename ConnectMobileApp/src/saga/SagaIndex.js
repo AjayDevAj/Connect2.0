@@ -30,7 +30,6 @@
  */
 
 import {all} from 'redux-saga/effects';
-import ResendOtpDataWatcherSaga from './ResendOTP';
 import StoreLocationDataWatcherSaga from './StoreLocationSaga';
 import Unassigned_Chat_Data_Saga from './Unassigned_Chat_Sage';
 import AllChat_ConversationDataWatcherSaga from './AllChat_Conversation_Saga';
@@ -47,9 +46,6 @@ import GetLeadDataWatcherSaga from './GetLeadSaga';
 
 export default function* rootSaga() {
   yield all([
-    
-    ResendOtpDataWatcherSaga(),
-    
     StoreLocationDataWatcherSaga(),
     Unassigned_Chat_Data_Saga(),
     AllChat_ConversationDataWatcherSaga(),

@@ -81,29 +81,17 @@ const GetOtpScreen = ({ navigation }) => {
    * OTP Api calling
    *  */
   const VerifyOTPApi = async () => {
-    
     var verifyOtpResponse = await verifyOTP(mobileNumber, otp);
-
-    const appAlreadyInstalled = async () => {
-      var val = await AsyncStorage.getItem(viewed_Onboarding);
-      return val;
-    }
 
     if (verifyOtpResponse.code == 200) {
       saveObject(verifyOtpResponse.data, otpResponse_Storage_Key);
       { verifyOtpResponse?.data?.token && setToken(verifyOtpResponse.data.token) }
 
-      var appInstalledAlready = appAlreadyInstalled();
-
-      {!appInstalledAlready
-        ? (
-          navigation.navigate(NavigationString.Location, {
-            userName: verifyOtpResponse.data.user.name,
-          })
-        ) : (
-          navigation.navigate(NavigationString.Dashboard)
-        )
-      }
+      {verifyOtpResponse?.data?.user.name && (
+        navigation.navigate(NavigationString.Location, {
+          userName: verifyOtpResponse.data.user.name,
+        })
+      )}
     } else if (
       verifyOtpResponse != '' &&
       verifyOtpResponse?.data?.code  &&

@@ -45,7 +45,7 @@ const getLogin = async (mobileNumber) => {
             body: bodyData,
         })
         const data = response.json()
-        console.log('login data  : ', data)
+        // console.log('login data  : ', data)
 
         if (response.status > 400) {
             throw new Error(data.errors)
