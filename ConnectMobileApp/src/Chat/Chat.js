@@ -38,11 +38,9 @@ import {searchedListData} from '../utility/Constant';
 import {store_Value} from '../utility/StorageClass';
 
 
-import { DrawerActions } from '@react-navigation/native';
-
 // import uWebSockets from '../component/uWebSockets'
 
-const Chat = ({ navigation, Route }) => {
+const Chat = ({navigation ,Route  }) => {
   const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
  
   const isFocused = useIsFocused();
@@ -55,9 +53,9 @@ const Chat = ({ navigation, Route }) => {
 
   const menuHandler = () => {
     // console.log('Menu Handler');
-    //  alert('Menu Handler');
-   // navigation.openDrawer();
-     navigation.dispatch(DrawerActions.openDrawer());
+     // alert('Menu Handler');
+
+     navigation.openDrawer()
   };
 
   const searchHandler = () => {
