@@ -34,10 +34,19 @@ const Add_new_offers = ({navigation}) => {
   //API Call
 
   // * master_outlet_id:78104
-  // * store_code:10007
+  // * store_code:10001
   //* detail - desclimer
   // * to date - vailidtill
   // * from date - vailid till -- UI dose not have 2 seprate date components 
+
+
+
+const PublishOffer_handler =()=>{
+  navigation.navigate(NavigationString.My_Offers)
+  AddofferAPI(78104, 10001 ,title , description , offerdisclimer,validtill,validtill,offer_image,detail_page_url)
+
+}
+
 
   const AddofferAPI = async (
     master_outlet_id,
@@ -50,29 +59,34 @@ const Add_new_offers = ({navigation}) => {
     offer_image,
     detail_page_url,
   ) => {
-    const bodyRawData = {
-      master_outlet_id: master_outlet_id,
-      store_code: store_code,
-      title: title,
-      description: description,
-      detail: detail,
-      from_date: from_date,
-      to_date: to_date,
-      offer_image: offer_image,
-      detail_page_url: detail_page_url,
-    };
 
+
+
+    var formdata = new FormData();
+    
+    formdata.append("master_outlet_id", master_outlet_id);
+    formdata.append("store_code", store_code);
+    formdata.append("title", title);
+    formdata.append("description", description);
+    formdata.append("detail", detail);
+    formdata.append("from_date", from_date);
+    formdata.append("to_date", to_date);
+    formdata.append("offer_image", offer_image);
+    formdata.append("detail_page_url", detail_page_url);    
+    
+   
     const token_Value = await getOtpResponse(otpResponse_Storage_Key);
 
     const response = await fetch(API_URL_STAGING + '/offer/save', {
       method: 'POST',
-      body: JSON.stringify(bodyRawData),
+      body: formdata,
       headers: {
         Authorization: `Bearer ${token_Value.token}`,
       },
     });
     const data = response.json();
     console.log('Add NEW Offer RESPONCE  == ', data);
+    console.log('Offer Data Boday params--------->',typeof(formdata),formdata)
 
     switch (response.status) {
       case response.status > 400:
@@ -105,7 +119,7 @@ const Add_new_offers = ({navigation}) => {
   const [detail_page_url,setDetail_page_url]=useState('https://www.singleinterface.com/')
   const [title, settitle] = useState('');
 
-  const [validtill, setvailidtill] = useState('Wednesday, 13th Feb 2022');
+  const [validtill, setvailidtill] = useState("07-07-2022");
 
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -118,6 +132,7 @@ const Add_new_offers = ({navigation}) => {
   const [checkboxdata, setcheckboxdata] = useState('');
 
   const [offer_image, setoffer_image]=useState('')
+  const [offertagline ,setoffertagline]=useState(null)
 
   //   /// swipable panel
 
@@ -170,6 +185,41 @@ const Add_new_offers = ({navigation}) => {
     }
   };
 
+
+
+
+
+
+  const uploadImage_forPost = async response => {
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key);
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'multipart/form-data');
+    myHeaders.append('Authorization', `Bearer ${token_Value.token}`);
+
+    var formdata = new FormData();
+    formdata.append('file', {
+      uri: response.assets[0].uri,
+      type: response.assets[0].type,
+      name: response.assets[0].fileName,
+    });
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+   
+    fetch('https://test-chat.starify.co/google/upload-image', requestOptions)
+      .then(response => response.json())
+      .then(result => 
+      //setFilePath(result.data.file)
+      setoffer_image(result.data.file)
+      )
+      .catch(error => console.log('error', error));
+  };
+
+
   //** */ Image picker for post
   const [filePath, setFilePath] = useState({});
   const chooseFile = type => {
@@ -203,7 +253,8 @@ const Add_new_offers = ({navigation}) => {
       console.log('type -> ', response.type);
       console.log('fileName -> ', response.fileName);
       setFilePath(response);
-      setoffer_image(response.assets[0].uri)
+      //(response.assets[0].uri)
+      uploadImage_forPost(response)
     });
   };
 
@@ -280,8 +331,8 @@ const Add_new_offers = ({navigation}) => {
           <TextInput
             style={PostStyleSheet.OfferLinkInputText}
             numberOfLines={4}
-            onChangeText={text => setOfferlink(text)}
-            value={''}
+            onChangeText={text => setoffertagline(text)}
+            value={{offertagline}}
           />
 
           {/* //toggleSwitch */}
@@ -435,7 +486,7 @@ const Add_new_offers = ({navigation}) => {
         <View style={{alignItems: 'center', marginTop: 15}}>
           <TouchableOpacity
             onPress={
-              () => AddofferAPI(78104, 10007 ,title , description , offerdisclimer,validtill,validtill,offer_image,detail_page_url)
+              () => PublishOffer_handler()
               //navigation.navigate(NavigationString.My_Offers)
             }
             style={{

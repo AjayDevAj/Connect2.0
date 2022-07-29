@@ -53,7 +53,11 @@ export default Storelocation = ({navigation}) => {
 
   const continueOnpress = () => {
     saveObject(SLResponce.data, location_Data_Key);
+<<<<<<< HEAD
     navigation.navigate(NavigationString.Dashboard);
+=======
+    navigation.navigate(NavigationString.Chat);
+>>>>>>> Sub_Branch
     resetNavigation(navigation)
   };
 

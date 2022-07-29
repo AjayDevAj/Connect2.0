@@ -4,10 +4,16 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import TopHeader from '../../Header/TopHeader';
 import MyPostBg from '../../../assets/svg/MyPostBg.svg';
 import fontfaimly from '../../utility/Font-Declarations';
-const My_Post = () => {
+import NavigationString from '../../utility/NavigationString';
+
+const My_Post = ({navigation}) => {
+const menuHandler=()=>{
+  navigation.openDrawer()
+}
+
   return (
     <SafeAreaView style={{backgroundColor: '#F7FCFF', flex: 1}}>
-      <TopHeader name={'My Posts'} firstIcon={'menu'} />
+      <TopHeader name={'My Posts'} firstIcon={'menu'} menuHandler={menuHandler} />
       <View
         style={{
           flex: 1,
@@ -45,7 +51,8 @@ const My_Post = () => {
           </Text>
         
 
-        <TouchableOpacity
+        <TouchableOpacity 
+        onPress={()=>navigation.navigate(NavigationString.MyPostHome)}
           style={{
             width: 99,
             height: 32,
