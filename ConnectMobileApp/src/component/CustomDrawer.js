@@ -121,7 +121,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                    // onPress={() => navigation.navigate(NavigationString.Offers)}
+                     onPress={() => navigation.navigate(NavigationString.ManageTeam)}
                     >
                         <View style={styles.listView}>
                             <Icon name='group' size={25} style={styles.iconList} />

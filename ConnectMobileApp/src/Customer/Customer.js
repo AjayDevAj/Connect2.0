@@ -48,6 +48,7 @@
      //  navigation.navigate(navigationString.Customer);
      //  navigation.goBack();
      setShowPurchaseForm(false);
+     navigation.openDrawer()
    };
  
    const searchHandler = () => {

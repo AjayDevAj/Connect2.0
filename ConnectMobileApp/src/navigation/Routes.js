@@ -64,7 +64,10 @@ import {navigationRef} from '../navigation/RootNavigation';
 import * as RootNavigation from '../navigation/RootNavigation';
 import Storelocation from '../containers/Location/Storelocation'
 import InterNetScreen from '../containers/InterNetScreen/InterNetScreen';
-
+import My_Offers from '../containers/Offers/My_Offers';
+import ManageTeam from '../containers/ManageTeam/ManageTeam';
+import AddNewMember from '../containers/ManageTeam/AddNewMember';
+import EditMember from '../containers/ManageTeam/EditMember';
 
 
 
@@ -164,9 +167,11 @@ const Routes = () => {
 
 
             <Drawer.Screen component={My_Offers} name={navigationString.My_Offers} />
+            <Drawer.Screen component={ManageTeam} name={navigationString.ManageTeam}/>
+            <Drawer.Screen component={AddNewMember} name={navigationString.AddNewMember}/>
+            <Drawer.Screen component={EditMember} name={navigationString.EditMember}/>
 
             {/* <Drawer.Screen component={InterNetScreen} name={navigationString.InterNetScreen} /> */}
-
             {/* <Drawer.Screen component={RouteTabBar} name={navigationString.RouteTabBar} /> */}
 
           </Drawer.Navigator>
@@ -264,5 +269,6 @@ export const signOut = () => {
     index: 0,
     routes: [{ name: navigationString.LOGIN }],
   });
+  
   //  deleteAll()
 };

@@ -25,7 +25,7 @@ const Review = ({navigation ,Route}) => {
   });
 
   const menuHandler = () => {
-     alert('Menu Handler');
+     navigation.openDrawer()
   };
 
   const searchHandler = () => {
