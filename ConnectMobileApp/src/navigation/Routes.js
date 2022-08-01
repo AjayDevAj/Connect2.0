@@ -158,18 +158,18 @@ const Routes = () => {
           )}
           <Stack.Screen component={Storelocation} name={navigationString.Location} />
           {/* <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} /> */}
-          <Stack.Screen component={New_Post} name={navigationString.New_Post} />
-          <Stack.Screen component={My_Post} name={navigationString.My_Post} />
-          
-          <Stack.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
-          <Stack.Screen component={My_Offers} name={navigationString.My_Offers} />
-          
-          
           
           <Stack.Screen component={Message} name={navigationString.Message} />
           <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
           <Stack.Screen component={PurchaseLeadComponent} name={navigationString.Purchase_Lead_Component} />
+
+          <Stack.Screen component={New_Post} name={navigationString.New_Post} />
+          <Stack.Screen component={My_Post} name={navigationString.My_Post} />
+          
+          <Stack.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+          <Stack.Screen component={My_Offers} name={navigationString.My_Offers} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
