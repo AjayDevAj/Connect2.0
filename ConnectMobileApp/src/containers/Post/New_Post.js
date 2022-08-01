@@ -144,16 +144,6 @@ const New_Post = ({navigation}) => {
   };
   console.log('-----------.......>>>>>picture url', file);
 
-
-
-<<<<<<< HEAD
-  // console.log('-----------.......>>>>>picture url',picture_url)
-=======
->>>>>>> Sub_Branch
-
-
-
-
   //** */ Image picker for post
 
   
@@ -503,11 +493,7 @@ const New_Post = ({navigation}) => {
            *
            */}
           <TouchableOpacity
-<<<<<<< HEAD
-            onPress={() => sendPost()}
-=======
             onPress={() => PublishPosthandler()}
->>>>>>> Sub_Branch
             style={{
               backgroundColor: '#0070FC',
               width: 350,
