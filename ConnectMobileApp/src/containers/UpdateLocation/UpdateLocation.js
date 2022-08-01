@@ -50,7 +50,39 @@ const UpdateLocation = () => {
   //Time Picker
 
   const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState([{Monday: {opens: '', close: ''}}]);
+
   const [open, setOpen] = useState(false);
+
+
+  const handletimerpicker = (boolval)=>{
+   // setOpen(true);
+
+   return( <DatePicker
+        modal
+        open={true}
+        date={date}
+        mode="time"
+        onConfirm={date => {
+          setOpen(false);
+          setDate(date);
+
+          let hourse = date.getHours();
+          let minutes = date.getMinutes();
+          let ampm = hourse >= 12 ? 'PM' : 'AM';
+          let strTime = hourse + ':' + minutes + ' ' + ampm;
+          console.log(strTime);
+          setTime([{Monday: {opens: strTime}}]);
+          return strTime;
+        }}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />);
+
+  }
+
+
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);
@@ -230,11 +262,14 @@ const UpdateLocation = () => {
 
                         fontFamily: fontfamily.Poppins,
                       }}>
-                      09:10 AM
+                      {time[0].Monday.opens}
                     </Text>
                   </TouchableOpacity>
                   <View style={{paddingRight: 19}}></View>
                   <TouchableOpacity
+                    onPress={() => {
+                      handletimerpicker()
+                    }}
                     style={{
                       minHeight: 32,
                       minWidth: 96,
@@ -254,7 +289,7 @@ const UpdateLocation = () => {
 
                         fontFamily: fontfamily.Poppins,
                       }}>
-                      09:10 PM
+                      {time[0].Monday.close}
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -303,27 +338,7 @@ const UpdateLocation = () => {
       )}
       {currenttabIndex === 2 ? <Text>More</Text> : <></>}
 
-      <DatePicker
-        modal
-        open={open}
-        date={date}
-        mode="time"
-        onConfirm={date => {
-          setOpen(false);
-          setDate(date);
-          //setfromdate(date.toDateString());
-
-          let hourse = date.getHours();
-          let minutes = date.getMinutes();
-          let ampm = hourse >= 12 ? 'PM' : 'AM';
-          let strTime = hourse + ':' + minutes + ' ' + ampm;
-          console.log(strTime);
-          return strTime;
-        }}
-        onCancel={() => {
-          setOpen(false);
-        }}
-      />
+      
     </View>
   );
 };
