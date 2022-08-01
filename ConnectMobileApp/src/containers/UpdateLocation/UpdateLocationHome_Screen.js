@@ -36,8 +36,8 @@ const UpdateLocationHome_Screen = ({navigation}) => {
   // get location list from the async storage
 
   const Getlocationdata = async () => {
-    const SlresponseData = await getOtpResponse(location_Data_Key);
-    console.log('SLResponce-----.... ------->', SlresponseData);
+    const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
+    console.log('Update location SLResponce-----.... ------->', SlresponseData);
     console.log(getOtpResponse(location_Data_Key));
 
     if (

@@ -70,8 +70,8 @@ console.log('isnaviagted from chat',isnavigated)
   );
 
   const getdata = async () => {
-    const SlresponseData = await getOtpResponse(location_Data_Key);
-    console.log('SLResponce-----.... ------->', SlresponseData);
+    const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
+    console.log('SLResponce filter-----.... ------->', SlresponseData);
 
     if (
       SlresponseData != null &&
@@ -201,12 +201,12 @@ console.log('isnaviagted from chat',isnavigated)
   const EntryPoint = () => {
     console.log(
       'Entry point--------->',
-      customerResponseData.data.filters.channels,
+      customerResponseData?.data?.filters?.channels,
     );
 
     return (
       <EntryPointFilter
-        entrypoints={customerResponseData.data.filters.channels}
+        entrypoints={customerResponseData?.data?.filters?.channels}
       />
     );
   };
@@ -223,13 +223,13 @@ console.log('isnaviagted from chat',isnavigated)
     const [enagementcheck, setenagmentcheck] = useState(false);
     const [Purchasecheck, setpurchasecheck] = useState(false);
     const engagement = [
-      {label: customerResponseData.data.filters.intents[0].intent},
+      {label: customerResponseData?.data?.filters?.intents[0]?.intent},
     ];
-    const lead = [{label: customerResponseData.data.filters.intents[3].intent}];
+    const lead = [{label: customerResponseData?.data?.filters?.intents[3]?.intent}];
 
     console.log(
       'Customer Intent------->',
-      customerResponseData.data.filters.intents,
+      customerResponseData?.data?.filters?.intents,
     );
     return (
       <View
@@ -269,7 +269,7 @@ console.log('isnaviagted from chat',isnavigated)
               tintColor="#5AA3F7"
             />
             <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
-              {customerResponseData.data.filters.intents[4].intent}
+              {customerResponseData?.data?.filters?.intents[4]?.intent}
             </Text>
           </View>
 
@@ -322,7 +322,7 @@ console.log('isnaviagted from chat',isnavigated)
               
             />
             <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
-            {customerResponseData.data.filters.intents[1].intent}
+            {customerResponseData?.data?.filters?.intents[1]?.intent}
             </Text>
           </View>
 
@@ -350,7 +350,7 @@ console.log('isnaviagted from chat',isnavigated)
             style={[styles.item, filterstyle.chekboxstyle]}
             onChange={e => {}}>
             <Text style={styles.itemtitle}>
-              {customerResponseData.data.filters.intents[2].intent}
+              {customerResponseData?.data?.filters?.intents[2]?.intent}
             </Text>
           </Checkbox>
         </NativeBaseProvider>
@@ -381,7 +381,7 @@ console.log('isnaviagted from chat',isnavigated)
   const Contacthandler = () => {
     console.log(
       'customer Contact responce data',
-      customerResponseData.data.filters,
+      customerResponseData?.data?.filters,
     );
     return (
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
@@ -406,7 +406,7 @@ console.log('isnaviagted from chat',isnavigated)
   const IntrestedInhandler = () => {
     console.log(
       'customer customer_interest responce data',
-      customerResponseData.data.filters.customer_interest,
+      customerResponseData?.data?.filters?.customer_interest,
     );
 
     const CustomerIntrestItem = ({title}) => (
@@ -433,7 +433,7 @@ console.log('isnaviagted from chat',isnavigated)
       <View>
         <FlatList
           numColumns={2}
-          data={customerResponseData.data.filters.customer_interest}
+          data={customerResponseData?.data?.filters?.customer_interest}
           renderItem={renderItem}
           keyExtractor={index => index.toString()}
         />
@@ -442,26 +442,20 @@ console.log('isnaviagted from chat',isnavigated)
   };
 
   const Assigned_To_Handler = ()=>{
-    console.log('Assigned To -->',customerResponseData.data.filters.assigned_users)
+    console.log('Assigned To -->',customerResponseData?.data?.filters?.assigned_users)
 
-    //const Assigned_To = [{label: 'OPEN'}, {label: 'CLOSE'}];
-    const Assigned_user = customerResponseData.data.filters.assigned_users
-
-   const  Assigned_To = Assigned_user.map(function(obj) {
-     
-      return { 
-        label: obj.name
+    const [Assigned_To, setAssigned_To] = useState([]);
+    if (customerResponseData?.data?.filters?.assigned_users) {
+      setAssigned_To(Assigned_user.map(function(obj) {
+        return { 
+          label: obj.name
         }
-  });
+      }));
+    }
 
-  
-
-  console.log(Assigned_To);
+    //console.log(Assigned_To);
 
     const Assigned_To_Agent = ({Item}) => (
-      
-      
-
       <RadioButtonRN
           data={Assigned_To}
           selectedBtn={e => {
@@ -473,25 +467,16 @@ console.log('isnaviagted from chat',isnavigated)
           deactiveColor={'#657180'}
           activeColor={'#0E0071'}
           circleSize={13}/>
-
-            
-
     );
 
     const renderItem = ({item}) => <Assigned_To_Agent Item={item} />;
     return (
       <View>
-
         <FlatList 
         data={Assigned_To}
         renderItem={renderItem}
         keyExtractor={index => index.toString()}
         />
-        
-        
-        
-
-        
       </View>
     );
     

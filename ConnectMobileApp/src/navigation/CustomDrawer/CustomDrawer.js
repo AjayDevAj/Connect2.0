@@ -37,6 +37,7 @@ function CustomDrawer(props) {
             navigation.closeDrawer();
             // deleteAll();
             signOut();
+            await AsyncStorage.removeItem(otpResponse_Storage_Key);
             navigation.navigate(NavigationString.LOGIN);
         } else if (logOutResponse?.error?.error) {
             throw new Error(logOutResponse?.error?.error)

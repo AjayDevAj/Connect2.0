@@ -11,7 +11,7 @@ export var store_Value = null;
 export const saveObject = async (storeObject,Store_Key) => {
     console.log("Before storage-------",JSON.stringify(storeObject));
     
-    AsyncStorage.setItem(Store_Key, JSON.stringify(storeObject), (err)=> {
+    await AsyncStorage.setItem(Store_Key, JSON.stringify(storeObject), (err)=> {
         if(err){
             console.log("an error");
             throw err;
@@ -25,9 +25,9 @@ export const saveObject = async (storeObject,Store_Key) => {
  * * This function is to fetch data into local storage(AsyncStorage)
  * @param {*} Store_Key 
  */
-export const getOtpResponse = async (Store_Key) => {
+export const getOtpResponse = async (Store_Key, val_type='') => {
 
-    if (store_Value !== null) {
+    if ((store_Value !== null) && (val_type != 'location')) {
         console.log("store_Value error is fail to store: if " + store_Value);
         return store_Value
     } else {
