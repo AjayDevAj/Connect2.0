@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Avatar, Button, Card, Title, Paragraph, List} from 'react-native-paper';
@@ -77,7 +78,7 @@ const MyPostHome = ({navigation}) => {
         name={'My Posts'}
         firstIcon={'menu'}
         //secondIcon={'search'}
-        thirdIcon={'filter-list'}
+        // thirdIcon={'filter-list'}
         menuHandler={menuHandler}
         searchHandler={searchHandler}
       />
@@ -305,6 +306,7 @@ const MyPostHome = ({navigation}) => {
         iconTextColor="#FFFFFF"
         onClickAction={() => {
           navigation.navigate(NavigationString.New_Post)
+          
         }}
         visible={true}
         iconTextComponent={<Icon name="post-add" />}

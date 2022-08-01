@@ -3,11 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {AntDesign} from 'react-native-vector-icons/AntDesign';
 import Fontfamily from '../../utility/Font-Declarations';
-const DropdownComponent = ({title , listvalue}) => {
+const DropdownComponent = ({title , listvalue , onChange}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  
+ 
 
   return (
     <View style={styles.container}>
@@ -29,10 +29,8 @@ const DropdownComponent = ({title , listvalue}) => {
         value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={item => {
-          setValue(item.value);
-          setIsFocus(false);
-        }}
+        onChange={
+        onChange}
         //   renderLeftIcon={() => (
         //     <AntDesign
         //       style={styles.icon}
