@@ -1,6 +1,5 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {viewed_Onboarding} from '../utility/Constant'
 
 export var store_Value = null;
 

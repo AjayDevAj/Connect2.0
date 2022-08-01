@@ -35,7 +35,7 @@ function CustomDrawer(props) {
         if (logOutResponse?.error === false) {
             setLocationScreenView();
             navigation.closeDrawer();
-            // deleteAll()
+            // deleteAll();
             signOut();
             navigation.navigate(NavigationString.LOGIN);
         } else if (logOutResponse?.error?.error) {

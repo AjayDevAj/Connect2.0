@@ -86,13 +86,12 @@
     *  */
    const VerifyOTPApi = async () => {
      var verifyOtpResponse = await verifyOTP(mobileNumber, otp);
- 
+
      if (verifyOtpResponse.code == 200) {
        saveObject(verifyOtpResponse.data, otpResponse_Storage_Key);
        {verifyOtpResponse?.data?.token && setToken(verifyOtpResponse.data.token)};
 
        var showLocationScreenAfterLogout = await AsyncStorage.getItem(show_location_screen);
-       console.log('===== showLocationScreenAfterLogout =====', showLocationScreenAfterLogout);
 
        {!showLocationScreenAfterLogout
         ? (
