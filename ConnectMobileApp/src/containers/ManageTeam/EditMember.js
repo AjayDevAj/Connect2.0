@@ -10,7 +10,11 @@ import { API_URL_STAGING } from '../../utility/Config_File';
 import { getOtpResponse } from '../../utility/StorageClass';
 import { otpResponse_Storage_Key } from '../../utility/Constant';
 import NavigationString from '../../utility/NavigationString';
-import { signOut } from '../../navigation/Routes'
+import { signOut } from '../../navigation/Routes';
+import fontFamily from '../../utility/Font-Declarations';
+import { color } from 'react-native-reanimated';
+import { size } from 'lodash';
+
 
 
 export default function EditMember({ route, navigation }) {
@@ -19,7 +23,7 @@ export default function EditMember({ route, navigation }) {
     const isFocused = useIsFocused();
 
     const { name, number } = route.params;
-   // console.log('Name and number======>', name, number)
+    // console.log('Name and number======>', name, number)
 
     const [radioValue, setRadioValue] = useState();
 
@@ -41,7 +45,7 @@ export default function EditMember({ route, navigation }) {
             //console.log("use effect calling......")
             getPermissionData();
         }
-    }, [isFocused],[]);
+    }, [isFocused], []);
 
     //Calling API.
     const getPermissionData = async () => {
@@ -105,9 +109,9 @@ export default function EditMember({ route, navigation }) {
                 menuHandler={menuHandler}
             />
 
-            <ScrollView 
+            <ScrollView
                 nestedScrollEnabled={true}>
-                
+
                 <View>
                     <Text style={editManageTeamStyles.textDataStyle}>
                         Enter Name
@@ -115,6 +119,7 @@ export default function EditMember({ route, navigation }) {
 
                     <TextInput style={editManageTeamStyles.texInputStyle}
                         placeholder={name}
+                        
                     >
                     </TextInput>
 
@@ -142,6 +147,18 @@ export default function EditMember({ route, navigation }) {
                                 setRadioValue({ value: e })
                                 Alert.alert(e.toString())
                             }}
+                            buttonSize={15}
+                            buttonColor={'#2146f1'}
+                           // buttonInnerColor={'#e74c3c'}
+                           // buttonOuterColor={'#2176f1'}
+
+                           // buttonWrapStyle={{marginLeft: 30}}
+                            buttonStyle={{marginTop: 100}}
+                            
+
+
+
+
                         />
 
                         {/* <Text style={editManageTeamStyles.radioBtnAdminStyle}>
@@ -157,23 +174,32 @@ export default function EditMember({ route, navigation }) {
                     <Text style={editManageTeamStyles.chooseTextStyle}>
                         Allow access to
                     </Text>
-                    <FlatList 
+                    <FlatList
                         data={data}
                         keyExtractor={({ id }, index) => id}
                         renderItem={({ item }) => (
                             <View style={{ paddingBottom: 10 }}>
                                 {console.log("DAATADATATADA====", data)}
 
-                                <Text style={{fontSize: 20,}}>
+                                <Text style={{ fontSize: 16, marginLeft: 45, marginTop: 15, fontWeight:'bold' }}>
                                     {item.route}
                                 </Text>
-                                <Text style={{fontSize: 20,}}>
-                                   djfhjdfshfh
+                                <Text style={{
+                                    fontSize: 14, marginLeft: 45, fontFamily: fontFamily.Poppins,}}>
+                                    Ability to add employees using their mobile
                                 </Text>
+                                <Text style={{ fontSize: 14, marginLeft: 45, fontFamily: fontFamily.Poppins, }}>
+                                    Numbers and assign permissions                                </Text>
                             </View>
                         )}
-                        
+
                     />
+
+                    <Text style={editManageTeamStyles.chooseTextStyle}>
+                        Location access to
+                    </Text>
+
+
                 </View>
 
             </ScrollView>

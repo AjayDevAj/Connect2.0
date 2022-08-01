@@ -22,13 +22,15 @@ const editManageTeamStyles = StyleSheet.create({
         height: 40, 
         width: "92%",
         alignSelf:'center',
-        marginTop: -5,      
+        marginTop: -5,    
+        paddingLeft:10  
     },
     chooseTextStyle:{
         marginTop: 30,
         marginLeft: 15,
         fontSize: 16,
-        fontFamily: fontFamily.Alte_DIN
+        fontFamily: fontFamily.Alte_DIN,
+        fontWeight:'bold'
     },
     chooseViewStyle: {
         flexDirection: 'row',
@@ -53,6 +55,7 @@ const editManageTeamStyles = StyleSheet.create({
         bottom:20,
         height:60,
         justifyContent:'space-around',
+        backgroundColor:'white'
        
     },
     cancleBtnStyle:{
