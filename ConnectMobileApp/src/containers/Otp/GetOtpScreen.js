@@ -49,7 +49,7 @@
  import NavigationString from '../../utility/NavigationString';
  import fontFamily from '../../utility/Font-Declarations';
  import {saveObject} from '../../utility/StorageClass';
- import {otpResponse_Storage_Key, appToken, viewed_Onboarding } from '../../utility/Constant';
+ import {otpResponse_Storage_Key, appToken, show_location_screen } from '../../utility/Constant';
  
  import AsyncStorage from '@react-native-async-storage/async-storage';
  
@@ -76,6 +76,10 @@
     const editNoHandler = () => {
      navigation.goBack();
     }
+
+    const setLocationScreenView = async () => {
+      await AsyncStorage.setItem(show_location_screen, 'false');
+    }
  
    /**
     * OTP Api calling
@@ -85,13 +89,25 @@
  
      if (verifyOtpResponse.code == 200) {
        saveObject(verifyOtpResponse.data, otpResponse_Storage_Key);
-       { verifyOtpResponse?.data?.token && setToken(verifyOtpResponse.data.token) }
- 
-       {verifyOtpResponse?.data?.user.name && (
-         navigation.navigate(NavigationString.Location, {
-           userName: verifyOtpResponse.data.user.name,
-         })
-       )}
+       {verifyOtpResponse?.data?.token && setToken(verifyOtpResponse.data.token)};
+
+       var showLocationScreenAfterLogout = await AsyncStorage.getItem(show_location_screen);
+       console.log('===== showLocationScreenAfterLogout =====', showLocationScreenAfterLogout);
+
+      //  {!showLocationScreenAfterLogout
+      //   ? (
+      //     navigation.navigate(NavigationString.Dashboard)
+      //   ) : (
+      //     setLocationScreenView(),
+      //     <>
+          {verifyOtpResponse?.data?.user.name && (
+            navigation.navigate(NavigationString.Location, {
+              userName: verifyOtpResponse.data.user.name,
+            })
+          )}
+      //     </>
+      //   )
+      // }
      } else if (
        verifyOtpResponse != '' &&
        verifyOtpResponse?.data?.code  &&
