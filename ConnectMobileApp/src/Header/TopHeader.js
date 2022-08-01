@@ -94,39 +94,40 @@ const TopHeader = ({
                     :   (
                         <>
                         {logo != '' && (
-                            <View style={ [headerStyles.headerIconContainer, { }] }>
+                            <View style={ headerStyles.headerIconContainer }>
                                 { logo === 'whatsapp' ? 
                                     <WhatsappIcon />
                                 : 
                                     <GoogleIcon /> 
                                 }
                             </View>
-                        ) }
+                        )}
                         <Text style={ headerStyles.headerText }>{name}</Text>
                         </>
                        )}
                 </View>
                 
                 <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-around', }}>
-                    {secondIcon && (<Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
-                    onPress={searchHandler} color={color == null ? '#FFFFFF': color} />)}
-                    {thirdIcon && (
-                    <>
-                        {isFilterApplied ? (
-                            <>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                                <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
-                                <Count_Badge topRight={16} top={1} width={16} height={16} badge_Value={2} fontSize={11} />
-                            </View>
-                            </>
-                        ) : (
-                            <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
-                        )}
-                    </>
-                    )}
+                    {secondIcon ? (
+                        <Icon name={secondIcon} size={28} style={ headerStyles.headerSearchIcon }
+                        onPress={searchHandler} color={color == null ? '#FFFFFF': color} />
+                    ) : <Text></Text>}
                     
+                    {thirdIcon ? (
+                        <>
+                            {isFilterApplied ? (
+                                <>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                                    <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                                    <Count_Badge topRight={16} top={1} width={16} height={16} badge_Value={2} fontSize={11} />
+                                </View>
+                                </>
+                            ) : (
+                                <Icon name={thirdIcon} size={28} style={ headerStyles.headerFilterIcon } onPress={filterHandler} />
+                            )}
+                        </>
+                    ) : <Text></Text>}
                 </View>
-                
             </View>
         )}
     </View>

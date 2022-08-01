@@ -39,38 +39,52 @@ function CustomDrawer(props) {
     const { navigation } = props
     return (
         <View style={{ flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)' }}>
-            <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: 'rgba(14, 0, 113, 1)', borderBottomRightRadius: 30, height: 150 }}>
+            <DrawerContentScrollView {...props} contentContainerStyle={{  }}>
 
-                <View style={{
-                    flexDirection: "column",
-                    height: '90%',
-                    marginTop: 10,
-                }}>
-                    <Singleinterfaceicon height={52} width={52} marginLeft={15} />
+                <View 
+                    style={{
+                        backgroundColor: 'rgba(14, 0, 113, 1)',
+                        flexDirection: "column",
+                        height: '28%',
+                        marginTop: -4,
+                        borderBottomRightRadius: 24
+                    }}
+                >
+                    <View style={{
+                        borderColor: '#0070FC',
+                        marginTop: 15,
+                        marginLeft: 15,
+                        height: 52,
+                        width: 52,
+                        borderRadius: 52/2,
+                        backgroundColor: '#0070FC',
+                        opacity: 1
+                    }}>
+                        <Singleinterfaceicon height={48} width={48} marginLeft={2} marginTop={2} />
+                    </View>
 
                     <Text style={{
                         color: 'rgba(255, 255, 255, 1)',
-                        marginTop: 10,
-                        marginBottom: 20,
+                        marginTop: 8,
+                        // marginBottom: 20,
                         marginLeft: 16,
                         fontSize: 12,
                         fontFamily: fontFamily.Alte_DIN,
-                        opacity: 70
-
+                        opacity: 0.7
                     }}>
                         XYZ Automobiles & Services
                     </Text>
                 </View>
 
-                <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10 }}>
+                <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10, }}>
                     <TouchableOpacity
                         style={styles.btnStyle}
                         onPress={() => navigation.navigate(NavigationString.MyPostHome)}
                     >
                         <View style={styles.listView}>
-                            <Icon name='post-add' size={25} style={styles.iconList} />
+                            <Icon name='post-add' size={20} style={styles.iconList} />
                             <Text style={styles.listText}>Posts</Text>
-                            <Icon name='chevron-right' size={20} style={{ marginLeft: 135, marginTop: 10, }} />
+                            <Icon name='chevron-right' size={20} color='#5F6368' style={{ marginLeft: 135, marginTop: 5, }} />
                         </View>
                     </TouchableOpacity>
                     <View style={styles.lineStyle}></View>
@@ -80,9 +94,9 @@ function CustomDrawer(props) {
                         onPress={() => navigation.navigate(NavigationString.My_Offers_home)}
                     >
                         <View style={styles.listView}>
-                            <Icon name='local-offer' size={25} style={styles.iconList} />
+                            <Icon name='local-offer' size={20} style={styles.iconList} />
                             <Text style={styles.listText}>Offers</Text>
-                            <Icon name='chevron-right' size={20} style={{ marginLeft: 130, marginTop: 10 }} />
+                            <Icon name='chevron-right' size={20} color='#5F6368' style={{ marginLeft: 130, marginTop: 5 }} />
                         </View>
                     </TouchableOpacity>
                     <View style={styles.lineStyle}></View>
@@ -92,9 +106,9 @@ function CustomDrawer(props) {
                     // onPress={() => navigation.navigate(NavigationString.Locations)}
                     >
                         <View style={styles.listView}>
-                            <Icon name='location-on' size={25} style={styles.iconList} />
+                            <Icon name='location-on' size={20} style={styles.iconList} />
                             <Text style={styles.listText}>Locations</Text>
-                            <Icon name='chevron-right' size={20} style={{ marginLeft: 103, marginTop: 10 }} />
+                            <Icon name='chevron-right' size={20} color='#5F6368' style={{ marginLeft: 103, marginTop: 5 }} />
                         </View>
                     </TouchableOpacity>
                     <View style={styles.lineStyle}></View>
@@ -104,9 +118,9 @@ function CustomDrawer(props) {
                     // onPress={() => navigation.navigate(NavigationString.Offers)}
                     >
                         <View style={styles.listView}>
-                            <Icon name='group' size={25} style={styles.iconList} />
+                            <Icon name='group' size={20} style={styles.iconList} />
                             <Text style={styles.listText}>Manage Team</Text>
-                            <Icon name='chevron-right' size={20} style={{ marginLeft: 65, marginTop: 10 }} />
+                            <Icon name='chevron-right' size={20} color='#5F6368' style={{ marginLeft: 75, marginTop: 5 }} />
                         </View>
                     </TouchableOpacity>
                     <View style={styles.lineStyle}></View>
@@ -116,9 +130,9 @@ function CustomDrawer(props) {
                     // onPress={() => navigation.navigate(NavigationString.Offers)}
                     >
                         <View style={styles.listView}>
-                            <Icon name='person-outline' size={25} style={styles.iconList} />
+                            <Icon name='person-outline' size={20} style={styles.iconList} />
                             <Text style={styles.listText}>Profile</Text>
-                            <Icon name='chevron-right' size={20} style={{ marginLeft: 128, marginTop: 10 }} />
+                            <Icon name='chevron-right' size={20} color='#5F6368' style={{ marginLeft: 128, marginTop: 5 }} />
                         </View>
                     </TouchableOpacity>
                     <View style={styles.lineStyle}></View>

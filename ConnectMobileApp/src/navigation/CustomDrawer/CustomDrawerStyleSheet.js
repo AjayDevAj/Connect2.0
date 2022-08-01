@@ -4,11 +4,12 @@ import fontFamily from '../../utility/Font-Declarations'
 export default StyleSheet.create({
 
     listText: {
-        color: 'black',
+        color: '#333333',
         fontSize: 15,
-        marginVertical: 10,
+        marginVertical: 5,
         marginLeft: 5,
-        fontFamily: fontFamily.Poppins
+        fontFamily: fontFamily.Poppins,
+        opacity: 1
     },
     lineStyle: {
         marginLeft: 5,
@@ -29,7 +30,7 @@ export default StyleSheet.create({
     },
     iconList: {
         padding: 5,
-        color: 'gray'
+        color: '#5F6368'
     },
     logoutStyle: {
         flexDirection: 'row',
