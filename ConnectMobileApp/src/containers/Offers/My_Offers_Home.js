@@ -293,7 +293,7 @@ useEffect(() => {
 
                 fontSize: 14,
               }}>
-              {postMessage}
+              {/* {postMessage} */}
             </Text>
             <View
               style={{

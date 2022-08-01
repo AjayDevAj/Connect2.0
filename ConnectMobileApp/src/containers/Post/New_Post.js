@@ -193,22 +193,12 @@ const New_Post = ({navigation}) => {
   const PublishPosthandler = () => {
     navigation.navigate(NavigationString.My_Post);
     closePanel();
-    dispatch(
-      loadpostdata(
-        location_id,
-        message,
-        picture_url,
-        call_to_action,
-       // file,
-        link,
-      ),
-    );
-
-    
+    sendPost();
   };
 
   const sendPost = async() => {
-    await getpost(location_id,
+    await getpost(
+      location_id,
       message,
       picture_url,
       link,

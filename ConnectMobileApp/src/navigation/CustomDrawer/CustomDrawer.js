@@ -103,7 +103,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                    // onPress={() => navigation.navigate(NavigationString.Locations)}
+                    onPress={() => navigation.navigate(NavigationString.Locations)}
                     >
                         <View style={styles.listView}>
                             <Icon name='location-on' size={20} style={styles.iconList} />

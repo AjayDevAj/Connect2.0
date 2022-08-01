@@ -20,7 +20,7 @@ import FontDeclarations from '../../utility/Font-Declarations';
 
 //import {useIsFocused} from '@react-navigation/native';
 
-const UpdateLocationHome_Screen = () => {
+const UpdateLocationHome_Screen = ({navigation}) => {
   //const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
   const [searchText, setsearchText] = useState(null);
@@ -83,6 +83,11 @@ const UpdateLocationHome_Screen = () => {
       setFilteredDataSource(masterDataSource);
       setsearchText(text);
     }
+  };
+
+  const menuHandler = () => {
+    //  alert('Menu Handler');
+    navigation.openDrawer();
   };
 
   const searchHandler = () => {
@@ -199,6 +204,7 @@ const UpdateLocationHome_Screen = () => {
         firstIcon={'menu'}
         name={'Locations'}
         secondIcon={'search'}
+        menuHandler={menuHandler}
         searchHandler={searchHandler} //Search handler (passed sesarch in  filter icon component )
         isSearchEnable={isSearch}
         chatSearchHandler={searchFilterFunction} //chatSearchHandler is commpon props to handler search data in input text

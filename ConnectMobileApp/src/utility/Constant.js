@@ -22,22 +22,6 @@
  */
 
  const CONSTANT = {
-  LOGIN_DATA: 'LOGIN_DATA',
-  DATA_ERROR: 'DATA_ERROR',
-  DATA_SUCCESS: 'DATA_SUCCESS',
-
-  OTP_DATA: 'OTP_DATA',
-  OTP_DATA_ERROR: 'OTP_DATA_ERROR',
-  OTP_DATA_SUCCESS: 'OTP_DATA_SUCCESS',
-
-  Resend_OTP_DATA: 'Resend_OTP_DATA',
-  Resend_OTP_DATA_ERROR: 'Resend_OTP_DATA_ERROR',
-  Resend_OTP_DATA_SUCCESS: 'Resend_OTP_DATA_SUCCESS',
-
-  CHAT_DATA: 'CHAT_DATA',
-  CHAT_DATA_ERROR: 'CHAT_DATA_ERROR',
-  CHAT_DATA_SUCCESS: 'CHAT_DATA_SUCCESS',
-
   STORE_LOCATION_DATA: 'STORE_LOCATION_DATA',
   STORE_LOCATION_ERROR: 'STORE_LOCATION_ERROR',
   STORE_LOCATION_SUCCESS: 'STORE_LOCATION_SUCCESS',
@@ -46,25 +30,9 @@
   Unassigned_Chat_ERROR: 'Unassigned_Chat_ERROR',
   Unassigned_Chat_SUCCESS: 'Unassigned_Chat_SUCCESS',
 
-  IsImportant_Data: 'IsImportant_Data',
-  IsImportant_ERROR: 'IsImportant_ERROR',
-  IsImportant_SUCCESS: 'IsImportant_SUCCESS',
-
-  SEARCH_DATA: 'SEARCH_DATA',
-  SEARCH_DATA_ERROR: 'SEARCH_DATA_ERROR',
-  SEARCH_DATA_SUCCESS: 'SEARCH_DATA_SUCCESS',
-
   loadAllChat_Conversation_Data: 'loadAllChat_Conversation_Data',
   loadAllChat_Conversation_ERROR: 'loadAllChat_Conversation_ERROR',
   loadAllChat_Conversation_SUCCESS: 'loadAllChat_Conversation_SUCCESS',
-
-  ACCEPT_REJECT_CHAT_DATA: 'ACCEPT_REJECT_CHAT_DATA',
-  ACCEPT_REJECT_CHAT_ERROR: 'ACCEPT_REJECT_CHAT_ERROR',
-  ACCEPT_REJECT_CHAT_SUCCESS: 'ACCEPT_REJECT_CHAT_SUCCESS',
-
-  Send_message_DATA: 'Send_message_DATA',
-  Send_message_ERROR: 'Send_message_ERROR',
-  Send_message_SUCCESS: 'Send_message_SUCCESS',
 
   FILTER_DATA: 'FILTER_DATA',
   FILTER_ERROR: 'FILTER_ERROR',
@@ -85,12 +53,6 @@
   CUSTOMER_DATA_ERROR: 'CUSTOMER_DATA_ERROR',
   CUSTOMER_DATA_SUCCESS: 'CUSTOMER_DATA_SUCCESS',
 
-
-  POST_DATA: 'POST_DATA',
-  POST_DATA_ERROR: 'POST_DATA_ERROR',
-  POST_DATA_SUCCESS: 'POST_DATA_SUCCESS',
-
-
   POST_LIST_DATA: 'POST_LIST_DATA',
   POST_LIST_DATA_ERROR: 'POST_LIST_DATA_ERROR',
   POST_LIST_DATA_SUCCESS: 'POST_LIST_DATA_SUCCESS',
@@ -99,15 +61,9 @@
   OFFER_LIST_DATA_ERROR: 'OFFER_LIST_DATA_ERROR',
   OFFER_LIST_DATA_SUCCESS: 'OFFER_LIST_DATA_SUCCESS',
 
-  
-
   GET_LEAD_DATA: 'GET_LEAD_DATA',
   GET_LEAD_DATA_ERROR: 'GET_LEAD_DATA_ERROR',
   GET_LEAD_DATA_SUCCESS: 'GET_LEAD_DATA_SUCCESS',
-
-  SEND_LEAD_DATA: 'SEND_LEAD_DATA',
-  SEND_LEAD_DATA_ERROR: 'SEND_LEAD_DATA_ERROR',
-  SEND_LEAD_DATA_SUCCESS: 'SEND_LEAD_DATA_SUCCESS',
 };
 
 export {CONSTANT};
@@ -214,15 +170,7 @@ export const Offer_CTA = [
   {label: 'CTA Covid Post', value: '4'},
  
 ];
-export const StateList = [
-  {label:'Maharashtra',value:'MH'},
-  {label:'Uttarapradesh',value:'UP'}
-]
 
-export const CityList = [
-  {label:'Mumbai',value:'MUM'},
-  {label:'Varansi',value:'BSB'}
-]
 export const intentData = [
   {
       id: 1,
@@ -293,3 +241,4 @@ export const viewed_Onboarding = 'viewed_Onboarding';
 export const ConnectAppCommonBottomSheet = 'ConnectAppCommonBottomSheet';
 export const searchedListData = 'searchedListData';
 export const selectedbtnid = 'selectedbtnid';
+export const appToken = 'app_token';

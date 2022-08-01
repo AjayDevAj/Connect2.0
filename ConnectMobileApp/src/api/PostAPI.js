@@ -5,11 +5,13 @@ import {otpResponse_Storage_Key} from '../utility/Constant'
 import {signOut} from '../navigation/Routes';
 
 
-const getpost = async (location_id,
+const getpost = async (
+    location_id,
     message,
     picture_url,
     link,
-    call_to_action) => {
+    call_to_action
+) => {
    
 
     const bodyRawData = {
@@ -18,7 +20,6 @@ const getpost = async (location_id,
         "picture_url": picture_url,
         "call_to_action": call_to_action,
         "link": link,
-       
     };
    
     const token_Value = await getOtpResponse(otpResponse_Storage_Key)

@@ -30,8 +30,7 @@
  */
 
 import React, { useEffect, useMemo, useReducer } from 'react';
-import { NavigationContainer, NavigationActions, CommonActions } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 
 import navigationString from '../utility/NavigationString';
 import {navigationRef} from '../navigation/RootNavigation';
@@ -52,7 +51,13 @@ import Storelocation from '../containers/Location/Storelocation';
 
 import Message from '../containers/Message/Message';
 import CustomerFilter from '../containers/Customer_Filter/CustomerFilter';
-import Chat_Filter from '../containers/FilterChat/Chat_Filter'
+import Chat_Filter from '../containers/FilterChat/Chat_Filter';
+
+import New_Post from '../containers/Post/New_Post';
+import My_Post from '../containers/Post/My_Post';
+
+import My_Offers from '../containers/Offers/My_Offers';
+import Add_new_offer from '../containers/Offers/Add_new_offers';
 
 import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
@@ -152,6 +157,14 @@ const Routes = () => {
             </>
           )}
           <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} />
+          <Stack.Screen component={New_Post} name={navigationString.New_Post} />
+          <Stack.Screen component={My_Post} name={navigationString.My_Post} />
+          
+          <Stack.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
+          <Stack.Screen component={My_Offers} name={navigationString.My_Offers} />
+          
+          
+          
           <Stack.Screen component={Message} name={navigationString.Message} />
           <Stack.Screen component={CustomerFilter} name={navigationString.Filter} />
           <Stack.Screen component={Chat_Filter} name={navigationString.Chat_Filter} />
