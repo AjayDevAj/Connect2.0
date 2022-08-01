@@ -94,20 +94,20 @@
        var showLocationScreenAfterLogout = await AsyncStorage.getItem(show_location_screen);
        console.log('===== showLocationScreenAfterLogout =====', showLocationScreenAfterLogout);
 
-      //  {!showLocationScreenAfterLogout
-      //   ? (
-      //     navigation.navigate(NavigationString.Dashboard)
-      //   ) : (
-      //     setLocationScreenView(),
-      //     <>
+       {!showLocationScreenAfterLogout
+        ? (
+          navigation.navigate(NavigationString.Dashboard)
+        ) : (
+          setLocationScreenView(),
+          <>
           {verifyOtpResponse?.data?.user.name && (
             navigation.navigate(NavigationString.Location, {
               userName: verifyOtpResponse.data.user.name,
             })
           )}
-      //     </>
-      //   )
-      // }
+           </>
+         )
+        }
      } else if (
        verifyOtpResponse != '' &&
        verifyOtpResponse?.data?.code  &&
