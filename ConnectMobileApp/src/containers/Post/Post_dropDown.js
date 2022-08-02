@@ -29,8 +29,7 @@ const DropdownComponent = ({title , listvalue , onChange}) => {
         value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={
-        onChange}
+        onChange={onChange}
         //   renderLeftIcon={() => (
         //     <AntDesign
         //       style={styles.icon}
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
+    
   },
   icon: {
     marginRight: 5,
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 12,
+    
   },
   placeholderStyle: {
     fontSize: 12,

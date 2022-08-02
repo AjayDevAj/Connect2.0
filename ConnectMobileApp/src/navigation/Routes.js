@@ -146,7 +146,7 @@ const Routes = () => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {loginState.userToken != null ? (
-            <Stack.Screen component={Storelocation} name={navigationString.Location} />
+            <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} />
           ) : (
             <>
               {loginState.isAppInstalledFirstTime == true  && (
@@ -156,7 +156,8 @@ const Routes = () => {
               <Stack.Screen component={GetOtpScreen} name={navigationString.GetOtpScreen} />
             </>
           )}
-          <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} />
+          <Stack.Screen component={Storelocation} name={navigationString.Location} />
+          {/* <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} /> */}
           <Stack.Screen component={New_Post} name={navigationString.New_Post} />
           <Stack.Screen component={My_Post} name={navigationString.My_Post} />
           

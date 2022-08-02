@@ -16,17 +16,24 @@ import Singleinterfaceicon from '../../../assets/svg/singleinterfaceicon.svg'
 import fontFamily from '../../utility/Font-Declarations';
 
 import { logOutApi } from '../../api/logOutApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { show_location_screen } from '../../utility/Constant';
 
 function CustomDrawer(props) {
     const navigation1 = useNavigation();
 
     const { logOut } = useContext(AuthContext);
 
+    const setLocationScreenView = async () => {
+        await AsyncStorage.setItem(show_location_screen, 'true');
+    }
+
     //Logout api calling..
     const logout = async () => {
         const logOutResponse = await logOutApi();
 
         if (logOutResponse?.error === false) {
+            setLocationScreenView();
             navigation.closeDrawer();
             // deleteAll()
             signOut();
@@ -103,7 +110,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                    onPress={() => navigation.navigate(NavigationString.Locations)}
+                        onPress={() => navigation.navigate(NavigationString.Locations)}
                     >
                         <View style={styles.listView}>
                             <Icon name='location-on' size={20} style={styles.iconList} />

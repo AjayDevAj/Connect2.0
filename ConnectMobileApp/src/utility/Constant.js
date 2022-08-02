@@ -242,3 +242,4 @@ export const ConnectAppCommonBottomSheet = 'ConnectAppCommonBottomSheet';
 export const searchedListData = 'searchedListData';
 export const selectedbtnid = 'selectedbtnid';
 export const appToken = 'app_token';
+export const show_location_screen = 'show_location_screen';
