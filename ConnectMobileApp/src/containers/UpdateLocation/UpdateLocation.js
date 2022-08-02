@@ -23,6 +23,7 @@ import DropdownComponent from '../Post/Post_dropDown';
 import {StateList, CityList} from '../../utility/Constant';
 import DatePicker from 'react-native-date-picker';
 import CheckBox from '@react-native-community/checkbox';
+import styles from './UpdateLocationStyle';
 
 const UpdateLocation = () => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
@@ -58,50 +59,43 @@ const UpdateLocation = () => {
       Monday: {
         opens: null,
         close: null,
-        
       },
       Tuesday: {
         opens: null,
         close: null,
-       
       },
       Wednesday: {
         opens: null,
         close: null,
-       
       },
       Thursday: {
         opens: null,
         close: null,
-       
       },
       Friday: {
         opens: null,
         close: null,
-       
       },
       Saturday: {
         opens: null,
         close: null,
-       
       },
       Sunday: {
         opens: null,
         close: null,
-       
       },
     },
   ]);
 
   const [open, setOpen] = useState({
-    isOpen:false,
-    trigerPointOpen:null,
-    TuesdaytrigerPoint:null,
-    Wednesdaytrigerpoint:null,
-    Thursdaytrigerpoint:null,
-    Fridaytrigerpoint:null,
-    Saturdaytrigerpoint:null,
-    Sundaytrigerpoint:null
+    isOpen: false,
+    trigerPointOpen: null,
+    TuesdaytrigerPoint: null,
+    Wednesdaytrigerpoint: null,
+    Thursdaytrigerpoint: null,
+    Fridaytrigerpoint: null,
+    Saturdaytrigerpoint: null,
+    Sundaytrigerpoint: null,
   });
 
   const handletimerpicker = () => {
@@ -268,8 +262,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        trigerPointOpen:true
+                        isOpen: true,
+                        trigerPointOpen: true,
                       });
                     }}
                     style={{
@@ -298,8 +292,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        trigerPointOpen:false
+                        isOpen: true,
+                        trigerPointOpen: false,
                       });
                     }}
                     style={{
@@ -357,8 +351,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        TuesdaytrigerPoint:true
+                        isOpen: true,
+                        TuesdaytrigerPoint: true,
                       });
                     }}
                     style={{
@@ -387,8 +381,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        TuesdaytrigerPoint:false
+                        isOpen: true,
+                        TuesdaytrigerPoint: false,
                       });
                     }}
                     style={{
@@ -415,13 +409,12 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
-{/* Wednesday */}
+            {/* Wednesday */}
 
-
-<View
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -435,9 +428,9 @@ const UpdateLocation = () => {
                 onValueChange={toggleSwitch_Wednesday}
                 value={isWednesdayEnabled}
               />
-              </View>
+            </View>
 
-              {isWednesdayEnabled === true ? (
+            {isWednesdayEnabled === true ? (
               <>
                 <View style={{flexDirection: 'row', paddingBottom: 10}}>
                   <Text style={styles.TimerLabel}>Opens at</Text>
@@ -447,8 +440,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Wednesdaytrigerpoint:true
+                        isOpen: true,
+                        Wednesdaytrigerpoint: true,
                       });
                     }}
                     style={{
@@ -477,8 +470,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Wednesdaytrigerpoint:false
+                        isOpen: true,
+                        Wednesdaytrigerpoint: false,
                       });
                     }}
                     style={{
@@ -505,7 +498,7 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
 
@@ -525,9 +518,9 @@ const UpdateLocation = () => {
                 onValueChange={toggleSwitch_Thursday}
                 value={isThursdayEnabled}
               />
-              </View>
+            </View>
 
-              {isThursdayEnabled === true ? (
+            {isThursdayEnabled === true ? (
               <>
                 <View style={{flexDirection: 'row', paddingBottom: 10}}>
                   <Text style={styles.TimerLabel}>Opens at</Text>
@@ -537,8 +530,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Thursdaytrigerpoint:true
+                        isOpen: true,
+                        Thursdaytrigerpoint: true,
                       });
                     }}
                     style={{
@@ -567,8 +560,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Thursdaytrigerpoint:false
+                        isOpen: true,
+                        Thursdaytrigerpoint: false,
                       });
                     }}
                     style={{
@@ -595,7 +588,7 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
 
@@ -615,8 +608,8 @@ const UpdateLocation = () => {
                 onValueChange={toggleSwitch_Friday}
                 value={isFridayEnabled}
               />
-              </View>
-              {isFridayEnabled === true ? (
+            </View>
+            {isFridayEnabled === true ? (
               <>
                 <View style={{flexDirection: 'row', paddingBottom: 10}}>
                   <Text style={styles.TimerLabel}>Opens at</Text>
@@ -626,8 +619,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Fridaytrigerpoint:true
+                        isOpen: true,
+                        Fridaytrigerpoint: true,
                       });
                     }}
                     style={{
@@ -656,8 +649,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Fridaytrigerpoint:false
+                        isOpen: true,
+                        Fridaytrigerpoint: false,
                       });
                     }}
                     style={{
@@ -684,12 +677,12 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
-{/* Saturday */}
+            {/* Saturday */}
 
-<View
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -703,9 +696,9 @@ const UpdateLocation = () => {
                 onValueChange={toggleSwitch_Saturday}
                 value={isSaturdayEnabled}
               />
-              </View>
+            </View>
 
-              {isSaturdayEnabled === true ? (
+            {isSaturdayEnabled === true ? (
               <>
                 <View style={{flexDirection: 'row', paddingBottom: 10}}>
                   <Text style={styles.TimerLabel}>Opens at</Text>
@@ -715,8 +708,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Saturdaytrigerpoint:true
+                        isOpen: true,
+                        Saturdaytrigerpoint: true,
                       });
                     }}
                     style={{
@@ -745,8 +738,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Saturdaytrigerpoint:false
+                        isOpen: true,
+                        Saturdaytrigerpoint: false,
                       });
                     }}
                     style={{
@@ -773,7 +766,7 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
 
@@ -792,9 +785,9 @@ const UpdateLocation = () => {
                 onValueChange={toggleSwitch_Saturday}
                 value={isSaturdayEnabled}
               />
-              </View>
+            </View>
 
-              {isSundayEnabled === true ? (
+            {isSundayEnabled === true ? (
               <>
                 <View style={{flexDirection: 'row', paddingBottom: 10}}>
                   <Text style={styles.TimerLabel}>Opens at</Text>
@@ -804,8 +797,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Sundaytrigerpoint:true
+                        isOpen: true,
+                        Sundaytrigerpoint: true,
                       });
                     }}
                     style={{
@@ -834,8 +827,8 @@ const UpdateLocation = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setOpen({
-                        isOpen : true,
-                        Sundaytrigerpoint:false
+                        isOpen: true,
+                        Sundaytrigerpoint: false,
                       });
                     }}
                     style={{
@@ -862,53 +855,63 @@ const UpdateLocation = () => {
                   </TouchableOpacity>
                 </View>
               </>
-            ): (
+            ) : (
               <></>
             )}
-
           </ScrollView>
-          <TouchableOpacity style={[styles.UpdateButton,{bottom:15}]}>
+          <TouchableOpacity style={[styles.UpdateButton, {bottom: 15}]}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <></>
-
-
-
       )}
-      {currenttabIndex === 2 ? 
-      <View style={{padding:15}}>
-        <Text style={styles.TitleTextlable}>Contact No.</Text>
-            <TextInput
-              style={styles.InputText}
-              numberOfLines={4}
-              onChangeText={text => setoffertagline(text)}
-              value={'+91 9819667268'}
-            />
+      {currenttabIndex === 2 ? (
+        <View style={{padding: 15}}>
+          
+          <Text style={styles.TitleTextlable}>Contact No.</Text>
+          <TextInput
+            style={styles.InputText}
+            numberOfLines={4}
+            onChangeText={text => setoffertagline(text)}
+            value={'+91 9819667268'}
+          />
 
-            <View style={{paddingTop:20}}>
+          <View style={{paddingTop: 20}}>
             <DropdownComponent
-             style={{height: 20}}
-                title={'Choose Primary Category'}
-                listvalue={StateList}
-                onChange={item => {
-                  console.log('OnChange dropdown item', item);
-                  setStatename(item);
-                }}
-              />
-
-            </View>
-<TouchableOpacity onPress={()=>Alert.alert('Category not available')}>
-            <Text style={{color:'rgba(0, 112, 252, 1)',fontFamily:fontfamily.Alte_DIN,fontSize:12,paddingTop:10}}>Add Another Category </Text>
-            </TouchableOpacity>
-            <Text style={styles.TitleTextlable}>Add Services</Text>
-            <View style={{flexDirection:'row',paddingRight:30}}>
-            <CheckBox/>
-            <Text>Home Delivery</Text>
-            </View>
-            
-      </View> : <></>}
+              style={{height: 20}}
+              title={'Choose Primary Category'}
+              listvalue={StateList}
+              onChange={item => {
+                console.log('OnChange dropdown item', item);
+                setStatename(item);
+              }}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => Alert.alert('Category not available')}>
+            <Text
+              style={{
+                color: 'rgba(0, 112, 252, 1)',
+                fontFamily: fontfamily.Alte_DIN,
+                fontSize: 12,
+                paddingTop: 10,
+              }}>
+              Add Another Category{' '}
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.TitleTextlable}>Add Services</Text>
+          <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+            <CheckBox />
+            <Text style={{paddingRight:40}}>Home Delivery</Text>
+          </View>
+          <TouchableOpacity style={[styles.UpdateButton, {bottom: -270}]}>
+            <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <></>
+      )}
 
       <DatePicker
         modal
@@ -917,8 +920,8 @@ const UpdateLocation = () => {
         mode="time"
         onConfirm={date => {
           setOpen({
-            isOpen:false,
-            trigerPointOpen:null
+            isOpen: false,
+            trigerPointOpen: null,
           });
           setDate(date);
 
@@ -929,134 +932,99 @@ const UpdateLocation = () => {
           console.log(strTime);
           // setTime(strTime)
           if (open.trigerPointOpen) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Monday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Monday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Monday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Monday.close = strTime;
+              return [...test];
+            });
           }
-          
-          if (open.TuesdaytrigerPoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Tuesday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Tuesday.close = strTime
-              return [...test]
-            }
-           
-            );
 
+          if (open.TuesdaytrigerPoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Tuesday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Tuesday.close = strTime;
+              return [...test];
+            });
           }
 
           if (open.Wednesdaytrigerpoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Wednesday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Wednesday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Wednesday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Wednesday.close = strTime;
+              return [...test];
+            });
           }
 
           if (open.Thursdaytrigerpoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Thursday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Thursday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Thursday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Thursday.close = strTime;
+              return [...test];
+            });
           }
           if (open.Fridaytrigerpoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Friday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Friday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Friday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Friday.close = strTime;
+              return [...test];
+            });
           }
 
           if (open.Saturdaytrigerpoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Saturday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Saturday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.close = strTime;
+              return [...test];
+            });
           }
           if (open.Sundaytrigerpoint) {
-            setTime((prev) => {
-              let test = [...prev]
-                test[0].Saturday.opens = strTime
-                return [...test]
-              }
-             
-              );
-          }else{
-            setTime((prev) => {
-            let test = [...prev]
-              test[0].Sunday.close = strTime
-              return [...test]
-            }
-           
-            );
-
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Sunday.close = strTime;
+              return [...test];
+            });
           }
           return strTime;
         }}
@@ -1069,86 +1037,3 @@ const UpdateLocation = () => {
 };
 
 export default UpdateLocation;
-
-const styles = StyleSheet.create({
-  tabStyle: {
-    minHeight: 50,
-    borderRadius: 0,
-    borderColor: '#F7FCFF',
-    backgroundColor: '#F7FCFF',
-  },
-  tabTextStyle: {
-    color: '#657180',
-    fontFamily: fontfamily.Alte_DIN,
-    fontSize: 18,
-  },
-  activeTabStyle: {
-    borderBottomColor: '#0070FC',
-    backgroundColor: '#F7FCFF',
-  },
-  activeTabTextStyle: {
-    color: '#0070FC',
-  },
-  InputText: {
-    minHeight: 40,
-    minWidth: 328,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    borderColor: '#C3C7D9',
-    color: '#5F6368',
-    fontSize: 12,
-    fontFamily: fontfamily.Poppins,
-    padding: 10,
-  },
-  MultilineTextinout: {
-    minHeight: 75,
-    minWidth: 328,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    borderColor: '#C3C7D9',
-    fontFamily: fontfamily.Poppins,
-    padding: 10,
-    paddingTop: 10,
-    fontSize: 12,
-    color: '#657180',
-  },
-  TitleTextlable: {
-    fontSize: 14,
-    color: '#657180',
-    fontFamily: fontfamily.Alte_DIN,
-    paddingTop: 24,
-    paddingBottom: 10,
-  },
-  UpdateButton: {
-    backgroundColor: 'rgba(14, 0, 113, 1)',
-    //width: 328,
-    //height: 40,
-    minHeight: 40,
-    minWidth: 328,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    bottom: 250,
-  },
-  UpdatebtnLebelText: {
-    fontSize: 16,
-    fontFamily: fontfamily.Alte_DIN,
-    color: '#FFFFFF',
-  },
-  map_view: {
-    minHeight: 132,
-    minWidth: 328,
-    paddingTop: 20,
-  },
-  ToggleLabel: {
-    fontSize: 16,
-    fontFamily: fontfamily.Alte_DIN,
-    color: 'rgba(0, 0, 0, 0.8)',
-  },
-  TimerLabel: {
-    fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.7)',
-    paddingRight: 60,
-    fontFamily: fontfamily.Poppins,
-  },
-});
