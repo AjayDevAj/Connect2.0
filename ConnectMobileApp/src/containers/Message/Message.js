@@ -311,9 +311,9 @@ const Message = ({navigation, route}) => {
   };
 
   const purchaseComponentHandler = () => {
-    console.log('=====PurchaseLeadComponent Form Data =====', purchaseLeadFormData);
-    console.log('===== PurchaseLeadComponent Form customerIntentVal =====', customerIntentVal);
-    console.log('===== PurchaseLeadComponent Form customerInterestVal =====', customerInterestVal);
+    // console.log('=====PurchaseLeadComponent Form Data =====', purchaseLeadFormData);
+    // console.log('===== PurchaseLeadComponent Form customerIntentVal =====', customerIntentVal);
+    // console.log('===== PurchaseLeadComponent Form customerInterestVal =====', customerInterestVal);
 
     var leadName = getDataFromParam.selected_Item.display_name;
     var leadLogo = getDataFromParam.selected_Item.publisher_type;
@@ -362,7 +362,7 @@ const Message = ({navigation, route}) => {
 
           <PurchaseLeadSection purchaseHandler={purchaseHandler} />
 
-          {dotClicked && (
+          {(dotClicked && (getDataFromParam.currentTab != 'closed')) && (
             <MaterialMenu
               itemData={materialMenuMessageData}
               onClick={index => {

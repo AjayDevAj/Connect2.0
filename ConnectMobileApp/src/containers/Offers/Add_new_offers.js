@@ -161,7 +161,7 @@ const PublishOffer_handler =()=>{
   }, []);
 
   const getdetas = async () => {
-    const SlresponseData = await getOtpResponse(location_Data_Key);
+    const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
     console.log(
       'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
       SlresponseData,
@@ -175,10 +175,10 @@ const PublishOffer_handler =()=>{
       // ** Master Data
       setData(SlresponseData.locations);
 
-      console.log(
-        'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
-        SlresponseData.locations,
-      );
+      // console.log(
+      //   'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
+      //   SlresponseData.locations,
+      // );
 
       //** */ Filtered Data
       setarrayholder(SlresponseData.locations);

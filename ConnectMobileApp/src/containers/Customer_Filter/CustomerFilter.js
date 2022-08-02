@@ -27,25 +27,18 @@ import {useSelector} from 'react-redux';
 import navigationstring from '../../utility/NavigationString';
 import Sorting_Sheet from './Sorting_Sheet';
 
-const Item = ({item, onPress, backgroundColor, textColor}) => (
+const Item = ({item, onPress, backgroundColor, textColor, titleStyle}) => (
   <TouchableOpacity
     onPress={onPress}
     style={[styles.leftcontaineritem, backgroundColor]}>
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
+    <Text style={[styles.title, textColor, titleStyle]}>{item.title}</Text>
   </TouchableOpacity>
 );
 
-
 const CustomerFilter = ({navigation ,route}) => {
-
-
-  
-
   const [selectedId, setSelectedId] = useState('');
-  console.log(' button id cliked ---->>>>', selectedId);
   const [isnavigated,setisnavigated]=useState(false)
   
-console.log('isnaviagted from chat',isnavigated)
   const [locationlistdata, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
 
@@ -57,6 +50,9 @@ console.log('isnaviagted from chat',isnavigated)
   const [opensheet, setopensheet] = useState(false);
 
   const [sortingsheetactive, setsortingsheetactive] = useState(true);
+
+  const getRoutesData = route.params;
+  var navigateToScreen = getRoutesData.navigateToScreen;
 
   useEffect(() => {
     getdata();
@@ -71,7 +67,7 @@ console.log('isnaviagted from chat',isnavigated)
 
   const getdata = async () => {
     const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
-    console.log('SLResponce filter-----.... ------->', SlresponseData);
+    // console.log('SLResponce filter-----.... ------->', SlresponseData);
 
     if (
       SlresponseData != null &&
@@ -81,10 +77,10 @@ console.log('isnaviagted from chat',isnavigated)
       // ** Master Data
       setData(SlresponseData.locations);
 
-      console.log(
-        'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
-        SlresponseData.locations,
-      );
+      // console.log(
+      //   'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
+      //   SlresponseData.locations,
+      // );
 
       //** */ Filtered Data
       setarrayholder(SlresponseData.locations);
@@ -94,72 +90,60 @@ console.log('isnaviagted from chat',isnavigated)
   //search function
 
   const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? '#FFFFFF' : 'transparent';
+    const backgroundColor = item.id === selectedId ? '#FFFFFF' : '#F1F1F1';
     const color = item.id === selectedId ? '#000000' : '#657180';
-
+    
     return (
       <Item
         item={item}
         onPress={() => setSelectedId(item.id)}
         backgroundColor={{backgroundColor}}
         textColor={{color}}
+        titleStyle={{
+          fontSize: 16,
+          fontFamily: fontfaimly.Alte_DIN,
+          opacity: 1,
+          letterSpacing: 0.16,
+        }}
       />
     );
   };
 
   const LocationList = () => {
-    const handleChange = Locality => {
-      console.log(
-        'handler locality before if contion in handlechae()---------------->',
-        Locality,
-      );
+    const handleChange = locality_id => {
       // mapping the state data to object checklist
-      let temp = locationlistdata.map(cheklist => {
+      locationlistdata.map(cheklist => {
         // Locality == item.locality
 
         // checking item.locality == checklist.locality
-        if (Locality == cheklist.locality) {
-          console.log(
-            'Location name from the in if condition---------------handeleChange()',
-            cheklist.locality,
-          );
-          //return {cheklist};
-
-          return cheklist.locality;
+        if (locality_id === cheklist.id) {
+          setcheckboxdata(cheklist.id);
         }
       });
-
-      setcheckboxdata(temp);
-      console.log(
-        'chekbox data----------111111111111!!!!!!!!!!!!!!>',
-        checkboxdata,
-      );
+      
     };
 
-    const LocationItem = ({item, index, Locality}) => (
+    const LocationItem = ({ locality_id, Locality }) => (
       <View style={styles.item}>
         <NativeBaseProvider style={styles.item}>
           <HStack space={4}>
             <Checkbox
+              disabled={false}
               value={ischeckboxChecked}
-              colorScheme={'info'}
               onChange={() => {
-                handleChange(Locality);
                 setisChecked(true);
-                console.log(
-                  'change handler---------inonChange()---->',
-                  Locality,
-                );
+                handleChange(locality_id);
               }}
-            />
-            <Text style={styles.title}>{Locality}</Text>
+            >
+              <Text style={styles.title}>{Locality}</Text>
+            </Checkbox>
           </HStack>
         </NativeBaseProvider>
       </View>
     );
 
     const renderlocationItem = ({item}) => (
-      <LocationItem Locality={item.locality} />
+      <LocationItem locality_id={item.id} Locality={item.locality} />
     );
 
     const keyExtractor = (item, index) => index.toString();
@@ -183,11 +167,11 @@ console.log('isnaviagted from chat',isnavigated)
             value={searchValue}
             onChangeText={text => searchFunction(text)}
             autoCorrect={false}
+            placeholderTextColor="#202124"
           />
 
           <Icon name="search" size={20} color={'#657180'} />
         </View>
-        {/* <Text>{locationlistdata[0].name}</Text> */}
 
         <FlatList
           keyExtractor={keyExtractor}
@@ -199,11 +183,6 @@ console.log('isnaviagted from chat',isnavigated)
   };
 
   const EntryPoint = () => {
-    console.log(
-      'Entry point--------->',
-      customerResponseData?.data?.filters?.channels,
-    );
-
     return (
       <EntryPointFilter
         entrypoints={customerResponseData?.data?.filters?.channels}
@@ -227,10 +206,6 @@ console.log('isnaviagted from chat',isnavigated)
     ];
     const lead = [{label: customerResponseData?.data?.filters?.intents[3]?.intent}];
 
-    console.log(
-      'Customer Intent------->',
-      customerResponseData?.data?.filters?.intents,
-    );
     return (
       <View
         style={{
@@ -239,38 +214,25 @@ console.log('isnaviagted from chat',isnavigated)
           paddingLeft: 10,
         }}>
         <NativeBaseProvider style={{}}>
-          {/* //Purchase */}
 
-          {/* <Checkbox
-            shadow={2}
-            value={Purchasecheck}
-            accessibilityLabel="Purchasecheck"
-            style={[styles.item, filterstyle.chekboxstyle]}
-            onChange={e => {
-              setpurchasecheck(e);
-            }}>
-            <Text style={styles.itemtitle}>
-              {customerResponseData.data.filters.intents[4].intent}
-            </Text>
-          </Checkbox> */}
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginVertical:15}}>
-            <CheckBox
+          {/* //Purchase */}
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginVertical:5}}>
+            <Checkbox
               disabled={false}
               value={Purchasecheck}
-              onValueChange={newValue => setpurchasecheck(newValue)}
-              boxType="square"
-              style={{
-                backgroundColor: 'rgba(178, 214, 255, 1)',
-                width: 20,
-                height: 20,
-                opacity: 500,
-              }}
+              onChange={newValue => setpurchasecheck(newValue)}
+              // boxType="square"
+              style={[
+                styles.item, 
+                filterstyle.chekboxstyle
+              ]}
               onTintColor="#5AA3F7"
               tintColor="#5AA3F7"
-            />
-            <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
-              {customerResponseData?.data?.filters?.intents[4]?.intent}
-            </Text>
+            >
+              <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
+                {customerResponseData?.data?.filters?.intents[4]?.intent}
+              </Text>
+            </Checkbox>
           </View>
 
           {Purchasecheck == true ? (
@@ -292,41 +254,24 @@ console.log('isnaviagted from chat',isnavigated)
           )}
 
           {/* //Enagement */}
-          {/* <Checkbox
-            shadow={0}
-            value={isContactcheckboxChecked}
-            accessibilityLabel="Mobile Number"
-            style={[styles.item, filterstyle.chekboxstyle]}
-            onChange={e => {
-              setenagmentcheck(e);
-            }}>
-            <Text style={styles.itemtitle}>
-              {customerResponseData.data.filters.intents[1].intent}
-            </Text>
-          </Checkbox> */}
-
           <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginVertical: 15,}}>
-            <CheckBox
+            <Checkbox
               disabled={false}
               value={enagementcheck}
-              onValueChange={newValue => setenagmentcheck(newValue)}
+              onChange={newValue => setenagmentcheck(newValue)}
               boxType="square"
-              style={{
-                backgroundColor: 'rgba(178, 214, 255, 1)',
-                width: 20,
-                height: 20,
-                opacity: 500,
-              }}
+              style={[
+                styles.item, 
+                filterstyle.chekboxstyle
+              ]}
               onTintColor="#5AA3F7"
               tintColor="#5AA3F7"
-              
-            />
-            <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
-            {customerResponseData?.data?.filters?.intents[1]?.intent}
-            </Text>
+            >
+              <Text style={[styles.itemtitle, {paddingLeft: 10}]}>
+              {customerResponseData?.data?.filters?.intents[1]?.intent}
+              </Text>
+            </Checkbox>
           </View>
-
-
 
           {enagementcheck == true ? (
             <RadioButtonRN
@@ -486,7 +431,6 @@ console.log('isnaviagted from chat',isnavigated)
     switch (selectedId) {
       case '1':
         return <LocationList />;
-
         break;
       case '2':
         return <EntryPoint />;
@@ -506,15 +450,14 @@ console.log('isnaviagted from chat',isnavigated)
       case '7':
         return <IntrestedInhandler />;
         break;
-        case '8':
+      case '8':
         return <Assigned_To_Handler />;
-        
         break;
       default:
         return <LocationList />;
     }
   };
-  const Sheethandler = () => {};
+  
   return (
     <SafeAreaView style={styles.container}>
       {/* //Header */}
@@ -536,19 +479,24 @@ console.log('isnaviagted from chat',isnavigated)
         <TouchableOpacity
           style={{justifyContent: 'center'}}
           onPress={() => (navigation.goBack())}>
-          <Icon name="arrow-back" size={30} color={'#5F6368'} />
+          <Icon name="arrow-back" size={26} color={'#5F6368'} />
         </TouchableOpacity>
 
         <Icon.Button
           name="filter-alt"
-          size={30}
+          size={22}
           backgroundColor="transparent"
           color={'#000000'}
           alignItems="center"
-          onPress={() => {
-            Alert.alert('hello');
-          }}>
-          <Text style={{fontSize: 18, fontFamily: fontfaimly.Alte_DIN}}>
+        >
+          <Text style={{
+            fontSize: 18, 
+            fontFamily: fontfaimly.Alte_DIN, 
+            textAlign: 'left', 
+            color: '#000', 
+            letterSpacing: 0.18, 
+            opacity: 1,
+            }}>
             Filters
           </Text>
         </Icon.Button>
@@ -565,20 +513,22 @@ console.log('isnaviagted from chat',isnavigated)
         <Icon.Button
           name="sort"
           color={'#657180'}
-          size={30}
+          size={22}
           backgroundColor="rgba(255, 255, 255, 1)"
           onPress={() => {
-            //setsortingsheetactive(true)
-            //navigation.navigate(navigationstring.Customers,{sorting:true});
-            //navigation.goBack(() => console.log());
-            //navigation.navigate(navigationstring.Customers)
-            //setopensheet(true);
+            setsortingsheetactive(true)
+            // navigation.navigate(navigationstring.Customers,{sorting:true});
+            // navigation.goBack(() => console.log());
+            // navigation.navigate(navigationstring.Customers)
+            setopensheet(true);
           }}>
           <Text
             style={{
               fontSize: 18,
               fontFamily: fontfaimly.Alte_DIN,
-              color: 'rgba(101, 113, 128, 1)',
+              color: '#657180',
+              opacity:1,
+              letterSpacing: 0.18,
             }}>
             Sorting
           </Text>
@@ -625,7 +575,7 @@ console.log('isnaviagted from chat',isnavigated)
         }}>
         <TouchableOpacity
           style={{justifyContent: 'center'}}
-          onPress={() => navigation.navigate(navigationstring.Dashboard)}>
+          onPress={() => navigation.goBack()}>
           <Text style={filterstyle.clearAllBtnText}>CLEAR ALL</Text>
         </TouchableOpacity>
 
@@ -660,8 +610,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   title: {
-    fontSize: 16,
-    fontFamily: fontfaimly.Alte_DIN,
+    fontSize: 14,
+    fontFamily: fontfaimly.Poppins,
+    color: '#000',
+    opacity: 1,
   },
   searchbarView: {
     flexDirection: 'row',
@@ -671,7 +623,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 0,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#0000000D',
@@ -681,7 +633,7 @@ const styles = StyleSheet.create({
     fontFamily: fontfaimly.Poppins,
     fontSize: 14,
     color: '#000000',
-    opacity: 70,
+    opacity: 0.7,
   },
   itemlist: {
     fontFamily: fontfaimly.Poppins,

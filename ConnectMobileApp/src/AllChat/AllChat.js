@@ -153,6 +153,7 @@
              navigation.navigate(navigationString.Message, {
                selected_Item,
                allChat: true,
+               currentTab: currentTabStatus,
              })
            }
            data={chatResponseData.data.result}

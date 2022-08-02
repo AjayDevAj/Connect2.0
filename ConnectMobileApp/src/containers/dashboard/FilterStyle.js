@@ -119,14 +119,13 @@ export default StyleSheet.create({
     minHeight: 592,
     minWidth: 144,
     backgroundColor: 'rgba(241, 241, 241, 1)',
-
-    opacity: 40,
-    
-   
+    opacity: 0.4,
   },
   chekboxstyle:{
     backgroundColor:'#B2D6FF',
-    borderColor:'#5AA3F0',opacity:100,
-    
+    borderColor:'#5AA3F0',
+    opacity:1,
+    borderWidth: 2,
+    borderRadius: 4,
   }
 });

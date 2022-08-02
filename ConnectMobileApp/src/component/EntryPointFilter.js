@@ -26,7 +26,6 @@ import {
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
     const [searchValue, setSearchValue] = useState('');
   
-    console.log('entry point name -- > ',entrypoints.entrypoints)
     // ** Fetch Location data from  the saga Store
     //const SLResponce = useSelector(store => store.StoreLocationDataResponse);
   
@@ -42,11 +41,7 @@ import {
     }, []);
   
     const getdetas = async () => {
-      const SlresponseData = await getOtpResponse(location_Data_Key);
-      console.log(
-        'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
-        SlresponseData,
-      );
+      const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
   
       if (
         SlresponseData != null &&
@@ -56,10 +51,10 @@ import {
         // ** Master Data
         setData(SlresponseData.locations);
   
-        console.log(
-          'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
-          SlresponseData.locations,
-        );
+        // console.log(
+        //   'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
+        //   SlresponseData.locations,
+        // );
   
         //** */ Filtered Data
         setarrayholder(SlresponseData.locations);
@@ -86,12 +81,8 @@ import {
   
     const keyExtractor = (item, index) => index.toString();
   
-    
-  
     return (
       <SafeAreaView style={styles.container}>
-       
-  
         <FlatList
           keyExtractor={keyExtractor}
           data={entrypoints.entrypoints}
@@ -110,12 +101,13 @@ import {
       padding: 5,
       marginVertical: 8,
       marginHorizontal: 16,
-  
       flexDirection: 'row',
     },
     title: {
       fontSize: 14,
       fontFamily: FontDeclarations.Poppins,
+      color: '#000',
+      opacity: 0.7
     },
   
     searchbarView: {

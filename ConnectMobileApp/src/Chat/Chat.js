@@ -49,38 +49,39 @@
    const [pageNo, setPageNo] = useState(1);
    const [totalChatPageCount, setTotalChatPageCount] = useState(1);
  
-   const menuHandler = () => {
-     //  alert('Menu Handler');
-     navigation.openDrawer();
-   };
+    const menuHandler = () => {
+      navigation.openDrawer();
+    };
  
-   const searchHandler = () => {
-     setIsSearch(!isSearch)
-   };
+    const searchHandler = () => {
+      setIsSearch(!isSearch)
+    };
  
-   const filterHandler = () => {
-     setIsFilterApplied(!isFilterApplied);
-     navigation.navigate(navigationString.Filter,{isnavigtedfromchat:'true'})
-   };
+    const filterHandler = () => {
+      setIsFilterApplied(!isFilterApplied);
+      navigation.navigate(navigationString.Filter, {
+        isnavigtedfromchat:'true',
+        navigateToScreen: navigationString.Chat
+      });
+    };
  
    const [chatResponseData, setChatResponseData] = useState({});
  
    /**
     * Api call when page load
     */
-   useEffect(() => {
-     if (isFocused) {
-      Incoming_Chat_Socket_Subscribe()
-      callAPI(currentTabStatus);
-     }
-   }, [isFocused]);
+    useEffect(() => {
+      if (isFocused) {
+        Incoming_Chat_Socket_Subscribe()
+        callAPI(currentTabStatus);
+      }
+    }, [isFocused]);
  
-   useEffect(() => {
-     if (chatResponseData === 'Error: 401') {
-       signOut()
-     }
-   }, [chatResponseData]);
- 
+    useEffect(() => {
+      if (chatResponseData === 'Error: 401') {
+        signOut()
+      }
+    }, [chatResponseData]);
  
    const Incoming_Chat_Socket_Subscribe = () => {
      console.log('uWebsocket Connected to the server Message',store_Value.id);
@@ -228,7 +229,11 @@
         <ChatList
           onPress_Chat={selected_Item =>
             {
-              return navigation.navigate(navigationString.Message, { selected_Item, allChat: false });
+              return navigation.navigate(navigationString.Message, { 
+                selected_Item, 
+                allChat: false,
+                currentTab: currentTabStatus,
+               });
             }
           }
           data={chatResponseData.data.result}

@@ -42,8 +42,8 @@ const Sorting_Sheet = open => {
     <View>
       <SwipeablePanel noBar={true} {...panelProps} isActive={setIsPanelActive}>
         <View style={{flexDirection: 'row', padding: 20}}>
-          <Icon name="sort" size={20} />
-          <Text style={styles.panelheader}>Sort By</Text>
+          <Icon name="sort" size={20} color='#0E0071' />
+          <Text style={styles.panelheader}>Sort by</Text>
         </View>
         <View
           style={{
@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
     fontFamily: fontfaimly.Alte_DIN,
     color: '#000000',
     fontSize: 18,
-    paddingLeft: 10,
+    paddingLeft: 8,
+    opacity:1,
+    letterSpacing: 0.18
   },
 });

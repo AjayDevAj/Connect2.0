@@ -85,7 +85,7 @@ const New_Post = ({navigation}) => {
   }, []);
 
   const getdetas = async () => {
-    const SlresponseData = await getOtpResponse(location_Data_Key);
+    const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
     console.log(
       'Store  DATA from the async storage ========-=-=-=-=-=->>>>',
       SlresponseData.locations,
@@ -103,10 +103,10 @@ const New_Post = ({navigation}) => {
       // location id
       //setLocation_id(locationid)
 
-      console.log(
-        'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
-        SlresponseData.locations,
-      );
+      // console.log(
+      //   'Store  DATA from the async storage after null and undefined check========-=-=-=-=-=->>>>',
+      //   SlresponseData.locations,
+      // );
 
       //** */ Filtered Data
       setarrayholder(SlresponseData.locations);

@@ -35,8 +35,6 @@
  import AsyncStorage from '@react-native-async-storage/async-storage';
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
- import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
-import { array } from 'i/lib/util';
  
  const Customer = ({navigation, Route, route}) => {
    const isFocused = useIsFocused();
@@ -59,7 +57,9 @@ import { array } from 'i/lib/util';
  
    const filterHandler = () => {
      setIsFilterApplied(!isFilterApplied);
-     navigation.navigate(navigationString.Filter);
+     navigation.navigate(navigationString.Filter, {
+      navigateToScreen: navigationString.Customers
+     });
    };
  
    const dispatch = useDispatch();

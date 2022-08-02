@@ -70,9 +70,6 @@ const DateFilter = () => {
             setOpen(false);
             setDate(date);
             setfromdate(date.toDateString());
-            
-
-            console.log(date.toDateString());
           }}
           onCancel={() => {
             setOpen(false);
@@ -87,10 +84,7 @@ const DateFilter = () => {
           onConfirm={date => {
             setOpenDatepicker(false);
             settoDate(date);
-            
             settodate(date.toDateString());
-
-            console.log(date.toDateString());
           }}
           onCancel={() => {
             setOpenDatepicker(false);
@@ -104,6 +98,8 @@ const DateFilter = () => {
             fontSize: 14,
             paddingLeft: 5,
             fontFamily: FontDeclarations.Poppins,
+            color: '#000',
+            opacity: 1,
           }}>
           Custom Range
         </Text>
@@ -111,7 +107,7 @@ const DateFilter = () => {
       <TouchableOpacity
         style={styles.frpmToLabel}
         onPress={() => setOpen(true)}>
-        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12}}>
+        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12, color: '#202124'}}>
           {/* { open != true ? 'From' : date.toDateString()} */}
 
           {fromdate}
@@ -121,7 +117,7 @@ const DateFilter = () => {
       <TouchableOpacity
         style={styles.frpmToLabel}
         onPress={() => setOpenDatepicker(true)}>
-        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12}}>
+        <Text style={{fontFamily: FontDeclarations.Poppins, fontSize: 12, color: '#202124'}}>
           {todate}
         </Text>
       </TouchableOpacity>

@@ -21,14 +21,13 @@ const Chat_Filter = () => {
   const isFocused = useIsFocused();
 
   const get_data_accroding_to_selection = async () => {
-    const getLocationData = await getOtpResponse(location_Data_Key);
-    console.log('Location Data', getLocationData);
+    const getLocationData = await getOtpResponse(location_Data_Key, 'location');
     setLocationData(getLocationData.locations);
     setSelectionData(getLocationData.locations);
   };
 
   const changeData = value => {
-    console.log('onPressonPress', value);
+    // console.log('onPressonPress', value);
     switch (value.id) {
       case 1:
         setSelectionData(locationData);
