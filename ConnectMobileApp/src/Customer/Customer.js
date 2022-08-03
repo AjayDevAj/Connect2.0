@@ -49,6 +49,8 @@
  
    const getFilterDataParams = route.params;
 
+   console.log('===== Customer filter params =====', getFilterDataParams)
+
    const menuHandler = () => {
      navigation.openDrawer()
    };
@@ -83,6 +85,12 @@
        signOut();
      }
    }, [customerResponseData]);
+
+   useEffect(() => {
+    if (getFilterDataParams?.location_ids) {
+      console.log('Filter Data - ', getFilterDataParams?.location_ids);
+    }
+  }, [getFilterDataParams]);
  
    /**
     *

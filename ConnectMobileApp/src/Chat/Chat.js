@@ -68,7 +68,7 @@
    const [chatResponseData, setChatResponseData] = useState({});
    const getFilterDataParams = route.params;
    //alert(getFilterDataParams?.testData);
- 
+ console.log('=====Char filter params =====', getFilterDataParams)
    /**
     * Api call when page load
     */
@@ -84,6 +84,12 @@
         signOut()
       }
     }, [chatResponseData]);
+
+    useEffect(() => {
+      if (getFilterDataParams?.chat_status) {
+        console.log('Filter Data - ', getFilterDataParams?.chat_status);
+      }
+    }, [getFilterDataParams]);
  
    const Incoming_Chat_Socket_Subscribe = () => {
      console.log('uWebsocket Connected to the server Message',store_Value.id);

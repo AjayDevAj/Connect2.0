@@ -35,6 +35,7 @@
  const AllChat = ({navigation, route}) => {
    const [isSearch, setIsSearch] = useState(false);
    const [searchText, setSearchText] = useState('');
+   const [isFilterApplied, setIsFilterApplied] = useState(true);
    const [pageNo, setPageNo] = useState(1);
    const [totalChatPageCount, setTotalChatPageCount] = useState(1);
  
@@ -46,7 +47,13 @@
      setIsSearch(!isSearch)
    };
  
-   const filterHandler = () => {};
+   const filterHandler = () => {
+    setIsFilterApplied(!isFilterApplied);
+    navigation.navigate(navigationString.Filter, {
+      openTab: route.params.openTab,
+      navigateToScreen: navigationString.AllChat
+    });
+  };
  
    const arrowDownHandler = () => {
      setShowAllUser(true);
@@ -77,6 +84,12 @@
    },[headerName])
  
    useEffect(() => {}, [chatResponseData]);
+
+   useEffect(() => {
+    if (route?.params?.chat_status) {
+      console.log('Filter Data - ', route?.params?.chat_status);
+    }
+  }, [route.params]);
  
    /**
     * Search Api call
@@ -123,6 +136,7 @@
          arrowDownHandler={arrowDownHandler}
          chatSearchHandler={chatSearchHandler}
          isSearchEnable={isSearch}
+         isFilterApplied={isFilterApplied}
        />
        
        {chatResponseData.data != null && (

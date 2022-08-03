@@ -42,7 +42,7 @@ const CustomerFilter = ({navigation ,route}) => {
   const [arrayholder, setarrayholder] = useState('');
 
   const [searchValue, setSearchValue] = useState('');
-  const [checkboxdata, setcheckboxdata] = useState('');
+  const [checkboxdata, setcheckboxdata] = useState([]);
   const [ischeckboxChecked, setisChecked] = useState(false);
   const [isContactcheckboxChecked, setisContactChecked] = useState('flase');
   const customerResponseData = useSelector(store => store.CustomerResponseData);
@@ -92,7 +92,7 @@ const CustomerFilter = ({navigation ,route}) => {
     const backgroundColor = item.id === selectedId ? '#FFFFFF' : '#F1F1F1';
     const color = item.id === selectedId ? '#000000' : '#657180';
 
-    if (navigateToScreen == 'Chat') {
+    if ((navigateToScreen == 'Chat') || (navigateToScreen == 'AllChat')) {
       if ((item.id == 1) || (item.id == 3) || (item.id == 5)) {
         return (
           <Item
@@ -155,8 +155,8 @@ const CustomerFilter = ({navigation ,route}) => {
         // Locality == item.locality
 
         // checking item.locality == checklist.locality
-        if (locality_id === cheklist.id) {
-          setcheckboxdata(cheklist.id);
+        if ((locality_id === cheklist.id) && (!checkboxdata.includes(cheklist.id))) {
+          setcheckboxdata(current => [...current, cheklist.id]);
         }
       });
       
@@ -168,9 +168,9 @@ const CustomerFilter = ({navigation ,route}) => {
           <HStack space={4}>
             <Checkbox
               disabled={false}
-              value={ischeckboxChecked}
+              value={checkboxdata.includes(locality_id) ? true : false}
               onChange={() => {
-                setisChecked(true);
+                // setisChecked(true);
                 handleChange(locality_id);
               }}
             >
@@ -342,6 +342,8 @@ const CustomerFilter = ({navigation ,route}) => {
     );
   };
 
+  const [chatStatus, setChatStatus] = useState('');
+
   const ChatStatushandler = () => {
     const chatstataus = [{label: 'OPEN'}, {label: 'CLOSE'}];
     return (
@@ -349,8 +351,9 @@ const CustomerFilter = ({navigation ,route}) => {
         <RadioButtonRN
           data={chatstataus}
           selectedBtn={e => {
-            console.log(e);
-            Alert.alert(e.label.toString());
+            setChatStatus(e.label.toString());
+            // console.log(e);
+            // Alert.alert(e.label.toString());
           }}
           box={false}
           textStyle={[styles.itemtitle, {marginVertical: 10}]}
@@ -461,11 +464,10 @@ const CustomerFilter = ({navigation ,route}) => {
         />
       </View>
     );
-    
   }
 
   const CheckSwitch = selectedId => {
-    if (navigateToScreen == 'Chat') {
+    if ((navigateToScreen == 'Chat') || (navigateToScreen == 'AllChat')) {
       switch (selectedId) {
         case '1':
           return <LocationList />;
@@ -520,7 +522,6 @@ const CustomerFilter = ({navigation ,route}) => {
       }
      
     }
-    
   };
   
   return (
@@ -654,7 +655,9 @@ const CustomerFilter = ({navigation ,route}) => {
 
         <TouchableOpacity style={filterstyle.applyFilterBTN} onPress={() => {
           navigation.navigate(navigateToScreen, {
-            testData: 'hello'
+            openTab: getRoutesData?.openTab,
+            location_ids: checkboxdata,
+            chat_status: chatStatus,
           })
         }}>
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
