@@ -62,6 +62,7 @@ import Add_new_offer from '../containers/Offers/Add_new_offers';
 import PurchaseLeadComponent from '../PurchaseLead/PurchaseLeadComponent';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import UpdateLocation from '../containers/UpdateLocation/UpdateLocation';
 
 import DrawerStack from './DrawerStack';
 
@@ -169,6 +170,8 @@ const Routes = () => {
           
           <Stack.Screen component={Add_new_offer} name={navigationString.Add_new_offer} />
           <Stack.Screen component={My_Offers} name={navigationString.My_Offers} />
+          <Stack.Screen component={UpdateLocation} name={navigationString.UpdateLocation} />
+
 
         </Stack.Navigator>
       </NavigationContainer>

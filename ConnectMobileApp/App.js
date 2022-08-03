@@ -26,7 +26,7 @@ const App =  ({navigation}) => {
     >
      
       <Provider store={store}>
-        <UpdateLocation />
+        <Routes />
       </Provider>
     </InternetConnectionAlert>
 

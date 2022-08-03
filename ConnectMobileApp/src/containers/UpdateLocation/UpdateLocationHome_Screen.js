@@ -17,6 +17,7 @@ import {List} from 'react-native-paper';
 import BluePencilEdit from '../../../assets/svg/Edit_blue_24dp.svg';
 import {color} from 'react-native-reanimated';
 import FontDeclarations from '../../utility/Font-Declarations';
+import NavigationString from '../../utility/NavigationString';
 
 //import {useIsFocused} from '@react-navigation/native';
 
@@ -167,7 +168,7 @@ const UpdateLocationHome_Screen = ({navigation}) => {
                   {item.address1}, {item.address2} {item.locality} {item.city+' '+item.pincode+' '+item.state}
                    
                 </Text>
-                <TouchableOpacity style={{}}>
+                <TouchableOpacity onPress={navigation.navigate(NavigationString.UpdateLocation)} style={{}}>
                   <BluePencilEdit width={20} height={40} />
                 </TouchableOpacity>
                

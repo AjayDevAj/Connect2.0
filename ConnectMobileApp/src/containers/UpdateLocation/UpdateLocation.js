@@ -14,8 +14,7 @@ import {
 import React, {useState} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import CommonButton from '../../Header/CommonButton';
-import {SegmentComponent} from '../../component/SegmentComponent';
-import {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
+import Icon, {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import fontfamily from '../../utility/Font-Declarations';
 import {Dropdown} from 'react-native-element-dropdown';
@@ -24,6 +23,7 @@ import {StateList, CityList} from '../../utility/Constant';
 import DatePicker from 'react-native-date-picker';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './UpdateLocationStyle';
+import { updatelocation } from '../../api/updatelocation';
 
 const UpdateLocation = () => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
@@ -98,11 +98,6 @@ const UpdateLocation = () => {
     Sundaytrigerpoint: null,
   });
 
-  const handletimerpicker = () => {
-    console.log(time);
-
-    return <View></View>;
-  };
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);
@@ -118,9 +113,11 @@ const UpdateLocation = () => {
         tabStyle={styles.tabStyle}
         tabTextStyle={styles.tabTextStyle}
         activeTabStyle={styles.activeTabStyle}
-        activeTabTextStyle={styles.activeTabTextStyle}
+        //activeTabTextStyle={styles.activeTabTextStyle}
+        selectedTabStyle={{ backgroundColor: '#fff' }}
         selectedIndex={currenttabIndex}
-        // badges={usercount.data.count[0].admin_count}
+        activeTabTextStyle={{color:'rgba(0, 0, 0, 1)'}}
+       
         // badges={[adminCount]}
         onTabPress={handleCustomIndexSelect}
       />
@@ -222,7 +219,7 @@ const UpdateLocation = () => {
             />
           </ScrollView>
 
-          <TouchableOpacity style={styles.UpdateButton}>
+          <TouchableOpacity onPress={()=>updatelocation(1)} style={styles.UpdateButton}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
