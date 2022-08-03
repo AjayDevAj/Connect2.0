@@ -3,7 +3,7 @@ import {getOtpResponse} from '../utility/StorageClass';
 import {otpResponse_Storage_Key} from '../utility/Constant';
 import {signOut} from '../navigation/Routes';
 
-const updatelocation = async (
+const updatelocationApi = async (
   location_id,
   message,
   picture_url,
@@ -22,12 +22,12 @@ const updatelocation = async (
   urlencoded.append('landmark', 'UCO Bank');
   urlencoded.append('locality', 'Sohna');
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
-
+console.log('Location id-------',location_id)
   const response = await fetch(API_URL_STAGING + '/user/auth/edit-location', {
     method: 'POST',
     body: urlencoded,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      
       Authorization: `Bearer ${token_Value.token}`,
     },
   });
@@ -49,4 +49,4 @@ const updatelocation = async (
   return data;
 };
 
-export {updatelocation};
+export {updatelocationApi};

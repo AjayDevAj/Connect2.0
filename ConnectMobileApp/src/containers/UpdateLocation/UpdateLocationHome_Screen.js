@@ -168,7 +168,10 @@ const UpdateLocationHome_Screen = ({navigation}) => {
                   {item.address1}, {item.address2} {item.locality} {item.city+' '+item.pincode+' '+item.state}
                    
                 </Text>
-                <TouchableOpacity onPress={navigation.navigate(NavigationString.UpdateLocation)} style={{}}>
+                <TouchableOpacity onPress={()=>{navigation.navigate(NavigationString.UpdateLocation,{
+                  currentindex:0,
+                  Location_Data:item
+                })}} style={{}}>
                   <BluePencilEdit width={20} height={40} />
                 </TouchableOpacity>
                
@@ -176,8 +179,13 @@ const UpdateLocationHome_Screen = ({navigation}) => {
               <View style={{flexDirection:'row'}}>
                 <Icon name='schedule' size={20} style={{paddingRight:10}}/>
                 <Text>Sunday : 10:00 AM to 7:00 PM</Text>
-               
+               <TouchableOpacity onPress={()=>{navigation.navigate(NavigationString.UpdateLocation,{
+                currentindex:1,
+                Location_Data:item
+               })}}>
                 <BluePencilEdit width={20} height={40}  />
+
+                </TouchableOpacity>
               </View>
               
              

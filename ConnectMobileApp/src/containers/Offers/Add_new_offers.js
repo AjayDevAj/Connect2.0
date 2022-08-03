@@ -378,7 +378,7 @@ const PublishOffer_handler =()=>{
           </View>
 
           <Text style={PostStyleSheet.LocationLabelText}>Locations</Text>
-          <Text>{data}</Text>
+          <Text>{data[0].locality}</Text>
           <Text style={PostStyleSheet.offerdisclimerLabelText}>
             Offer Disclaimer
           </Text>

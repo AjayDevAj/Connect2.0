@@ -11,7 +11,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import CommonButton from '../../Header/CommonButton';
 import Icon, {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
@@ -23,9 +23,10 @@ import {StateList, CityList} from '../../utility/Constant';
 import DatePicker from 'react-native-date-picker';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './UpdateLocationStyle';
-import { updatelocation } from '../../api/updatelocation';
+import { updatelocationApi } from '../../api/updatelocationApi';
+import { navigationRef } from '../../navigation/RootNavigation';
 
-const UpdateLocation = () => {
+const UpdateLocation = ({route,navigation}) => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
   const [changedStatename, setStatename] = useState([null]);
   const [changedCityename, setCityname] = useState([null]);
@@ -52,6 +53,15 @@ const UpdateLocation = () => {
     setIsSundayEnabled(previousState => !previousState);
 
   //Time Picker
+  
+  console.log(route.params)
+
+  useEffect(() => {
+    setCurrentTabindex(route.params.currentindex)
+  
+    
+  }, [])
+  
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState([
@@ -97,7 +107,8 @@ const UpdateLocation = () => {
     Saturdaytrigerpoint: null,
     Sundaytrigerpoint: null,
   });
-
+ const[name, setname_of_location]=useState(null)
+ const[address1, setaddress1]=useState(null)
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);
@@ -105,9 +116,15 @@ const UpdateLocation = () => {
     // Tab selection for custom Tab Selection
     setCurrentTabindex(index);
   };
+
+  const menuHandler =()=>{
+    navigation.goBack();
+  }
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)'}}>
-      <TopHeader name={'Santacruz'} firstIcon={'arrow-back'} />
+      <TopHeader name={route.params.Location_Data.locality} firstIcon={'arrow-back'}
+       menuHandler={menuHandler} 
+      />
       <SegmentedControlTab
         values={['Location', 'Hours', 'More']}
         tabStyle={styles.tabStyle}
@@ -127,17 +144,19 @@ const UpdateLocation = () => {
             <Text style={styles.TitleTextlable}>Name Of Location</Text>
             <TextInput
               style={styles.InputText}
-              numberOfLines={4}
-              onChangeText={text => setoffertagline(text)}
-              value={'Santacruz'}
+              
+              onChangeText={text => setname_of_location(text)}
+              value={name}
+              placeholder={route.params.Location_Data.locality}
             />
             <Text style={styles.TitleTextlable}>Address 1</Text>
             <TextInput
               style={styles.MultilineTextinout}
               multiline={true}
               numberOfLines={4}
-              onChangeText={text => setofferdisclimer(text)}
-              value={''}
+              onChangeText={text => setaddress1(text)}
+              value={address1}
+              placeholder={route.params.Location_Data.address1}
             />
             <Text style={styles.TitleTextlable}>Address 2</Text>
             <TextInput
@@ -219,7 +238,7 @@ const UpdateLocation = () => {
             />
           </ScrollView>
 
-          <TouchableOpacity onPress={()=>updatelocation(1)} style={styles.UpdateButton}>
+          <TouchableOpacity onPress={()=>updatelocationApi(1)} style={styles.UpdateButton}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
