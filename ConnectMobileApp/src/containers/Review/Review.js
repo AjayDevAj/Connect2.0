@@ -10,7 +10,7 @@ import {loadOverAllData} from '../../actions/OverAllRatingAction';
 import {loadReviewListData} from '../../actions/GetReviewListAction';
 
 
-const Review = ({navigation, Route}) => {
+const Review = ({navigation, route}) => {
   const dispatch = useDispatch();
   const OverAllReducer_ResponceData = useSelector(store => store.OverAllReducer_ResponceData);
   const GetReviewListData = useSelector(store => store.GetReviewListData);
@@ -31,10 +31,11 @@ const Review = ({navigation, Route}) => {
   const searchHandler = () => {
     setIsSearch(!isSearch)
   };
+  const getFilterDataParams = route.params;
 
   const filterHandler = () => {
     navigation.navigate(navigationString.Filter, {
-      navigateToScreen: navigationString.Review
+      navigateToScreen: navigationString.Reviews
      })
   };
   const arrowDownHandler = () => {

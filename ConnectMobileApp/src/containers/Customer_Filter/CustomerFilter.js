@@ -10,7 +10,6 @@ import {
   SectionList,
 } from 'react-native';
 import React, {useState} from 'react';
-import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fontfaimly from '../../utility/Font-Declarations';
 import filterstyle from '../dashboard/FilterStyle';
@@ -37,7 +36,7 @@ const Item = ({item, onPress, backgroundColor, textColor, titleStyle}) => (
 
 const CustomerFilter = ({navigation ,route}) => {
   const [selectedId, setSelectedId] = useState('');
-  const [isnavigated,setisnavigated]=useState(false)
+  const [isnavigated,setisnavigated] = useState(false)
   
   const [locationlistdata, setData] = useState('');
   const [arrayholder, setarrayholder] = useState('');
@@ -92,21 +91,61 @@ const CustomerFilter = ({navigation ,route}) => {
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? '#FFFFFF' : '#F1F1F1';
     const color = item.id === selectedId ? '#000000' : '#657180';
-    
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        backgroundColor={{backgroundColor}}
-        textColor={{color}}
-        titleStyle={{
-          fontSize: 16,
-          fontFamily: fontfaimly.Alte_DIN,
-          opacity: 1,
-          letterSpacing: 0.16,
-        }}
-      />
-    );
+
+    if (navigateToScreen == 'Chat') {
+      if ((item.id == 1) || (item.id == 3) || (item.id == 5)) {
+        return (
+          <Item
+            item={item}
+            onPress={() => setSelectedId(item.id)}
+            backgroundColor={{backgroundColor}}
+            textColor={{color}}
+            titleStyle={{
+              fontSize: 16,
+              fontFamily: fontfaimly.Alte_DIN,
+              opacity: 1,
+              letterSpacing: 0.16,
+            }}
+          />
+        );
+      }
+    } else {
+      if (navigateToScreen == 'Reviews') {
+        if ((item.id == 1) || (item.id == 3)) {
+          return (
+            <Item
+              item={item}
+              onPress={() => setSelectedId(item.id)}
+              backgroundColor={{backgroundColor}}
+              textColor={{color}}
+              titleStyle={{
+                fontSize: 16,
+                fontFamily: fontfaimly.Alte_DIN,
+                opacity: 1,
+                letterSpacing: 0.16,
+              }}
+            />
+          );
+        }
+      } else {
+        if (item.id != 5) {
+          return (
+            <Item
+              item={item}
+              onPress={() => setSelectedId(item.id)}
+              backgroundColor={{backgroundColor}}
+              textColor={{color}}
+              titleStyle={{
+                fontSize: 16,
+                fontFamily: fontfaimly.Alte_DIN,
+                opacity: 1,
+                letterSpacing: 0.16,
+              }}
+            />
+          );
+        }
+      }
+    }
   };
 
   const LocationList = () => {
@@ -349,10 +388,10 @@ const CustomerFilter = ({navigation ,route}) => {
     );
   };
   const IntrestedInhandler = () => {
-    console.log(
-      'customer customer_interest responce data',
-      customerResponseData?.data?.filters?.customer_interest,
-    );
+    // console.log(
+    //   'customer customer_interest responce data',
+    //   customerResponseData?.data?.filters?.customer_interest,
+    // );
 
     const CustomerIntrestItem = ({title}) => (
       <TouchableOpacity onPress={() => Alert.alert(title)}>
@@ -398,8 +437,6 @@ const CustomerFilter = ({navigation ,route}) => {
       }));
     }
 
-    //console.log(Assigned_To);
-
     const Assigned_To_Agent = ({Item}) => (
       <RadioButtonRN
           data={Assigned_To}
@@ -428,34 +465,62 @@ const CustomerFilter = ({navigation ,route}) => {
   }
 
   const CheckSwitch = selectedId => {
-    switch (selectedId) {
-      case '1':
-        return <LocationList />;
-        break;
-      case '2':
-        return <EntryPoint />;
-        break;
-      case '3':
-        return <DateHandler />;
-        break;
-      case '4':
-        return <CustomerIntenthandler />;
-        break;
-      case '5':
-        return <ChatStatushandler />;
-        break;
-      case '6':
-        return <Contacthandler />;
-        break;
-      case '7':
-        return <IntrestedInhandler />;
-        break;
-      case '8':
-        return <Assigned_To_Handler />;
-        break;
-      default:
-        return <LocationList />;
+    if (navigateToScreen == 'Chat') {
+      switch (selectedId) {
+        case '1':
+          return <LocationList />;
+          break;
+        case '3':
+          return <DateHandler />;
+          break;
+        case '5':
+          return <ChatStatushandler />;
+          break;
+        default:
+          return <LocationList />;
+      }
+    } else {
+      if (navigateToScreen == 'Reviews') {
+        switch (selectedId) {
+          case '1':
+            return <LocationList />;
+            break;
+          case '3':
+            return <DateHandler />;
+            break;
+          default:
+            return <LocationList />;
+        }
+      } else {
+        switch (selectedId) {
+          case '1':
+            return <LocationList />;
+            break;
+          case '2':
+            return <EntryPoint />;
+            break;
+          case '3':
+            return <DateHandler />;
+            break;
+          case '4':
+            return <CustomerIntenthandler />;
+            break;
+          case '6':
+            return <Contacthandler />;
+            break;
+          case '7':
+            return <IntrestedInhandler />;
+            break;
+          case '8':
+            return <Assigned_To_Handler />;
+            break;
+          default:
+            return <LocationList />;
+        }
+      }
+     
     }
+    
   };
   
   return (
@@ -587,7 +652,11 @@ const CustomerFilter = ({navigation ,route}) => {
             alignItems: 'center',
           }}></View>
 
-        <TouchableOpacity style={filterstyle.applyFilterBTN}>
+        <TouchableOpacity style={filterstyle.applyFilterBTN} onPress={() => {
+          navigation.navigate(navigateToScreen, {
+            testData: 'hello'
+          })
+        }}>
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
         </TouchableOpacity>
       </View>

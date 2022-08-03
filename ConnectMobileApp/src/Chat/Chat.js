@@ -38,7 +38,7 @@
  
  // import uWebSockets from '../component/uWebSockets'
  
- const Chat = ({ navigation, Route }) => {
+ const Chat = ({ navigation, route }) => {
    const ws = React.useRef(new WebSocket('ws://test-chat.starify.co/')).current;
  
    const isFocused = useIsFocused();
@@ -66,6 +66,8 @@
     };
  
    const [chatResponseData, setChatResponseData] = useState({});
+   const getFilterDataParams = route.params;
+   //alert(getFilterDataParams?.testData);
  
    /**
     * Api call when page load

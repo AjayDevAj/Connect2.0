@@ -128,9 +128,9 @@ const ItemSecond = () => {
             justifyContent: 'space-between',
           },
         ]}>
-        <Custom_Capsul title={'Total Reviews'} count={OverAllReducer_ResponceData.data.review_data.total_reviews}/>
-        <Custom_Capsul title={'Replied'} count={OverAllReducer_ResponceData.data.review_data.reviews_reply_count.review_with_reply}/>
-        <Custom_Capsul title={'Unreplied'} count={OverAllReducer_ResponceData.data.review_data.reviews_reply_count.review_without_reply}/>
+        <Custom_Capsul title={'Total Reviews'} count={OverAllReducer_ResponceData?.data?.review_data?.total_reviews}/>
+        <Custom_Capsul title={'Replied'} count={OverAllReducer_ResponceData?.data?.review_data?.reviews_reply_count?.review_with_reply}/>
+        <Custom_Capsul title={'Unreplied'} count={OverAllReducer_ResponceData?.data?.review_data?.reviews_reply_count?.review_without_reply}/>
       </View>
     </View>
   );

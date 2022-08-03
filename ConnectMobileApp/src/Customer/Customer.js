@@ -36,7 +36,7 @@
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
  
- const Customer = ({navigation, Route, route}) => {
+ const Customer = ({navigation, route}) => {
    const isFocused = useIsFocused();
    const [isSearch, setIsSearch] = useState(false);
    const [isFilterApplied, setIsFilterApplied] = useState(true);
@@ -47,6 +47,8 @@
    const [customerIntentVal, setCustomerIntentVal] = useState([]);
    const [customerInterestVal, setCustomerInterestVal] = useState([]);
  
+   const getFilterDataParams = route.params;
+
    const menuHandler = () => {
      navigation.openDrawer()
    };
