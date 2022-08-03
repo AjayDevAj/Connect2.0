@@ -8,18 +8,22 @@ import {
   TouchableOpacity,
   Image,
   Switch,
+  Modal,
+  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import CommonButton from '../../Header/CommonButton';
-import {SegmentComponent} from '../../component/SegmentComponent';
-import {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
+import Icon, {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import fontfamily from '../../utility/Font-Declarations';
 import {Dropdown} from 'react-native-element-dropdown';
 import DropdownComponent from '../Post/Post_dropDown';
 import {StateList, CityList} from '../../utility/Constant';
 import DatePicker from 'react-native-date-picker';
+import CheckBox from '@react-native-community/checkbox';
+import styles from './UpdateLocationStyle';
+import { updatelocation } from '../../api/updatelocation';
 
 const UpdateLocation = () => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
@@ -50,7 +54,50 @@ const UpdateLocation = () => {
   //Time Picker
 
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [time, setTime] = useState([
+    {
+      Monday: {
+        opens: null,
+        close: null,
+      },
+      Tuesday: {
+        opens: null,
+        close: null,
+      },
+      Wednesday: {
+        opens: null,
+        close: null,
+      },
+      Thursday: {
+        opens: null,
+        close: null,
+      },
+      Friday: {
+        opens: null,
+        close: null,
+      },
+      Saturday: {
+        opens: null,
+        close: null,
+      },
+      Sunday: {
+        opens: null,
+        close: null,
+      },
+    },
+  ]);
+
+  const [open, setOpen] = useState({
+    isOpen: false,
+    trigerPointOpen: null,
+    TuesdaytrigerPoint: null,
+    Wednesdaytrigerpoint: null,
+    Thursdaytrigerpoint: null,
+    Fridaytrigerpoint: null,
+    Saturdaytrigerpoint: null,
+    Sundaytrigerpoint: null,
+  });
+
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);
@@ -66,9 +113,11 @@ const UpdateLocation = () => {
         tabStyle={styles.tabStyle}
         tabTextStyle={styles.tabTextStyle}
         activeTabStyle={styles.activeTabStyle}
-        activeTabTextStyle={styles.activeTabTextStyle}
+        //activeTabTextStyle={styles.activeTabTextStyle}
+        selectedTabStyle={{ backgroundColor: '#fff' }}
         selectedIndex={currenttabIndex}
-        // badges={usercount.data.count[0].admin_count}
+        activeTabTextStyle={{color:'rgba(0, 0, 0, 1)'}}
+       
         // badges={[adminCount]}
         onTabPress={handleCustomIndexSelect}
       />
@@ -170,7 +219,7 @@ const UpdateLocation = () => {
             />
           </ScrollView>
 
-          <TouchableOpacity style={styles.UpdateButton}>
+          <TouchableOpacity onPress={()=>updatelocation(1)} style={styles.UpdateButton}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
@@ -209,7 +258,10 @@ const UpdateLocation = () => {
                 <View style={{flexDirection: 'row'}}>
                   <TouchableOpacity
                     onPress={() => {
-                      setOpen(true);
+                      setOpen({
+                        isOpen: true,
+                        trigerPointOpen: true,
+                      });
                     }}
                     style={{
                       minHeight: 32,
@@ -230,11 +282,17 @@ const UpdateLocation = () => {
 
                         fontFamily: fontfamily.Poppins,
                       }}>
-                      09:10 AM
+                      {time[0].Monday.opens}
                     </Text>
                   </TouchableOpacity>
                   <View style={{paddingRight: 19}}></View>
                   <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        trigerPointOpen: false,
+                      });
+                    }}
                     style={{
                       minHeight: 32,
                       minWidth: 96,
@@ -254,7 +312,7 @@ const UpdateLocation = () => {
 
                         fontFamily: fontfamily.Poppins,
                       }}>
-                      09:10 PM
+                      {time[0].Monday.close}
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -271,7 +329,7 @@ const UpdateLocation = () => {
                 justifyContent: 'space-between',
                 paddingTop: 30,
               }}>
-              <Text>Tuesday</Text>
+              <Text style={styles.ToggleLabel}>Tuesday</Text>
               <Switch
                 trackColor={{false: '#F4F4F4', true: '#0070FC'}}
                 thumbColor={isTuesdayEnabled ? '#FFFFFF' : '#f4f3f4'}
@@ -282,42 +340,689 @@ const UpdateLocation = () => {
             </View>
             {isTuesdayEnabled === true ? (
               <>
-                <View style={{flexDirection: 'row'}}>
-                  <Text>Opens at</Text>
-                  <Text style={{left: 60}}>Close at</Text>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                  <TextInput />
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        TuesdaytrigerPoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Tuesday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        TuesdaytrigerPoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Tuesday.close}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <></>
+            )}
+            {/* Wednesday */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: 30,
+              }}>
+              <Text style={styles.ToggleLabel}>Wednesday</Text>
+              <Switch
+                trackColor={{false: '#F4F4F4', true: '#0070FC'}}
+                thumbColor={isTuesdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                ios_backgroundColor="#F4F4F4"
+                onValueChange={toggleSwitch_Wednesday}
+                value={isWednesdayEnabled}
+              />
+            </View>
+
+            {isWednesdayEnabled === true ? (
+              <>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Wednesdaytrigerpoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Wednesday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Wednesdaytrigerpoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Wednesday.close}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Thursday */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: 30,
+              }}>
+              <Text style={styles.ToggleLabel}>Thursday</Text>
+              <Switch
+                trackColor={{false: '#F4F4F4', true: '#0070FC'}}
+                thumbColor={isTuesdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                ios_backgroundColor="#F4F4F4"
+                onValueChange={toggleSwitch_Thursday}
+                value={isThursdayEnabled}
+              />
+            </View>
+
+            {isThursdayEnabled === true ? (
+              <>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Thursdaytrigerpoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Thursday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Thursdaytrigerpoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Thursday.close}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Friday */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: 30,
+              }}>
+              <Text style={styles.ToggleLabel}>Friday</Text>
+              <Switch
+                trackColor={{false: '#F4F4F4', true: '#0070FC'}}
+                thumbColor={isTuesdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                ios_backgroundColor="#F4F4F4"
+                onValueChange={toggleSwitch_Friday}
+                value={isFridayEnabled}
+              />
+            </View>
+            {isFridayEnabled === true ? (
+              <>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Fridaytrigerpoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Friday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Fridaytrigerpoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Friday.close}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <></>
+            )}
+            {/* Saturday */}
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: 30,
+              }}>
+              <Text style={styles.ToggleLabel}>Saturday</Text>
+              <Switch
+                trackColor={{false: '#F4F4F4', true: '#0070FC'}}
+                thumbColor={isSaturdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                ios_backgroundColor="#F4F4F4"
+                onValueChange={toggleSwitch_Saturday}
+                value={isSaturdayEnabled}
+              />
+            </View>
+
+            {isSaturdayEnabled === true ? (
+              <>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Saturdaytrigerpoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Saturday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Saturdaytrigerpoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Saturday.close}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* Sunday */}
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: 30,
+              }}>
+              <Text style={styles.ToggleLabel}>Saturday</Text>
+              <Switch
+                trackColor={{false: '#F4F4F4', true: '#0070FC'}}
+                thumbColor={isSaturdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                ios_backgroundColor="#F4F4F4"
+                onValueChange={toggleSwitch_Saturday}
+                value={isSaturdayEnabled}
+              />
+            </View>
+
+            {isSundayEnabled === true ? (
+              <>
+                <View style={{flexDirection: 'row', paddingBottom: 10}}>
+                  <Text style={styles.TimerLabel}>Opens at</Text>
+                  <Text style={styles.TimerLabel}>Close at</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Sundaytrigerpoint: true,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Sunday.opens}
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{paddingRight: 19}}></View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setOpen({
+                        isOpen: true,
+                        Sundaytrigerpoint: false,
+                      });
+                    }}
+                    style={{
+                      minHeight: 32,
+                      minWidth: 96,
+                      backgroundColor: 'rgba(255, 255, 255, 1)',
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: 'rgba(195, 199, 217, 1)',
+
+                      //alignItems:'center',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: 'rgba(0, 0, 0, 0.7)',
+
+                        fontFamily: fontfamily.Poppins,
+                      }}>
+                      {time[0].Sunday.close}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </>
             ) : (
               <></>
             )}
           </ScrollView>
-          <TouchableOpacity style={styles.UpdateButton}>
+          <TouchableOpacity style={[styles.UpdateButton, {bottom: 15}]}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <></>
       )}
-      {currenttabIndex === 2 ? <Text>More</Text> : <></>}
+      {currenttabIndex === 2 ? (
+        <View style={{padding: 15}}>
+          
+          <Text style={styles.TitleTextlable}>Contact No.</Text>
+          <TextInput
+            style={styles.InputText}
+            numberOfLines={4}
+            onChangeText={text => setoffertagline(text)}
+            value={'+91 9819667268'}
+          />
+
+          <View style={{paddingTop: 20}}>
+            <DropdownComponent
+              style={{height: 20}}
+              title={'Choose Primary Category'}
+              listvalue={StateList}
+              onChange={item => {
+                console.log('OnChange dropdown item', item);
+                setStatename(item);
+              }}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => Alert.alert('Category not available')}>
+            <Text
+              style={{
+                color: 'rgba(0, 112, 252, 1)',
+                fontFamily: fontfamily.Alte_DIN,
+                fontSize: 12,
+                paddingTop: 10,
+              }}>
+              Add Another Category{' '}
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.TitleTextlable}>Add Services</Text>
+          <View style={{flexDirection: 'row',justifyContent:'space-between'}}>
+            <CheckBox />
+            <Text style={{paddingRight:40}}>Home Delivery</Text>
+          </View>
+          <TouchableOpacity style={[styles.UpdateButton, {bottom: -270}]}>
+            <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <></>
+      )}
 
       <DatePicker
         modal
-        open={open}
+        open={open.isOpen}
         date={date}
         mode="time"
         onConfirm={date => {
-          setOpen(false);
+          setOpen({
+            isOpen: false,
+            trigerPointOpen: null,
+          });
           setDate(date);
-          //setfromdate(date.toDateString());
 
           let hourse = date.getHours();
           let minutes = date.getMinutes();
           let ampm = hourse >= 12 ? 'PM' : 'AM';
           let strTime = hourse + ':' + minutes + ' ' + ampm;
           console.log(strTime);
+          // setTime(strTime)
+          if (open.trigerPointOpen) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Monday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Monday.close = strTime;
+              return [...test];
+            });
+          }
+
+          if (open.TuesdaytrigerPoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Tuesday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Tuesday.close = strTime;
+              return [...test];
+            });
+          }
+
+          if (open.Wednesdaytrigerpoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Wednesday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Wednesday.close = strTime;
+              return [...test];
+            });
+          }
+
+          if (open.Thursdaytrigerpoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Thursday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Thursday.close = strTime;
+              return [...test];
+            });
+          }
+          if (open.Fridaytrigerpoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Friday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Friday.close = strTime;
+              return [...test];
+            });
+          }
+
+          if (open.Saturdaytrigerpoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.close = strTime;
+              return [...test];
+            });
+          }
+          if (open.Sundaytrigerpoint) {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Saturday.opens = strTime;
+              return [...test];
+            });
+          } else {
+            setTime(prev => {
+              let test = [...prev];
+              test[0].Sunday.close = strTime;
+              return [...test];
+            });
+          }
           return strTime;
         }}
         onCancel={() => {
@@ -329,86 +1034,3 @@ const UpdateLocation = () => {
 };
 
 export default UpdateLocation;
-
-const styles = StyleSheet.create({
-  tabStyle: {
-    minHeight: 50,
-    borderRadius: 0,
-    borderColor: '#F7FCFF',
-    backgroundColor: '#F7FCFF',
-  },
-  tabTextStyle: {
-    color: '#657180',
-    fontFamily: fontfamily.Alte_DIN,
-    fontSize: 18,
-  },
-  activeTabStyle: {
-    borderBottomColor: '#0070FC',
-    backgroundColor: '#F7FCFF',
-  },
-  activeTabTextStyle: {
-    color: '#0070FC',
-  },
-  InputText: {
-    minHeight: 40,
-    minWidth: 328,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    borderColor: '#C3C7D9',
-    color: '#5F6368',
-    fontSize: 12,
-    fontFamily: fontfamily.Poppins,
-    padding: 10,
-  },
-  MultilineTextinout: {
-    minHeight: 75,
-    minWidth: 328,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    borderColor: '#C3C7D9',
-    fontFamily: fontfamily.Poppins,
-    padding: 10,
-    paddingTop: 10,
-    fontSize: 12,
-    color: '#657180',
-  },
-  TitleTextlable: {
-    fontSize: 14,
-    color: '#657180',
-    fontFamily: fontfamily.Alte_DIN,
-    paddingTop: 24,
-    paddingBottom: 10,
-  },
-  UpdateButton: {
-    backgroundColor: 'rgba(14, 0, 113, 1)',
-    //width: 328,
-    //height: 40,
-    minHeight: 40,
-    minWidth: 328,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    bottom: 250,
-  },
-  UpdatebtnLebelText: {
-    fontSize: 16,
-    fontFamily: fontfamily.Alte_DIN,
-    color: '#FFFFFF',
-  },
-  map_view: {
-    minHeight: 132,
-    minWidth: 328,
-    paddingTop: 20,
-  },
-  ToggleLabel: {
-    fontSize: 16,
-    fontFamily: fontfamily.Alte_DIN,
-    color: 'rgba(0, 0, 0, 0.8)',
-  },
-  TimerLabel: {
-    fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.7)',
-    paddingRight: 60,
-    fontFamily: fontfamily.Poppins,
-  },
-});

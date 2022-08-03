@@ -8,6 +8,8 @@ import Routes from './src/navigation/Routes';
 import InternetConnectionAlert from "react-native-internet-connection-alert";
 import navigationString from './src/utility/NavigationString';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import UpdateLocationHome_Screen from './src/containers/UpdateLocation/UpdateLocationHome_Screen';
+import UpdateLocation from './src/containers/UpdateLocation/UpdateLocation'
 
 const store = configureStore();
 

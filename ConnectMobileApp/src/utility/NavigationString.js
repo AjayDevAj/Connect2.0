@@ -41,6 +41,7 @@ export default {
     Purchase_Lead_Component: 'Purchase_Lead_Component',
     New_Post: 'New_Post',
     My_Post: 'My_Post',
+    UpdateLocation:'UpdateLocation',
   
 /*
 **
