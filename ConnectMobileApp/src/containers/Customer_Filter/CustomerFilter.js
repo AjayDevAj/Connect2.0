@@ -658,6 +658,7 @@ const CustomerFilter = ({navigation ,route}) => {
             openTab: getRoutesData?.openTab,
             location_ids: checkboxdata,
             chat_status: chatStatus,
+            // date: toDate,
           })
         }}>
           <Text style={filterstyle.applyFilterBtnText}>APPLY FILTERS</Text>
@@ -711,7 +712,7 @@ const styles = StyleSheet.create({
     fontFamily: fontfaimly.Poppins,
     fontSize: 12,
     color: '#000000',
-    opacity: 70,
+    opacity: 0.7,
     
   },
 });

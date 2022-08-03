@@ -135,7 +135,6 @@ const UpdateLocationHome_Screen = ({navigation}) => {
         style={{
           borderRadius: 8,
           backgroundColor: 'rgba(255, 255, 255, 1)',
-          borderRadius: 8,
         }}>
         <List.Accordion
           title={item.locality}
@@ -150,6 +149,15 @@ const UpdateLocationHome_Screen = ({navigation}) => {
             margin: 10,
           }}>
           <List.Item
+          style={{
+            // backgroundColor: 'black',
+            width: '94%',  
+            marginLeft: 10,
+          }}
+          descriptionStyle={{
+            // backgroundColor: 'blue',
+            justifyContent: 'center',
+          }}
             description={
               <>
               <View
@@ -158,31 +166,82 @@ const UpdateLocationHome_Screen = ({navigation}) => {
                   flexDirection: 'row',
                   margin: 20,
                 }}>
-                <Icon name="room" size={20} />
+                <Icon name="room" size={18} color='#5F6368'/>
+
                 <Text
+                numberOfLines={2}
+                adjustsFontSizeToFit
                   style={{
                     fontFamily: FontDeclarations.Poppins,
                     color: 'rgba(0, 0, 0, 0.7)',
                     fontSize: 12,
+                    // opacity: 0.7,
+                    // width: '30%'
+                    textAlign: 'center',
+                    
                   }}>
-                  {item.address1}, {item.address2} {item.locality} {item.city+' '+item.pincode+' '+item.state}
-                   
+                  {item.address1}, {item.address2}
                 </Text>
-                <TouchableOpacity onPress={navigation.navigate(NavigationString.UpdateLocation)} style={{}}>
+                <Text
+                numberOfLines={2}
+                adjustsFontSizeToFit
+                  style={{
+                    fontFamily: FontDeclarations.Poppins,
+                    color: 'rgba(0, 0, 0, 0.7)',
+                    fontSize: 12,
+                    // opacity: 0.7,
+                    // width: '30%'
+                    textAlign: 'center',
+                    
+                  }}>
+                  {item.locality} 
+                </Text>
+
+                <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                  style={{
+                    fontFamily: FontDeclarations.Poppins,
+                    color: 'rgba(0, 0, 0, 0.7)',
+                    fontSize: 12,
+                    // opacity: 0.7,
+                    // width: '30%'
+                    textAlign: 'center',
+                    
+                  }}>
+                  
+                  {item.city+'('+item.state+')'}
+                </Text>
+
+                <Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                  style={{
+                    fontFamily: FontDeclarations.Poppins,
+                    color: 'rgba(0, 0, 0, 0.7)',
+                    fontSize: 12,
+                    // opacity: 0.7,
+                    // width: '30%'
+                    textAlign: 'center',
+                   
+                    
+                  }}>
+                  {item.pincode}
+                </Text>
+
+                <TouchableOpacity onPress={() => {navigation.navigate(NavigationString.UpdateLocation)}} style={{}}>
                   <BluePencilEdit width={20} height={40} />
                 </TouchableOpacity>
-               
               </View>
+
               <View style={{flexDirection:'row'}}>
-                <Icon name='schedule' size={20} style={{paddingRight:10}}/>
-                <Text>Sunday : 10:00 AM to 7:00 PM</Text>
-               
-                <BluePencilEdit width={20} height={40}  />
+                <Icon name='schedule' size={18} color='#5F6368' style={{paddingRight:10}}/>
+                <Text style={{ color:'#000', fontSize: 12, fontFamily: FontDeclarations.Poppins, opacity: 0.8}}>Sunday : 10:00 AM to 7:00 PM</Text>
+                <BluePencilEdit width={20} height={40} />
+
               </View>
-              
-             
+
               </>
-            
             }
           />
         </List.Accordion>

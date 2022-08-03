@@ -145,7 +145,8 @@ const Routes = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }} 
+        initialRouteName={loginState.userToken != null ? navigationString.Dashboard : navigationString.LOGIN}>
           {loginState.userToken != null ? (
             <Stack.Screen component={DrawerStack} name={navigationString.Dashboard} />
           ) : (

@@ -68,14 +68,14 @@
    const [chatResponseData, setChatResponseData] = useState({});
    const getFilterDataParams = route.params;
    //alert(getFilterDataParams?.testData);
- console.log('=====Char filter params =====', getFilterDataParams)
+ 
    /**
     * Api call when page load
     */
     useEffect(() => {
       if (isFocused) {
-        Incoming_Chat_Socket_Subscribe()
         callAPI(currentTabStatus);
+        Incoming_Chat_Socket_Subscribe();
       }
     }, [isFocused]);
  
@@ -184,7 +184,7 @@
    }
 
   //  console.log('===== Open chat count =====', chatResponseData);
-   
+  // console.log('=====Chat response data =====', chatResponseData)
    return (
     <View style={chatStyles.chatMainContainer}>
       <TopHeader

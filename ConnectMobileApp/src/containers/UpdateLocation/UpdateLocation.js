@@ -24,8 +24,9 @@ import DatePicker from 'react-native-date-picker';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './UpdateLocationStyle';
 import { updatelocation } from '../../api/updatelocation';
+import { navigationRef } from '../../navigation/RootNavigation';
 
-const UpdateLocation = () => {
+const UpdateLocation = ({navigation, route}) => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
   const [changedStatename, setStatename] = useState([null]);
   const [changedCityename, setCityname] = useState([null]);
@@ -107,7 +108,7 @@ const UpdateLocation = () => {
   };
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)'}}>
-      <TopHeader name={'Santacruz'} firstIcon={'arrow-back'} />
+      <TopHeader name={'Santacruz'} firstIcon={'arrow-back'} menuHandler={() => navigation.goBack()} />
       <SegmentedControlTab
         values={['Location', 'Hours', 'More']}
         tabStyle={styles.tabStyle}

@@ -22,37 +22,6 @@
 */
 
 
-
-
-// import React from 'react';
-// import {NavigationContainer, StackActions} from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import Dashboard from '../containers/login/Login';
-
-// const Stack = createNativeStackNavigator();
-
-// /**
-//  * TabBar maintain the tab controllers
-//  */
-//  const Routes = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Login">
-//         <Stack.Screen name={navigationString.Dashboard} component = {Dashboard} options={{headerShown: false}} />
-//         <Stack.Screen name={navigationString.Chat} component = {Dashboard} options={{headerShown: false}}/>
-//         <Stack.Screen name={navigationString.Customers} component = {Dashboard} options={{headerShown: false}}/>
-//         <Stack.Screen name={navigationString.Reviews} component = {Dashboard} options={{headerShown: false}}/>
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   )
-// }
-
-// export default Routes;
-
-
-
-
-
 /*
 **
 *

@@ -27,10 +27,10 @@ export const saveObject = async (storeObject,Store_Key) => {
  */
 export const getOtpResponse = async (Store_Key, val_type='') => {
 
-    if ((store_Value !== null) && (val_type != 'location')) {
-        console.log("store_Value error is fail to store: if " + store_Value);
-        return store_Value
-    } else {
+    // if ((store_Value !== null) && (val_type != 'location')) {
+    //     console.log("store_Value error is fail to store: if " + store_Value);
+    //     return store_Value;
+    // } else {
         // console.log("store_Value error is fail to store: else " + store_Value);
         try {
             const value = await AsyncStorage.getItem(Store_Key);
@@ -39,11 +39,16 @@ export const getOtpResponse = async (Store_Key, val_type='') => {
                 store_Value = JSON.parse(value)
                 console.log("store_Value error is fail to store: else store_Value :- " + store_Value);
                 return JSON.parse(value)
+            } else {
+                if ((store_Value !== null) && (val_type != 'location')) {
+                    console.log("store_Value error is fail to store: if " + store_Value);
+                    return store_Value;
+                }
             }
         } catch (error) {
             console.log("@store_Value Exception : " + error);
         }
-    }
+    // }
 }
 
 /**

@@ -49,6 +49,7 @@ function CustomDrawer(props) {
         <View style={{ flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)' }}>
             <DrawerContentScrollView {...props} contentContainerStyle={{  }}>
 
+                
                 <View 
                     style={{
                         backgroundColor: 'rgba(14, 0, 113, 1)',
@@ -68,21 +69,26 @@ function CustomDrawer(props) {
                         backgroundColor: '#0070FC',
                         opacity: 1
                     }}>
-                        <Singleinterfaceicon height={48} width={48} marginLeft={2} marginTop={2} />
+                        <TouchableOpacity onPress={() => navigation.navigate(NavigationString.Dashboard)}>
+                            <Singleinterfaceicon height={48} width={48} marginLeft={2} marginTop={2} />
+                        </TouchableOpacity>
                     </View>
 
-                    <Text style={{
-                        color: 'rgba(255, 255, 255, 1)',
-                        marginTop: 8,
-                        // marginBottom: 20,
-                        marginLeft: 16,
-                        fontSize: 12,
-                        fontFamily: fontFamily.Alte_DIN,
-                        opacity: 0.7
-                    }}>
-                        XYZ Automobiles & Services
-                    </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate(NavigationString.Dashboard)}>
+                        <Text style={{
+                            color: 'rgba(255, 255, 255, 1)',
+                            marginTop: 8,
+                            // marginBottom: 20,
+                            marginLeft: 16,
+                            fontSize: 12,
+                            fontFamily: fontFamily.Alte_DIN,
+                            opacity: 0.7
+                        }}>
+                            XYZ Automobiles & Services
+                        </Text>
+                    </TouchableOpacity>
                 </View>
+                
 
                 <View style={{ backgroundColor: 'rgba(247, 252, 255, 1)', padding: 10, }}>
                     <TouchableOpacity

@@ -33,8 +33,7 @@ import { API_URL_STAGING } from '../utility/Config_File'
 import { getOtpResponse } from '../utility/StorageClass'
 import { otpResponse_Storage_Key } from '../utility/Constant'
 import NavigationString from '../utility/NavigationString'
-import {signOut} from '../navigation/Routes'
-
+import {signOut} from '../navigation/Routes';
 
 
 /*
@@ -50,8 +49,8 @@ import {signOut} from '../navigation/Routes'
 */
 
 const getChatList = async (is_important, location_id, unread, order_by, chat_status, pagination, other_chat, user_id = null, search_text = '') => {
-    const token_Value = await getOtpResponse(otpResponse_Storage_Key)
-
+    const token_Value = await getOtpResponse(otpResponse_Storage_Key);
+    
     /*
     **
     *
@@ -71,7 +70,7 @@ const getChatList = async (is_important, location_id, unread, order_by, chat_sta
         "unread": unread,
         "user_id": user_id == null ? token_Value.user.id : user_id,
     };
-    
+    console.log('bodyRawData ', bodyRawData)
     var api_url = API_URL_STAGING + '/message/message-list';
     search_text !== null ? api_url = api_url + '?search=' + search_text : api_url = api_url
 
