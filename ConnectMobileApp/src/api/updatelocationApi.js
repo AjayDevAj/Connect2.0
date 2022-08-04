@@ -5,29 +5,37 @@ import {signOut} from '../navigation/Routes';
 
 const updatelocationApi = async (
   location_id,
-  message,
-  picture_url,
-  link,
-  call_to_action,
+  address1,
+  address2,
+  mobile_number,
+  name,
+  pincode,
+  landmark,
+  locality,
 ) => {
-  
-
+  console.log('Params data ===>',location_id,
+  address1,
+  address2,
+  mobile_number,
+  name,
+  pincode,
+  landmark,
+  locality,)
   var urlencoded = new URLSearchParams();
   urlencoded.append('location_id', location_id);
-  urlencoded.append('address1', '22 Haler One');
-  urlencoded.append('address2', 'Gadiara One');
-  urlencoded.append('mobile_number', '+918194857321');
-  urlencoded.append('name', 'Nissan One');
-  urlencoded.append('pincode', '122103');
-  urlencoded.append('landmark', 'UCO Bank');
-  urlencoded.append('locality', 'Sohna');
+  urlencoded.append('address1', address1);
+  urlencoded.append('address2', address2);
+  urlencoded.append('mobile_number', mobile_number);
+  urlencoded.append('name', name);
+  urlencoded.append('pincode', pincode);
+  urlencoded.append('landmark', landmark);
+  urlencoded.append('locality', locality);
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
-console.log('Location id-------',location_id)
+  console.log('Location id-------', location_id);
   const response = await fetch(API_URL_STAGING + '/user/auth/edit-location', {
     method: 'POST',
     body: urlencoded,
     headers: {
-      
       Authorization: `Bearer ${token_Value.token}`,
     },
   });

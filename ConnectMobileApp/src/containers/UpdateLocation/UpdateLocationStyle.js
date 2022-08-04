@@ -85,5 +85,39 @@ import fontfamily from '../../utility/Font-Declarations'
       paddingRight: 60,
       fontFamily: fontfamily.Poppins,
     },
+    card: {
+      minHeight:48,
+      minWidth:328,
+      backgroundColor: 'rgba(255, 255, 255, 8)',
+      borderRadius: 8,
+      justifyContent: 'center',
+      shadowColor: '#657180',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+    
+      top:15,
+     marginLeft:15,
+      marginRight:15
+     
+      
+    },
+    cardTop: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: 15,
+      paddingRight:20,
+      paddingLeft:20
+      
+      
+    },
+    cardContent: {
+      borderTopWidth: 1,
+      borderColor: '#fff',
+    },
 
   })

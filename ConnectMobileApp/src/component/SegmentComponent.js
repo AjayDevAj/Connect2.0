@@ -55,12 +55,10 @@ export const SegmentComponent = ({onClickSegmentChanged,badgesValue=[2, 2, 0],se
             if (for_allUser){
               setSelectedIndex(index)
               onClickSegmentChanged(segment_Value[index])
-
-            }else{
+            } else {
               setSelectedIndex(index)
               onClickSegmentChanged(index == 0 ? 'open' : index == 1 ? 'closed':'assign_chat')
             }
-         
           }}
         />
       </View>

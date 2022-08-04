@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import {location_Data_Key} from '../../utility/Constant';
@@ -16,12 +17,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {List} from 'react-native-paper';
 import BluePencilEdit from '../../../assets/svg/Edit_blue_24dp.svg';
 import {color} from 'react-native-reanimated';
-import FontDeclarations from '../../utility/Font-Declarations';
+import fontfamily from '../../utility/Font-Declarations';
 import NavigationString from '../../utility/NavigationString';
+import {Card} from 'react-native-paper';
+import CollapsibleCard from './CollapsibleCard';
 
 //import {useIsFocused} from '@react-navigation/native';
 
-const UpdateLocationHome_Screen = ({navigation}) => {
+const UpdateLocationHome_Screen = ({navigation, defaultCollapsed}) => {
   //const isFocused = useIsFocused();
   const [isSearch, setIsSearch] = useState(false);
   const [searchText, setsearchText] = useState(null);
@@ -30,9 +33,13 @@ const UpdateLocationHome_Screen = ({navigation}) => {
   const [colapsicon, seticon] = useState('expand-more');
   const [listsize, setlistsize] = useState({width: 380, height: 48});
 
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
 
-  const handlePress = () => setExpanded(!expanded);
+  const [isCollapsed, setCollapsed] = useState(
+    defaultCollapsed ? defaultCollapsed : true,
+  );
+
+  const handlePress = () => setExpanded(previousState => !previousState);
 
   // get location list from the async storage
 
@@ -131,81 +138,184 @@ const UpdateLocationHome_Screen = ({navigation}) => {
       //   </Text>
       //   <Icon style={{paddingRight:10}} name={colapsicon} size={20} color='#657180'/>
       // </TouchableOpacity>
-      <View
-        style={{
-          borderRadius: 8,
-          backgroundColor: 'rgba(255, 255, 255, 1)',
-          borderRadius: 8,
-        }}>
-        <List.Accordion
-          title={item.locality}
-          titleStyle={{
-            color: 'rgba(0, 0, 0, 1)',
-            fontFamily: FontDeclarations.Alte_DIN,
-            fontSize: 16,
-          }}
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 1)',
-            borderRadius: 8,
-            margin: 10,
-          }}>
-          <List.Item
-            description={
-              <>
-              <View
-                style={{
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  margin: 20,
-                }}>
-                <Icon name="room" size={20} />
-                <Text
-                  style={{
-                    fontFamily: FontDeclarations.Poppins,
-                    color: 'rgba(0, 0, 0, 0.7)',
-                    fontSize: 12,
-                  }}>
-                  {item.address1}, {item.address2} {item.locality} {item.city+' '+item.pincode+' '+item.state}
-                   
-                </Text>
-                <TouchableOpacity onPress={()=>{navigation.navigate(NavigationString.UpdateLocation,{
-                  currentindex:0,
-                  Location_Data:item
-                })}} style={{}}>
-                  <BluePencilEdit width={20} height={40} />
-                </TouchableOpacity>
-               
-              </View>
-              <View style={{flexDirection:'row'}}>
-                <Icon name='schedule' size={20} style={{paddingRight:10}}/>
-                <Text>Sunday : 10:00 AM to 7:00 PM</Text>
-               <TouchableOpacity onPress={()=>{navigation.navigate(NavigationString.UpdateLocation,{
-                currentindex:1,
-                Location_Data:item
-               })}}>
-                <BluePencilEdit width={20} height={40}  />
 
-                </TouchableOpacity>
-              </View>
-              
-             
-              </>
-            
-            }
-          />
-        </List.Accordion>
-      </View>
+      // <List.Accordion
+      //   title={item.locality}
+      //   titleStyle={{
+      //     color: 'rgba(0, 0, 0, 1)',
+      //     fontFamily: FontDeclarations.Alte_DIN,
+      //     fontSize: 16,
+      //   }}
+      //   style={{
+      //     backgroundColor: 'rgba(255, 255, 255, 1)',
+      //     borderRadius: 8,
+      //     margin: 10,
+      //   }}>
+      //   <View style={{padding: 10}}>
+      //     <Card>
+      //       <View style={{flexDirection: 'row'}}>
+      //         <Icon name="room" size={20} />
+      //         <Text
+      //           style={{
+      //             fontFamily: FontDeclarations.Poppins,
+      //             color: 'rgba(0, 0, 0, 0.7)',
+      //             fontSize: 12,
+      //           }}>
+      //           {item.address1}, {item.address2} {item.locality}{' '}
+      //           {item.city + ' ' + item.pincode + ' ' + item.state}
+      //         </Text>
+      //       </View>
+      //     </Card>
+      //   </View>
+
+      //   {/* <List.Item
+      //     description={
+      //       <>
+      //         <View
+      //           style={{
+      //             alignItems: 'center',
+      //             flexDirection: 'row',
+      //             margin: 20,
+      //           }}>
+      //           <Icon name="room" size={20} />
+      //           <Text
+      //             style={{
+      //               fontFamily: FontDeclarations.Poppins,
+      //               color: 'rgba(0, 0, 0, 0.7)',
+      //               fontSize: 12,
+      //             }}>
+      //             {item.address1}, {item.address2} {item.locality}{' '}
+      //             {item.city + ' ' + item.pincode + ' ' + item.state}
+      //           </Text>
+      //           <TouchableOpacity
+      //             onPress={() => {
+      //               navigation.navigate(NavigationString.UpdateLocation, {
+      //                 currentindex: 0,
+      //                 Location_Data: item,
+      //               });
+      //             }}
+      //             style={{}}>
+      //             <BluePencilEdit width={20} height={40} />
+      //           </TouchableOpacity>
+      //         </View>
+      //         <View style={{flexDirection: 'row'}}>
+      //           <Icon name="schedule" size={20} style={{paddingRight: 10}} />
+      //           <Text>Sunday : 10:00 AM to 7:00 PM</Text>
+      //           <TouchableOpacity
+      //             onPress={() => {
+      //               navigation.navigate(NavigationString.UpdateLocation, {
+      //                 currentindex: 1,
+      //                 Location_Data: item,
+      //               });
+      //             }}>
+      //             <BluePencilEdit width={20} height={40} />
+      //           </TouchableOpacity>
+      //         </View>
+      //       </>
+      //     }
+      //   /> */}
+      // </List.Accordion>
+      // <View>
+      //   <View
+      //     style={{
+      //       flexDirection: 'row',
+      //       minHeight: 40,
+      //       minWidth: 328,
+      //       padding: 10,
+      //       backgroundColor: 'red',
+      //       borderRadius: 8,
+      //       margin: 8,
+      //       justifyContent: 'space-between',
+      //     }}>
+      //       <TouchableOpacity
+      //       onPress={() => {
+      //         //setExpanded(!expanded)
+      //          setCollapsed(c => !c)
+
+      //       }}>
+      //     <Text>{item.locality}</Text>
+
+      //     </TouchableOpacity>
+      //     <Icon name="expand-more" />
+      //   </View>
+      //   {isCollapsed &&
+      //     <View
+      //       style={{
+      //         minWidth: 328,
+      //         minHeight: '50%',
+      //         backgroundColor: 'green',
+      //         borderRadius: 8,
+      //         padding: 10,
+      //         margin: 10,
+      //       }}></View>
+
+      //   }
+      // </View>
+      <CollapsibleCard title={item.locality} style={{marginBottom: 16}}>
+        <View style={{padding: 15, paddingTop: 5, flexDirection: 'row'}}>
+          <Icon name="room" size={20} />
+
+          <Text
+            style={{
+              fontFamily: fontfamily.Poppins,
+              color: 'rgba(0, 0, 0, 0.7)',
+              fontSize: 12,
+              paddingLeft: 10,
+            }}>
+            {item.address1}, {item.address2} {item.locality} {'\n'}
+            {item.city}
+            {'\n'}
+            {item.state}
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(NavigationString.UpdateLocation, {
+                currentindex: 0,
+                Location_Data: item,
+              });
+            }}
+            style={{position: 'absolute', left: '99%'}}>
+            <BluePencilEdit width={20} height={40} />
+          </TouchableOpacity>
+        </View>
+        <View style={{padding: 15, paddingTop: 5, flexDirection: 'row'}}>
+          <Icon name="schedule" size={20} style={{paddingRight: 10}} />
+          <Text style={styles.cardcontent}>Sunday : 10:00 AM to 7:00 PM</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(NavigationString.UpdateLocation, {
+                currentindex: 1,
+                Location_Data: item,
+              });
+            }}
+            style={{position: 'absolute', left: '99%'}}>
+            <BluePencilEdit width={20} height={40} />
+          </TouchableOpacity>
+        </View>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, }]}>
+          Monday : 10:00 AM to 7:00 PM
+        </Text>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, paddingTop: 15}]}>
+          Tuesday : 10:00 AM to 7:00 PM
+        </Text>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, paddingTop: 15}]}>
+          Wednesday : 10:00 AM to 7:00 PM{' '}
+        </Text>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, paddingTop: 15}]}>
+          Thursday : 10:00 AM to 7:00 PM
+        </Text>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, paddingTop: 15}]}>
+          Friday : 10:00 AM to 7:00 PM
+        </Text>
+        <Text style={[styles.cardcontent, {paddingLeft: 45, paddingTop: 15}]}>
+          Saturday : 10:00 AM to 7:00 PM
+        </Text>
+      </CollapsibleCard>
     );
   };
   // colasp view
-
-  function handleItemClick({index}) {
-    console.log(index);
-  }
-
-  function handleInnerItemClick({innerIndex, item, itemIndex}) {
-    console.log(innerIndex);
-  }
 
   return (
     <View style={styles.container}>
@@ -214,7 +324,7 @@ const UpdateLocationHome_Screen = ({navigation}) => {
         name={'Locations'}
         secondIcon={'search'}
         menuHandler={menuHandler}
-        searchHandler={searchHandler} //Search handler (passed sesarch in  filter icon component )
+        searchHandler={searchHandler}
         isSearchEnable={isSearch}
         chatSearchHandler={searchFilterFunction} //chatSearchHandler is commpon props to handler search data in input text
       />
@@ -222,13 +332,7 @@ const UpdateLocationHome_Screen = ({navigation}) => {
       {console.log('Filter Data source ====>', filteredDataSource)}
       <FlatList
         data={filteredDataSource}
-        // renderItem={({item}) => (
-        //   <>
-        //     <Text>{item.locality}</Text>
-        //   </>
-        // )}
         keyExtractor={(item, index) => index.toString()}
-        // ItemSeparatorComponent={ItemSeparatorView}
         renderItem={ItemView}
       />
     </View>
@@ -240,7 +344,12 @@ export default UpdateLocationHome_Screen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7FCFF',
+    backgroundColor: 'rgba(247, 252, 255, 1)',
     opacity: 100,
+  },
+  cardcontent: {
+    fontFamily: fontfamily.Poppins,
+    color: 'rgba(0, 0, 0, 0.8)',
+    fontSize: 12,
   },
 });

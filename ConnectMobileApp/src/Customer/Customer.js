@@ -36,7 +36,7 @@
  import {searchedListData} from '../utility/Constant';
  import AddNewCustomer from './AddNewCustomer';
  
- const Customer = ({navigation, Route, route}) => {
+ const Customer = ({navigation, route}) => {
    const isFocused = useIsFocused();
    const [isSearch, setIsSearch] = useState(false);
    const [isFilterApplied, setIsFilterApplied] = useState(true);
@@ -47,6 +47,10 @@
    const [customerIntentVal, setCustomerIntentVal] = useState([]);
    const [customerInterestVal, setCustomerInterestVal] = useState([]);
  
+   const getFilterDataParams = route.params;
+
+   console.log('===== Customer filter params =====', getFilterDataParams)
+
    const menuHandler = () => {
      navigation.openDrawer()
    };
@@ -81,6 +85,12 @@
        signOut();
      }
    }, [customerResponseData]);
+
+   useEffect(() => {
+    if (getFilterDataParams?.location_ids) {
+      console.log('Filter Data - ', getFilterDataParams?.location_ids);
+    }
+  }, [getFilterDataParams]);
  
    /**
     *
