@@ -11,7 +11,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import CommonButton from '../../Header/CommonButton';
 import Icon, {IconButtonProps} from 'react-native-vector-icons/MaterialIcons';
@@ -23,10 +23,10 @@ import {StateList, CityList} from '../../utility/Constant';
 import DatePicker from 'react-native-date-picker';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './UpdateLocationStyle';
-import { updatelocation } from '../../api/updatelocation';
+import { updatelocationApi } from '../../api/updatelocationApi';
 import { navigationRef } from '../../navigation/RootNavigation';
 
-const UpdateLocation = ({navigation, route}) => {
+const UpdateLocation = ({route,navigation}) => {
   const [currenttabIndex, setCurrentTabindex] = useState(0);
   const [changedStatename, setStatename] = useState([null]);
   const [changedCityename, setCityname] = useState([null]);
@@ -53,6 +53,15 @@ const UpdateLocation = ({navigation, route}) => {
     setIsSundayEnabled(previousState => !previousState);
 
   //Time Picker
+  
+  console.log(route.params)
+
+  useEffect(() => {
+    setCurrentTabindex(route.params.currentindex)
+  
+    
+  }, [])
+  
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState([
@@ -98,7 +107,15 @@ const UpdateLocation = ({navigation, route}) => {
     Saturdaytrigerpoint: null,
     Sundaytrigerpoint: null,
   });
-
+ const[name, setname_of_location]=useState(null)
+ const[address1, setaddress1]=useState(null)
+ const[address2, setaddress2]=useState(null)
+ const[mobile_number, setmobile_number]=useState(null)
+ const[pincode, setpincode]=useState(null)
+ const[landmark, setlandmark]=useState(null)
+ const[locality, setlocality]=useState(null)
+ const location_id =route.params.Location_Data.id
+ 
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);
@@ -106,9 +123,15 @@ const UpdateLocation = ({navigation, route}) => {
     // Tab selection for custom Tab Selection
     setCurrentTabindex(index);
   };
+
+  const menuHandler =()=>{
+    navigation.goBack();
+  }
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)'}}>
-      <TopHeader name={'Santacruz'} firstIcon={'arrow-back'} menuHandler={() => navigation.goBack()} />
+      <TopHeader name={route.params.Location_Data.locality} firstIcon={'arrow-back'}
+       menuHandler={menuHandler} 
+      />
       <SegmentedControlTab
         values={['Location', 'Hours', 'More']}
         tabStyle={styles.tabStyle}
@@ -128,40 +151,45 @@ const UpdateLocation = ({navigation, route}) => {
             <Text style={styles.TitleTextlable}>Name Of Location</Text>
             <TextInput
               style={styles.InputText}
-              numberOfLines={4}
-              onChangeText={text => setoffertagline(text)}
-              value={'Santacruz'}
+              
+              onChangeText={text => setname_of_location(text)}
+              value={name}
+              placeholder={route.params.Location_Data.name}
             />
             <Text style={styles.TitleTextlable}>Address 1</Text>
             <TextInput
               style={styles.MultilineTextinout}
               multiline={true}
               numberOfLines={4}
-              onChangeText={text => setofferdisclimer(text)}
-              value={''}
+              onChangeText={text => setaddress1(text)}
+              value={address1}
+              placeholder={route.params.Location_Data.address1}
             />
             <Text style={styles.TitleTextlable}>Address 2</Text>
             <TextInput
               style={styles.MultilineTextinout}
               multiline={true}
               numberOfLines={4}
-              onChangeText={text => setofferdisclimer(text)}
-              value={''}
+              onChangeText={text => setaddress2(text)}
+              value={address2}
+              placeholder={route.params.Location_Data.address2}
             />
 
             <Text style={styles.TitleTextlable}>Locality</Text>
             <TextInput
               style={styles.InputText}
               numberOfLines={4}
-              onChangeText={text => setoffertagline(text)}
-              value={'Santacruz'}
+              onChangeText={text => setlocality(text)}
+              value={locality}
+              placeholder={route.params.Location_Data.locality}
             />
             <Text style={styles.TitleTextlable}>Pincode</Text>
             <TextInput
               style={styles.InputText}
               numberOfLines={4}
               onChangeText={text => setoffertagline(text)}
-              value={'Santacruz'}
+              value={pincode}
+              placeholder={route.params.Location_Data.pincode}
             />
             <View style={{paddingTop: 20}}>
               <DropdownComponent
@@ -188,15 +216,15 @@ const UpdateLocation = ({navigation, route}) => {
               <TextInput
                 style={styles.InputText}
                 numberOfLines={4}
-                onChangeText={text => setoffertagline(text)}
-                value={'1.50777778'}
+                //onChangeText={text => setoffertagline(text)}
+                value={route.params.Location_Data.latitude}
               />
               <Text style={styles.TitleTextlable}>Longitude</Text>
               <TextInput
                 style={styles.InputText}
                 numberOfLines={4}
-                onChangeText={text => setoffertagline(text)}
-                value={'1.50777778'}
+                //onChangeText={text => setoffertagline(text)}
+                value={route.params.Location_Data.longitude}
               />
             </View>
             {/* // Map View  */}
@@ -220,7 +248,7 @@ const UpdateLocation = ({navigation, route}) => {
             />
           </ScrollView>
 
-          <TouchableOpacity onPress={()=>updatelocation(1)} style={styles.UpdateButton}>
+          <TouchableOpacity onPress={()=>updatelocationApi(location_id,address1,address2,mobile_number,name,pincode,landmark,locality)} style={styles.UpdateButton}>
             <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
           </TouchableOpacity>
         </View>
@@ -775,13 +803,13 @@ const UpdateLocation = ({navigation, route}) => {
                 justifyContent: 'space-between',
                 paddingTop: 30,
               }}>
-              <Text style={styles.ToggleLabel}>Saturday</Text>
+              <Text style={styles.ToggleLabel}>Sunday</Text>
               <Switch
                 trackColor={{false: '#F4F4F4', true: '#0070FC'}}
-                thumbColor={isSaturdayEnabled ? '#FFFFFF' : '#f4f3f4'}
+                thumbColor={isSundayEnabled ? '#FFFFFF' : '#f4f3f4'}
                 ios_backgroundColor="#F4F4F4"
-                onValueChange={toggleSwitch_Saturday}
-                value={isSaturdayEnabled}
+                onValueChange={toggleSwitch_Sunday}
+                value={isSundayEnabled}
               />
             </View>
 
@@ -871,8 +899,10 @@ const UpdateLocation = ({navigation, route}) => {
           <TextInput
             style={styles.InputText}
             numberOfLines={4}
-            onChangeText={text => setoffertagline(text)}
-            value={'+91 9819667268'}
+            onChangeText={text => setmobile_number(text)}
+            //value={route.params.Location_Data.mobile_number}
+            placeholder={route.params.Location_Data.mobile_number}
+            keyboardType='numeric'
           />
 
           <View style={{paddingTop: 20}}>
@@ -930,12 +960,14 @@ const UpdateLocation = ({navigation, route}) => {
           console.log(strTime);
           // setTime(strTime)
           if (open.trigerPointOpen) {
+            alert('Monday');
             setTime(prev => {
               let test = [...prev];
               test[0].Monday.opens = strTime;
               return [...test];
             });
           } else {
+            alert('Monday');
             setTime(prev => {
               let test = [...prev];
               test[0].Monday.close = strTime;
@@ -1014,7 +1046,7 @@ const UpdateLocation = ({navigation, route}) => {
           if (open.Sundaytrigerpoint) {
             setTime(prev => {
               let test = [...prev];
-              test[0].Saturday.opens = strTime;
+              test[0].Sunday.opens = strTime;
               return [...test];
             });
           } else {
