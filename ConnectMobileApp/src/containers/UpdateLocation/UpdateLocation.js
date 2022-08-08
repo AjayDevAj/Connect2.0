@@ -65,6 +65,7 @@ const UpdateLocation = ({route, navigation}) => {
       <Tab.Screen
         name="EditMore"
         component={EditMore}
+        initialParams={{route}}
         options={{ tabBarLabel: 'More' ,
         tabBarIcon: ({ color, size}) => (
             

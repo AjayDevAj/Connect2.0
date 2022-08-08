@@ -19,6 +19,8 @@ import DropdownComponent from '../Post/Post_dropDown';
 import {StateList, CityList} from '../../utility/Constant';
 import styles from './UpdateLocationStyle';
 import CommonButton from '../../Header/CommonButton';
+import {updatelocationApi} from '../../api/updatelocationApi';
+
 
 const Editlocation = ({navigation, route}) => {
   //React Hooks
@@ -27,16 +29,16 @@ const Editlocation = ({navigation, route}) => {
 
   route = route.params.route;
   console.log('Route Params ', route);
-  const [name, setname_of_location] = useState(null);
-  const [address1, setaddress1] = useState(null);
-  const [address2, setaddress2] = useState(null);
-  const [mobile_number, setmobile_number] = useState(null);
-  const [pincode, setpincode] = useState(null);
-  const [landmark, setlandmark] = useState(null);
-  const [locality, setlocality] = useState(null);
+  const [name, setname_of_location] = useState();
+  const [address1, setaddress1] = useState();
+  const [address2, setaddress2] = useState();
+  const [mobile_number, setmobile_number] = useState();
+  const [pincode, setpincode] = useState();
+  const [landmark, setlandmark] = useState();
+  const [locality, setlocality] = useState();
   const location_id = route.params.Location_Data.id;
-  const [changedStatename, setStatename] = useState([null]);
-  const [changedCityename, setCityname] = useState([null]);
+  const [changedStatename, setStatename] = useState([]);
+  const [changedCityename, setCityname] = useState([]);
 
   console.log('StateName', changedStatename.label);
   console.log('StateName', changedCityename.label);

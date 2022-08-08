@@ -41,7 +41,9 @@ const UpdateLocationHome_Screen = ({navigation, defaultCollapsed}) => {
 
   const handlePress = () => setExpanded(previousState => !previousState);
 
-  // get location list from the async storage
+  // get location list from the async storage 
+
+  // **** But need to show the location list from the API call not from the async
 
   const Getlocationdata = async () => {
     const SlresponseData = await getOtpResponse(location_Data_Key, 'location');
