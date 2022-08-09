@@ -62,7 +62,7 @@ import fontfamily from '../../utility/Font-Declarations'
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 8,
-      bottom: 250,
+      bottom: 50,
     },
     UpdatebtnLebelText: {
       fontSize: 16,

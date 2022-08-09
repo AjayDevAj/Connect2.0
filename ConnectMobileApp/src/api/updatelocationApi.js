@@ -1,6 +1,6 @@
 import {API_URL_STAGING} from '../utility/Config_File';
 import {getOtpResponse} from '../utility/StorageClass';
-import {otpResponse_Storage_Key} from '../utility/Constant';
+import {otpResponse_Storage_Key,appToken} from '../utility/Constant';
 import {signOut} from '../navigation/Routes';
 
 const updatelocationApi = async (
@@ -21,7 +21,7 @@ const updatelocationApi = async (
   pincode,
   landmark,
   locality,)
-  var urlencoded = new URLSearchParams();
+  var urlencoded = new FormData();
   urlencoded.append('location_id', location_id);
   urlencoded.append('address1', address1);
   urlencoded.append('address2', address2);
@@ -30,8 +30,10 @@ const updatelocationApi = async (
   urlencoded.append('pincode', pincode);
   urlencoded.append('landmark', landmark);
   urlencoded.append('locality', locality);
+
   const token_Value = await getOtpResponse(otpResponse_Storage_Key);
   console.log('Location id-------', location_id);
+  console.log('Token',token_Value)
   const response = await fetch(API_URL_STAGING + '/user/auth/edit-location', {
     method: 'POST',
     body: urlencoded,
