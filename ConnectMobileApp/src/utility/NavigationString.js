@@ -42,6 +42,7 @@ export default {
     New_Post: 'New_Post',
     My_Post: 'My_Post',
     UpdateLocation:'UpdateLocation',
+    Profile:'Profile',
   
 /*
 **

@@ -1,26 +1,18 @@
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    ScrollView,
-    Alert,
-    TouchableOpacity,
-    Image,
-    Switch,
-    Modal,
-    Pressable,
-  } from 'react-native';
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import DropdownComponent from '../Post/Post_dropDown';
 import {StateList, CityList} from '../../utility/Constant';
 import styles from './UpdateLocationStyle';
-import CommonButton from '../../Header/CommonButton';
-import {updatelocationApi} from '../../api/updatelocationApi';
 
+import {updatelocationApi} from '../../api/updatelocationApi';
 
 const Editlocation = ({navigation, route}) => {
   //React Hooks
@@ -29,13 +21,13 @@ const Editlocation = ({navigation, route}) => {
 
   route = route.params.route;
   console.log('Route Params ', route);
-  const [name, setname_of_location] = useState();
-  const [address1, setaddress1] = useState();
-  const [address2, setaddress2] = useState();
-  const [mobile_number, setmobile_number] = useState();
-  const [pincode, setpincode] = useState();
-  const [landmark, setlandmark] = useState();
-  const [locality, setlocality] = useState();
+  const [name, setname_of_location] = useState(route.params.Location_Data.name);
+  const [address1, setaddress1] = useState(route.params.Location_Data.address1);
+  const [address2, setaddress2] = useState(route.params.Location_Data.address2);
+  const [mobile_number, setmobile_number] = useState(route.params.Location_Data.mobile_number);
+  const [pincode, setpincode] = useState(route.params.Location_Data.pincode);
+  const [landmark, setlandmark] = useState(route.params.Location_Data.landmark);
+  const [locality, setlocality] = useState(route.params.Location_Data.locality);
   const location_id = route.params.Location_Data.id;
   const [changedStatename, setStatename] = useState([]);
   const [changedCityename, setCityname] = useState([]);
@@ -161,12 +153,9 @@ const Editlocation = ({navigation, route}) => {
           style={styles.UpdateButton}>
           <Text style={styles.UpdatebtnLebelText}>UPDATE</Text>
         </TouchableOpacity>
-        
       </View>
     </View>
   );
 };
 
 export default Editlocation;
-
-

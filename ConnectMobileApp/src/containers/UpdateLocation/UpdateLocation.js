@@ -34,6 +34,8 @@ const UpdateLocation = ({route, navigation}) => {
       initialRouteName="Editlocation"
       screenOptions={{
         tabBarActiveTintColor: 'rgba(0, 0, 0, 1)',
+        tabBarInactiveTintColor: 'rgba(101, 113, 128, 1)',
+
         tabBarLabelStyle: { fontSize: 18,fontFamily:FontDeclarations.Alte_DIN,textTransform: 'none' },
         tabBarStyle: { backgroundColor: 'rgba(247, 252, 255, 1)'},
          tabBarItemStyle: { flexDirection:'row',marginLeft:15,marginRight:15},
@@ -45,9 +47,9 @@ const UpdateLocation = ({route, navigation}) => {
         component={Editlocation}
         initialParams={{route}}
         options={{ tabBarLabel: 'Location',
-          tabBarIcon: ({ color, size}) => (
+          tabBarIcon: ({ color, size ,tintColor}) => (
             
-            <Icon name="place" size={25} color="rgba(0, 0, 0, 1)" />
+            <Icon name="place" size={25} color={tintColor}  />
           ),
         
         }}
@@ -58,7 +60,7 @@ const UpdateLocation = ({route, navigation}) => {
         options={{ tabBarLabel: 'Hours' ,
         tabBarIcon: ({ color, size}) => (
             
-            <Icon name="watch-later" size={25} color="rgba(0, 0, 0, 1)" />
+            <Icon name="watch-later" size={25}  />
           ),}}
         
       />
@@ -69,7 +71,7 @@ const UpdateLocation = ({route, navigation}) => {
         options={{ tabBarLabel: 'More' ,
         tabBarIcon: ({ color, size}) => (
             
-            <Icon name="more-vert" size={25} color="rgba(0, 0, 0, 1)" />
+            <Icon name="more-vert" size={25}  />
           )}}
         
       />

@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import UpdateLocationHome_Screen from './src/containers/UpdateLocation/UpdateLocationHome_Screen';
 import UpdateLocation from './src/containers/UpdateLocation/UpdateLocation'
 import CustomerFilter from './src/containers/Customer_Filter/CustomerFilter';
+import Profile from './src/containers/Profile/Profile';
 
 const store = configureStore();
 
