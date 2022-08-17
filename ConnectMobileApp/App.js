@@ -28,7 +28,7 @@ const App =  ({navigation}) => {
     >
      
       <Provider store={store}>
-        <Profile />
+        <Routes />
       </Provider>
     </InternetConnectionAlert>
 

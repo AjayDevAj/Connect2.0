@@ -135,7 +135,7 @@ function CustomDrawer(props) {
 
                     <TouchableOpacity
                         style={styles.btnStyle}
-                    // onPress={() => navigation.navigate(NavigationString.Offers)}
+                     onPress={() => navigation.navigate(NavigationString.Profile)}
                     >
                         <View style={styles.listView}>
                             <Icon name='person-outline' size={20} style={styles.iconList} />

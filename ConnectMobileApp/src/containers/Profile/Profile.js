@@ -1,13 +1,49 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TopHeader from '../../Header/TopHeader';
 import fontfamily from '../../utility/Font-Declarations';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Getuser from '../../api/Getuser';
+import {API_URL_STAGING} from '../../utility/Config_File';
+import {getOtpResponse} from '../../utility/StorageClass';
+import {otpResponse_Storage_Key} from '../../utility/Constant';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+    const [userdata, setuserData] = useState([]);
+//   const usr = await getOtpResponse(otpResponse_Storage_Key);
+//   console.log('UserID-------->',usr ?.token)
+   console.log('data from the use api ====>',userdata )
+ const Get_token_userId  = async ()=>{
+  const usr = await getOtpResponse(otpResponse_Storage_Key);
+
+   var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${usr ?.token}`);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(API_URL_STAGING + `/user/auth/get-user/${usr.user.id}`, requestOptions)
+      .then(response => response.json())
+      .then(result => setuserData(result))
+      .catch(error => console.log('error', error));
+ }
+
+
+  useEffect(() => {
+   Get_token_userId();
+  }, []);
+
+  function menuHandler  (){
+navigation.openDrawer();
+  }
+
   return (
     <View style={{flex: 1, backgroundColor: 'rgba(247, 252, 255, 1)'}}>
-      <TopHeader firstIcon={'menu'} name={'My Profile'} />
+      <TopHeader firstIcon={'menu'} name={'My Profile'} 
+      menuHandler={menuHandler}/>
       <View style={{margin: 20}}>
         <View style={{flexDirection: 'row'}}>
           {/* Circle */}
@@ -36,7 +72,7 @@ const Profile = () => {
               paddingTop: 18,
               paddingLeft: 15,
             }}>
-            Samarth Ahuja {'\n'}
+            {userdata.data ?.name} {'\n'}
             <Text
               style={{
                 fontFamily: fontfamily.Poppins,
@@ -64,7 +100,7 @@ const Profile = () => {
               fontFamily: fontfamily.Poppins,
               color: 'rgba(124, 130, 138, 1)',
             }}>
-            +91 9819667268
+            +91 {userdata.data ?.mobile_number}
           </Text>
         </View>
 
@@ -140,12 +176,23 @@ const Profile = () => {
             paddingTop: 30,
             fontFamily: fontfamily.Alte_DIN,
             fontSize: 18,
-            paddingBottom:10
+            paddingBottom: 10,
           }}>
           Locations Access
         </Text>
-        <Text style={{fontFamily:fontfamily.Poppins,color:'rgba(124, 130, 138, 1)'}}>Sikandrabaad</Text>
-        <Text style={{fontFamily:fontfamily.Poppins,color:'rgba(124, 130, 138, 1)',paddingTop:5}}>
+        <Text
+          style={{
+            fontFamily: fontfamily.Poppins,
+            color: 'rgba(124, 130, 138, 1)',
+          }}>
+          Sikandrabaad
+        </Text>
+        <Text
+          style={{
+            fontFamily: fontfamily.Poppins,
+            color: 'rgba(124, 130, 138, 1)',
+            paddingTop: 5,
+          }}>
           Shop No223,Bisla Road, Krishna ngr Near Jhumka Churaha Moradabad
         </Text>
       </View>

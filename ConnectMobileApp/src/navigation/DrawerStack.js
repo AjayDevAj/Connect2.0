@@ -9,6 +9,7 @@ import RouteTabBar from './RouteTabBar';
 import MyPostHome from '../containers/Post/MyPostHome';
 import My_Offers_Home from '../containers/Offers/My_Offers_Home';
 import UpdateLocationHome_Screen from '../containers/UpdateLocation/UpdateLocationHome_Screen';
+import Profile from '../containers/Profile/Profile';
 
 const Drawer = createDrawerNavigator();
 
@@ -20,6 +21,7 @@ export default function DrawerStack() {
             <Drawer.Screen component={MyPostHome} name={navigationString.MyPostHome} />
             <Drawer.Screen component={My_Offers_Home} name={navigationString.My_Offers_home} />
             <Drawer.Screen component={UpdateLocationHome_Screen} name={navigationString.Locations} />
+            <Drawer.Screen component={Profile} name={navigationString.Profile} />
             {/* <Drawer.Screen component={ManageTeam} name={navigationString.ManageTeam} />
             <Drawer.Screen component={Profile} name={navigationString.Profile} /> */}
         </Drawer.Navigator>
